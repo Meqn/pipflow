@@ -1,0 +1,21 @@
+{
+  "name": "pip",
+  "private": true,
+  "version": "0.0.1-alpha",
+  "description": "A web developer workflow based on Gulp.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Meqn/pipFlow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Meqn/pipFlow/issues"
+  },
+  "homepage": "https://github.com/Meqn/pipFlow#readme"
+}
