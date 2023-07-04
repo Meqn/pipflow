@@ -28,7 +28,7 @@ module.exports = {
   envDir: '', //用于加载 .env 文件的目录, 默认根目录
   build: {
     outDir: 'dist/', //指定输出路径（相对于 项目根目录).
-    fileHash: false, //文件指纹 ['[name]?[hash]', '[name].[hash]']
+    fileHash: false, //文件指纹 ['[name]?[hash]', '[name]-[hash]']
     minify: isPROD ? true : false,
     sourcemap: false, //构建后是否生成 source map 文件。
   },

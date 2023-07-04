@@ -2,17 +2,16 @@ const gulp = require('gulp')
 const merge = require('merge2')
 const _ = require('lodash')
 const plumber = require('gulp-plumber')
-const sourcemaps = require('gulp-sourcemaps')
 const named = require('vinyl-named')
 const gulpWebpack = require('webpack-stream')
 const webpack = require('webpack')
 const TerserPlugin = require('terser-webpack-plugin')
 // const strReplace = require('string-replace-loader')
+const sourcemaps = require('gulp-sourcemaps')
+const filter = require('gulp-filter')
 
-const {
-  isPROD,
-  ENV
-} = require('../base/config')
+const { isPROD } = require('../base/config')
+const { outputFiles } = require('./comm')
 
 const {
   onError,
@@ -158,17 +157,39 @@ module.exports = function compileModule(options = {}, done) {
     input,
     dest,
     sourcemap: hasSourcemaps,
-    minify: isMinify
+    minify: isMinify,
+    plugins,
+    fileHash
   } = options
 
   if (!input) {
     throw new Error('input is required')
   }
 
+  const jsFilter = filter('**/*.{js,mjs}', { restore: true })
   const processes = []
-  processes.push(sourcemaps.init({ loadMaps: true }))
-  processes.push(sourcemaps.write('./'))
-  processes.push(gulp.dest(dest))
+
+  // 3.1 sourcemaps.init
+  if (hasSourcemaps) {
+    processes.push(sourcemaps.init({ loadMaps: true }))
+  }
+  
+  // 6. 外部插件
+  if (Array.isArray(plugins) && plugins.length > 0) {
+    processes.push(plugins)
+  }
+
+  // 3.2 sourcemaps 输出
+  if (hasSourcemaps) {
+    processes.push(sourcemaps.write('./'))
+  }
+
+  // 文件指纹处理 & 输出文件
+  outputFiles(processes, {
+    dest,
+    fileHash,
+    filter: jsFilter
+  })
 
   return pipeline(
     merge(...getEntries(options)),

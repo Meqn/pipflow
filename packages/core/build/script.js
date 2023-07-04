@@ -6,9 +6,8 @@ const babel = require('gulp-babel')
 const concat = require('gulp-concat')
 const replace = require('gulp-replace')
 const uglifyjs = require('gulp-terser')
-const filter = require('gulp-filter')
 const sourcemaps = require('gulp-sourcemaps')
-const rev = require('gulp-rev')
+const filter = require('gulp-filter')
 
 const {
   isPROD,
@@ -21,6 +20,8 @@ const {
   pipeline
 } = require('../base/utils')
 
+const { outputFiles } = require('./comm')
+
 const options = {
   name: '',
   type: 'script',
@@ -28,12 +29,12 @@ const options = {
   base: './src', //同顶部 src
   dest: 'dist/', //同顶部 build.outDir
   compiler: 'babel', //编译器
-  module: true, // 模块化 (js包含 import/require, 必须启用)
+  module: false, // 模块化 (js包含 import/require, 必须启用)
   plugins: [],
 
-  fileHash: false, //
+  fileHash: '?', //
   minify: isPROD ? true : false,
-  sourcemap: false, //构建后是否生成 source map 文件。
+  sourcemap: true, //构建后是否生成 source map 文件。
   alias: {
     'HEHE': 'world'
   },
@@ -53,7 +54,7 @@ function compileScript(options = {}, done) {
 
   const processes = []
   const entries = []
-  const mapFilter = filter('**/*.{js,mjs}', { restore: true })
+  const jsFilter = filter('**/*.{js,mjs}', { restore: true })
 
   const {
     input,
@@ -118,6 +119,7 @@ function compileScript(options = {}, done) {
     processes.push(sourcemaps.write('./'))
   }
 
+  /* 
   // 7.1 文件指纹 revision
   if (fileHash) {
     processes.push(mapFilter) //仅处理js文件 (过滤.map文件)
@@ -132,7 +134,14 @@ function compileScript(options = {}, done) {
   if (fileHash) {
     processes.push(rev.manifest({ merge: true }))
     processes.push(gulp.dest(dest))
-  }
+  } */
+
+  // 文件指纹处理 & 输出文件
+  outputFiles(processes, {
+    dest,
+    fileHash,
+    filter: jsFilter
+  })
 
   return pipeline(
     merge(...entries),
@@ -141,7 +150,7 @@ function compileScript(options = {}, done) {
 
 }
 
-const compileModuleScript = require('./scriptModule')
+const compileModuleScript = require('./script.module')
 module.exports = function scriptTask(done) {
   if (options.module) {
     return compileModuleScript(options, done)
