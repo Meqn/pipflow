@@ -1,6 +1,5 @@
 {
-  "name": "core",
-  "private": true,
+  "name": "@pipflow/core",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,5 +8,31 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "babel-loader": "^9.1.2",
+    "diy-log": "^2.4.1",
+    "glob": "^10.3.1",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-env-loader": "^1.1.1",
+    "gulp-filter": "^7.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-replace": "^1.1.4",
+    "gulp-rev": "^9.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0",
+    "lodash": "^4.17.21",
+    "merge2": "^1.4.1",
+    "rimraf": "^5.0.1",
+    "string-replace-loader": "^3.1.0",
+    "terser-webpack-plugin": "^5.3.9",
+    "through2": "^4.0.2",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^5.88.1",
+    "webpack-stream": "^7.0.0"
+  }
 }
