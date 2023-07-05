@@ -110,8 +110,20 @@ const plumber = (function() {
   }
 })();
 
+/**
+ * 自定义处理流程
+ * @param {Array} plugins 流程
+ */
+function putProcesses(processes, plugins) {
+  if (Array.isArray(plugins) && plugins.length > 0) {
+    processes.push(...plugins)
+  }
+  return processes
+}
+
 module.exports = {
   outputFiles,
   createSrcOptions,
-  plumber
+  plumber,
+  putProcesses
 }

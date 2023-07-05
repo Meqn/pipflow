@@ -1,13 +1,12 @@
 const gulp = require('gulp')
 
 const { pipeline } = require('../base/utils')
-const { createSrcOptions, outputFiles, plumber } = require('./comm')
+const { createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
 
 module.exports = function staticTask(options = {}, done) {
   const {
     input,
     dest,
-    plugins
   } = options
 
   if (!input) {
@@ -19,10 +18,8 @@ module.exports = function staticTask(options = {}, done) {
   ]
   const srcOptions = createSrcOptions(options)
 
-  // 1. 外部插件
-  if (Array.isArray(plugins) && plugins.length > 0) {
-    processes.push(plugins)
-  }
+  // 1. 自定义处理流程
+  putProcesses(processes, options.plugins)
 
   // 2. 文件指纹处理 & 输出文件
   outputFiles(processes, {

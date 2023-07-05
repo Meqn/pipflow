@@ -10,7 +10,7 @@ const filter = require('gulp-filter')
 
 const { isPROD, ENV, envInject } = require('../base/config')
 const { pipeline } = require('../base/utils')
-const { outputFiles, createSrcOptions, plumber } = require('./comm')
+const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
 
 const options = {
   name: '',
@@ -51,7 +51,6 @@ function compileScript(options = {}, done) {
     dest,
     sourcemap: hasSourcemaps,
     alias,
-    plugins,
     compiler,
     minify: isMinify,
     fileHash
@@ -89,10 +88,8 @@ function compileScript(options = {}, done) {
     }
   }
 
-  // 6. 外部插件
-  if (Array.isArray(plugins) && plugins.length > 0) {
-    processes.push(plugins)
-  }
+  // 6. 自定义处理流程
+  putProcesses(processes, options.plugins)
 
   // 7. babel转换
   if (compiler === 'babel') {

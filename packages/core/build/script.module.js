@@ -10,7 +10,7 @@ const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 
 const { isPROD } = require('../base/config')
-const { outputFiles, createSrcOptions, plumber } = require('./comm')
+const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
 const { pipeline } = require('../base/utils')
 
 /**
@@ -157,7 +157,6 @@ module.exports = function compileModule(options = {}, done) {
     dest,
     sourcemap: hasSourcemaps,
     minify: isMinify,
-    plugins,
     fileHash
   } = options
 
@@ -173,10 +172,8 @@ module.exports = function compileModule(options = {}, done) {
     processes.push(sourcemaps.init({ loadMaps: true }))
   }
   
-  // 4. 外部插件
-  if (Array.isArray(plugins) && plugins.length > 0) {
-    processes.push(plugins)
-  }
+  // 4. 自定义处理流程
+  putProcesses(processes, options.plugins)
 
   // 3.2 sourcemaps 输出
   if (hasSourcemaps) {
