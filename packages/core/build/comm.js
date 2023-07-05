@@ -1,8 +1,11 @@
 const path = require('path')
 const gulp = require('gulp')
+const logger = require('diy-log')
+const { colors, symbols } = logger
 const gulpFilter = require('gulp-filter')
 const rev = require('gulp-rev')
 const jsonEditor = require('gulp-json-editor')
+const gulpPlumber = require('gulp-plumber')
 
 /**
  * 转换文件 hash 方式
@@ -88,7 +91,27 @@ function createSrcOptions({ name, base }) {
   return ret
 }
 
+/**
+ * plumber 错误处理
+ */
+const plumber = (function() {
+  function errorHandler(error) {
+    const { name, plugin, message } = error
+    logger.time(symbols.error, colors.red(`${plugin} ${name} : ${message}`))
+  }
+
+  return {
+    handler() {
+      return gulpPlumber({ errorHandler })
+    },
+    stop() {
+      return gulpPlumber.stop()
+    }
+  }
+})();
+
 module.exports = {
   outputFiles,
-  createSrcOptions
+  createSrcOptions,
+  plumber
 }

@@ -1,7 +1,6 @@
 const gulp = require('gulp')
 const merge = require('merge2')
 const _ = require('lodash')
-const plumber = require('gulp-plumber')
 const named = require('vinyl-named')
 const gulpWebpack = require('webpack-stream')
 const webpack = require('webpack')
@@ -11,12 +10,8 @@ const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 
 const { isPROD } = require('../base/config')
-const { outputFiles, createSrcOptions } = require('./comm')
-
-const {
-  onError,
-  pipeline
-} = require('../base/utils')
+const { outputFiles, createSrcOptions, plumber } = require('./comm')
+const { pipeline } = require('../base/utils')
 
 /**
  * 生成webpack配置项
@@ -134,7 +129,7 @@ function getEntries(options = {}) {
   if (_.isPlainObject(input)) {
     entries = Object.keys(input).map(name => {
       return gulp.src(input[name], srcOptions)
-        .pipe(plumber(onError))
+        .pipe(plumber.handler())
         .pipe(gulpWebpack(getWebpackConfig(
           Object.assign({
             filename: `${name}.js`
@@ -144,7 +139,7 @@ function getEntries(options = {}) {
   } else {
     entries.push(
       gulp.src(input, srcOptions)
-        .pipe(plumber(onError))
+        .pipe(plumber.handler())
         .pipe(named(function(file) {
           // 返回相对路径的文件名
           return file.relative.replace(file.extname, '')

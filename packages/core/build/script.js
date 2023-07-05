@@ -1,7 +1,6 @@
 const gulp = require('gulp')
 const merge = require('merge2')
 const _ = require('lodash')
-const plumber = require('gulp-plumber')
 const babel = require('gulp-babel')
 const concat = require('gulp-concat')
 const replace = require('gulp-replace')
@@ -9,21 +8,9 @@ const uglifyjs = require('gulp-terser')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 
-const {
-  isPROD,
-  ENV,
-  envInject
-} = require('../base/config')
-
-const {
-  onError,
-  pipeline
-} = require('../base/utils')
-
-const {
-  outputFiles,
-  createSrcOptions
-} = require('./comm')
+const { isPROD, ENV, envInject } = require('../base/config')
+const { pipeline } = require('../base/utils')
+const { outputFiles, createSrcOptions, plumber } = require('./comm')
 
 const options = {
   name: '',
@@ -32,7 +19,7 @@ const options = {
   base: './src', //同顶部 src
   dest: 'dist/', //同顶部 build.outDir
   compiler: 'babel', //编译器
-  module: false, // 模块化 (js包含 import/require, 必须启用)
+  module: true, // 模块化 (js包含 import/require, 必须启用)
   plugins: [],
 
   fileHash: '?', //
@@ -85,7 +72,7 @@ function compileScript(options = {}, done) {
   }
 
   // 2. 错误流处理
-  processes.push(plumber(onError))
+  processes.push(plumber.handler())
 
   // 3.1 sourcemaps.init
   if (hasSourcemaps) {
