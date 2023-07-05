@@ -57,6 +57,7 @@ function compileScript(options = {}, done) {
   const jsFilter = filter('**/*.{js,mjs}', { restore: true })
 
   const {
+    name: taskName,
     input,
     base,
     dest,
@@ -68,15 +69,20 @@ function compileScript(options = {}, done) {
     fileHash
   } = options
 
+  const srcOptions = {}
+  base && (srcOptions.base = base)
+  taskName && (srcOptions.since = gulp.lastRun(taskName)) // 增量构建能,加快执行时间
+
   // 1. 统一入口文件
   if (_.isPlainObject(input)) {
     Object.keys(input).forEach(name => {
       entries.push(
-        gulp.src(input[name], { base }).pipe(concat(`${name}.js`))
+        gulp.src(input[name], { srcOptions })
+          .pipe(concat(`${name}.js`))
       )
     })
   } else {
-    entries.push(gulp.src(input, { base }))
+    entries.push(gulp.src(input, { srcOptions }))
   }
 
   // 2. 错误流处理
