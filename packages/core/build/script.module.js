@@ -11,7 +11,7 @@ const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 
 const { isPROD } = require('../base/config')
-const { outputFiles } = require('./comm')
+const { outputFiles, createSrcOptions } = require('./comm')
 
 const {
   onError,
@@ -110,26 +110,30 @@ function getWebpackConfig({
 /**
  * 统一入口文件
  * @param {object} options 配置项
+ * @param {string} options.base 基础路径
+ * @param {string} options.name 任务名
  * @param {string} options.input 入口文件
  * @param {object} options.env 环境变量
  * @param {boolean} options.minify 是否压缩
  * @param {object} options.alias 别名
  * @param {string} options.compiler 使用babel转换
- * @param {string} options.base 基础路径
  * @returns 
  */
-function getEntries({ input, env, alias, minify, base, compiler }) {
+function getEntries(options = {}) {
+  const { input, env, alias, minify, compiler } = options
   const webpackOptions = {
     env,
     minify,
     alias,
     compiler,
   }
+
+  const srcOptions = createSrcOptions(options)
   
   let entries = []
   if (_.isPlainObject(input)) {
     entries = Object.keys(input).map(name => {
-      return gulp.src(input[name], { base })
+      return gulp.src(input[name], srcOptions)
         .pipe(plumber(onError))
         .pipe(gulpWebpack(getWebpackConfig(
           Object.assign({
@@ -139,7 +143,7 @@ function getEntries({ input, env, alias, minify, base, compiler }) {
     })
   } else {
     entries.push(
-      gulp.src(input, { base })
+      gulp.src(input, srcOptions)
         .pipe(plumber(onError))
         .pipe(named(function(file) {
           // 返回相对路径的文件名
@@ -174,7 +178,7 @@ module.exports = function compileModule(options = {}, done) {
     processes.push(sourcemaps.init({ loadMaps: true }))
   }
   
-  // 6. 外部插件
+  // 4. 外部插件
   if (Array.isArray(plugins) && plugins.length > 0) {
     processes.push(plugins)
   }
@@ -184,7 +188,7 @@ module.exports = function compileModule(options = {}, done) {
     processes.push(sourcemaps.write('./'))
   }
 
-  // 文件指纹处理 & 输出文件
+  // 5. 文件指纹处理 & 输出文件
   outputFiles(processes, {
     dest,
     fileHash,

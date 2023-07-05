@@ -20,7 +20,10 @@ const {
   pipeline
 } = require('../base/utils')
 
-const { outputFiles } = require('./comm')
+const {
+  outputFiles,
+  createSrcOptions
+} = require('./comm')
 
 const options = {
   name: '',
@@ -57,9 +60,7 @@ function compileScript(options = {}, done) {
   const jsFilter = filter('**/*.{js,mjs}', { restore: true })
 
   const {
-    name: taskName,
     input,
-    base,
     dest,
     sourcemap: hasSourcemaps,
     alias,
@@ -69,20 +70,18 @@ function compileScript(options = {}, done) {
     fileHash
   } = options
 
-  const srcOptions = {}
-  base && (srcOptions.base = base)
-  taskName && (srcOptions.since = gulp.lastRun(taskName)) // 增量构建能,加快执行时间
+  const srcOptions = createSrcOptions(options)
 
   // 1. 统一入口文件
   if (_.isPlainObject(input)) {
     Object.keys(input).forEach(name => {
       entries.push(
-        gulp.src(input[name], { srcOptions })
+        gulp.src(input[name], srcOptions)
           .pipe(concat(`${name}.js`))
       )
     })
   } else {
-    entries.push(gulp.src(input, { srcOptions }))
+    entries.push(gulp.src(input, srcOptions))
   }
 
   // 2. 错误流处理
@@ -142,7 +141,7 @@ function compileScript(options = {}, done) {
     processes.push(gulp.dest(dest))
   } */
 
-  // 文件指纹处理 & 输出文件
+  // 9. 文件指纹处理 & 输出文件
   outputFiles(processes, {
     dest,
     fileHash,

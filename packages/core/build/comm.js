@@ -36,7 +36,7 @@ function createFilter(filter) {
  * @param {string} params.fileHash 文件指纹
  * @param {string} params.filter 文件过滤
  */
-exports.outputFiles = function buildFileHash(processes, {
+function outputFiles(processes, {
   fileHash,
   dest,
   filter
@@ -69,4 +69,26 @@ exports.outputFiles = function buildFileHash(processes, {
   } else {
     processes.push(gulp.dest(dest))
   }
+}
+
+/**
+ * 生成 gulp.src 选项
+ * @param {object} options 选项
+ * @returns 
+ */
+function createSrcOptions({ name, base }) {
+  const ret = {}
+  if (name) {
+    // 增量构建能,加快执行时间
+    ret.since = gulp.lastRun(name)
+  }
+  if (base) {
+    ret.base = base
+  }
+  return ret
+}
+
+module.exports = {
+  outputFiles,
+  createSrcOptions
 }
