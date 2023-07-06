@@ -7,6 +7,7 @@ module.exports = function staticTask(options = {}, done) {
   const {
     input,
     dest,
+    fileHash
   } = options
 
   if (!input) {

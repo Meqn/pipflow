@@ -46,29 +46,31 @@ function outputFiles(processes, {
 }) {
   if (fileHash) {
     const fileFilter = createFilter(filter)
+    //! 1.1 不生成 rev文件
+    fileHash === '?' && processes.push(gulp.dest(dest))
+
+    // 2. 是否过滤指定文件
+    if (fileFilter) {
+      processes.push(fileFilter)
+      processes.push(rev())
+      processes.push(fileFilter.restore)
+    } else {
+      processes.push(rev())
+    }
+    //! 1.2 生成 rev文件
+    fileHash !== '?' && processes.push(gulp.dest(dest))
+    // 3. 生成 manifest.json
+    processes.push(rev.manifest(
+      path.resolve(dest, 'rev-manifest.json'),
+      { merge: true, base: path.resolve(dest) }
+    ))
+    // 4. 转换manifest.json内容
     if (fileHash === '?') {
-      processes.push(gulp.dest(dest))
-      if (fileFilter) {
-        //过滤指定文件, 不输出 rev后的文件
-        processes.push(fileFilter)
-        processes.push(rev())
-        processes.push(fileFilter.restore)
-      }
-      processes.push(rev.manifest({ merge: true }))
       processes.push(jsonEditor(function(file) {
         return transformHash(file)
       }))
-      processes.push(gulp.dest(dest))
-    } else {
-      if (fileFilter) {
-        processes.push(fileFilter)
-        processes.push(rev())
-        processes.push(fileFilter.restore)
-      }
-      processes.push(gulp.dest(dest))
-      processes.push(rev.manifest({ merge: true }))
-      processes.push(gulp.dest(dest))
     }
+    processes.push(gulp.dest(dest))
   } else {
     processes.push(gulp.dest(dest))
   }
