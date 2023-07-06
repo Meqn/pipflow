@@ -88,6 +88,8 @@ function outputFiles(processes, {
 /**
  * 生成 gulp.src 选项
  * @param {object} options 选项
+ * @param {string} options.name 任务名
+ * @param {string} options.base 基础路径
  * @returns 
  */
 function createSrcOptions({ name, base }) {

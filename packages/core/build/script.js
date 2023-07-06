@@ -70,7 +70,7 @@ function compileScript(options = {}, done) {
     entries.push(gulp.src(input, srcOptions))
   }
 
-  // 2. 错误流处理
+  // 2. plumber错误处理
   processes.push(plumber.handler())
 
   // 3.1 sourcemaps.init
