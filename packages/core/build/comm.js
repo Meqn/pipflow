@@ -8,7 +8,56 @@ const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 
-/**
+/************************************************
+ * 生成 gulp.src 选项
+ * @param {object} options 选项
+ * @param {string} options.name 任务名
+ * @param {string} options.base 基础路径
+ * @returns 
+ */
+function createSrcOptions({ name, base }) {
+  const ret = {}
+  if (name) {
+    // 增量构建能,加快执行时间
+    ret.since = gulp.lastRun(name)
+  }
+  if (base) {
+    ret.base = base
+  }
+  return ret
+}
+
+/************************************************
+ * 自定义处理流程
+ * @param {Array} plugins 流程
+ */
+function putProcesses(processes, plugins) {
+  if (Array.isArray(plugins) && plugins.length > 0) {
+    processes.push(...plugins)
+  }
+  return processes
+}
+
+/************************************************
+ * plumber 错误处理
+ */
+const plumber = (function() {
+  function errorHandler(error) {
+    const { name, plugin, message } = error
+    logger.time(symbols.error, colors.red(`${plugin} ${name} : ${message}`))
+  }
+
+  return {
+    handler() {
+      return gulpPlumber({ errorHandler })
+    },
+    stop() {
+      return gulpPlumber.stop()
+    }
+  }
+})();
+
+/************************************************
  * 转换文件 hash 方式
  */
 function transformHash(json) {
@@ -30,7 +79,7 @@ function createFilter(filter) {
   return filter
 }
 
-/**
+/************************************************
  * 生成文件指纹, sourcemaps 和 输出文件
  * 1. fileHash 作为文件名([name]-[hash])，则输出 rev后的文件及manifest.json
  * 2. fileHash 作为参数`?`([name]?[hash])，则仅输出文件及 manifest.json
@@ -85,54 +134,6 @@ function outputFiles(processes, {
   }
 }
 
-/**
- * 生成 gulp.src 选项
- * @param {object} options 选项
- * @param {string} options.name 任务名
- * @param {string} options.base 基础路径
- * @returns 
- */
-function createSrcOptions({ name, base }) {
-  const ret = {}
-  if (name) {
-    // 增量构建能,加快执行时间
-    ret.since = gulp.lastRun(name)
-  }
-  if (base) {
-    ret.base = base
-  }
-  return ret
-}
-
-/**
- * plumber 错误处理
- */
-const plumber = (function() {
-  function errorHandler(error) {
-    const { name, plugin, message } = error
-    logger.time(symbols.error, colors.red(`${plugin} ${name} : ${message}`))
-  }
-
-  return {
-    handler() {
-      return gulpPlumber({ errorHandler })
-    },
-    stop() {
-      return gulpPlumber.stop()
-    }
-  }
-})();
-
-/**
- * 自定义处理流程
- * @param {Array} plugins 流程
- */
-function putProcesses(processes, plugins) {
-  if (Array.isArray(plugins) && plugins.length > 0) {
-    processes.push(...plugins)
-  }
-  return processes
-}
 
 module.exports = {
   outputFiles,
