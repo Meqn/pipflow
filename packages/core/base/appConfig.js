@@ -45,6 +45,11 @@ module.exports = {
       compiler: 'babel', //编译器
       module: false, // 模块化 (js包含 import/require, 必须启用)
       plugins: [],
+    },
+    {
+      type: 'archive',
+      input: './dist/**',
+      filename: '', //压缩包名
     }
   ]
 }
