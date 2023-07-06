@@ -25,7 +25,8 @@ module.exports = function staticTask(options = {}, done) {
   // 2. 文件指纹处理 & 输出文件
   outputFiles(processes, {
     dest,
-    fileHash
+    fileHash,
+    sourcemap: false,
   })
 
   return pipeline(

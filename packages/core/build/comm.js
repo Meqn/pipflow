@@ -6,6 +6,7 @@ const gulpFilter = require('gulp-filter')
 const rev = require('gulp-rev')
 const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
+const sourcemaps = require('gulp-sourcemaps')
 
 /**
  * 转换文件 hash 方式
@@ -30,7 +31,7 @@ function createFilter(filter) {
 }
 
 /**
- * 生成文件指纹 和 输出文件
+ * 生成文件指纹, sourcemaps 和 输出文件
  * 1. fileHash 作为文件名([name]-[hash])，则输出 rev后的文件及manifest.json
  * 2. fileHash 作为参数`?`([name]?[hash])，则仅输出文件及 manifest.json
  * @param {Array} processes 所有流程
@@ -38,18 +39,24 @@ function createFilter(filter) {
  * @param {string} params.dest 输出目录
  * @param {string} params.fileHash 文件指纹
  * @param {string} params.filter 文件过滤
+ * @param {boolean} params.sourcemap 是否输出 sourcemap
  */
 function outputFiles(processes, {
   fileHash,
   dest,
-  filter
+  filter,
+  sourcemap: hasSourcemap
 }) {
   if (fileHash) {
     const fileFilter = createFilter(filter)
-    //! 1.1 不生成 rev文件
-    fileHash === '?' && processes.push(gulp.dest(dest))
 
-    // 2. 是否过滤指定文件
+    // 1. 写入sourcemap文件
+    hasSourcemap && processes.push(sourcemaps.write('.'))
+
+    // 2. 是否生成 rev文件
+    // 2.1 不生成 rev文件
+    fileHash === '?' && processes.push(gulp.dest(dest))
+    // 2.2 是否过滤指定文件
     if (fileFilter) {
       processes.push(fileFilter)
       processes.push(rev())
@@ -57,19 +64,21 @@ function outputFiles(processes, {
     } else {
       processes.push(rev())
     }
-    //! 1.2 生成 rev文件
+    // 2.3 生成 rev文件 和 sourcemap文件
     fileHash !== '?' && processes.push(gulp.dest(dest))
+
     // 3. 生成 manifest.json
     processes.push(rev.manifest(
       path.resolve(dest, 'rev-manifest.json'),
       { merge: true, base: path.resolve(dest) }
     ))
-    // 4. 转换manifest.json内容
+    // 3.1 转换manifest.json内容
     if (fileHash === '?') {
       processes.push(jsonEditor(function(file) {
         return transformHash(file)
       }))
     }
+    // 3.2 输出manifest文件
     processes.push(gulp.dest(dest))
   } else {
     processes.push(gulp.dest(dest))

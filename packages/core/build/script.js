@@ -22,7 +22,7 @@ const options = {
   module: true, // 模块化 (js包含 import/require, 必须启用)
   plugins: [],
 
-  fileHash: '?', //
+  fileHash: '-', //
   minify: isPROD ? true : false,
   sourcemap: true, //构建后是否生成 source map 文件。
   alias: {
@@ -49,7 +49,7 @@ function compileScript(options = {}, done) {
   const {
     input,
     dest,
-    sourcemap: hasSourcemaps,
+    sourcemap: hasSourcemap,
     alias,
     compiler,
     minify: isMinify,
@@ -74,7 +74,7 @@ function compileScript(options = {}, done) {
   processes.push(plumber.handler())
 
   // 3.1 sourcemaps.init
-  if (hasSourcemaps) {
+  if (hasSourcemap) {
     processes.push(sourcemaps.init({ loadMaps: true }))
   }
 
@@ -103,12 +103,12 @@ function compileScript(options = {}, done) {
     processes.push(uglifyjs())
   }
 
+  /* 
   // 3.2 sourcemaps 输出
-  if (hasSourcemaps) {
-    processes.push(sourcemaps.write('./'))
+  if (hasSourcemap) {
+    processes.push(sourcemaps.write('.'))
   }
 
-  /* 
   // 7.1 文件指纹 revision
   if (fileHash) {
     processes.push(mapFilter) //仅处理js文件 (过滤.map文件)
@@ -125,11 +125,12 @@ function compileScript(options = {}, done) {
     processes.push(gulp.dest(dest))
   } */
 
-  // 9. 文件指纹处理 & 输出文件
+  // 9. 文件指纹处理 & sourcemaps & 输出文件
   outputFiles(processes, {
     dest,
     fileHash,
-    filter: jsFilter
+    filter: jsFilter,
+    sourcemap: hasSourcemap,
   })
 
   return pipeline(

@@ -155,8 +155,7 @@ module.exports = function compileModule(options = {}, done) {
   const {
     input,
     dest,
-    sourcemap: hasSourcemaps,
-    minify: isMinify,
+    sourcemap: hasSourcemap,
     fileHash
   } = options
 
@@ -168,23 +167,19 @@ module.exports = function compileModule(options = {}, done) {
   const processes = []
 
   // 3.1 sourcemaps.init
-  if (hasSourcemaps) {
+  if (hasSourcemap) {
     processes.push(sourcemaps.init({ loadMaps: true }))
   }
   
   // 4. 自定义处理流程
   putProcesses(processes, options.plugins)
 
-  // 3.2 sourcemaps 输出
-  if (hasSourcemaps) {
-    processes.push(sourcemaps.write('./'))
-  }
-
-  // 5. 文件指纹处理 & 输出文件
+  // 5. 文件指纹处理 & sourcemaps & 输出文件
   outputFiles(processes, {
     dest,
     fileHash,
-    filter: jsFilter
+    filter: jsFilter,
+    sourcemap: hasSourcemap,
   })
 
   return pipeline(
