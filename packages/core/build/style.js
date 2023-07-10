@@ -12,6 +12,7 @@ const cssnano = require('cssnano')
 
 const { pipeline } = require('../base/utils')
 const { createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
+const { envInject } = require('../base/config')
 
 module.exports = function styleTask(options = {}, done) {
   const {
@@ -40,8 +41,8 @@ module.exports = function styleTask(options = {}, done) {
     processes.push(sourcemaps.init({ loadMaps: true }))
   }
 
-  // 1. 自定义处理流程
-  putProcesses(processes, options.plugins)
+  // 1. 环境变量处理
+  processes.push(envInject({ isVar: false }))
 
   // 2. replace 替换别名
   if (_.isPlainObject(alias)) {
@@ -50,7 +51,10 @@ module.exports = function styleTask(options = {}, done) {
     }
   }
 
-  // 3. CSS预处理器
+  // 3. 自定义处理流程
+  putProcesses(processes, options.plugins)
+
+  // 4. CSS预处理器
   if (compiler === 'sass' || compiler === 'scss') {
     processes.push(sass().on('error', sass.logError))
   } else if (compiler === 'less') {
@@ -59,7 +63,7 @@ module.exports = function styleTask(options = {}, done) {
     processes.push(stylus())
   }
 
-  // 4. postcss
+  // 5. postcss //!需配置 `postcss.config.js` 和 `.browserslistrc`
   const postcssPlugins = []
   postcssPlugins.push(postcssEnv())
   isMinify && postcssPlugins.push(cssnano())

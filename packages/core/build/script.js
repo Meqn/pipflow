@@ -91,7 +91,7 @@ function compileScript(options = {}, done) {
   // 6. 自定义处理流程
   putProcesses(processes, options.plugins)
 
-  // 7. babel转换
+  // 7. babel转换 //!需配置 `babel.config.json`
   if (compiler === 'babel') {
     processes.push(babel({
       presets: ['@babel/preset-env'],
