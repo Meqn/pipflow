@@ -81,7 +81,6 @@ module.exports = function htmlTask(options = {}, done) {
   // 3. replace 替换别名
   if (_.isPlainObject(alias)) {
     for (const key in alias) {
-      console.log('alias : ', key, alias[key])
       processes.push(replace(key, alias[key]))
     }
   }

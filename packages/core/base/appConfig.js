@@ -5,6 +5,7 @@
  * 
  * css
  * 预处理器: less, sass, Stylus, postCss
+ *   ['*.{sass,scss,css}', '*.{less,css}', '*.{styl,css}']
  * CSS框架: TailwindCSS
  * 
  * js
@@ -33,11 +34,14 @@ module.exports = {
     sourcemap: false, //构建后是否生成 source map 文件。
   },
   server: {
-    port: 3000
+    port: 8080,
+    server: {
+      baseDir: ''
+    }
   },
   tasks: [
     {
-      // name: '', //任务名, `{type}T{number}`
+      // name: '', //任务名, `[type]:[index]`
       type: 'script', // 任务类型
       input: './src/scripts/**/*.{js,mjs}',
       base: './src', //同顶部 src
@@ -50,6 +54,17 @@ module.exports = {
       type: 'archive',
       input: './dist/**',
       filename: '', //压缩包名
+    },
+    {
+      type: 'html',
+      input: './src/views/**/*.html',
+      dest: 'dist/',
+      base: './src',
+      compiler: '',
+      compilerOptions: {
+        data: {}, //渲染数据
+      },
+      plugins: [],
     }
   ]
 }
