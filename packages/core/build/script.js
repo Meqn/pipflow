@@ -8,28 +8,9 @@ const uglifyjs = require('gulp-terser')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 
-const { isPROD, ENV, envInject } = require('../base/config')
+const { envInject } = require('../base/config')
 const { pipeline } = require('../base/utils')
 const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
-
-const options = {
-  name: '',
-  type: 'script',
-  input: './src/scripts/**/*.{js,mjs}',
-  base: './src', //同顶部 src
-  dest: 'dist/', //同顶部 build.outDir
-  compiler: 'babel', //编译器
-  module: true, // 模块化 (js包含 import/require, 必须启用)
-  plugins: [],
-
-  fileHash: '-', //
-  minify: isPROD ? true : false,
-  sourcemap: true, //构建后是否生成 source map 文件。
-  alias: {
-    'HEHE': 'world'
-  },
-  env: ENV
-}
 
 /**
  * 处理 script文件 (非 module)
@@ -141,7 +122,7 @@ function compileScript(options = {}, done) {
 }
 
 const compileModuleScript = require('./script.module')
-module.exports = function scriptTask(done) {
+module.exports = function scriptTask(options = {}, done) {
   if (options.module) {
     return compileModuleScript(options, done)
   } else {

@@ -68,29 +68,3 @@ nunjucks - gulp-nunjucks (`.njk`)
 
 **serve**
 - //browser-sync
-
-
-
-# Todos
-
-## utils
-- gulp-renew => gulp-replace
-
-## style
-- [ ] base64
-  - gulp-base64, gulp-base64-img, base64-js
-
-## image
-- [ ] min
-- [ ] svgo
-
-
-## pwa, favicon
-- [ ] favicons
-- [ ] pwa
-
-## html
-- posthtml : https://github.com/posthtml/posthtml
-- gulp-file-include : https://www.npmjs.com/package/gulp-file-include
-- preprocess
-

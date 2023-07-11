@@ -11,7 +11,12 @@ const postcssEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
 
 const { pipeline } = require('../base/utils')
-const { createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
+const {
+  createSrcOptions,
+  outputFiles,
+  plumber,
+  putProcesses
+} = require('./comm')
 const { envInject } = require('../base/config')
 
 module.exports = function styleTask(options = {}, done) {
@@ -22,13 +27,13 @@ module.exports = function styleTask(options = {}, done) {
     compiler,
     alias,
     minify: isMinify,
-    sourcemap: hasSourcemap,
+    sourcemap: hasSourcemap
   } = options
 
   if (!input) {
     throw new Error('input is required')
   }
-  
+
   const processes = []
   const srcOptions = createSrcOptions(options)
   const cssFilter = filter('**/*.css', { restore: true })
@@ -74,7 +79,7 @@ module.exports = function styleTask(options = {}, done) {
     dest,
     fileHash,
     filter: cssFilter,
-    sourcemap: hasSourcemap,
+    sourcemap: hasSourcemap
   })
 
   return pipeline(

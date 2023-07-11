@@ -9,7 +9,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 
-const { isPROD } = require('../base/config')
+const { isPROD, ENV } = require('../base/config')
 const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
 const { pipeline } = require('../base/utils')
 
@@ -108,21 +108,19 @@ function getWebpackConfig({
  * @param {string} options.base 基础路径
  * @param {string} options.name 任务名
  * @param {string} options.input 入口文件
- * @param {object} options.env 环境变量
  * @param {boolean} options.minify 是否压缩
  * @param {object} options.alias 别名
  * @param {string} options.compiler 使用babel转换
  * @returns 
  */
 function getEntries(options = {}) {
-  const { input, env, alias, minify, compiler } = options
+  const { input, alias, minify, compiler } = options
   const webpackOptions = {
-    env,
+    env: ENV,
     minify,
     alias,
     compiler,
   }
-
   const srcOptions = createSrcOptions(options)
   
   let entries = []
