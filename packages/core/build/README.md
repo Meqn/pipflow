@@ -68,3 +68,11 @@ nunjucks - gulp-nunjucks (`.njk`)
 
 **serve**
 - //browser-sync
+
+
+
+# Configuration
+- `.browserslistrc`
+- `postcss.config.js`
+- `babel.config.json`
+

@@ -1,17 +1,34 @@
 {
   "name": "@pipflow/core",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "index.js",
+    "base",
+    "build",
+    "plugins",
+    "types"
+  ],
+  "homepage": "https://github.com/Meqn/pipFlow",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Meqn/pipFlow.git"
+  },
+  "author": "Mervin <mengqing723@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Meqn/pipFlow/issues"
+  },
   "dependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
