@@ -1,0 +1,10 @@
+<footer>
+  <p>copyright@{{year}} pipflow</p>
+  <p id="year"></p>
+</footer>
+<script src="@/scripts/index.js"></script>
+<script type="module">
+const year = new Date().getFullYear();
+console.log('year: ', year)
+document.querySelector('#year').innerHTML = year
+</script>

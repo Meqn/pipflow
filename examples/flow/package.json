@@ -12,9 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@jotter/dateformat": "^1.0.2",
     "@pipflow/core": "workspace:^"
   },
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "postcss-load-config": "^4.0.1"
   }
 }

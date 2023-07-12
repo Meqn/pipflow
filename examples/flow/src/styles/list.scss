@@ -1,0 +1,10 @@
+$width: 100%;
+$item-height: 20px;
+
+.list{
+  width: $width;
+  .item{
+    height: $item-height;
+    line-height: $item-height;
+  }
+}
