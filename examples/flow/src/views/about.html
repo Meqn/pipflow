@@ -6,12 +6,21 @@
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telphone=no">
-<title>index page</title>
+<title>About - {{title}}</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="styles/comm.css">
 </head>
 <body>
+{{include './include/header.art'}}
 
+<section class="main center">
+  <h1>About</h1>
+  {{if content}}
+  <p>{{content}}</p>
+  {{/if}}
+</section>
+
+{{include './include/footer.art'}}
 </body>
 </html>

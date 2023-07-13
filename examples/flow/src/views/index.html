@@ -6,21 +6,22 @@
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telphone=no">
-<title>index _ {{title}}</title>
+<title>Home - {{title}}</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
+<link rel="stylesheet" href="styles/comm.css">
 <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
 {{include './include/header.art'}}
 
-<!-- 这里是页面标题 -->
-<h1>page index</h1>
-<p>当前环境: process.env.TITLE</p>
-{{if content}}
-<p>HEHE : {{content}}</p>
-{{/if}}
-<p>{{author}}</p>
+<section class="main center">
+  <h1>Home</h1>
+  {{if content}}
+  <p>{{content}}</p>
+  {{/if}}
+</section>
+
 {{include './include/footer.art'}}
 </body>
 </html>
