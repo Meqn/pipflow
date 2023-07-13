@@ -1,10 +1,19 @@
 {
   "name": "pipflow",
-  "version": "0.0.1-alpha",
+  "version": "0.0.1",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "index.js",
+    "tasks.js",
+    "libs",
+    "types"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -18,8 +27,9 @@
   },
   "homepage": "https://github.com/Meqn/pipFlow#readme",
   "dependencies": {
-    "cosmiconfig": "^8.2.0",
-    "import-fresh": "^3.3.0",
-    "lodash": "^4.17.21"
+    "@pipflow/core": "workspace:*",
+    "@pipflow/utils": "workspace:*",
+    "lodash": "^4.17.21",
+    "minimist": "^1.2.8"
   }
 }
