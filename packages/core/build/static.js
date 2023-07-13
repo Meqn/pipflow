@@ -9,9 +9,7 @@ const {
 } = require('./comm')
 
 module.exports = function staticTask(options = {}, done) {
-  const { input, dest, fileHash } = options
-
-  if (!input) {
+  if (!options.input) {
     throw new Error('input is required')
   }
 
@@ -26,13 +24,12 @@ module.exports = function staticTask(options = {}, done) {
 
   // 3. 文件指纹处理 & 输出文件
   outputFiles(processes, {
-    dest,
-    fileHash,
+    ...options,
     sourcemap: false
   })
 
   return pipeline(
-    gulp.src(input, srcOptions),
+    gulp.src(options.input, srcOptions),
     processes
   ).on('end', done)
 }

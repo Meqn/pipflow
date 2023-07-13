@@ -13,7 +13,7 @@ const njkTemplate = require('gulp-nunjucks')
 const artTemplate = require('gulp-art-tpl')
 
 const { pipeline } = require('../base/utils')
-const { createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
+const { revManifest, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
 const { envInject } = require('../base/config')
 
 /**
@@ -66,7 +66,7 @@ module.exports = function htmlTask(options = {}, done) {
   
   let manifest
   if (fileHash) {
-    manifest = readFileSync(path.resolve(dest, 'rev-manifest.json'), 'utf-8')
+    manifest = readFileSync(path.resolve(dest, revManifest), 'utf-8')
   }
   
   const processes = []
@@ -78,23 +78,23 @@ module.exports = function htmlTask(options = {}, done) {
   // 2. 环境变量处理
   processes.push(envInject({ isVar: false }))
 
-  // 3. replace 替换别名
-  if (_.isPlainObject(alias)) {
-    for (const key in alias) {
-      processes.push(replace(key, alias[key]))
-    }
-  }
-
-  // 4. 自定义处理流程
-  putProcesses(processes, options.plugins)
-
-  // 5. 模板处理
+  // 3. 模板处理
   if (compiler) {
     const rendered = templater(compiler, compilerOptions)
     if (rendered) {
       processes.push(rendered)
     }
   }
+  
+  // 4. replace 替换别名 (在模板编译之前，避免路径不会被替换)
+  if (_.isPlainObject(alias)) {
+    for (const key in alias) {
+      processes.push(replace(key, alias[key]))
+    }
+  }
+
+  // 5. 自定义处理流程
+  putProcesses(processes, options.plugins)
   
   // 6. 文件指纹处理
   if (manifest) {

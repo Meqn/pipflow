@@ -8,6 +8,8 @@ const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 
+const revManifest = 'rev-manifest.json'
+
 /************************************************
  * 生成 gulp.src 选项
  * @param {object} options 选项
@@ -118,7 +120,7 @@ function outputFiles(processes, {
 
     // 3. 生成 manifest.json
     processes.push(rev.manifest(
-      path.resolve(dest, 'rev-manifest.json'),
+      path.resolve(dest, revManifest),
       { merge: true, base: path.resolve(dest) }
     ))
     // 3.1 转换manifest.json内容
@@ -136,6 +138,7 @@ function outputFiles(processes, {
 
 
 module.exports = {
+  revManifest,
   outputFiles,
   createSrcOptions,
   plumber,

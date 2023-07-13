@@ -6,7 +6,7 @@ const copyTask = require('./build/copy')
 const staticTask = require('./build/static')
 const archiveTask = require('./build/archive')
 const userTask = require('./build/user')
-const serveTask = require('./build/serve')
+const createServeTask = require('./build/serve')
 
 module.exports = {
   scriptTask,
@@ -17,6 +17,5 @@ module.exports = {
   archiveTask,
   removeTask,
   userTask,
-  serveTask,
-  reload: serveTask.reload,
+  createServeTask
 }

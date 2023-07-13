@@ -29,12 +29,9 @@ function compileScript(options = {}, done) {
 
   const {
     input,
-    dest,
-    sourcemap: hasSourcemap,
     alias,
     compiler,
-    minify: isMinify,
-    fileHash
+    minify: isMinify
   } = options
 
   const srcOptions = createSrcOptions(options)
@@ -55,7 +52,7 @@ function compileScript(options = {}, done) {
   processes.push(plumber.handler())
 
   // 3.1 sourcemaps.init
-  if (hasSourcemap) {
+  if (options.sourcemap) {
     processes.push(sourcemaps.init({ loadMaps: true }))
   }
 
@@ -108,10 +105,8 @@ function compileScript(options = {}, done) {
 
   // 9. 文件指纹处理 & sourcemaps & 输出文件
   outputFiles(processes, {
-    dest,
-    fileHash,
+    ...options,
     filter: jsFilter,
-    sourcemap: hasSourcemap,
   })
 
   return pipeline(

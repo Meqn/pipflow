@@ -22,12 +22,8 @@ const { envInject } = require('../base/config')
 module.exports = function styleTask(options = {}, done) {
   const {
     input,
-    dest,
-    fileHash,
     compiler,
-    alias,
-    minify: isMinify,
-    sourcemap: hasSourcemap
+    alias
   } = options
 
   if (!input) {
@@ -42,7 +38,7 @@ module.exports = function styleTask(options = {}, done) {
   processes.push(plumber.handler())
 
   // 3.1 sourcemaps.init
-  if (hasSourcemap) {
+  if (options.sourcemap) {
     processes.push(sourcemaps.init({ loadMaps: true }))
   }
 
@@ -71,15 +67,13 @@ module.exports = function styleTask(options = {}, done) {
   // 5. postcss //!需配置 `postcss.config.js` 和 `.browserslistrc`
   const postcssPlugins = []
   postcssPlugins.push(postcssEnv())
-  isMinify && postcssPlugins.push(cssnano())
+  options.minify && postcssPlugins.push(cssnano())
   processes.push(postcss(postcssPlugins))
 
   // 9. 文件指纹处理 & sourcemaps & 输出文件
   outputFiles(processes, {
-    dest,
-    fileHash,
-    filter: cssFilter,
-    sourcemap: hasSourcemap
+    ...options,
+    filter: cssFilter
   })
 
   return pipeline(
