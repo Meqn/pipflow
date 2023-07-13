@@ -1,5 +1,6 @@
 const { task, watch, series, parallel } = require('gulp')
 const _ = require('lodash')
+const minimist = require('minimist')
 
 const {
   htmlTask,
@@ -163,7 +164,7 @@ Object.keys(taskTypes).forEach(type => {
     buildTasks[2].push(..._typeTasks.map(v => v.name))
   }
 })
-buildTasks = filter(v => v.length > 0) //过滤空任务
+buildTasks = buildTasks.filter(v => v.length > 0) //过滤空任务
 
 exports.serve = series(
   'del:dest',

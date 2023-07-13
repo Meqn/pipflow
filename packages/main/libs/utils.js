@@ -57,6 +57,6 @@ function getInputList(input) {
 
 module.exports = {
   globFiles,
-  getCliServeArgs，
+  getCliServeArgs,
   getInputList
 }
