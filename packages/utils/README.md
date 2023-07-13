@@ -1,3 +1,3 @@
-# @pipflow/cli-utils
+# @pipflow/utils
 
-工具库
+> utilities for pipFlow-cli

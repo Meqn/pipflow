@@ -1,13 +1,23 @@
 {
-  "name": "utils",
-  "private": true,
-  "version": "1.0.0",
-  "description": "",
+  "name": "@pipflow/utils",
+  "version": "0.1.1",
+  "description": "utilities for pipFlow-cli packages",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "libs"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "import-fresh": "^3.3.0",
+    "lodash": "^4.17.21"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
