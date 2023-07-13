@@ -13,7 +13,7 @@ const {
   reload
 } = require('@pipflow/core')
 
-console.log('reload', typeof reload)
+
 task('clean', (done) => {
   removeTask('dist/', done)
 })
@@ -119,4 +119,4 @@ task('serve', done => {
   }, done)
 })
 
-task('build', series('clean', parallel('style', 'script', 'custom'), parallel('html'), parallel('archive', 'serve')))
+task('build', series('clean', parallel('style', 'script', 'custom'), parallel('html')))

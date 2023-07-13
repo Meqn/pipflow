@@ -1,7 +1,7 @@
 {
   "name": "demo-flow",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,10 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "@jotter/dateformat": "^1.0.2",
-    "@pipflow/core": "workspace:^"
+    "@pipflow/core": "workspace:*",
+    "pipflow": "workspace:*"
   },
-  "devDependencies": {
-    "gulp": "^4.0.2",
-    "postcss-load-config": "^4.0.1"
-  }
+  "devDependencies": {}
 }
