@@ -25,9 +25,9 @@ function globFiles(path, level = 2) {
  * @param {string} options.dir 服务基础目录
  * @returns 
  */
-function getCliServeArgs({ port, open, cors, dir }) {
+function getCliServeArgs({ port, p, open, cors, dir }) {
   const args = {}
-  port && (args.port = port)
+  ;(port || p) && (args.port = port || p)
   open && (args.open = open)
   cors && (args.cors = cors)
   dir && (args.server = { baseDir: dir })

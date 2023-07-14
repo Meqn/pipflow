@@ -2,6 +2,15 @@ const { task, watch, series, parallel } = require('gulp')
 const _ = require('lodash')
 const minimist = require('minimist')
 
+// 命令行参数
+const args = minimist(process.argv.slice(3))
+console.log('args : ', args)
+
+const nodeEnv = process.env.NODE_ENV
+if (!nodeEnv) {
+  process.env.NODE_ENV = ['development', 'production'].includes(process.env.PP_MODE) ? process.env.PP_MODE : 'development'
+}
+
 const {
   htmlTask,
   scriptTask,
@@ -15,14 +24,6 @@ const {
 } = require('@pipflow/core')
 const { getConfig } = require('@pipflow/utils')
 const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
-
-const nodeEnv = process.env.NODE_ENV
-if (!nodeEnv) {
-  process.env.NODE_ENV = ['development', 'production'].includes(process.env.PP_MODE) ? process.env.PP_MODE : 'development'
-}
-
-// 命令行参数
-const args = minimist(process.argv.slice(3))
 
 //== 自定义配置 ==============================================
 const CC = getConfig(args.config || 'pipflow.config')
