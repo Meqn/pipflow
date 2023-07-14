@@ -85,8 +85,8 @@ module.exports = function getConfig(file) {
     if (item.sourcemap === undefined) {
       item.sourcemap = sourcemap
     }
-    if (item.alias === undefined && alias) {
-      item.alias = alias
+    if (item.alias || alias) {
+      item.alias = _.merge({}, alias, item.alias)
     }
     return item
   }).filter(item => item)
