@@ -134,9 +134,9 @@ task('del:dest', done => {
 task('watch', done => {
   if (!CC.tasks.length) return done()
   
-  const watchTypes = ['html', 'style', 'script', 'static']
+  const watchTypes = ['html', 'style', 'script', 'static', 'copy', 'user']
   for (const item of CC.tasks) {
-    if (watchTypes.includes(item.type) && item.watch) {
+    if (watchTypes.includes(item.type) && item.input && item.watch) {
       watch(getInputList(item.input), parallel(item.name)).on('change', devServerReload)
     }
   }
@@ -155,7 +155,7 @@ if (publicFiles) {
 }
 Object.keys(taskTypes).forEach(type => {
   const _typeTasks = taskTypes[type]
-  if (type === 'static') {
+  if (['static', 'copy', 'user'].includes(type)) {
     buildTasks[0].push(..._typeTasks.map(v => v.name))
   }
   if (type === 'script' || type === 'style') {
