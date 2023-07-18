@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const defaultConfig = require('./defaultConfig')
 
 /**
@@ -23,10 +24,10 @@ function getInput(type, compiler) {
 
   const typeMap = {
     html: `./src/**/*.{html,htm${
-      htmlMap[compiler] && ',' + htmlMap[compiler]
+      htmlMap[compiler] ? ',' + htmlMap[compiler] : ''
     }}`,
     style: `./src/styles/**/*.{css${
-      styleMap[compiler] && ',' + styleMap[compiler]
+      styleMap[compiler] ? ',' + styleMap[compiler] : ''
     }}`,
     script: `./src/scripts/**/*.{js,mjs}`,
     static: `./src/assets/**`
@@ -48,7 +49,14 @@ module.exports = function generateConfig({
   cssPreprocessor,
   templater
 } = {}) {
-  const result = Object.assign({}, defaultConfig)
+  const result = _.merge({}, defaultConfig, {
+    build: {
+      // 生成文件时会被替换 `replace('"process.env.NODE_ENV === production"', 'process.env.NODE_ENV === "production"')`
+      fileHash: 'process.env.NODE_ENV === production',
+      minify: 'process.env.NODE_ENV === production',
+      sourcemap: 'process.env.NODE_ENV === production',
+    }
+  })
 
   result.tasks = result.tasks.map(item => {
     switch (item.type) {
