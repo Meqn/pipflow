@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/utils",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "utilities for pipFlow-cli packages",
   "main": "index.js",
   "files": [
@@ -10,14 +10,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "homepage": "https://github.com/Meqn/pipFlow",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Meqn/pipFlow.git"
+  },
+  "author": "Mervin <mengqing723@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Meqn/pipFlow/issues"
+  },
   "dependencies": {
     "import-fresh": "^3.3.0",
     "lodash": "^4.17.21"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
