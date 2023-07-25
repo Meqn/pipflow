@@ -75,8 +75,8 @@ function transformHash(json) {
 
 // 创建文件过滤器
 function createFilter(filter) {
-  if (typeof filter === 'string') {
-    return gulpFilter('**/*.{js,mjs}', { restore: true })
+  if (typeof filter === 'string' || Array.isArray(filter)) {
+    return gulpFilter(filter, { restore: true })
   }
   return filter
 }
@@ -119,6 +119,7 @@ function outputFiles(processes, {
     fileHash !== '?' && processes.push(gulp.dest(dest))
 
     // 3. 生成 manifest.json
+    //! gulp-rev 使用merge选项存在bug。当并行任务生成`rev-mainifest.json`会混乱(覆盖)
     processes.push(rev.manifest(
       path.resolve(dest, revManifest),
       { merge: true, base: path.resolve(dest) }
