@@ -1,6 +1,6 @@
 {
   "name": "pipflow",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "engines": {
@@ -33,8 +33,6 @@
   "homepage": "https://github.com/Meqn/pipFlow#readme",
   "dependencies": {
     "@pipflow/core": "workspace:*",
-    "@pipflow/utils": "workspace:*",
-    "lodash": "^4.17.21",
-    "minimist": "^1.2.8"
+    "@pipflow/utils": "workspace:*"
   }
 }
