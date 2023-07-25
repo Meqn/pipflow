@@ -26,9 +26,9 @@ function getInput(type, compiler) {
     html: `./src/**/*.{html,htm${
       htmlMap[compiler] ? ',' + htmlMap[compiler] : ''
     }}`,
-    style: `./src/styles/**/*.{css${
-      styleMap[compiler] ? ',' + styleMap[compiler] : ''
-    }}`,
+    style: `./src/styles/**/*.${
+      styleMap[compiler] ? '{css,' + styleMap[compiler] + '}' : 'css'
+    }`,
     script: `./src/scripts/**/*.{js,mjs}`,
     static: `./src/assets/**`
   }
