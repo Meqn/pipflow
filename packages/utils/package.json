@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/utils",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "utilities for pipFlow-cli packages",
   "main": "index.js",
   "files": [
@@ -26,7 +26,14 @@
     "url": "https://github.com/Meqn/pipFlow/issues"
   },
   "dependencies": {
+    "diy-log": "^2.4.1",
+    "find-up": "^5.0.0",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.1",
+    "gulp": "^4.0.2",
     "import-fresh": "^3.3.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "merge2": "^1.4.1",
+    "minimist": "^1.2.8"
   }
 }
