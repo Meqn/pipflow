@@ -1,7 +1,7 @@
 /**
  * 
  * html
- * 模板引擎：handlebars, ejs,jade, artTemplate, pug, lodash_template
+ * 模板引擎：handlebars, EJS, artTemplate, Pug(Jade), Nunjucks
  * 
  * css
  * 预处理器: less, sass, Stylus, postCss
@@ -53,7 +53,7 @@ module.exports = Object.freeze({
     archive: false, //创建压缩包, `dist-[timestamp].zip`
   },
   server: {
-    port: 8080,
+    port: 9527,
     server: {
       baseDir: 'dist/',
       index: 'index.html'
@@ -85,4 +85,4 @@ module.exports = Object.freeze({
   ]
 })
 
-// tasks: public, devServer, archive, watch, remove:dest
+// tasks: html, script, style, static, public, devServer, archive, watch, remove:dest
