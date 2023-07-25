@@ -1,19 +1,19 @@
+const path = require('path')
+
 /**
  * 路径下的所有文件
- * @param {string} path 目录
- * @param {number} level 层级
+ * @param {string} filePath 文件路径
+ * @param {number} recurs 递归文件
  * @returns 
  */
-function globFiles(path, level = 2) {
-  if (!path) return ''
-  const regEx = /\/\*{1,2}$/
-  if (regEx.test(path)) {
-    return path
+function globFiles(filePath, recurs = true) {
+  if (!filePath) return ''
+  const regExp = /\/\*{1,2}$/
+  if (regExp.test(filePath)) {
+    return filePath
   }
 
-  const arr = path.split('/').filter(v => v)
-  arr.push(''.padEnd(level, '*'))
-  return arr.join('/')
+  return path.posix.join(filePath, recurs ? '**' : '*')
 }
 
 /**
@@ -23,13 +23,15 @@ function globFiles(path, level = 2) {
  * @param {boolean} options.open 是否打开
  * @param {boolean} options.cors 是否允许跨域
  * @param {string} options.dir 服务基础目录
+ * @param {boolean} options.https 是否https
  * @returns 
  */
-function getCliServeArgs({ port, p, open, cors, dir }) {
+function getCliServeArgs({ port, p, open, cors, dir, https }) {
   const args = {}
   ;(port || p) && (args.port = port || p)
-  open && (args.open = open)
-  cors && (args.cors = cors)
+  open && (args.open = true)
+  cors && (args.cors = true)
+  https && (args.https = true)
   dir && (args.server = { baseDir: dir })
 
   return args
