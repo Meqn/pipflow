@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/core",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "engines": {
@@ -34,13 +34,11 @@
   "dependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
+    "@pipflow/utils": "workspace:^",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "browser-sync": "^2.29.3",
     "cssnano": "^6.0.1",
-    "diy-log": "^2.4.1",
-    "glob": "^10.3.1",
-    "gulp": "^4.0.2",
     "gulp-art-tpl": "^1.3.0",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
@@ -64,8 +62,6 @@
     "gulp-terser": "^2.1.0",
     "gulp-zip": "^5.1.0",
     "html-minifier-terser": "^7.2.0",
-    "lodash": "^4.17.21",
-    "merge2": "^1.4.1",
     "plugin-error": "^2.0.1",
     "postcss": "^8.4.25",
     "postcss-preset-env": "^9.0.0",
