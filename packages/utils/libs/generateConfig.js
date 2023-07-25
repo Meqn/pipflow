@@ -62,7 +62,15 @@ module.exports = function generateConfig({
     switch (item.type) {
       case 'html':
         item.input = getInput('html', templater)
-        templater && (item.compiler = templater)
+        if (templater) {
+          item.compiler = templater
+          item.compilerOptions = {
+            data: {
+              title: 'pipflow',
+              description: 'pipflow-CLI is a command line tool based on the gulp workflow. It can greatly simplify front-end development workflows.'
+            }
+          }
+        }
         break
       case 'style':
         item.input = getInput('style', cssPreprocessor)
