@@ -13,6 +13,11 @@
     "version-packages": "changeset version",
     "release": "changeset publish --registry https://registry.npmjs.org"
   },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

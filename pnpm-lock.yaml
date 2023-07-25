@@ -26,6 +26,9 @@ importers:
       '@pipflow/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@pipflow/utils':
+        specifier: workspace:^
+        version: link:../../packages/utils
       pipflow:
         specifier: workspace:*
         version: link:../../packages/main
