@@ -1,5 +1,8 @@
-const logger = require('diy-log')
-const { symbols, colors } = logger
+const {
+  logger,
+  symbols,
+  colors
+} = require('@pipflow/utils')
 
 /**
  * 将多个流的阵列合并成一个流

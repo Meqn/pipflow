@@ -1,12 +1,16 @@
 const path = require('path')
-const gulp = require('gulp')
-const logger = require('diy-log')
-const { colors, symbols } = logger
 const gulpFilter = require('gulp-filter')
 const rev = require('gulp-rev')
 const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
+const { gulp } = require('@pipflow/utils')
+
+const {
+  logger,
+  colors,
+  symbols
+} = require('@pipflow/utils')
 
 // gulp-rev `manifest.json` 保存目录
 const revDir = 'revManifest'

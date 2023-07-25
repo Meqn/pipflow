@@ -1,4 +1,4 @@
-const gulp = require('gulp')
+const { gulp } = require('@pipflow/utils')
 const { pipeline } = require('../base/utils')
 
 module.exports = function userTask(options = {}, done) {

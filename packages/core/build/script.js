@@ -1,12 +1,14 @@
-const gulp = require('gulp')
-const merge = require('merge2')
-const _ = require('lodash')
 const babel = require('gulp-babel')
 const concat = require('gulp-concat')
 const replace = require('gulp-replace')
 const uglifyjs = require('gulp-terser')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
+const {
+  gulp,
+  merge,
+  _
+} = require('@pipflow/utils')
 
 const { envInject } = require('../base/config')
 const { pipeline } = require('../base/utils')

@@ -1,5 +1,3 @@
-const gulp = require('gulp')
-const _ = require('lodash')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 const replace = require('gulp-replace')
@@ -9,6 +7,10 @@ const stylus = require('gulp-stylus')
 const postcss = require('gulp-postcss')
 const postcssEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
+const {
+  gulp,
+  lodash: _
+} = require('@pipflow/utils')
 
 const { pipeline } = require('../base/utils')
 const {

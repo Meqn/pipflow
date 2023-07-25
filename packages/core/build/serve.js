@@ -1,12 +1,14 @@
-const _ = require('lodash')
 const browserSync = require('browser-sync')
+const {
+  lodash: _
+} = require('@pipflow/utils')
 
 module.exports = function createServeTask(name) {
   const bs = browserSync.create(name)
   
   function create(options = {}, done) {
     return bs.init(_.merge({
-      port: 8080,
+      port: 9527,
       open: true,
       server: {
         baseDir: './dist',

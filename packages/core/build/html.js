@@ -1,6 +1,4 @@
-const gulp = require('gulp')
 const path = require('path')
-const _ = require('lodash')
 const replace = require('gulp-replace')
 const rename = require('gulp-rename')
 const htmlMinifier = require('../plugins/htmlMinifier')
@@ -10,11 +8,15 @@ const pugTemplate = require('gulp-pug')
 const hbTemplate = require('gulp-hb')
 const njkTemplate = require('gulp-nunjucks')
 const artTemplate = require('gulp-art-tpl')
+const {
+  gulp,
+  lodash: _,
+  readJsonFiles
+} = require('@pipflow/utils')
 
 const { pipeline } = require('../base/utils')
 const { revDir, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
 const { envInject } = require('../base/config')
-const { readJsonFiles } = require('@pipflow/utils')
 
 /**
  * html 模板引擎

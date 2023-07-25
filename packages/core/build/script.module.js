@@ -1,6 +1,3 @@
-const gulp = require('gulp')
-const merge = require('merge2')
-const _ = require('lodash')
 const named = require('vinyl-named')
 const gulpWebpack = require('webpack-stream')
 const webpack = require('webpack')
@@ -8,6 +5,11 @@ const TerserPlugin = require('terser-webpack-plugin')
 // const strReplace = require('string-replace-loader')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
+const {
+  gulp,
+  merge,
+  lodash: _
+} = require('@pipflow/utils')
 
 const { isPROD, ENV } = require('../base/config')
 const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')

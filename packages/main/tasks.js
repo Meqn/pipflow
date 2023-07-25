@@ -1,10 +1,16 @@
-const { task, watch, series, parallel } = require('gulp')
-const _ = require('lodash')
-const minimist = require('minimist')
+const {
+  gulp,
+  _,
+  minimist,
+  getConfig
+} = require('@pipflow/utils')
+const { task, watch, series, parallel } = gulp
 
 // 命令行参数
 const args = minimist(process.argv.slice(3))
 
+// 环境变量配置
+process.env.PIPFLOW_MODE = args.mode || 'development'
 const nodeEnv = process.env.NODE_ENV
 if (!nodeEnv) {
   process.env.NODE_ENV = ['development', 'production'].includes(process.env.PIPFLOW_MODE) ? process.env.PIPFLOW_MODE : 'development'
@@ -21,13 +27,12 @@ const {
   userTask,
   createServeTask
 } = require('@pipflow/core')
-const { getConfig } = require('@pipflow/utils')
 const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
 
 //== 自定义配置 ==============================================
 const CC = getConfig(args.config || 'pipflow.config')
 const { outDir, archive } = CC.build
-const publicFiles = globFiles(CC.publicDir, 2) // public 目录文件
+const publicFiles = globFiles(CC.publicDir, true) // public 目录文件
 
 //== 用户任务 ==============================================
 const taskTypes = {} //所有任务类型对象, `{ type: [{name}] }`
