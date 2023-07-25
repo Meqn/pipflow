@@ -7,17 +7,15 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clear": "rm -rf node_modules **/*/node_modules dist **/*/dist",
+    "clean": "rm -rf node_modules **/*/node_modules dist **/*/dist",
     "flow": "pnpm -F demo-flow run build",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "changeset publish --registry https://registry.npmjs.org"
   },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
