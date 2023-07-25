@@ -1,6 +1,5 @@
 const gulp = require('gulp')
 const path = require('path')
-const { readFileSync } = require('fs')
 const _ = require('lodash')
 const replace = require('gulp-replace')
 const rename = require('gulp-rename')
@@ -13,8 +12,9 @@ const njkTemplate = require('gulp-nunjucks')
 const artTemplate = require('gulp-art-tpl')
 
 const { pipeline } = require('../base/utils')
-const { revManifest, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
+const { revDir, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
 const { envInject } = require('../base/config')
+const { readJsonFiles } = require('@pipflow/utils')
 
 /**
  * html 模板引擎
@@ -49,7 +49,7 @@ function templater(compiler, compilerOptions = {}) {
   return templaterMap[compiler]?.()
 }
 
-module.exports = function htmlTask(options = {}, done) {
+module.exports = async function htmlTask(options = {}, done) {
   const {
     input,
     dest,
@@ -66,7 +66,9 @@ module.exports = function htmlTask(options = {}, done) {
   
   let manifest
   if (fileHash) {
-    manifest = readFileSync(path.resolve(dest, revManifest), 'utf-8')
+    // path.posix 统一路径, 兼容window平台
+    const json = await readJsonFiles(path.posix.join(dest, revDir, '*.json'), { merge: true })
+    manifest = JSON.stringify(json)
   }
   
   const processes = []

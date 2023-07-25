@@ -8,7 +8,8 @@ const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 
-const revManifest = 'rev-manifest.json'
+// gulp-rev `manifest.json` 保存目录
+const revDir = 'revManifest'
 
 /************************************************
  * 生成 gulp.src 选项
@@ -93,6 +94,7 @@ function createFilter(filter) {
  * @param {boolean} params.sourcemap 是否输出 sourcemap
  */
 function outputFiles(processes, {
+  name: taskName,
   fileHash,
   dest,
   filter,
@@ -119,19 +121,23 @@ function outputFiles(processes, {
     fileHash !== '?' && processes.push(gulp.dest(dest))
 
     // 3. 生成 manifest.json
-    //! gulp-rev 使用merge选项存在bug。当并行任务生成`rev-mainifest.json`会混乱(覆盖)
-    processes.push(rev.manifest(
+    //! gulp-rev 使用 `merge` 选项存在bug。当并行任务生成`rev-mainifest.json`会混乱(覆盖)
+    /* processes.push(rev.manifest(
       path.resolve(dest, revManifest),
       { merge: true, base: path.resolve(dest) }
+    )) */
+    processes.push(rev.manifest(
+      taskName ? `rev-${taskName.replace(/:/g, '-')}.json` : `rev-${Date.now()}.json`
     ))
-    // 3.1 转换manifest.json内容
+
+    // 3.1 转换`rev-manifest.json`内容
     if (fileHash === '?') {
       processes.push(jsonEditor(function(file) {
         return transformHash(file)
       }))
     }
-    // 3.2 输出manifest文件
-    processes.push(gulp.dest(dest))
+    // 3.2 输出`rev-manifest`文件
+    processes.push(gulp.dest(path.resolve(dest, revDir)))
   } else {
     processes.push(gulp.dest(dest))
   }
@@ -139,7 +145,7 @@ function outputFiles(processes, {
 
 
 module.exports = {
-  revManifest,
+  revDir,
   outputFiles,
   createSrcOptions,
   plumber,
