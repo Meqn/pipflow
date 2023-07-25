@@ -1,15 +1,17 @@
 {
   "name": "@pipflow/core",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "engines": {
-    "node": ">=14"
+    "node": ">=14",
+    "gulp": ">=4"
   },
   "scripts": {
     "test": "jest"
   },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "files": [

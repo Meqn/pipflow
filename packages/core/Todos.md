@@ -7,6 +7,7 @@
 - [ ] image/svg compress
 - [ ] html 内容处理 (css,js)
 - [ ] PWA
+- [ ] esbuild
 
 
 
