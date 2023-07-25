@@ -4,11 +4,10 @@ const minimist = require('minimist')
 
 // 命令行参数
 const args = minimist(process.argv.slice(3))
-console.log('args : ', args)
 
 const nodeEnv = process.env.NODE_ENV
 if (!nodeEnv) {
-  process.env.NODE_ENV = ['development', 'production'].includes(process.env.PP_MODE) ? process.env.PP_MODE : 'development'
+  process.env.NODE_ENV = ['development', 'production'].includes(process.env.PIPFLOW_MODE) ? process.env.PIPFLOW_MODE : 'development'
 }
 
 const {
