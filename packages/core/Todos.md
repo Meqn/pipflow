@@ -4,7 +4,7 @@
 - [ ] 发布子应用, publicPath
 - [ ] 批量替换, replace-all
 - [ ] csss/image (`?__inline`, `?__sprite`)
-- [ ] image/svg compress
+- [ ] image/svg compress (gulp-imagemin) + minifyOptions
 - [ ] html 内容处理 (css,js)
 - [ ] PWA
 - [ ] esbuild
@@ -22,7 +22,7 @@
   - gulp-base64, gulp-base64-img, base64-js
 
 ## image
-- [ ] min
+- [ ] gulp-imagemin + minifyOptions
 - [ ] svgo
 
 
