@@ -112,6 +112,9 @@ task('devServer', done => {
 const viewServerTask = createServeTask('pipFlowView')
 task('preview', done => {
   const cliServe = getCliServeArgs(args)
+  if (!cliServe.port) {
+    cliServe.port = 8527
+  }
   viewServerTask(_.merge({}, CC.server, cliServe), done)
 })
 
