@@ -1,4 +1,4 @@
-const { gulp } = require('@pipflow/utils')
+const { gulp, glob, lodash, merge } = require('@pipflow/utils')
 const { pipeline } = require('../base/utils')
 
 module.exports = function userTask(options = {}, done) {
@@ -8,7 +8,10 @@ module.exports = function userTask(options = {}, done) {
   if (typeof compiler === 'function') {
     return compiler(
       {
-        gulp
+        gulp,
+        glob,
+        lodash,
+        merge
       },
       done
     )
