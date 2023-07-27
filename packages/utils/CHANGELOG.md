@@ -1,5 +1,12 @@
 # @pipflow/utils
 
+## 0.4.0
+
+### Minor Changes
+
+- perf: 移除server & archive配置项
+- 
+
 ## 0.3.1
 
 ### Patch Changes
