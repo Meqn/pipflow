@@ -31,7 +31,7 @@ const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
 
 //== 自定义配置 ==============================================
 const CC = getConfig(args.config || 'pipflow.config')
-const { outDir, archive } = CC.build
+const { outDir } = CC.build
 const publicFiles = globFiles(CC.publicDir, true) // public 目录文件
 
 //== 用户任务 ==============================================
@@ -95,16 +95,6 @@ if (publicFiles) {
   })
 }
 
-/**
- * 📦 创建 archive:dest 压缩包
- */
-task('archive:dest', done => {
-  archiveTask({
-    input: outDir,
-    filename: typeof archive === 'string' ? archive : `dest-${Date.now()}`
-  }, done)
-})
-
 //== 内置任务 ==============================================
 /**
  * 👻 本地开发服务
@@ -153,34 +143,32 @@ task('watch', done => {
 })
 
 //== 导出任务 ==============================================
-let buildTasks = [[], [], []] // `[0: 静态资源, 1: js/css, 2: html`]
+let baseTasks = [[], [], []] // `[0: 静态资源, 1: js/css, 2: html`]
 if (publicFiles) {
-  buildTasks[0].push('copy:public')
+  baseTasks[0].push('copy:public')
 }
 Object.keys(taskTypes).forEach(type => {
   const _typeTasks = taskTypes[type]
   if (['static', 'copy', 'user'].includes(type)) {
-    buildTasks[0].push(..._typeTasks.map(v => v.name))
+    baseTasks[0].push(..._typeTasks.map(v => v.name))
   }
   if (type === 'script' || type === 'style') {
-    buildTasks[1].push(..._typeTasks.map(v => v.name))
+    baseTasks[1].push(..._typeTasks.map(v => v.name))
   }
   if (type === 'html') {
-    buildTasks[2].push(..._typeTasks.map(v => v.name))
+    baseTasks[2].push(..._typeTasks.map(v => v.name))
   }
 })
-buildTasks = buildTasks.filter(v => v.length > 0) //过滤空任务
+baseTasks = baseTasks
+  .filter(item => item.length > 0) //过滤空任务
+  .map(item => parallel(...item))
 
 exports.serve = series(
   'del:dest',
-  parallel(...buildTasks[0]),
-  parallel(...buildTasks[1]),
-  parallel(...buildTasks[2]),
+  ...baseTasks,
   parallel('devServer', 'watch')
 )
 exports.build = series(
   'del:dest',
-  parallel(...buildTasks[0]),
-  parallel(...buildTasks[1]),
-  parallel(...buildTasks[2]),
+  ...baseTasks
 )
