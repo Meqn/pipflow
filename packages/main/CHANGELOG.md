@@ -1,5 +1,18 @@
 # pipflow
 
+## 0.1.0
+
+### Minor Changes
+
+- perf: 优化 preview 服务&移除 archive 任务;
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pipflow/core@0.4.0
+  - @pipflow/utils@0.4.0
+
 ## 0.0.5
 
 ### Patch Changes
