@@ -1,5 +1,17 @@
 # @pipflow/core
 
+## 0.4.0
+
+### Minor Changes
+
+- feat: userTask 参数加入通用三方包;
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pipflow/utils@0.4.0
+
 ## 0.3.1
 
 ### Patch Changes
