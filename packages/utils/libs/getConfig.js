@@ -4,6 +4,19 @@ const importFresh = require('import-fresh')
 const _ = require('lodash')
 
 const defaultConfig = require('./defaultConfig')
+const defaults = {
+  server: {
+    ui: {
+      port: 9528
+    },
+    port: 9527,
+    server: {
+      baseDir: 'dist/',
+      index: 'index.html'
+    },
+    open: true
+  }
+}
 
 /**
  * 获取用户自定义配置
@@ -44,7 +57,7 @@ module.exports = function getConfig(file) {
     })
   }
   
-  const result = _.merge({}, defaultConfig, userConfig)
+  const result = _.merge({ ...defaults }, defaultConfig, userConfig)
   const { base, alias, tasks = [], build = {}  } = result
   const { outDir, fileHash, minify, sourcemap } = build
 
@@ -68,7 +81,7 @@ module.exports = function getConfig(file) {
     if (!item.type) return false
     
     if (!item.name) {
-      item.name = `${item.type}:${index}`
+      item.name = `${item.type}:${index + 1}`
     }
     if (!item.dest) {
       item.dest = outDir

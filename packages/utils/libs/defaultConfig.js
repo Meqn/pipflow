@@ -40,7 +40,7 @@ const taskItem = {
 }
 
 module.exports = Object.freeze({
-  publicPath: '/', //部署应用包时的基本 URL
+  // publicPath: '/', //部署应用包时的基本 URL
   base: './src', //公共基础路径, 用于 `gulp.src('', { base: './src' })`, 每个任务可以不一样
   publicDir: 'public', //作为静态资源服务的文件夹
   // alias: {}, // 别名, 用于替换文本
@@ -50,16 +50,19 @@ module.exports = Object.freeze({
     fileHash: false, //文件指纹 ['[name]?[hash]', '[name]-[hash]']
     minify: false, //是否压缩
     sourcemap: false, //构建后是否生成 source map 文件
-    archive: false, //创建压缩包, `dist-[timestamp].zip`
   },
-  server: {
+  // BrowserSync 本地服务配置
+  /* server: {
+    ui: {
+      port: 9528
+    },
     port: 9527,
     server: {
       baseDir: 'dist/',
       index: 'index.html'
     },
     open: true
-  },
+  }, */
   tasks: [
     {
       type: 'html',
