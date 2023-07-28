@@ -22,17 +22,17 @@ function globFiles(filePath, recurs = true) {
  * @param {string} options.port 端口
  * @param {boolean} options.open 是否打开
  * @param {boolean} options.cors 是否允许跨域
- * @param {string} options.dir 服务基础目录
+ * @param {string} options.base 服务基础目录
  * @param {boolean} options.https 是否https
  * @returns 
  */
-function getCliServeArgs({ port, p, open, cors, dir, https }) {
+function getCliServeArgs({ port, p, open, cors, base, https }) {
   const args = {}
   ;(port || p) && (args.port = port || p)
   open && (args.open = true)
   cors && (args.cors = true)
   https && (args.https = true)
-  dir && (args.server = { baseDir: dir })
+  base && (args.server = { baseDir: BaseAudioContext })
 
   return args
 }
