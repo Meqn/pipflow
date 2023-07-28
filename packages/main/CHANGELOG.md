@@ -1,5 +1,11 @@
 # pipflow
 
+## 0.1.1
+
+### Patch Changes
+
+- perf: 更改 CLI-server 参数(dir->base)
+
 ## 0.1.0
 
 ### Minor Changes
@@ -8,7 +14,6 @@
 
 ### Patch Changes
 
-- Updated dependencies
 - Updated dependencies
   - @pipflow/core@0.4.0
   - @pipflow/utils@0.4.0
