@@ -1,5 +1,14 @@
 # pipflow
 
+## 0.1.2
+
+### Patch Changes
+
+- docs: update README
+- Updated dependencies
+  - @pipflow/utils@0.4.1
+  - @pipflow/core@0.4.1
+
 ## 0.1.1
 
 ### Patch Changes

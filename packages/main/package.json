@@ -1,6 +1,6 @@
 {
   "name": "pipflow",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "engines": {
@@ -20,11 +20,19 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
+  "keywords": [
+    "pipflow",
+    "pipflow-cli",
+    "workflow",
+    "gulp-starter",
+    "gulp workflow",
+    "gulp plugin",
+    "gulp-webpack"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Meqn/pipFlow.git"
   },
-  "keywords": [],
   "author": "Mervin <mengqing723@gmail.com>",
   "license": "MIT",
   "bugs": {
