@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules **/*/node_modules dist **/*/dist",
     "flow": "pnpm -F demo-flow run build",
     "changeset": "changeset",
-    "version-packages": "changeset version",
+    "changeset-version": "changeset version",
     "release": "changeset publish --registry https://registry.npmjs.org"
   },
   "workspaces": [
