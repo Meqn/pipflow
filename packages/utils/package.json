@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/utils",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "utilities for pipFlow-cli packages",
   "main": "index.js",
   "files": [
@@ -10,11 +10,21 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0",
+    "gulp": ">=4"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "keywords": [],
+  "keywords": [
+    "pipflow",
+    "pipflow-cli",
+    "pipflow utils",
+    "workflow",
+    "gulp workflow"
+  ],
   "homepage": "https://github.com/Meqn/pipFlow",
   "repository": {
     "type": "git",

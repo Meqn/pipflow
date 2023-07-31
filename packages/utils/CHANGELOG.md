@@ -1,11 +1,19 @@
 # @pipflow/utils
 
+## 0.4.1
+
+### Patch Changes
+
+- feat: add fileExists function
+- perf: remove imageMinify (configuration item)
+- docs: update keywords & engines
+
 ## 0.4.0
 
 ### Minor Changes
 
-- perf: 移除server & archive配置项
-- 
+- perf: 移除 server & archive 配置项
+-
 
 ## 0.3.1
 

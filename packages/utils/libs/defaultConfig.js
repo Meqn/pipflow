@@ -49,6 +49,7 @@ module.exports = Object.freeze({
     outDir: 'dist/', //指定输出路径（相对于 项目根目录).
     fileHash: false, //文件指纹 ['[name]?[hash]', '[name]-[hash]']
     minify: false, //是否压缩
+    // imageMinify: false, //!是否压缩图片,也可以是压缩选项 !(由于压缩图片比较耗时，且安装依赖容易失败, 所以用户根据自身情况启用)
     sourcemap: false, //构建后是否生成 source map 文件
   },
   // BrowserSync 本地服务配置
