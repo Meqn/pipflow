@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/core",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "engines": {
@@ -20,6 +20,19 @@
     "build",
     "plugins",
     "types"
+  ],
+  "keywords": [
+    "pipflow",
+    "pipflow-cli",
+    "workflow",
+    "gulp workflow",
+    "gulp plugin",
+    "gulp-webpack",
+    "gulp task",
+    "gulp-sass",
+    "gulp-less",
+    "gulp-postcss",
+    "gulp-stylus"
   ],
   "homepage": "https://github.com/Meqn/pipFlow",
   "repository": {

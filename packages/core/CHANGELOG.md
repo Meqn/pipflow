@@ -1,5 +1,13 @@
 # @pipflow/core
 
+## 0.4.1
+
+### Patch Changes
+
+- docs: update keywords
+- Updated dependencies
+  - @pipflow/utils@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes
@@ -8,7 +16,6 @@
 
 ### Patch Changes
 
-- Updated dependencies
 - Updated dependencies
   - @pipflow/utils@0.4.0
 
