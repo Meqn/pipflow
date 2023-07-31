@@ -18,37 +18,29 @@ const gulp = require('gulp')
 const {
   scriptTask,
   styleTask,
-  htmlTask,
-  copyTask,
-  staticTask,
-  archiveTask,
-  removeTask,
-  userTask,
-  serveTask
+  htmlTask
 } = require('@pipflow/core')
 
-task('build:html', done => {
+exports.buildHtml = done => {
   return htmlTask({
     input: 'src/**/*.{html,art,ejs}',
-    dest: 'dist/'
-    base: 'src/',
-    compiler: 'art-template',
-    compilerOptions: {
-      data: {
-        title: 'pipFlow'
-      }
-    }
+    compiler: 'pug'
   }, done)
-})
+}
 
-task('build:script', done => {
+exports.buildScript = done => {
   return scriptTask({
     input: 'src/**/*.{js,mjs}',
-    dest: 'dist/',
-    base: 'src/',
     compiler: 'babel'
   }, done)
-})
+}
+
+exports.buildStyle = done => {
+  return styleTask({
+    input: 'src/**/*.{css,less}',
+    compiler: 'less'
+  }, done)
+}
 
 // ...
 ```
