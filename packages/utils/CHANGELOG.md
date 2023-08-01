@@ -32,7 +32,7 @@
 
 ### Patch Changes
 
-- feat: add compilerOptions
+- feat: add compileOptions
 - perf: update dev-server port
 
 ## 0.2.0

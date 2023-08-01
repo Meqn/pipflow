@@ -28,7 +28,7 @@ const taskItem = {
   base: '', //公共基础路径, 同 `base`
   filename: '', //!输出的文件名, 仅 `archive`使用
   compiler: '', //编译器(转换器), 如果 `type=user`, 则类型可以是gulp任务函数
-  compilerOptions: {}, //编译选项, 和对应的compiler有关, 比如 html => { data, ... }
+  compileOptions: {}, //编译选项, 和对应的compiler有关, 比如 html => { data, ... }
   module: false, //!模块化 (仅`JS`任务, 代码包含 `import/require` 则必须启用)
   plugins: [], //自定义流程
   minify: process.env.NODE_ENV === 'production' ? true : false, //是否压缩, @继承 `build.minify`

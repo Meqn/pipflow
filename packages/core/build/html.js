@@ -21,31 +21,31 @@ const { envInject } = require('../base/config')
 /**
  * html 模板引擎
  * @param {string} compiler 模板引擎name
- * @param {object} compilerOptions 配置项
+ * @param {object} compileOptions 配置项
  * @returns 
  */
-function templater(compiler, compilerOptions = {}) {
-  const { data = {} } = compilerOptions
+function templater(compiler, compileOptions = {}) {
+  const { data = {} } = compileOptions
   const templaterMap = {
     ejs() {
       // ejs(data, options)
-      return ejsTemplate(data, compilerOptions)
+      return ejsTemplate(data, compileOptions)
     },
     pug() {
       // pug([opts])
-      return pugTemplate(compilerOptions)
+      return pugTemplate(compileOptions)
     },
     artTemplate() {
       // template(data, options)
-      return artTemplate(data, compilerOptions)
+      return artTemplate(data, compileOptions)
     },
     handlebars() {
       // hb([options])
-      return hbTemplate(compilerOptions)
+      return hbTemplate(compileOptions)
     },
     nunjucks() {
       // nunjucks.compile(data?, options?)
-      return njkTemplate(data, compilerOptions)
+      return njkTemplate(data, compileOptions)
     }
   }
   return templaterMap[compiler]?.()
@@ -56,7 +56,7 @@ module.exports = async function htmlTask(options = {}, done) {
     input,
     dest,
     compiler,
-    compilerOptions,
+    compileOptions,
     alias,
     fileHash,
     minify: isMinify,
@@ -84,7 +84,7 @@ module.exports = async function htmlTask(options = {}, done) {
 
   // 3. 模板处理
   if (compiler) {
-    const rendered = templater(compiler, compilerOptions)
+    const rendered = templater(compiler, compileOptions)
     if (rendered) {
       processes.push(rendered)
     }

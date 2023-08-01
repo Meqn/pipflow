@@ -68,7 +68,7 @@ module.exports = function getConfig(file) {
     dest: '',
     base: '',
     compiler: '',
-    compilerOptions: {},
+    compileOptions: {},
     module: false,
     plugins: [],
     minify: false,

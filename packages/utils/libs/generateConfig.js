@@ -64,7 +64,7 @@ module.exports = function generateConfig({
         item.input = getInput('html', templater)
         if (templater) {
           item.compiler = templater
-          item.compilerOptions = {
+          item.compileOptions = {
             data: {
               title: 'pipflow',
               description: 'pipflow-CLI is a command line tool based on the gulp workflow. It can greatly simplify front-end development workflows.'
