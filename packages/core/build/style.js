@@ -19,7 +19,7 @@ const {
   plumber,
   putProcesses
 } = require('./comm')
-const { envInject } = require('../base/config')
+const { ENV } = require('../base/env')
 
 module.exports = function styleTask(options = {}, done) {
   const {
@@ -45,7 +45,7 @@ module.exports = function styleTask(options = {}, done) {
   }
 
   // 1. 环境变量处理
-  processes.push(envInject({ isVar: false }))
+  processes.push(ENV.inject({ isVar: false }))
 
   // 2. replace 替换别名
   if (_.isPlainObject(alias)) {

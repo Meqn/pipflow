@@ -16,7 +16,7 @@ const {
 
 const { pipeline } = require('../base/utils')
 const { revDir, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
-const { envInject } = require('../base/config')
+const { ENV } = require('../base/env')
 
 /**
  * html 模板引擎
@@ -80,7 +80,7 @@ module.exports = async function htmlTask(options = {}, done) {
   processes.push(plumber.handler())
 
   // 2. 环境变量处理
-  processes.push(envInject({ isVar: false }))
+  processes.push(ENV.inject({ isVar: false }))
 
   // 3. 模板处理
   if (compiler) {

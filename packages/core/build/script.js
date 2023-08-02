@@ -10,7 +10,7 @@ const {
   _
 } = require('@pipflow/utils')
 
-const { envInject } = require('../base/config')
+const { ENV } = require('../base/env')
 const { pipeline } = require('../base/utils')
 const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
 
@@ -59,7 +59,7 @@ function compileScript(options = {}, done) {
   }
 
   // 4. 环境变量处理
-  processes.push(envInject())
+  processes.push(ENV.inject())
 
   // 5. replace 替换别名
   if (_.isPlainObject(alias)) {

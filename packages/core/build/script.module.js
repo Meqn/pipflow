@@ -11,9 +11,11 @@ const {
   lodash: _
 } = require('@pipflow/utils')
 
-const { isPROD, ENV } = require('../base/config')
+const { ENV } = require('../base/env')
 const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
 const { pipeline } = require('../base/utils')
+
+const isPROD = process.env.NODE_ENV === 'production'
 
 /**
  * 生成webpack配置项
@@ -39,7 +41,8 @@ function getWebpackConfig({
   const uglifyOptions = {
     extractComments: false // 不提取注释
   }
-  if (!(isPROD && minify)) {
+  // 非 build模式不压缩
+  if (!isPROD || !minify) {
     uglifyOptions.terserOptions = {
       mangle: true, //指定变量名压缩选项，或跳过破坏变量名
       keep_classnames: true, //是否保留或保留哪些类名
@@ -118,7 +121,7 @@ function getWebpackConfig({
 function getEntries(options = {}) {
   const { input, alias, minify, compiler } = options
   const webpackOptions = {
-    env: ENV,
+    env: ENV.data,
     minify,
     alias,
     compiler,

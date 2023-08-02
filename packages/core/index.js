@@ -7,8 +7,10 @@ const staticTask = require('./build/static')
 const archiveTask = require('./build/archive')
 const userTask = require('./build/user')
 const createServeTask = require('./build/serve')
+const { loadEnv } = require('./base/env')
 
 module.exports = {
+  loadEnv,
   scriptTask,
   styleTask,
   htmlTask,
