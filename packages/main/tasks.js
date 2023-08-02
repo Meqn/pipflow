@@ -18,6 +18,7 @@ if (!process.env.NODE_ENV) {
 }
 
 const {
+  loadEnv,
   htmlTask,
   scriptTask,
   styleTask,
@@ -34,6 +35,9 @@ const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
 const CC = getConfig(args.config || 'pipflow.config')
 const { outDir } = CC.build
 const publicFiles = globFiles(CC.publicDir, true) // public 目录文件
+
+// 重新加载环境变量文件
+loadEnv(CC.envDir)
 
 //== 用户任务 ==============================================
 const taskTypes = {} //所有任务类型对象, `{ type: [{name}] }`
