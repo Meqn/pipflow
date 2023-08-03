@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const defaultConfig = require('./defaultConfig')
+const { generateDefault } = require('./defaultConfig')
 
 /**
  * 获取默认输入文件
@@ -10,7 +10,7 @@ const defaultConfig = require('./defaultConfig')
  */
 function getInput(type, compiler) {
   const htmlMap = {
-    artTemplate: 'art,ejs',
+    artTemplate: 'art',
     ejs: 'ejs',
     pug: 'pug',
     nunjucks: 'njk',
@@ -30,7 +30,8 @@ function getInput(type, compiler) {
       styleMap[compiler] ? '{css,' + styleMap[compiler] + '}' : 'css'
     }`,
     script: `./src/scripts/**/*.{js,mjs}`,
-    static: `./src/assets/**`
+    static: `./src/assets/**`,
+    image: `./src/images/**`
   }
 
   return typeMap[type]
@@ -49,7 +50,7 @@ module.exports = function generateConfig({
   cssPreprocessor,
   templater
 } = {}) {
-  const result = _.merge({}, defaultConfig, {
+  const result = _.merge({}, generateDefault, {
     build: {
       // 生成文件时会被替换 `replace('"process.env.NODE_ENV === production"', 'process.env.NODE_ENV === "production"')`
       fileHash: 'process.env.NODE_ENV === production',
@@ -67,7 +68,7 @@ module.exports = function generateConfig({
           item.compileOptions = {
             data: {
               title: 'pipflow',
-              description: 'pipflow-CLI is a command line tool based on the gulp workflow. It can greatly simplify front-end development workflows.'
+              description: 'A web developer workflow based on Gulp.'
             }
           }
         }
@@ -82,6 +83,9 @@ module.exports = function generateConfig({
         break
       case 'static':
         item.input = getInput('static')
+        break
+      case 'image':
+        item.input = getInput('image')
         break
     }
     return item
