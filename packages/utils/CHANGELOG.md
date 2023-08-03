@@ -1,5 +1,12 @@
 # @pipflow/utils
 
+## 0.5.0
+
+### Minor Changes
+
+- feat: add minifyOptions
+- perf: update getConfig
+
 ## 0.4.1
 
 ### Patch Changes

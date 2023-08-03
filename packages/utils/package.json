@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/utils",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "utilities for pipFlow-cli packages",
   "main": "index.js",
   "files": [
