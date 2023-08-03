@@ -1,5 +1,13 @@
 # @pipflow/core
 
+## 0.5.0
+
+### Patch Changes
+
+- perf: Optimize reading local ENV-vars
+- Updated dependencies
+  - @pipflow/utils@0.5.0
+
 ## 0.4.1
 
 ### Patch Changes
@@ -12,7 +20,7 @@
 
 ### Minor Changes
 
-- feat: userTask 参数加入通用三方包;
+- feat: userTask params added comm-packages
 
 ### Patch Changes
 
