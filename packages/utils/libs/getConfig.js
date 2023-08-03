@@ -3,20 +3,7 @@ const importFresh = require('import-fresh')
 // const { cosmiconfig } = require('cosmiconfig')
 const _ = require('lodash')
 
-const defaultConfig = require('./defaultConfig')
-const defaults = {
-  server: {
-    ui: {
-      port: 9528
-    },
-    port: 9527,
-    server: {
-      baseDir: 'dist/',
-      index: 'index.html'
-    },
-    open: true
-  }
-}
+const { defaultConfig } = require('./defaultConfig')
 
 /**
  * 获取用户自定义配置
@@ -35,6 +22,40 @@ function getUserConfig(filePath) {
     fileContent = importFresh(path.resolve(filePath.cwd, filePath.path))
   }
   return typeof fileContent === 'function' ? fileContent() : fileContent
+}
+
+/**
+ * 是否压缩
+ * @param {any} self 子集项
+ * @param {boolean} parent 父级项
+ * @returns 
+ */
+function isMinify(self, parent) {
+  return self ? true : self === false ? false : parent
+}
+
+/**
+ * 获取压缩配置项
+ * @param {string} type 任务类型
+ * @param {object} options 配置项
+ * @returns 
+ */
+function getMinify(type, options = {}) {
+  const { minify, terserOptions, cssMinify, imageMinify } = options
+  const result = { minify }
+
+  if (type === 'script') {
+    result.minify = isMinify(terserOptions, minify)
+    typeof terserOptions === 'object' && (result.minifyOptions = terserOptions)
+  } else if (type === 'style') {
+    result.minify = isMinify(cssMinify, minify)
+    typeof cssMinify === 'object' && (result.minifyOptions = cssMinify)
+  } else if (type === 'static' || type === 'image') {
+    result.minify = isMinify(imageMinify, minify)
+    typeof imageMinify === 'object' && (result.minifyOptions = imageMinify)
+  }
+
+  return result
 }
 
 /**
@@ -57,27 +78,11 @@ module.exports = function getConfig(file) {
     })
   }
   
-  const result = _.merge({ ...defaults }, defaultConfig, userConfig)
+  const result = _.merge({}, defaultConfig, userConfig)
   const { base, alias, tasks = [], build = {}  } = result
-  const { outDir, fileHash, minify, sourcemap } = build
+  const { outDir, fileHash, sourcemap, minify, terserOptions, cssMinify, imageMinify } = build
 
   result.tasks = tasks.map((item, index) => {
-    /* 
-    name: item.name ?? `html:${index}`,
-    input: '',
-    dest: '',
-    base: '',
-    compiler: '',
-    compileOptions: {},
-    module: false,
-    plugins: [],
-    minify: false,
-    minifyOptions: {},
-    fileHash: false,
-    sourcemap: false,
-    alias: {},
-    */
-
     if (!item.type) return false
     
     if (!item.name) {
@@ -89,9 +94,15 @@ module.exports = function getConfig(file) {
     if (item.base === undefined && base) {
       item.base = base
     }
+
+    const itemMinify = getMinify(item.type, build)
     if (item.minify === undefined) {
-      item.minify = minify
+      item.minify = itemMinify.minify
     }
+    if (!item.minifyOptions && itemMinify.minifyOptions) {
+      item.minifyOptions = itemMinify.minifyOptions
+    }
+
     if (item.fileHash === undefined) {
       item.fileHash = fileHash
     }
