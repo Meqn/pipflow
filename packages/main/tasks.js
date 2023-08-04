@@ -1,3 +1,4 @@
+const path = require('path')
 const {
   gulp,
   _,
@@ -6,6 +7,7 @@ const {
 } = require('@pipflow/utils')
 const { task, watch, series, parallel } = gulp
 
+//== 参数和环境变量 ==============================================
 // 命令行参数
 const args = minimist(process.argv.slice(3))
 
@@ -121,6 +123,40 @@ task('preview', done => {
     cliServe.port = 8527
   }
   viewServerTask(_.merge({}, CC.server, cliServe), done)
+})
+
+/**
+ * 📦 打包 `zip` 文件
+ * @example gulp archive --input=src/style,src/script --dest=assets.zip
+ */
+task('archive', done => {
+  let input = path.resolve(outDir, '**')
+  let dest = outDir
+  let filename = 'archive.zip'
+  const fileReg = /(\w+\.\w+)$/
+
+  if (args.input) {
+    //如果 input 是以 `xx.xx` 结尾，则认为是 文件，否则为 目录
+    input = args.input.split(',').map(item => {
+      if (fileReg.test(item)) return item
+      return path.resolve(item, '**')
+    })
+  }
+
+  if (args.dest) {
+    //如果 dest 是以 `.zip` 结尾，则认为是 `输出目录 + 文件名`，否则为 `输出目录`
+    dest = args.dest
+    if (dest.endsWith('.zip')) {
+      filename = dest.split('/').pop()
+      dest = path.resolve(dest.replace(filename, '')) //当 `gulp.dest('')` 时会报错
+    }
+  }
+
+  archiveTask({
+    input,
+    dest,
+    filename
+  }, done)
 })
 
 /**
