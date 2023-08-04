@@ -35,7 +35,8 @@ const taskOptions = {
   fileHash: process.env.NODE_ENV === 'production' ? true : false, //文件指纹, @type: [boolean, string], @value: `{ '?': [name]?[hash], '-': [name]-[hash] }`, @继承 `build.fileHash`
   sourcemap: false, //是否生成 sourcemap 文件, @继承 `build.sourcemap`
   alias: {}, //替换别名, @继承 `alias`
-  watch: false, //是否监听任务
+  watch: false, //是否监听任务,
+  filename: 'archive.zip', //文件名，仅 `archive` 任务有效 (xxx.zip)
 }
 
 const defaults = Object.freeze({
@@ -74,7 +75,6 @@ const defaults = Object.freeze({
     {
       type: 'script',
       input: './src/scripts/**/*.{js,mjs}',
-      module: false,
       watch: true
     },
     {
@@ -93,6 +93,7 @@ const defaults = Object.freeze({
 const generateDefault = {
   base: defaults.base,
   publicDir: defaults.publicDir,
+  build: {},
   tasks: defaults.tasks
 }
 
