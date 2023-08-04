@@ -24,7 +24,7 @@ module.exports = function archiveTask(options = {}, done) {
   putProcesses(processes, options.plugins)
   
   // 3. 创建zip压缩包
-  processes.push(zip(filename + '.zip'))
+  processes.push(zip(filename.endsWith('.zip') ? filename : `${filename}.zip`))
   
   // 3. 输出文件
   processes.push(gulp.dest(dest))
