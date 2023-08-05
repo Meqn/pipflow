@@ -1,5 +1,13 @@
 # @pipflow/core
 
+## 0.5.1
+
+### Patch Changes
+
+- fix: Archive-task filename problem
+- Updated dependencies
+  - @pipflow/utils@0.5.1
+
 ## 0.5.0
 
 ### Patch Changes
