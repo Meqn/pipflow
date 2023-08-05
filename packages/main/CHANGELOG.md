@@ -1,5 +1,17 @@
 # pipflow
 
+## 0.2.0
+
+### Minor Changes
+
+- built-in archiveTask & support CLI-options
+
+### Patch Changes
+
+- Updated dependencies
+  - @pipflow/core@0.5.1
+  - @pipflow/utils@0.5.1
+
 ## 0.1.3
 
 ### Patch Changes
