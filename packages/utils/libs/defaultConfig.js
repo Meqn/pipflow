@@ -10,19 +10,36 @@
  * 
  * js
  * webpack, babel, uglify
- * 
- * task
- * 任务类型： copy, html, script, style, static, image 自定义(none, compiler 函数)
- * 处理顺序： assets, copy, style, script, html
+ *
  * 
  */
+
+/**
+ * Task任务类型
+ * 
+ * 综合任务:
+ * `serve`任务执行顺序: ['remove', ['public', 'static'], ['style', 'script'], 'html', ['server', 'watch']]
+ * `build` 任务执行顺序: ['remove', ['public', 'static'], ['style', 'script'], 'html']
+ */
+const taskTypes = [
+  'html',
+  'style',
+  'script',
+  'static', //静态资源 任务
+  'image',
+  'server', //本地服务器 任务
+  'copy',
+  'remove', //删除文件/目录 任务
+  'archive', //压缩包 任务
+  'user', //自定义 任务, (默认空任务)
+]
 
 /**
  * 每个task任务项 属性
  */
 const taskOptions = {
   name: 'html:1', //任务名, @规则 `[type]:[index]`
-  type: 'html', //任务类型, 包含 `{html, script, style, static, copy, server, remove: '删除文件/目录', archive: '压缩包', user: '自定义任务'}`
+  type: 'html', //任务类型
   input: '', //输入文件
   dest: '', //输出目录, 同 `build.outDir`
   base: '', //公共基础路径, 同 `base`
@@ -37,6 +54,28 @@ const taskOptions = {
   alias: {}, //替换别名, @继承 `alias`
   watch: false, //是否监听任务,
   filename: 'archive.zip', //文件名，仅 `archive` 任务有效 (xxx.zip)
+}
+
+const htmlTask = {
+  input: '',
+  compiler: '',
+  compileOptions: ''
+}
+
+const styleTask = {
+  input: '',
+  compiler: '',
+  cssMinify: ''
+}
+
+const scriptTask = {
+  compiler: '',
+  module: false,
+  terserOptions: ''
+}
+
+const staticTask = {
+  imageMinify: false
 }
 
 const defaults = Object.freeze({
