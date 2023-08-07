@@ -21,7 +21,15 @@ function getUserConfig(filePath) {
   if (typeof filePath === 'object') {
     fileContent = importFresh(path.resolve(filePath.cwd, filePath.path))
   }
-  return typeof fileContent === 'function' ? fileContent() : fileContent
+
+  const configEnv = {
+    mode: process.env.PIPFLOW_MODE
+  }
+  if (['serve', 'build'].includes(process.env.PIPFLOW_CLI_COMMAND)) {
+    configEnv.command = process.env.PIPFLOW_CLI_COMMAND
+  }
+
+  return typeof fileContent === 'function' ? fileContent(configEnv) : fileContent
 }
 
 /**
@@ -80,7 +88,7 @@ module.exports = function getConfig(file) {
   
   const result = _.merge({}, defaultConfig, userConfig)
   const { base, alias, tasks = [], build = {}  } = result
-  const { outDir, fileHash, sourcemap, minify, terserOptions, cssMinify, imageMinify } = build
+  const { outDir, fileHash, sourcemap } = build
 
   result.tasks = tasks.map((item, index) => {
     if (!item.type) return false
