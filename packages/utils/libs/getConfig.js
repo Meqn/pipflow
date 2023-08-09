@@ -49,18 +49,21 @@ function isMinify(self, parent) {
  * @returns 
  */
 function getMinify(type, options = {}) {
-  const { minify, terserOptions, cssMinify, imageMinify } = options
+  const { minify, htmlMinify, jsMinify, cssMinify, imageMinify } = options
   const result = { minify }
 
   if (type === 'script') {
-    result.minify = isMinify(terserOptions, minify)
-    typeof terserOptions === 'object' && (result.minifyOptions = terserOptions)
+    result.minify = isMinify(jsMinify, minify)
+    _.isPlainObject(jsMinify) && (result.minifyOptions = jsMinify)
   } else if (type === 'style') {
     result.minify = isMinify(cssMinify, minify)
-    typeof cssMinify === 'object' && (result.minifyOptions = cssMinify)
+    _.isPlainObject(cssMinify) && (result.minifyOptions = cssMinify)
+  } else if (type === 'html') {
+    result.minify = isMinify(htmlMinify, minify)
+    _.isPlainObject(htmlMinify) && (result.minifyOptions = htmlMinify)
   } else if (type === 'static' || type === 'image') {
     result.minify = isMinify(imageMinify, minify)
-    typeof imageMinify === 'object' && (result.minifyOptions = imageMinify)
+    _.isPlainObject(imageMinify) && (result.minifyOptions = imageMinify)
   }
 
   return result
@@ -89,6 +92,8 @@ module.exports = function getConfig(file) {
   const result = _.merge({}, defaultConfig, userConfig)
   const { base, alias, tasks = [], build = {}  } = result
   const { outDir, fileHash, sourcemap } = build
+  // [minify, sourcemap, fileHash] 必须在 `build` 命令下有效
+  const isBuild = process.env.PIPFLOW_CLI_COMMAND === 'build'
 
   result.tasks = tasks.map((item, index) => {
     if (!item.type) return false
@@ -105,17 +110,16 @@ module.exports = function getConfig(file) {
 
     const itemMinify = getMinify(item.type, build)
     if (item.minify === undefined) {
-      item.minify = itemMinify.minify
+      item.minify = itemMinify.minify && isBuild
     }
     if (!item.minifyOptions && itemMinify.minifyOptions) {
       item.minifyOptions = itemMinify.minifyOptions
     }
-
     if (item.fileHash === undefined) {
-      item.fileHash = fileHash
+      item.fileHash = fileHash && isBuild
     }
     if (item.sourcemap === undefined) {
-      item.sourcemap = sourcemap
+      item.sourcemap = sourcemap && isBuild
     }
     if (item.alias || alias) {
       item.alias = _.merge({}, alias, item.alias)
