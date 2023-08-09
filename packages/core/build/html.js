@@ -58,8 +58,7 @@ module.exports = async function htmlTask(options = {}, done) {
     compiler,
     compileOptions,
     alias,
-    fileHash,
-    minify: isMinify,
+    fileHash
   } = options
   
   if (!input) {
@@ -109,7 +108,7 @@ module.exports = async function htmlTask(options = {}, done) {
   processes.push(rename({ extname: '.html' }))
 
   // 8. 压缩处理
-  if (isMinify) {
+  if (options.minify) {
     processes.push(htmlMinifier({
       collapseWhitespace: true, //移除多余空白
       removeComments: true, //移除注释

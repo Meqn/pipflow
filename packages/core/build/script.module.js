@@ -15,8 +15,6 @@ const { ENV } = require('../base/env')
 const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
 const { pipeline } = require('../base/utils')
 
-const isPROD = process.env.NODE_ENV === 'production'
-
 /**
  * 生成webpack配置项
  * @param {object} options 配置项
@@ -41,8 +39,8 @@ function getWebpackConfig({
   const uglifyOptions = {
     extractComments: false // 不提取注释
   }
-  // 非 build模式不压缩
-  if (!isPROD || !minify) {
+  // 不压缩时，简化webpack生成内容
+  if (!minify) {
     uglifyOptions.terserOptions = {
       mangle: true, //指定变量名压缩选项，或跳过破坏变量名
       keep_classnames: true, //是否保留或保留哪些类名
@@ -93,7 +91,7 @@ function getWebpackConfig({
   
   return {
     // devtool: 'source-map',
-    mode: isPROD ? 'production' : 'none', //无webpack注释 ['none', 'production']
+    mode: minify ? 'production' : 'none', //无webpack注释 ['none', 'production']
     output: {
       filename: filename || '[name].js',
     },

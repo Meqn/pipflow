@@ -33,7 +33,7 @@ function compileScript(options = {}, done) {
     input,
     alias,
     compiler,
-    minify: isMinify
+    minify
   } = options
 
   const srcOptions = createSrcOptions(options)
@@ -79,7 +79,7 @@ function compileScript(options = {}, done) {
   }
 
   // 6. 压缩处理
-  if (isMinify) {
+  if (minify) {
     processes.push(uglifyjs())
   }
 
