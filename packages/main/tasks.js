@@ -15,8 +15,18 @@ const args = minimist(process.argv.slice(3))
 if (!process.env.PIPFLOW_MODE) {
   process.env.PIPFLOW_MODE = args.mode || (process.env.PIPFLOW_CLI_COMMAND === 'build' ? 'production' : 'development')
 }
+
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = ['development', 'production'].includes(process.env.PIPFLOW_MODE) ? process.env.PIPFLOW_MODE : 'development'
+  if (process.env.PIPFLOW_CLI_COMMAND === 'build') {
+    process.env.NODE_ENV = 'production'
+  } else {
+    // 当 build 且 mode=production 时，强制 node_env = production
+    process.env.NODE_ENV = ['development', 'production'].includes(process.env.PIPFLOW_MODE) ? process.env.PIPFLOW_MODE : 'development'
+  }
+} else {
+  if(process.env.NODE_ENV !== 'production' && process.env.PIPFLOW_CLI_COMMAND === 'build' && process.env.PIPFLOW_MODE === 'production') {
+    process.env.NODE_ENV = 'production'
+  }
 }
 
 const {
