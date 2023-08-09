@@ -7,7 +7,7 @@
 - [ ] image/svg compress (gulp-imagemin) + minifyOptions
 - [ ] html 内容处理 (css,js)
 - [ ] PWA
-- [ ] esbuild
+- [x] esbuild (放弃)
 
 
 
@@ -20,6 +20,8 @@
 ## style
 - [ ] base64
   - gulp-base64, gulp-base64-img, base64-js
+- [ ] TailwindCSS/WindiCSS
+
 
 ## image
 - [ ] gulp-imagemin + minifyOptions
@@ -34,4 +36,8 @@
 - posthtml : https://github.com/posthtml/posthtml
 - gulp-file-include : https://www.npmjs.com/package/gulp-file-include
 - preprocess
+
+## Mock server
+
+
 
