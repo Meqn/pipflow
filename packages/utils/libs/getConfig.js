@@ -50,23 +50,17 @@ function isMinify(self, parent) {
  */
 function getMinify(type, options = {}) {
   const { minify, htmlMinify, jsMinify, cssMinify, imageMinify } = options
-  const result = { minify }
-
+  
   if (type === 'script') {
-    result.minify = isMinify(jsMinify, minify)
-    _.isPlainObject(jsMinify) && (result.minifyOptions = jsMinify)
+    return jsMinify ?? minify
   } else if (type === 'style') {
-    result.minify = isMinify(cssMinify, minify)
-    _.isPlainObject(cssMinify) && (result.minifyOptions = cssMinify)
+    return cssMinify ?? minify
   } else if (type === 'html') {
-    result.minify = isMinify(htmlMinify, minify)
-    _.isPlainObject(htmlMinify) && (result.minifyOptions = htmlMinify)
+    return htmlMinify ?? minify
   } else if (type === 'static' || type === 'image') {
-    result.minify = isMinify(imageMinify, minify)
-    _.isPlainObject(imageMinify) && (result.minifyOptions = imageMinify)
+    return imageMinify ?? minify
   }
-
-  return result
+  return minify
 }
 
 /**
@@ -108,12 +102,8 @@ module.exports = function getConfig(file) {
       item.base = base
     }
 
-    const itemMinify = getMinify(item.type, build)
     if (item.minify === undefined) {
-      item.minify = itemMinify.minify && isBuild
-    }
-    if (!item.minifyOptions && itemMinify.minifyOptions) {
-      item.minifyOptions = itemMinify.minifyOptions
+      item.minify = getMinify(item.type, build) && isBuild
     }
     if (item.fileHash === undefined) {
       item.fileHash = fileHash && isBuild
