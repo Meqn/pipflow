@@ -1,3 +1,3 @@
-module.exports = function defineConfig() {
-  //
+module.exports = function defineConfig(config) {
+  return config
 }
