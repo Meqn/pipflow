@@ -1,8 +1,10 @@
 # @pipflow/core
 
-A web developer workflow based on Gulp.
+- [pipflow Documents](https://pipflow.mengqing.org/)
 
-基于Gulp的web开发工作流程。目前提供了一系列的构建任务流程，包含`html`, `css`, `javascript`, `static`, `devServer`等。
+> Gulp-based web development workflow. It provides a series of out-of-the-box build tasks , can cover from html, css, javascript to static resources , local servers , the entire front-end project build process , greatly simplifying and optimizing the front-end project development .
+
+基于Gulp的web开发工作流程。它提供了一系列开箱即用的构建任务,可以涵盖从 html、css、javascript 到静态资源、本地服务器的整个前端项目构建流程,极大地简化和优化了前端的项目开发。
 
 
 ## Install
