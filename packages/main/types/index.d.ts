@@ -3,7 +3,7 @@
 import type {
   ConfigEnv,
   UserConfig
-} from './types/config'
+} from './config'
 
 // export declare type UserConfigExport = UserConfig | Promise<UserConfig> | UserConfigFn
 // export declare type UserConfigFn = (env: ConfigEnv) => UserConfig | Promise<UserConfig>
