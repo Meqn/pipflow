@@ -1,5 +1,18 @@
 # @pipflow/core
 
+## 0.6.0
+
+### Minor Changes
+
+- feat: Add minify configuration
+- feat: Add Image-Minify
+- perf: Optimize Server-Task configration
+
+### Patch Changes
+
+- Updated dependencies
+  - @pipflow/utils@0.6.0
+
 ## 0.5.1
 
 ### Patch Changes
