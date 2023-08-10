@@ -47,7 +47,6 @@ const taskOptions = {
   compileOptions: {}, //编译选项, 和对应的compiler有关, 比如 html => { data, ... }
   module: false, //!模块化 (仅`JS`任务, 代码包含 `import/require` 则必须启用)
   minify: process.env.NODE_ENV === 'production' ? true : false, //是否压缩, @继承 `build.minify`
-  minifyOptions: {}, //压缩选项
   plugins: [], //自定义流程
   fileHash: process.env.NODE_ENV === 'production' ? true : false, //文件指纹, @type: [boolean, string], @value: `{ '?': [name]?[hash], '-': [name]-[hash] }`, @继承 `build.fileHash`
   sourcemap: false, //是否生成 sourcemap 文件, @继承 `build.sourcemap`

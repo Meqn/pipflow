@@ -48,16 +48,20 @@ function getInput(type, compiler) {
 module.exports = function generateConfig({
   babel,
   cssPreprocessor,
-  templater
+  templater,
+  imagemin
 } = {}) {
   const result = _.merge({}, generateDefault, {
     build: {
       // 生成文件时会被替换 `replace('"process.env.NODE_ENV === production"', 'process.env.NODE_ENV === "production"')`
       fileHash: 'process.env.NODE_ENV === production',
-      minify: 'process.env.NODE_ENV === production',
       sourcemap: 'process.env.NODE_ENV === production',
+      minify: 'process.env.NODE_ENV === production',
     }
   })
+  if (imagemin === false) {
+    result.build.imageMinify = imagemin
+  }
 
   result.tasks = result.tasks.map(item => {
     switch (item.type) {
