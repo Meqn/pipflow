@@ -1,9 +1,9 @@
 {
   "name": "pipflow",
-  "version": "0.2.0",
-  "description": "A web developer workflow based on Gulp.",
+  "version": "0.3.3",
+  "description": "A web developer workflow based on Gulp. It has built-in features such as merging, compiling, packaging, and compressing that greatly simplify the front-end development process.",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "./types/index.d.ts",
   "engines": {
     "node": "^14.13.1 || >=16.0.0",
     "gulp": ">=4"
@@ -26,8 +26,8 @@
     "pipflow-cli",
     "workflow",
     "gulp-starter",
-    "gulp workflow",
-    "gulp plugin",
+    "gulp-workflow",
+    "gulp-plugin",
     "gulp-webpack"
   ],
   "repository": {

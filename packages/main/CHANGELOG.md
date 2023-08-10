@@ -1,5 +1,38 @@
 # pipflow
 
+## 0.3.3
+
+### Patch Changes
+
+- fix: Change types directory
+
+## 0.3.2
+
+### Patch Changes
+
+- fix: update types
+
+## 0.3.1
+
+### Patch Changes
+
+- docs: update README
+
+## 0.3.0
+
+### Minor Changes
+
+- feat: Add defineConfig
+- feat: Add pipflow.config types
+- feat: Add gulp default-task
+- perf: Change NODE_ENV when in build
+
+### Patch Changes
+
+- Updated dependencies
+  - @pipflow/core@0.6.0
+  - @pipflow/utils@0.6.0
+
 ## 0.2.0
 
 ### Minor Changes
@@ -25,7 +58,7 @@
 
 ### Patch Changes
 
-- docs: update README
+- docs: Update README
 - Updated dependencies
   - @pipflow/utils@0.4.1
   - @pipflow/core@0.4.1
@@ -34,7 +67,7 @@
 
 ### Patch Changes
 
-- perf: 更改 CLI-server 参数(dir->base)
+- perf: Update CLI-server params(dir->base)
 
 ## 0.1.0
 
