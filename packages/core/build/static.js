@@ -1,4 +1,4 @@
-const { gulp } = require('@pipflow/utils')
+const { gulp, _ } = require('@pipflow/utils')
 
 const { pipeline } = require('../base/utils')
 const {
@@ -13,6 +13,10 @@ module.exports = function staticTask(options = {}, done) {
     throw new Error('input is required')
   }
 
+  const {
+    minify: imageMinify
+  } = options
+
   const processes = []
   const srcOptions = createSrcOptions(options)
 
@@ -21,6 +25,16 @@ module.exports = function staticTask(options = {}, done) {
 
   // 2. 自定义处理流程
   putProcesses(processes, options.plugins)
+
+  // 3. 压缩图片
+  if (imageMinify) {
+    const minifyOptions = _.isPlainObject(imageMinify) ? imageMinify : {}
+    const gulpImagemin = require('gulp-imagemin')
+    processes.push(gulpImagemin(
+      minifyOptions.plugins || undefined,
+      minifyOptions.options || {}
+    ))
+  }
 
   // 3. 文件指纹处理 & 输出文件
   outputFiles(processes, {

@@ -9,7 +9,7 @@ const postcssEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
 const {
   gulp,
-  lodash: _
+  _
 } = require('@pipflow/utils')
 
 const { pipeline } = require('../base/utils')
@@ -25,6 +25,7 @@ module.exports = function styleTask(options = {}, done) {
   const {
     input,
     compiler,
+    minify: cssMinify,
     alias
   } = options
 
@@ -69,7 +70,10 @@ module.exports = function styleTask(options = {}, done) {
   // 5. postcss //!需配置 `postcss.config.js` 和 `.browserslistrc`
   const postcssPlugins = []
   postcssPlugins.push(postcssEnv())
-  options.minify && postcssPlugins.push(cssnano())
+  if (cssMinify) {
+    const minifyOptions = _.isPlainObject(cssMinify) ? cssMinify : {}
+    postcssPlugins.push(cssnano(minifyOptions))
+  }
   processes.push(postcss(postcssPlugins))
 
   // 9. 文件指纹处理 & sourcemaps & 输出文件

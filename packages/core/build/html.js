@@ -10,7 +10,7 @@ const njkTemplate = require('gulp-nunjucks')
 const artTemplate = require('gulp-art-tpl')
 const {
   gulp,
-  lodash: _,
+  _,
   readJsonFiles
 } = require('@pipflow/utils')
 
@@ -57,6 +57,7 @@ module.exports = async function htmlTask(options = {}, done) {
     dest,
     compiler,
     compileOptions,
+    minify: htmlMinify,
     alias,
     fileHash
   } = options
@@ -108,8 +109,8 @@ module.exports = async function htmlTask(options = {}, done) {
   processes.push(rename({ extname: '.html' }))
 
   // 8. 压缩处理
-  if (options.minify) {
-    processes.push(htmlMinifier({
+  if (htmlMinify) {
+    const minifyOptions = Object.assign({
       collapseWhitespace: true, //移除多余空白
       removeComments: true, //移除注释
       // removeRedundantAttributes: true, //移除默认值的属性
@@ -118,7 +119,9 @@ module.exports = async function htmlTask(options = {}, done) {
       collapseBooleanAttributes: true, //当属性值为布尔类型时，移除属性值，仅保留属性名称
       minifyJS: true, //使用terser来压缩内联JavaScript代码
       minifyCSS: true //使用clean-css压缩内联CSS代码
-    }))
+    }, _.isPlainObject(htmlMinify) ? htmlMinify : {})
+
+    processes.push(htmlMinifier(minifyOptions))
   }
 
   // 9. 文件指纹处理 & sourcemaps & 输出文件

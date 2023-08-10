@@ -8,7 +8,7 @@ const filter = require('gulp-filter')
 const {
   gulp,
   merge,
-  lodash: _
+  _
 } = require('@pipflow/utils')
 
 const { ENV } = require('../base/env')
@@ -48,6 +48,13 @@ function getWebpackConfig({
       format: {
         comments: true, //保留注释
         beautify: true, //是否美化实际的输出代码 (保留空格和制表符)
+      }
+    }
+  } else {
+    // 生产环境 自定义压缩
+    if (_.isPlainObject(minify)) {
+      uglifyOptions.terserOptions = {
+        ...minify
       }
     }
   }
