@@ -217,7 +217,7 @@ baseTasks = baseTasks
   .filter(item => item.length > 0) //过滤空任务
   .map(item => parallel(...item))
 
-  exports.default = exports.serve = series(
+exports.default = exports.serve = series(
   'del:dest',
   ...baseTasks,
   parallel('devServer', 'watch')
