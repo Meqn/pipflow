@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
+  "types": "index.d.ts",
   "engines": {
     "node": "^14.13.1 || >=16.0.0",
     "gulp": ">=4"
@@ -41,6 +42,11 @@
   "homepage": "https://github.com/Meqn/pipFlow#readme",
   "dependencies": {
     "@pipflow/core": "workspace:*",
-    "@pipflow/utils": "workspace:*"
+    "@pipflow/utils": "workspace:*",
+    "@types/browser-sync": "^2.27.0",
+    "@types/html-minifier-terser": "^7.0.0",
+    "@types/node": "*",
+    "terser": "^5.19.2",
+    "typescript": "^5.1.6"
   }
 }
