@@ -164,7 +164,7 @@ module.exports = function compileModule(options = {}, done) {
     throw new Error('input is required')
   }
 
-  const jsFilter = filter('**/*.{js,mjs}', { restore: true })
+  const jsFilter = filter('*.{js,mjs}', { restore: true })
   const processes = []
 
   // 3.1 sourcemaps.init

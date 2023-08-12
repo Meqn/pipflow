@@ -1,10 +1,9 @@
-const zip = require('gulp-zip')
-const { gulp } = require('@pipflow/utils')
-
-const { pipeline } = require('../base/utils')
-const { createSrcOptions, plumber, putProcesses } = require('./comm')
-
 module.exports = function archiveTask(options = {}, done) {
+  const zip = require('gulp-zip')
+  const { gulp } = require('@pipflow/utils')
+  const { pipeline } = require('../base/utils')
+  const { createSrcOptions, plumber, putProcesses } = require('./comm')
+
   const {
     input,
     dest,

@@ -27,7 +27,7 @@ function compileScript(options = {}, done) {
 
   const processes = []
   const entries = []
-  const jsFilter = filter('**/*.{js,mjs}', { restore: true })
+  const jsFilter = filter('*.{js,mjs}', { restore: true })
 
   const {
     input,
