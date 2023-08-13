@@ -3,7 +3,8 @@ const {
   gulp,
   _,
   minimist,
-  getConfig
+  getConfig,
+  logger
 } = require('@pipflow/utils')
 const { task, watch, series, parallel } = gulp
 
@@ -39,6 +40,7 @@ const {
   archiveTask,
   removeTask,
   userTask,
+  eslintTask,
   createServeTask
 } = require('@pipflow/core')
 const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
@@ -90,12 +92,13 @@ if (CC.tasks?.length > 0) {
       taskTypes[item.type] = []
     }
     taskTypes[item.type].push({
-      name: item.name
+      name: item.name,
+      input: item.input
     })
-    
+
     // 🍱 所有自定义任务
     task(item.name, done => {
-      taskMap[item.type]?.(item, done)
+      return taskMap[item.type]?.(item, done)
     })
   }
 }
@@ -105,7 +108,7 @@ if (CC.tasks?.length > 0) {
  */
 if (publicFiles) {
   task('copy:public', done => {
-    copyTask({
+    return copyTask({
       input: publicFiles,
       dest: outDir
     }, done)
@@ -162,7 +165,7 @@ task('archive', done => {
     }
   }
 
-  archiveTask({
+  return archiveTask({
     input,
     dest,
     filename
@@ -173,13 +176,13 @@ task('archive', done => {
  * 🗑 移除 dest 目录
  */
 task('del:dest', done => {
-  removeTask(outDir, done)
+  return removeTask(outDir, done)
 })
 
 /**
  * 👀 监听任务
  */
-task('watch', done => {
+task('watch', async (done) => {
   if (!CC.tasks.length) return done()
   
   const watchTypes = ['html', 'style', 'script', 'static', 'copy', 'user']
@@ -188,12 +191,41 @@ task('watch', done => {
       watch(getInputList(item.input), parallel(item.name)).on('change', devServerReload)
     }
   }
-  
   // public 文件
   if (publicFiles) {
     watch(publicFiles, parallel('copy:public')).on('change', devServerReload)
   }
-  done()
+})
+
+/**
+ * 🎨 lint检查
+ */
+task('lint', async (done) => {
+  const jsTasks = taskTypes['script']
+  if (jsTasks) {
+    // 获取所有 JS入口文件
+    const jsEntries = jsTasks.reduce((list, item) => {
+      if (typeof item.input === 'string') {
+        list.push(item.input)
+      } else if (Array.isArray(item.input)) {
+        list.push(...item.input)
+      } else if (typeof item.input === 'object') {
+        Object.values(item.input).map(input => {
+          list.push(...[].concat(input))
+        })
+      }
+      return list
+    }, [])
+    jsEntries.push('!node_modules/**')
+    
+    return eslintTask({
+      name: 'lint',
+      input: jsEntries
+    }, done)
+  } else {
+    logger.time(logger.symbols.warn, logger.colors.yellow('ESLint: Javascript-free task!'))
+    done()
+  }
 })
 
 //== 导出任务 ==============================================
