@@ -7,6 +7,7 @@ const staticTask = require('./build/static')
 const archiveTask = require('./build/archive')
 const userTask = require('./build/user')
 const createServeTask = require('./build/serve')
+const eslintTask = require('./build/eslint')
 const { loadEnv } = require('./base/env')
 
 module.exports = {
@@ -19,5 +20,6 @@ module.exports = {
   archiveTask,
   removeTask,
   userTask,
-  createServeTask
+  createServeTask,
+  eslintTask
 }
