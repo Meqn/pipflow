@@ -67,7 +67,7 @@ function getMinify(type, options = {}) {
  * 获取配置项
  * @param {object|string} file 配置文件url或自定义配置项
  */
-module.exports = function getConfig(file) {
+exports.getConfig = function getConfig(file) {
   let userConfig = {}
   if (typeof file === 'string') {
     file = {

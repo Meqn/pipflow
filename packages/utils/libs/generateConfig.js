@@ -45,7 +45,7 @@ function getInput(type, compiler) {
  * @param {string} preset.templater html模板引擎
  * @returns
  */
-module.exports = function generateConfig({
+exports.generateConfig = function generateConfig({
   babel,
   cssPreprocessor,
   templater,
