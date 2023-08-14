@@ -1,5 +1,17 @@
 # @pipflow/core
 
+## 0.7.0
+
+### Minor Changes
+
+- feat: Add ESlint-Task
+- perf: Optimize archiveTask Exec & scriptTask filter
+
+### Patch Changes
+
+- Updated dependencies
+  - @pipflow/utils@0.7.0
+
 ## 0.6.0
 
 ### Minor Changes
