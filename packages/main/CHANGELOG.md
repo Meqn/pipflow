@@ -1,5 +1,17 @@
 # pipflow
 
+## 0.4.0
+
+### Minor Changes
+
+- feat: Add Lint-task & Optimize gulp-task callback
+
+### Patch Changes
+
+- Updated dependencies
+  - @pipflow/core@0.7.0
+  - @pipflow/utils@0.7.0
+
 ## 0.3.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "pipflow",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "A web developer workflow based on Gulp. It has built-in features such as merging, compiling, packaging, and compressing that greatly simplify the front-end development process.",
   "main": "index.js",
   "types": "./types/index.d.ts",
