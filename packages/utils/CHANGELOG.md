@@ -1,5 +1,12 @@
 # @pipflow/utils
 
+## 0.7.0
+
+### Minor Changes
+
+- feat: Add write Js/Json file
+- perf: Optimize exports module
+
 ## 0.6.0
 
 ### Minor Changes
