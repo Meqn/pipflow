@@ -35,6 +35,7 @@ const {
   htmlTask,
   scriptTask,
   styleTask,
+  imageTask,
   staticTask,
   copyTask,
   archiveTask,
@@ -64,6 +65,9 @@ const taskMap = {
   },
   style(options, done) {
     return styleTask(options, done)
+  },
+  image(options, done) {
+    return imageTask(options, done)
   },
   static(options, done) {
     return staticTask(options, done)
@@ -185,7 +189,7 @@ task('del:dest', done => {
 task('watch', async (done) => {
   if (!CC.tasks.length) return done()
   
-  const watchTypes = ['html', 'style', 'script', 'static', 'copy', 'user']
+  const watchTypes = ['html', 'style', 'script', 'static', 'image', 'copy', 'user']
   for (const item of CC.tasks) {
     if (watchTypes.includes(item.type) && item.input && item.watch) {
       watch(getInputList(item.input), parallel(item.name)).on('change', devServerReload)
@@ -235,7 +239,7 @@ if (publicFiles) {
 }
 Object.keys(taskTypes).forEach(type => {
   const _typeTasks = taskTypes[type]
-  if (['static', 'copy', 'user'].includes(type)) {
+  if (['static', 'image', 'copy', 'user'].includes(type)) {
     baseTasks[0].push(..._typeTasks.map(v => v.name))
   }
   if (type === 'script' || type === 'style') {
