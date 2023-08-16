@@ -1,9 +1,10 @@
 const scriptTask = require('./build/script')
 const styleTask = require('./build/style')
 const htmlTask = require('./build/html')
+const imageTask = require('./build/image')
+const staticTask = require('./build/static')
 const removeTask = require('./build/remove')
 const copyTask = require('./build/copy')
-const staticTask = require('./build/static')
 const archiveTask = require('./build/archive')
 const userTask = require('./build/user')
 const createServeTask = require('./build/serve')
@@ -15,8 +16,9 @@ module.exports = {
   scriptTask,
   styleTask,
   htmlTask,
-  copyTask,
+  imageTask,
   staticTask,
+  copyTask,
   archiveTask,
   removeTask,
   userTask,
