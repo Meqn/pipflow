@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const { generateDefault } = require('./defaultConfig')
+const { makeJSOnlyValue } = require('./stringifyJS')
 
 /**
  * 获取默认输入文件
@@ -53,10 +54,9 @@ exports.generateConfig = function generateConfig({
 } = {}) {
   const result = _.merge({}, generateDefault, {
     build: {
-      // 生成文件时会被替换 `replace('"process.env.NODE_ENV === production"', 'process.env.NODE_ENV === "production"')`
-      fileHash: 'process.env.NODE_ENV === production',
-      sourcemap: 'process.env.NODE_ENV === production',
-      minify: 'process.env.NODE_ENV === production',
+      fileHash: makeJSOnlyValue(`process.env.NODE_ENV === 'production'`),
+      sourcemap: makeJSOnlyValue(`process.env.NODE_ENV === 'production'`),
+      minify: makeJSOnlyValue(`process.env.NODE_ENV === 'production'`),
     }
   })
   if (imagemin === false) {
