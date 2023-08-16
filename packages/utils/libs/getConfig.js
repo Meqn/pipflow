@@ -33,16 +33,6 @@ function getUserConfig(filePath) {
 }
 
 /**
- * 是否压缩
- * @param {any} self 子集项
- * @param {boolean} parent 父级项
- * @returns 
- */
-function isMinify(self, parent) {
-  return self ? true : self === false ? false : parent
-}
-
-/**
  * 获取压缩配置项
  * @param {string} type 任务类型
  * @param {object} options 配置项

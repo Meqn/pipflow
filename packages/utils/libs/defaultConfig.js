@@ -55,28 +55,6 @@ const taskOptions = {
   filename: 'archive.zip', //文件名，仅 `archive` 任务有效 (xxx.zip)
 }
 
-const htmlTask = {
-  input: '',
-  compiler: '',
-  compileOptions: ''
-}
-
-const styleTask = {
-  input: '',
-  compiler: '',
-  cssMinify: ''
-}
-
-const scriptTask = {
-  compiler: '',
-  module: false,
-  terserOptions: ''
-}
-
-const staticTask = {
-  imageMinify: false
-}
-
 const defaults = Object.freeze({
   // publicPath: '/', //部署应用包时的基本 URL
   base: './src', //公共基础路径, 用于 `gulp.src('', { base: './src' })`, 每个任务可以不一样
@@ -86,11 +64,12 @@ const defaults = Object.freeze({
   build: {
     outDir: 'dist/', //指定输出路径（相对于 项目根目录).
     fileHash: false, //文件指纹 ['[name]?[hash]', '[name]-[hash]']
-    minify: false, //是否压缩
-    // terserOptions: false, // !terser选项 https://terser.org/docs/api-reference/#minify-options
-    // cssMinify: false, //!是否压缩 css或压缩选项
-    // imageMinify: false, //!是否压缩图片 或 压缩选项 !(由于压缩图片比较耗时，且安装依赖容易失败, 所以用户根据自身情况启用)
     sourcemap: false, //构建后是否生成 source map 文件
+    minify: false, //是否压缩
+    // htmlMinify: false, //!是否压缩 html, 配置详见 html-minifier-terser
+    // jsMinify: false, // !terser选项 https://terser.org/docs/api-reference/#minify-options
+    // cssMinify: false, //!是否压缩 css或压缩选项, 配置详见 cssnano
+    // imageMinify: false, //!是否压缩图片 或 压缩选项 !(由于压缩图片比较耗时，且安装依赖容易失败, 所以用户根据自身情况启用)
   },
   // BrowserSync 本地服务配置
   server: {
