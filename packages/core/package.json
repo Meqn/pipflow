@@ -1,11 +1,10 @@
 {
   "name": "@pipflow/core",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "engines": {
-    "node": ">=14",
-    "gulp": ">=4"
+    "node": ">=14"
   },
   "scripts": {
     "test": "jest"
@@ -90,5 +89,8 @@
   },
   "devDependencies": {
     "gulp-imagemin": "^7.1.0"
+  },
+  "peerDependencies": {
+    "gulp": ">=4.0.0"
   }
 }
