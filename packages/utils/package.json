@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/utils",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "utilities for pipFlow-cli packages",
   "main": "index.js",
   "files": [
@@ -11,8 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "^14.13.1 || >=16.0.0",
-    "gulp": ">=4"
+    "node": "^14.13.1 || >=16.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

@@ -1,5 +1,23 @@
 # @pipflow/utils
 
+## 0.8.0
+
+### Patch Changes
+
+- Add Image-task
+
+## 0.7.2
+
+### Patch Changes
+
+- perf: Optimize `process.env.NODE_ENV` write files
+
+## 0.7.1
+
+### Patch Changes
+
+- feat: Add makeJSOnlyValue function
+
 ## 0.7.0
 
 ### Minor Changes
