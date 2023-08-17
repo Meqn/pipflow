@@ -1,5 +1,33 @@
 # pipflow
 
+## 0.5.0
+
+### Minor Changes
+
+- Add Image-task
+
+### Patch Changes
+
+- Updated dependencies
+  - @pipflow/core@0.8.0
+  - @pipflow/utils@0.8.0
+
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @pipflow/utils@0.7.2
+  - @pipflow/core@0.7.2
+
+## 0.4.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @pipflow/utils@0.7.1
+  - @pipflow/core@0.7.1
+
 ## 0.4.0
 
 ### Minor Changes
