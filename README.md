@@ -1,8 +1,18 @@
 # pipflow 🥤
 
-> `pipflow` (pipe-workflow) is a gulp-based front-end development workflow. It has built-in features such as merging, compiling, packaging, and compressing that greatly simplify the front-end development process. It provides a set of out-of-the-box gulp tasks and features , developers do not need to configure from scratch can immediately start the front-end project development .
+[![version](https://img.shields.io/npm/v/pipflow?style=flat-square&logo=npm)](https://www.npmjs.com/package/pipflow)
+[![node.js](https://img.shields.io/node/v/pipflow?style=flat-square&logo=nodedotjs)](https://nodejs.org/en/about/releases/)
+[![downloads](https://img.shields.io/npm/dm/pipflow?style=flat-square)](https://www.npmjs.com/package/pipflow)
+[![license](https://img.shields.io/npm/l/pipflow?style=flat-square)](https://github.com/Meqn/pipflow)
 
-`pipflow` (pipe-workflow) 是一个基于gulp的前端开发工作流。它内置了诸如合并、编译、打包、压缩等功能，极大地简化了前端开发流程。它提供了一组开箱即用的gulp任务和功能，开发者无需从零开始配置就可以立即启动前端项目的开发。
+
+> `pipflow` (pipe-workflow) is a gulp-based front-end development workflow. It has built-in features such as merging, compiling, packaging, and compressing that greatly simplify the front-end development process. 
+> 
+> It provides a set of out-of-the-box gulp tasks and features , developers do not need to configure from scratch can immediately start the front-end project development .
+
+`pipflow` (pipe-workflow) 是一个基于gulp的前端开发工作流。它内置了诸如合并、编译、打包、压缩等功能，极大地简化了前端开发流程。
+
+它提供了一组开箱即用的gulp任务和功能，开发者无需从零开始配置就可以立即启动前端项目的开发。
 
 
 ## Features
@@ -48,7 +58,18 @@ pw build
 
 ## Documents 📚
 
-[Read the Docs to Learn More.](https://pipflow.mengiqng.org)
+[Read the Docs to Learn More.](https://pipflow.mengqing.org)
+
+
+
+## Packages
+
+| Package                                                                     | Version (click for changelogs)                                                                                                                               |
+| --------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [@pipflow/cli](https://github.com/Meqn/pipflow-cli)                         | [![CLI version](https://img.shields.io/npm/v/%40pipflow%2Fcli?style=flat-square)](https://github.com/Meqn/pipflow-cli/blob/main/CHANGELOG.md)                |
+| [@pipflow/core](https://github.com/Meqn/pipflow/tree/main/packages/core/)   | [![core version](https://img.shields.io/npm/v/%40pipflow%2Fcore?style=flat-square)](https://github.com/Meqn/pipflow/blob/main/packages/core/CHANGELOG.md)    |
+| [@pipflow/utils](https://github.com/Meqn/pipflow/tree/main/packages/utils/) | [![utils version](https://img.shields.io/npm/v/%40pipflow%2Futils?style=flat-square)](https://github.com/Meqn/pipflow/blob/main/packages/utils/CHANGELOG.md) |
+| [pipflow](https://github.com/Meqn/pipflow/tree/main/packages/main/)         | [![pipflow version](https://img.shields.io/npm/v/pipflow?style=flat-square)](https://github.com/Meqn/pipflow/blob/main/packages/main/CHANGELOG.md)           |
 
 
 ## License
