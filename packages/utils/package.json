@@ -1,7 +1,7 @@
 {
   "name": "@pipflow/utils",
   "version": "0.8.0",
-  "description": "utilities for pipFlow-cli packages",
+  "description": "utilities for pipflow-cli packages",
   "main": "index.js",
   "files": [
     "index.js",
@@ -24,15 +24,15 @@
     "workflow",
     "gulp workflow"
   ],
-  "homepage": "https://github.com/Meqn/pipFlow",
+  "homepage": "https://github.com/Meqn/pipflow",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Meqn/pipFlow.git"
+    "url": "git+https://github.com/Meqn/pipflow.git"
   },
   "author": "Mervin <mengqing723@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Meqn/pipFlow/issues"
+    "url": "https://github.com/Meqn/pipflow/issues"
   },
   "dependencies": {
     "diy-log": "^2.4.1",

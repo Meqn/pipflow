@@ -50,7 +50,7 @@ pw build
 
 ## Documents 📚
 
-[Read the Docs to Learn More.](https://pipflow.mengiqng.org)
+[Read the Docs to Learn More.](https://pipflow.mengqing.org)
 
 
 ## License

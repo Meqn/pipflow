@@ -1,3 +1,3 @@
 # @pipflow/utils
 
-> utilities for pipFlow-cli
+> utilities for pipflow-cli

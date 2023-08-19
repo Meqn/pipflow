@@ -33,15 +33,15 @@
     "gulp-postcss",
     "gulp-stylus"
   ],
-  "homepage": "https://github.com/Meqn/pipFlow",
+  "homepage": "https://github.com/Meqn/pipflow",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Meqn/pipFlow.git"
+    "url": "git+https://github.com/Meqn/pipflow.git"
   },
   "author": "Mervin <mengqing723@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Meqn/pipFlow/issues"
+    "url": "https://github.com/Meqn/pipflow/issues"
   },
   "dependencies": {
     "@babel/core": "^7.22.5",

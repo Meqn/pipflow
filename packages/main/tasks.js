@@ -123,7 +123,7 @@ if (publicFiles) {
 /**
  * 👻 本地开发服务
  */
-const devServerTask = createServeTask('pipFlowDev')
+const devServerTask = createServeTask('pipflowDev')
 const devServerReload = devServerTask.reload
 task('devServer', done => {
   const cliServe = getCliServeArgs(args)
@@ -133,7 +133,7 @@ task('devServer', done => {
 /**
  * 👻 本地预览服务
  */
-const viewServerTask = createServeTask('pipFlowView')
+const viewServerTask = createServeTask('pipflowView')
 task('preview', done => {
   const cliServe = getCliServeArgs(args)
   if (!cliServe.port) {
