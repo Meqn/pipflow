@@ -1,0 +1,27 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - uses: pnpm/action-setup@v2.4.0
+        with:
+          version: 8
+      - run: pnpm install
+
+      - name: Build docs
+        run: pnpm docs:build
+      
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_RELEASE_TOKEN }}
+          publish_dir: ./docs/.vitepress/dist
