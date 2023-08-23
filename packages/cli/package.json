@@ -17,10 +17,7 @@
     "build": "npx gulp build",
     "preview": "npx gulp preview",
     "pack": "npx gulp archive",
-    "task": "npx gulp",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "task": "npx gulp"
   },
   "files": [
     "index.js",
@@ -75,9 +72,7 @@
     "validate-npm-package-name": "^5.0.0"
   },
   "devDependencies": {
-    "@pipflow/core": "workspace:*",
     "@types/inquirer": "^9.0.3",
-    "gulp": "^4.0.2",
-    "vitepress": "^1.0.0-beta.7"
+    "gulp": "^4.0.2"
   }
 }
