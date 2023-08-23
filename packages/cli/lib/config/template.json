@@ -1,0 +1,11 @@
+{
+  "name": "@pipflow/template",
+  "github": {
+    "url": "https://github.com/Meqn/pipflow-template.git#main",
+    "download": "github:Meqn/pipflow-template#main"
+  },
+  "gitee": {
+    "url": "https://gitee.com/mengqing/pipflow-template.git#main",
+    "download": "direct:https://gitee.com/mengqing/pipflow-template.git#main"
+  }
+}

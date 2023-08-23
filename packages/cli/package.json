@@ -1,0 +1,83 @@
+{
+  "name": "@pipflow/cli",
+  "version": "0.5.0",
+  "description": "A command-line tool based on Gulp-workflow that quickly build web development workflows.",
+  "main": "index.js",
+  "bin": {
+    "pipflow": "bin/cli.js",
+    "pw": "bin/cli.js"
+  },
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf node_modules dist",
+    "serve": "npx gulp serve",
+    "build": "npx gulp build",
+    "preview": "npx gulp preview",
+    "pack": "npx gulp archive",
+    "task": "npx gulp",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "files": [
+    "index.js",
+    "bin",
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Meqn/pipflow-cli.git"
+  },
+  "keywords": [
+    "pip",
+    "pipe",
+    "pipeline",
+    "gulp",
+    "cli",
+    "workflow",
+    "pipe workflow",
+    "gulp workflow",
+    "gulp task",
+    "gulp plugin"
+  ],
+  "author": "Mervin <mengqing723@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Meqn/pipflow-cli/issues"
+  },
+  "homepage": "https://github.com/Meqn/pipflow-cli#readme",
+  "dependencies": {
+    "@pipflow/utils": "workspace:*",
+    "boxen": "5",
+    "chalk": "4",
+    "commander": "^11.0.0",
+    "consolidate": "^1.0.1",
+    "download-git-repo": "^3.0.2",
+    "envinfo": "^7.9.0",
+    "execa": "5.1.1",
+    "gradient-string": "^2.0.2",
+    "handlebars": "^4.7.7",
+    "inquirer": "8",
+    "leven": "^3.1.0",
+    "lru-cache": "^10.0.0",
+    "metalsmith": "^2.6.1",
+    "node-fetch": "2",
+    "ora": "5",
+    "semver": "^7.5.2",
+    "strip-ansi": "6",
+    "validate-npm-package-name": "^5.0.0"
+  },
+  "devDependencies": {
+    "@pipflow/core": "workspace:*",
+    "@types/inquirer": "^9.0.3",
+    "gulp": "^4.0.2",
+    "vitepress": "^1.0.0-beta.7"
+  }
+}
