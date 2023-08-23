@@ -1,9 +1,12 @@
 {
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "pipflow",
   "main": "index.js",
   "packageManager": "pnpm@8.6.0",
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +14,10 @@
     "flow": "pnpm -F demo-flow run build",
     "changeset": "changeset",
     "changeset-version": "changeset version",
-    "release": "changeset publish --registry https://registry.npmjs.org"
+    "release": "changeset publish --registry https://registry.npmjs.org",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "workspaces": [
     "packages/*"
@@ -23,6 +29,7 @@
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.2",
     "gulp": "^4.0.2",
-    "rimraf": "5.0.1"
+    "rimraf": "5.0.1",
+    "vitepress": "1.0.0-rc.4"
   }
 }
