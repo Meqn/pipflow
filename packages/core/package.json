@@ -87,9 +87,6 @@
     "webpack": "^5.88.1",
     "webpack-stream": "^7.0.0"
   },
-  "devDependencies": {
-    "gulp-imagemin": "^7.1.0"
-  },
   "peerDependencies": {
     "gulp": ">=4.0.0"
   }
