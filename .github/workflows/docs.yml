@@ -19,11 +19,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          cache: pnpm
-          node-version: 18.x
+          cache: 'pnpm'
+          node-version: 18
 
       - name: Install dependencies
-        run: pnpm install --ignore-scripts
+        run: pnpm install
 
       - name: Build docs
         run: pnpm docs:build
