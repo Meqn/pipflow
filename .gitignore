@@ -3,13 +3,16 @@ node_modules
 dist
 coverage
 temp
+TODOs.md
+
+docs/.vitepress/cache
+docs/.vitepress/dist
 
 # Log files
 *.log
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj
