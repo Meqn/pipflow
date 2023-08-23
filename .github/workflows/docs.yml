@@ -10,17 +10,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
+          cache: pnpm
           node-version: 18.x
 
-      - name: Install pnpm
-        run: npm i -g pnpm
-
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --ignore-scripts
 
       - name: Build docs
         run: pnpm docs:build
