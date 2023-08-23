@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/cli",
-  "version": "0.5.0",
+  "version": "0.8.1",
   "description": "A command-line tool based on Gulp-workflow that quickly build web development workflows.",
   "main": "index.js",
   "bin": {
@@ -50,9 +50,9 @@
   "author": "Mervin <mengqing723@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Meqn/pipflow-cli/issues"
+    "url": "https://github.com/Meqn/pipflow/issues"
   },
-  "homepage": "https://github.com/Meqn/pipflow-cli#readme",
+  "homepage": "https://github.com/Meqn/pipflow#readme",
   "dependencies": {
     "@pipflow/utils": "workspace:*",
     "boxen": "5",
