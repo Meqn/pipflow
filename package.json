@@ -13,8 +13,8 @@
     "clean": "rm -rf node_modules **/*/node_modules dist **/*/dist",
     "flow": "pnpm -F demo-flow run build",
     "changeset": "changeset",
-    "changeset-version": "changeset version",
-    "release": "changeset publish --registry https://registry.npmjs.org",
+    "changeset:version": "changeset version",
+    "changeset:release": "changeset publish --registry https://registry.npmjs.org",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
