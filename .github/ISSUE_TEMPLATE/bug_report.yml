@@ -4,7 +4,7 @@ labels: ["bug"]
 body:
   - type: checkboxes
     attributes:
-      label: Is there an existing issue for this?
+      label: Existing Issue
       description: Please search to see if an issue already exists for the bug you encountered.
       options:
         - label: I have searched the existing issues
@@ -26,12 +26,6 @@ body:
       placeholder: Please paste Environment Info ...
     validations:
       required: true
-  - type: textarea
-    attributes:
-      label: Current Behavior
-      description: A concise description of what you're experiencing.
-    validations:
-      required: false
   - type: textarea
     attributes:
       label: Current Behavior
