@@ -1,5 +1,11 @@
 # @pipflow/cli
 
+## 0.8.2
+
+### Patch Changes
+
+- feat: Change the display order of CLI
+
 ## 0.8.1
 
 ### Patch Changes
