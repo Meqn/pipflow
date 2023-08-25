@@ -38,7 +38,7 @@ jobs:
           # Custom versioning script in package.json
           # version: pnpm changeset:version
           # Custom pulish script in package.json
-          publish: changeset:release
+          publish: pnpm changeset:release
           # Messages
           commit: 'chore(deploy): Release'
           title: 'chore(deploy): Release'
