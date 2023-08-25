@@ -87,6 +87,20 @@ module.exports = () => {
     })
   
   program
+    .command('task [task-name]')
+    .description('Run a specific task')
+    .option('-l, --list', 'List all tasks')
+    .option('-T, --tasks', 'List all tasks')
+    .allowUnknownOption()
+    .action((name, options, cmd) => {
+      if (options.list || options.tasks) {
+        require('./lib/utils/runNpmScript')('task', ['--tasks'])
+      } else {
+        require('./lib/utils/runNpmScript')('task', process.argv.slice(3))
+      }
+    })
+
+  program
     .command('pack')
     .description('Create zip archives for files')
     .argument('[target]', 'input files')
@@ -98,20 +112,6 @@ module.exports = () => {
         require('./lib/utils/runNpmScript')('pack', [`--input=${args.join(',')}`, `--dest=${dest}`])
       } else {
         warn('No input or output file specified !')
-      }
-    })
-
-  program
-    .command('task [task-name]')
-    .description('Run a specific task')
-    .option('-l, --list', 'List all tasks')
-    .option('-T, --tasks', 'List all tasks')
-    .allowUnknownOption()
-    .action((name, options, cmd) => {
-      if (options.list || options.tasks) {
-        require('./lib/utils/runNpmScript')('task', ['--tasks'])
-      } else {
-        require('./lib/utils/runNpmScript')('task', process.argv.slice(3))
       }
     })
 
