@@ -1,0 +1,57 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "debug",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${fileBasename}" //当前打开文件
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "cli",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/bin/cli.js",
+      "args": [
+        "create",
+        "demo-project"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "gulp",
+      "args": ["build"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/demo/node_modules/gulp/bin/gulp.js",
+      "cwd": "${workspaceFolder}/demo",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "npm",
+      "runtimeExecutable": "npm",
+      "args": [
+        "run-script",
+        "start"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "npm",
+    }
+  ]
+}
