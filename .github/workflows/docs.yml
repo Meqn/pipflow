@@ -3,6 +3,9 @@ name: Deploy Docs
 on:
   push:
     branches: [ main ]
+    # docs内容变动才会触发action
+    paths:
+      - 'docs/**'
 
 jobs:
   deploy:

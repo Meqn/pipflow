@@ -1,9 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "Meqn/pipflow" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "meqn/pipflow" }],
   "commit": false,
   "fixed": [],
-  "linked": [["@pipflow/*"]],
+  "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
