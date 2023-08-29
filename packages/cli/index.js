@@ -35,36 +35,36 @@ module.exports = () => {
 
   program
     .command('create <app-name>')
-    .description(`create a new project powered by ${name}`)
-    .option('-f, --force', 'Overwrite target directory if it exists')
-    .option('--merge', 'Merge target directory if it exists')
-    .option('--repo <name>', 'Git repository source name', 'github') //模板仓库源 ['github', 'gitee']
-    .option('-c, --clone', 'Use git clone when fetching remote preset')
-    .option('-n, --no-git', 'Skip git initialization')
+    .description(`Create a new project powered by ${name}`)
+    .option('-f, --force', 'overwrite target directory if it exists')
+    .option('--merge', 'merge target directory if it exists')
+    .option('--repo <name>', 'git repository source name', 'github') //模板仓库源 ['github', 'gitee']
+    .option('-c, --clone', 'use git clone when fetching remote preset')
+    .option('-n, --no-git', 'skip git initialization')
     .action((name, options) => {
       if (minimist(process.argv.slice(3))._.length > 1) {
         console.log(chalk.yellow('\n Info: You provided more than one argument. The first one will be used as the app\'s name, the rest are ignored.'))
       }
-
       require('./lib/create')(name, options)
     })
 
   program
-    .command('serve')
-    .alias('dev')
+    .command('dev')
+    .alias('serve')
     .description('Start development server that with HMR in the current project')
     .option('--mode <mode>', 'specify env mode', 'development')
     .option('--config <path>', 'the configuration file path')
     .option('-p, --port <port>', 'specify port', 9527)
+    .option('-d --dir <path>', 'specify base directory')
+    .option('--host', 'specify a hostname to use')
     .option('--open', 'open browser on server start')
+    .option('--no-open', 'not open browser on server start')
     .option('--https', 'use https', false)
-    .option('--base <path>', 'base directory')
     .option('--cors', 'configure CORS for the dev server')
     // .allowUnknownOption()
     .action(() => {
       info('Starting development server...')
-      const args = process.argv.slice(3).filter(v => v.startsWith('-'))
-      require('./lib/utils/runNpmScript')('serve', args)
+      require('./lib/utils/runNpmScript')('serve', process.argv.slice(3))
     })
 
   program
@@ -73,24 +73,15 @@ module.exports = () => {
     .option('--mode <mode>', 'specify env mode', 'production')
     .option('--config <path>', 'the configuration file path')
     .action((cmd) => {
-      const args = process.argv.slice(3).filter(v => v.startsWith('-'))
-      require('./lib/utils/runNpmScript')('build', args)
-    })
-
-  program
-    .command('preview')
-    .description('Start a preview server in the current project')
-    .allowUnknownOption()
-    .action((cmd) => {
-      const args = process.argv.slice(3).filter(v => v.startsWith('-'))
-      require('./lib/utils/runNpmScript')('preview', args)
+      require('./lib/utils/runNpmScript')('build', process.argv.slice(3))
     })
   
   program
-    .command('task [task-name]')
+    .command('task')
     .description('Run a specific task')
-    .option('-l, --list', 'List all tasks')
-    .option('-T, --tasks', 'List all tasks')
+    .argument('<name>', 'task name')
+    .option('-l, --list', 'list all tasks')
+    .option('-T, --tasks', 'list all tasks')
     .allowUnknownOption()
     .action((name, options, cmd) => {
       if (options.list || options.tasks) {
@@ -101,14 +92,30 @@ module.exports = () => {
     })
 
   program
+    .command('server')
+    .description('Start a local HTTP service')
+    .option('-p, --port <port>', 'specify port', 3000)
+    .option('-d --dir [path]', 'specify base directory')
+    .option('--host [host]', 'specify a hostname to use')
+    .option('--open', 'open browser on server start')
+    .option('--no-open', 'not open browser on server start')
+    .option('--https', 'use https', false)
+    .option('--cors', 'configure CORS for the dev server')
+    .option('--index [index]', 'specify which file should be used as the index page')
+    .allowUnknownOption()
+    .action((cmd) => {
+      require('./lib/utils/runNpmScript')('server', process.argv.slice(3))
+    })
+
+  program
     .command('pack')
     .description('Create zip archives for files')
-    .argument('[target]', 'input files')
     .argument('[output]', 'output path')
+    .argument('[target...]', 'input files')
     .action((cmd) => {
       const args = process.argv.slice(3)
       if (args.length > 1) {
-        const dest = args.pop()
+        const dest = args.shift()
         require('./lib/utils/runNpmScript')('pack', [`--input=${args.join(',')}`, `--dest=${dest}`])
       } else {
         warn('No input or output file specified !')

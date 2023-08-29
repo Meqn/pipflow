@@ -123,7 +123,7 @@ module.exports = class Creator extends EventEmitter {
       log(`    cd ${name}`)
     }
     log(`    npm install`)
-    log(`    npm run serve`)
+    log(`    npm run dev`)
     log()
   }
 
