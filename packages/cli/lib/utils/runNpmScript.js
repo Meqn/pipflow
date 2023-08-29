@@ -9,7 +9,7 @@ module.exports = async function runTaskScript(command, args) {
   let gulpfile = path.resolve(projectRoot, 'node_modules/pipflow/tasks.js')
   if (process.env.PIPFLOW_CLI_DEBUG) {
     // 本地测试环境, `~/.zshrc`
-    gulpfile = path.resolve(require('os').homedir() + '/www/project/github/pipFlow', 'packages/main/tasks.js')
+    gulpfile = path.resolve(__dirname, '../../../', 'main/tasks.js')
   }
   //记录当前命令
   process.env.PIPFLOW_CLI_COMMAND = command
