@@ -73,9 +73,6 @@ const defaults = Object.freeze({
   },
   // BrowserSync 本地服务配置
   server: {
-    ui: {
-      port: 9528
-    },
     port: 9527,
     server: {
       baseDir: 'dist/',
