@@ -2,6 +2,7 @@ const path = require('path')
 const importFresh = require('import-fresh')
 // const { cosmiconfig } = require('cosmiconfig')
 const _ = require('lodash')
+const logger = require('diy-log')
 
 const { defaultConfig } = require('./defaultConfig')
 
@@ -59,18 +60,24 @@ function getMinify(type, options = {}) {
  */
 exports.getConfig = function getConfig(file) {
   let userConfig = {}
-  if (typeof file === 'string') {
-    file = {
-      path: file
+  try {
+    if (typeof file === 'string') {
+      file = {
+        path: file
+      }
     }
-  }
-  if (file.tasks && file.tasks.length > 0) {
-    userConfig = file
-  } else {
-    userConfig = getUserConfig({
-      path: file.path,
-      cwd: file.cwd || process.cwd()
-    })
+    if (file.tasks && file.tasks.length > 0) {
+      userConfig = file
+    } else {
+      userConfig = getUserConfig({
+        path: file.path,
+        cwd: file.cwd || process.cwd()
+      })
+    }
+  } catch (e) {
+    // 支持无 `pipflow.config` 文件
+    const { colors } = logger
+    console.warn(`${colors.bgYellow(colors.black(' WARN '))} ${colors.yellow(`Cannot find module 'pipflow.config'`)}`)
   }
   
   const result = _.merge({}, defaultConfig, userConfig)
