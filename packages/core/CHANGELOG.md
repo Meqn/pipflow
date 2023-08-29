@@ -1,5 +1,17 @@
 # @pipflow/core
 
+## 0.9.0
+
+### Minor Changes
+
+- feat: Server add no initial configuration
+- perf: Server-task add ui-port configuration
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@0.9.0
+
 ## 0.8.0
 
 ### Minor Changes
