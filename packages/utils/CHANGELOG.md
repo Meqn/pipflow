@@ -1,5 +1,12 @@
 # @pipflow/utils
 
+## 0.9.0
+
+### Minor Changes
+
+- feat: Support no pipflow.config file
+- perf: Remove server-ui-port of defaultConfig
+
 ## 0.8.0
 
 ### Patch Changes
