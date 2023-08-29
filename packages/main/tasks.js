@@ -21,10 +21,10 @@ if (!process.env.NODE_ENV) {
   if (process.env.PIPFLOW_CLI_COMMAND === 'build') {
     process.env.NODE_ENV = 'production'
   } else {
-    // 当 build 且 mode=production 时，强制 node_env = production
     process.env.NODE_ENV = ['development', 'production'].includes(process.env.PIPFLOW_MODE) ? process.env.PIPFLOW_MODE : 'development'
   }
 } else {
+  // 当 build 且 mode=production 时，强制 node_env = production
   if(process.env.NODE_ENV !== 'production' && process.env.PIPFLOW_CLI_COMMAND === 'build' && process.env.PIPFLOW_MODE === 'production') {
     process.env.NODE_ENV = 'production'
   }
@@ -133,13 +133,23 @@ task('devServer', done => {
 /**
  * 👻 本地预览服务
  */
-const viewServerTask = createServeTask('pipflowView')
 task('preview', done => {
   const cliServe = getCliServeArgs(args)
   if (!cliServe.port) {
     cliServe.port = 8527
   }
-  viewServerTask(_.merge({}, CC.server, cliServe), done)
+  createServeTask('pipflowView')(_.merge({}, CC.server, cliServe), done)
+})
+
+/**
+ * 👻 本地服务
+ */
+task('server', done => {
+  const cliServe = getCliServeArgs(args)
+  createServeTask('pipflowServer')(_.merge({
+    server: '.',
+    open: true
+  }, cliServe), done, null)
 })
 
 /**
@@ -253,7 +263,7 @@ baseTasks = baseTasks
   .filter(item => item.length > 0) //过滤空任务
   .map(item => parallel(...item))
 
-exports.default = exports.serve = series(
+exports.default = exports.dev = series(
   'del:dest',
   ...baseTasks,
   parallel('devServer', 'watch')
