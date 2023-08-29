@@ -1,5 +1,18 @@
 # pipflow
 
+## 0.6.0
+
+### Minor Changes
+
+- feat: Add server-task & CLI-Args
+- feat: Support no `pipflow.config` file
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/core@0.9.0
+  - @pipflow/utils@0.9.0
+
 ## 0.5.0
 
 ### Minor Changes
