@@ -1,5 +1,17 @@
 # @pipflow/cli
 
+## 0.9.0
+
+### Minor Changes
+
+- feat: Add server command & Optimize dev/pack/task
+- perf: Optimize debug mode
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@0.9.0
+
 ## 0.8.2
 
 ### Patch Changes
