@@ -2,9 +2,9 @@
 
 [![version](https://img.shields.io/npm/v/%40pipflow%2Fcli?style=flat-square&logo=npm)](https://www.npmjs.com/package/@pipflow/cli)
 [![node.js](https://img.shields.io/node/v/%40pipflow%2Fcli?style=flat-square&logo=nodedotjs)](https://nodejs.org/en/about/releases/)
-[![release](https://img.shields.io/github/actions/workflow/status/meqn/pipflow-cli/release.yml?style=flat-square)](https://github.com/Meqn/pipflow-cli/releases)
+[![release](https://img.shields.io/github/actions/workflow/status/meqn/pipflow/release.yml?style=flat-square)](https://github.com/Meqn/pipflow/releases)
 [![downloads](https://img.shields.io/npm/dm/%40pipflow%2Fcli?style=flat-square)](https://www.npmjs.com/package/@pipflow/cli)
-[![license](https://img.shields.io/npm/l/%40pipflow%2Fcli?style=flat-square)](https://github.com/Meqn/pipflow-cli)
+[![license](https://img.shields.io/npm/l/%40pipflow%2Fcli?style=flat-square)](https://github.com/Meqn/pipflow)
 
 > A command-line tool based on the Gulp workflow, designed to simplify the frontend development process.  
 
@@ -64,16 +64,17 @@ pw build
 
 | Package                                                                     | Version (click for changelogs)                                                                                                                               |
 | --------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [@pipflow/cli](https://github.com/Meqn/pipflow-cli)                         | [![CLI version](https://img.shields.io/npm/v/%40pipflow%2Fcli?style=flat-square)](https://github.com/Meqn/pipflow-cli/blob/main/CHANGELOG.md)                |
+| [pipflow](https://github.com/Meqn/pipFlow/tree/main/packages/main/)         | [![pipflow version](https://img.shields.io/npm/v/pipflow?style=flat-square)](https://github.com/Meqn/pipFlow/blob/main/packages/main/CHANGELOG.md)           |
+| [@pipflow/cli](https://github.com/Meqn/pipflow/tree/main/packages/cli)                         | [![CLI version](https://img.shields.io/npm/v/%40pipflow%2Fcli?style=flat-square)](https://github.com/Meqn/pipflow/blob/main/packages/cli/CHANGELOG.md)                |
 | [@pipflow/core](https://github.com/Meqn/pipFlow/tree/main/packages/core/)   | [![core version](https://img.shields.io/npm/v/%40pipflow%2Fcore?style=flat-square)](https://github.com/Meqn/pipFlow/blob/main/packages/core/CHANGELOG.md)    |
 | [@pipflow/utils](https://github.com/Meqn/pipFlow/tree/main/packages/utils/) | [![utils version](https://img.shields.io/npm/v/%40pipflow%2Futils?style=flat-square)](https://github.com/Meqn/pipFlow/blob/main/packages/utils/CHANGELOG.md) |
-| [pipflow](https://github.com/Meqn/pipFlow/tree/main/packages/main/)         | [![pipflow version](https://img.shields.io/npm/v/pipflow?style=flat-square)](https://github.com/Meqn/pipFlow/blob/main/packages/main/CHANGELOG.md)           |
+
 
 
 
 ## Changelog
 
-[Changelog](https://github.com/Meqn/pipflow-cli/blob/main/CHANGELOG.md)
+[Changelog](https://github.com/Meqn/pipflow/blob/main/packages/cli/CHANGELOG.md)
 
 
 ## License
