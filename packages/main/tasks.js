@@ -131,25 +131,16 @@ task('devServer', done => {
 })
 
 /**
- * 👻 本地预览服务
- */
-task('preview', done => {
-  const cliServe = getCliServeArgs(args)
-  if (!cliServe.port) {
-    cliServe.port = 8527
-  }
-  createServeTask('pipflowView')(_.merge({}, CC.server, cliServe), done)
-})
-
-/**
- * 👻 本地服务
+ * 👻 本地 HTTP 服务
  */
 task('server', done => {
   const cliServe = getCliServeArgs(args)
-  createServeTask('pipflowServer')(_.merge({
+  const _defaults = args.preview ? { ...CC.server, port: 8527 } : {
+    port: 3000,
     server: '.',
     open: true
-  }, cliServe), done, null)
+  }
+  createServeTask('pipflowServer')(_.merge(_defaults, cliServe), done)
 })
 
 /**
