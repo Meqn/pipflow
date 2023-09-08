@@ -107,6 +107,7 @@ module.exports = () => {
       require('./lib/utils/runNpmScript')('server', process.argv.slice(3))
     })
 
+  /* // 创建压缩包
   program
     .command('pack')
     .description('Create zip archives for files')
@@ -120,7 +121,7 @@ module.exports = () => {
       } else {
         warn('No input or output file specified !')
       }
-    })
+    }) */
 
   // 显示通用详细信息的报告，如操作系统、二进制版本、浏览器、已安装语言等。(用于排查软件问题)
   program
