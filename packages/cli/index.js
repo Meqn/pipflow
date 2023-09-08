@@ -79,7 +79,7 @@ module.exports = () => {
   program
     .command('task')
     .description('Run a specific task')
-    .argument('<name>', 'task name')
+    .argument('[name]', 'task name')
     .option('-l, --list', 'list all tasks')
     .option('-T, --tasks', 'list all tasks')
     .allowUnknownOption()
