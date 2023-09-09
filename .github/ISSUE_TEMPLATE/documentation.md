@@ -1,7 +1,7 @@
 ---
 name: ✏ Documentation improvement
 about: Please open the PR instead!
-labels: 📖 documentation
+labels: ['documentation']
 ---
 
 Documentation lives in the `/docs` folder. Please, send in PR directly with a change instead of describing what you want to change.
