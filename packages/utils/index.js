@@ -13,6 +13,7 @@ module.exports = {
   fs: require('fs-extra'),
   gulp: require('gulp'),
   glob: require('glob'),
+  browserSync: require('browser-sync'),
   merge: require('merge2'),
   importFresh: require('import-fresh'),
   minimist: require('minimist')
