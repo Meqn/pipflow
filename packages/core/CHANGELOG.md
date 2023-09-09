@@ -1,5 +1,14 @@
 # @pipflow/core
 
+## 0.9.1
+
+### Patch Changes
+
+- perf: Import browserSync from utils
+
+- Updated dependencies []:
+  - @pipflow/utils@0.10.0
+
 ## 0.9.0
 
 ### Minor Changes
