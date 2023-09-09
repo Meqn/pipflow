@@ -1,5 +1,21 @@
 # @pipflow/cli
 
+## 0.10.0
+
+### Minor Changes
+
+- feat: Optimize server command (not base-on gulp)
+- fix: Update repository url
+- fix: Set task's name to optional
+- perf: Optimize server command arguments
+- perf: Optimize dev/task command arguments
+- perf: Remove `pack-cli` (use `task archive`)
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@0.10.0
+
 ## 0.9.0
 
 ### Minor Changes
