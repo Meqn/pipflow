@@ -55,12 +55,13 @@ module.exports = () => {
     .option('--mode <mode>', 'specify env mode', 'development')
     .option('--config <path>', 'the configuration file path')
     .option('-p, --port <port>', 'specify port', 9527)
-    .option('-d --dir <path>', 'specify base directory')
-    .option('--host', 'specify a hostname to use')
-    .option('--open', 'open browser on server start')
-    .option('--no-open', 'not open browser on server start')
-    .option('--https', 'use https', false)
-    .option('--cors', 'configure CORS for the dev server')
+    .option('--host', 'specify hostname')
+    .option('--index', 'specify index page')
+    .option('--https', 'enable SSL for local development', false)
+    .option('--cors', 'enable CORS for the dev server')
+    .option('--open', 'open browser on startup')
+    .option('--no-open', 'not open browser on startup')
+    .option('--no-notify', 'disable the notify element in browser')
     // .allowUnknownOption()
     .action(() => {
       info('Starting development server...')
@@ -69,7 +70,7 @@ module.exports = () => {
 
   program
     .command('build')
-    .description('Produces a production-ready bundle in the dist/ directory')
+    .description('Produces a production-ready bundle in the `dist/` directory')
     .option('--mode <mode>', 'specify env mode', 'production')
     .option('--config <path>', 'the configuration file path')
     .action((cmd) => {
@@ -79,7 +80,7 @@ module.exports = () => {
   program
     .command('task')
     .description('Run a specific task')
-    .argument('[name]', 'task name')
+    .argument('[task-name]', 'task name')
     .option('-l, --list', 'list all tasks')
     .option('-T, --tasks', 'list all tasks')
     .allowUnknownOption()
@@ -91,6 +92,7 @@ module.exports = () => {
       }
     })
 
+  // 打开 gulp server 服务
   program
     .command('server')
     .description('Start a local HTTP service')
@@ -107,7 +109,7 @@ module.exports = () => {
       require('./lib/utils/runNpmScript')('server', process.argv.slice(3))
     })
 
-  /* // 创建压缩包
+  // 创建压缩包
   program
     .command('pack')
     .description('Create zip archives for files')
@@ -121,7 +123,7 @@ module.exports = () => {
       } else {
         warn('No input or output file specified !')
       }
-    }) */
+    })
 
   // 显示通用详细信息的报告，如操作系统、二进制版本、浏览器、已安装语言等。(用于排查软件问题)
   program
