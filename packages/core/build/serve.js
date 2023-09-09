@@ -1,7 +1,7 @@
-const browserSync = require('browser-sync')
 const {
   defaultConfig,
-  lodash: _
+  lodash: _,
+  browserSync
 } = require('@pipflow/utils')
 
 module.exports = function createServeTask(name) {

@@ -49,7 +49,6 @@
     "@pipflow/utils": "workspace:^",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
-    "browser-sync": "^2.29.3",
     "cssnano": "^6.0.1",
     "gulp-art-tpl": "^1.3.0",
     "gulp-babel": "^8.0.0",
