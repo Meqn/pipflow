@@ -2,6 +2,7 @@
 
 [![version](https://img.shields.io/npm/v/pipflow?style=flat-square&logo=npm)](https://www.npmjs.com/package/pipflow)
 [![node.js](https://img.shields.io/node/v/pipflow?style=flat-square&logo=nodedotjs)](https://nodejs.org/en/about/releases/)
+[![release](https://img.shields.io/github/actions/workflow/status/meqn/pipflow/release.yml?style=flat-square)](https://github.com/Meqn/pipflow/releases)
 [![downloads](https://img.shields.io/npm/dm/pipflow?style=flat-square)](https://www.npmjs.com/package/pipflow)
 [![license](https://img.shields.io/npm/l/pipflow?style=flat-square)](https://github.com/Meqn/pipflow)
 
@@ -17,16 +18,16 @@
 
 ## Features
 
-- HTML模板渲染 - 内置5款流行的模板引擎,开箱即用
-- CSS预处理 - 支持LESS/SASS(SCSS)/Stylus,自动添加浏览器前缀,压缩等
-- JavaScript语法转换、合并、压缩、校验、兼容老版本浏览器
-- 图片优化 - 无损压缩图片,生成雪碧图
-- Sourcemap和文件指纹 - 更容易调试和版本控制
-- 本地开发服务器 - 支持HTTPS和浏览器同步测试
-- 文件监视 - 自动检测文件变动并重新编译、合并、刷新页面
-- 自定义任务 - 可以扩展已有任务,满足各种需求
+- 🎨 HTML template rendering - built-in 5 popular template engines
+- 🌈 CSS preprocessing - supports LESS/SASS(SCSS)/Stylus, with autoprefixer, minify, and more.
+- 🧬 JavaScript syntax transformation, merging, minification, validation, compatibility with older browsers
+- 🖼 Image optimization - lossless image compression, sprite generation
+- 🦋 Sourcemaps and fingerprinting - easier debugging and version control
+- 👻 Local development server - supports HTTPS and browser sync testing
+- 👀 File watching - automatically detects file changes and recompiles, merges, and refreshes pages
+- 🤖 Custom tasks - extend existing tasks to meet various needs
 
-通过 `pipflow`，开发者可以专注于代码编写，无需浪费时间在重复的工程配置上。它使用简单的命令就可以完成复杂的前端构建工作，并标准化了构建流程，极大地提升了项目之间的一致性和开发效率。
+With `pipflow`, developers can focus on coding without wasting time on repetitive build configurations. It uses simple commands to complete complex front-end builds and standardizes the build process, greatly improving consistency and efficiency across projects.
 
 
 ## How to use
@@ -66,10 +67,10 @@ pw build
 
 | Package                                                                     | Version (click for changelogs)                                                                                                                               |
 | --------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [@pipflow/cli](https://github.com/Meqn/pipflow-cli)                         | [![CLI version](https://img.shields.io/npm/v/%40pipflow%2Fcli?style=flat-square)](https://github.com/Meqn/pipflow-cli/blob/main/CHANGELOG.md)                |
-| [@pipflow/core](https://github.com/Meqn/pipflow/tree/main/packages/core/)   | [![core version](https://img.shields.io/npm/v/%40pipflow%2Fcore?style=flat-square)](https://github.com/Meqn/pipflow/blob/main/packages/core/CHANGELOG.md)    |
-| [@pipflow/utils](https://github.com/Meqn/pipflow/tree/main/packages/utils/) | [![utils version](https://img.shields.io/npm/v/%40pipflow%2Futils?style=flat-square)](https://github.com/Meqn/pipflow/blob/main/packages/utils/CHANGELOG.md) |
-| [pipflow](https://github.com/Meqn/pipflow/tree/main/packages/main/)         | [![pipflow version](https://img.shields.io/npm/v/pipflow?style=flat-square)](https://github.com/Meqn/pipflow/blob/main/packages/main/CHANGELOG.md)           |
+| [pipflow](https://github.com/Meqn/pipFlow/tree/main/packages/main/)         | [![pipflow version](https://img.shields.io/npm/v/pipflow?style=flat-square)](https://github.com/Meqn/pipFlow/blob/main/packages/main/CHANGELOG.md)           |
+| [@pipflow/cli](https://github.com/Meqn/pipflow/tree/main/packages/cli)                         | [![CLI version](https://img.shields.io/npm/v/%40pipflow%2Fcli?style=flat-square)](https://github.com/Meqn/pipflow/blob/main/packages/cli/CHANGELOG.md)                |
+| [@pipflow/core](https://github.com/Meqn/pipFlow/tree/main/packages/core/)   | [![core version](https://img.shields.io/npm/v/%40pipflow%2Fcore?style=flat-square)](https://github.com/Meqn/pipFlow/blob/main/packages/core/CHANGELOG.md)    |
+| [@pipflow/utils](https://github.com/Meqn/pipFlow/tree/main/packages/utils/) | [![utils version](https://img.shields.io/npm/v/%40pipflow%2Futils?style=flat-square)](https://github.com/Meqn/pipFlow/blob/main/packages/utils/CHANGELOG.md) |
 
 
 ## License
