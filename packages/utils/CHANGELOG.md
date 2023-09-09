@@ -1,5 +1,11 @@
 # @pipflow/utils
 
+## 0.10.0
+
+### Minor Changes
+
+- feat: Add browser-sync package
+
 ## 0.9.0
 
 ### Minor Changes
