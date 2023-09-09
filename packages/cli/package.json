@@ -15,7 +15,7 @@
     "clean": "rm -rf node_modules dist",
     "serve": "npx gulp dev",
     "build": "npx gulp build",
-    "server": "npx gulp server",
+    "server": "npx browser-sync start",
     "pack": "npx gulp archive",
     "task": "npx gulp"
   },

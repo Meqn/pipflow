@@ -92,7 +92,7 @@ module.exports = () => {
       }
     })
 
-  // 打开 gulp server 服务
+  /* // 开启 gulp server 服务
   program
     .command('server')
     .description('Start a local HTTP service')
@@ -107,9 +107,27 @@ module.exports = () => {
     .allowUnknownOption()
     .action((cmd) => {
       require('./lib/utils/runNpmScript')('server', process.argv.slice(3))
+    }) */
+  
+  // 开启 server 服务，不依赖 gulp
+  program
+    .command('server')
+    .description('Start a local HTTP service')
+    .option('-s, --server <path>', 'Run a Local server (uses your cwd as the web root)', '.')
+    .option('-p, --port <port>', 'specify port', 3000)
+    .option('-d --dir [path]', 'specify base directory')
+    .option('--host [host]', 'specify a hostname to use')
+    .option('--open', 'open browser on server start')
+    .option('--no-open', 'not open browser on server start')
+    .option('--https', 'use https', false)
+    .option('--cors', 'configure CORS for the dev server')
+    .option('--index [index]', 'specify which file should be used as the index page')
+    .allowUnknownOption()
+    .action((options, cmd) => {
+      require('./lib/utils/runServer')('server', process.argv.slice(3))
     })
 
-  // 创建压缩包
+  /* // 创建压缩包
   program
     .command('pack')
     .description('Create zip archives for files')
@@ -123,7 +141,7 @@ module.exports = () => {
       } else {
         warn('No input or output file specified !')
       }
-    })
+    }) */
 
   // 显示通用详细信息的报告，如操作系统、二进制版本、浏览器、已安装语言等。(用于排查软件问题)
   program
