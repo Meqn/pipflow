@@ -1,5 +1,15 @@
 # pipflow
 
+## 0.6.1
+
+### Patch Changes
+
+- perf: Merge server-task
+
+- Updated dependencies []:
+  - @pipflow/utils@0.10.0
+  - @pipflow/core@0.9.1
+
 ## 0.6.0
 
 ### Minor Changes
