@@ -182,7 +182,7 @@ export interface TaskOptions<T extends TaskType, C extends CompilerType<T>> {
    * 
    * File hashing and version control.
    */
-  fileHash?: T extends 'style' | 'script' | 'static' | 'image' ? boolean : never
+  fileHash?: T extends 'style' | 'script' | 'static' | 'image' ? boolean | '?' | '-' : never
 
   /**
    * 生成 source map 文件
