@@ -8,7 +8,7 @@ export interface ConfigEnv {
 
 export interface UserConfig {
   /**
-   * 显式地在创建的 Vinyl 对象上设置 base 属性
+   * 显式地在创建的 Vinyl 对象上设置 base 属性。具体请参见`gulp.src`的 options
    * 
    * Explicitly set the base property on created Vinyl objects. 
    * 
@@ -17,7 +17,7 @@ export interface UserConfig {
   base?: string
 
   /**
-   * 静态资源服务的文件夹
+   * 作为静态资源服务的文件夹
    * 
    * Folders for static resource services.
    * 
@@ -26,14 +26,14 @@ export interface UserConfig {
   publicDir?: string
 
   /**
-   * 环境变量文件目录
+   * 用于加载`.env`文件的目录
    * 
    * Environment variable file directory.
    */
   envDir?: string
 
   /**
-   * 字符串别名替换
+   * 字符串别名，构建时会被静态替换
    * 
    * alias replacement.
    */
@@ -72,9 +72,9 @@ interface BuildOptions {
   outDir?: string
 
   /**
-   * 文件哈希和版本控制
+   * 使用文件哈希作为资源文件的版本控制
    * 
-   * File hashing and version control.
+   * Use file hash as version control.
    */
   fileHash?: boolean | '?' | '-'
 
@@ -114,7 +114,7 @@ interface BuildOptions {
   imageMinify?: boolean | MinifyOptions<'image'>
 
   /**
-   * 是否生成 source map 文件
+   * 构建后是否生成 source map 文件
    * 
    * Whether to generate source map.
    */

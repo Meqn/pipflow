@@ -115,7 +115,7 @@ export interface TaskOptions<T extends TaskType, C extends CompilerType<T>> {
 
   /**
    * 任务类型
-   * Task Type;
+   * Task Type
    */
   type: T
 
