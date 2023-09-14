@@ -1,5 +1,13 @@
 # pipflow
 
+## 0.6.2
+
+### Patch Changes
+
+- fix: minify/sourcemap/fileHash only works under the build ([a8374d8](https://github.com/Meqn/pipflow/commit/a8374d83da454c02231a15278c5c94f7f9435291))
+- fix: Fix fileHash type error ([8a9e485](https://github.com/Meqn/pipflow/commit/8a9e485aa2f7126d12aa0c1d58f00cb56fbf1d5a))
+- perf: Optimize defineConfig type hints ([df09379](https://github.com/Meqn/pipflow/commit/df093797900a05a8ac40ab9dff17d1378820d019))
+
 ## 0.6.1
 
 ### Patch Changes
