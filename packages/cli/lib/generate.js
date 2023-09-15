@@ -89,24 +89,26 @@ exports.generateTemplate = async function(src, dest, options = {}) {
   // 拷贝 style 样式文件
   const cssDir = ['less', 'sass', 'stylus'].includes(cssPreprocessor) ? cssPreprocessor : 'default'
   await fs.copy(
-    path.resolve(src, 'styles', cssDir),
+    path.resolve(dest, 'styles', cssDir),
     path.resolve(dest, 'src/styles')
   )
+  await fs.remove(path.resolve(dest, 'styles'))
   // 拷贝基础 html 模板文件
   const htmlDir = ['artTemplate', 'ejs', 'pug', 'handlebars', 'nunjucks'].includes(templater) ? templater : 'default'
   await fs.copy(
-    path.resolve(src, 'views', htmlDir),
+    path.resolve(dest, 'views', htmlDir),
     path.resolve(dest, 'src')
   )
+  await fs.remove(path.resolve(dest, 'views'))
   // 处理 linter 和 eslint 配置
   if (linter) {
     await fs.copy(
-      path.resolve(src, 'eslint', eslintConfig),
+      path.resolve(dest, 'eslint', eslintConfig),
       path.resolve(dest)
     )
     if (eslintConfig !== 'base') {
       await fs.copy(
-        path.resolve(src, 'eslint/base'),
+        path.resolve(dest, 'eslint/base'),
         path.resolve(dest)
       )
     }
@@ -127,4 +129,5 @@ exports.generateTemplate = async function(src, dest, options = {}) {
     const eslintJson = getEslintConfig(options)
     await writeJsFile(path.resolve(dest, '.eslintrc.js'), eslintJson)
   }
+  await fs.remove(path.resolve(dest, 'eslint'))
 }
