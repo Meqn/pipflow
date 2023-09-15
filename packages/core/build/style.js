@@ -4,7 +4,8 @@ const replace = require('gulp-replace')
 const sass = require('gulp-sass')(require('sass'))
 const less = require('gulp-less')
 const stylus = require('gulp-stylus')
-const postcss = require('gulp-postcss')
+// const postcss = require('gulp-postcss')
+const postcss = require('../plugins/postcss')
 const postcssEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
 const {
@@ -74,7 +75,9 @@ module.exports = function styleTask(options = {}, done) {
     const minifyOptions = _.isPlainObject(cssMinify) ? cssMinify : {}
     postcssPlugins.push(cssnano(minifyOptions))
   }
-  processes.push(postcss(postcssPlugins))
+  processes.push(postcss({}, {
+    plugins: postcssPlugins
+  }))
 
   // 9. 文件指纹处理 & sourcemaps & 输出文件
   outputFiles(processes, {
