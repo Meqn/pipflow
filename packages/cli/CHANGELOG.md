@@ -1,5 +1,11 @@
 # @pipflow/cli
 
+## 0.10.1
+
+### Patch Changes
+
+- fix: Update on changes to template project ([84cb103](https://github.com/Meqn/pipflow/commit/84cb1033096aad7a4ce63d9071ab4b7df4a886f1))
+
 ## 0.10.0
 
 ### Minor Changes
