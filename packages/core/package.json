@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/core",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "A web developer workflow based on Gulp.",
   "main": "index.js",
   "engines": {

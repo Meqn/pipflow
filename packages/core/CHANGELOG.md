@@ -1,5 +1,11 @@
 # @pipflow/core
 
+## 0.9.2
+
+### Patch Changes
+
+- fix: Modify postcss to support configuration merging ([8a0f31f](https://github.com/Meqn/pipflow/commit/8a0f31f1d8248cd9fafd436f3f701a92643c4b01))
+
 ## 0.9.1
 
 ### Patch Changes
