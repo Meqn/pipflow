@@ -12,6 +12,7 @@ export type TaskType =
   | 'copy'
   | 'archive'
   | 'user'
+  | 'compose'
 
 type TaskEntryType = string | string[] | string[][] | { [key: string]: string | string[] }
 

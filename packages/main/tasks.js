@@ -56,6 +56,7 @@ loadEnv(CC.envDir)
 
 //== 用户任务 ==============================================
 const taskTypes = {} //所有任务类型对象, `{ type: [{name}] }`
+const composeTasks = [] //组合任务
 const taskMap = {
   html(options, done) {
     return htmlTask(options, done)
@@ -101,10 +102,16 @@ if (CC.tasks?.length > 0) {
     })
 
     // 🍱 所有自定义任务
-    // !使用async函数，防止用户自定义任务无返回值导致报错
-    task(item.name, async done => {
-      return taskMap[item.type]?.(item, done)
-    })
+    if (item.type === 'compose') {
+      // 组合任务放在最后导出
+      composeTasks.push(item)
+    } else {
+      // !使用async函数，防止用户自定义任务无返回值导致报错
+      task(item.name, async done => {
+        return taskMap[item.type]?.(item, done)
+      })
+    }
+
   }
 }
 
@@ -234,8 +241,8 @@ task('lint', async (done) => {
   }
 })
 
-//== 导出任务 ==============================================
-let baseTasks = [[], [], []] // `[0: 静态资源, 1: js/css, 2: html`]
+//== 导出组合任务 ==============================================
+let baseTasks = [[], [], []] //任务执行顺序分组: `[0: 静态资源, 1: js/css, 2: html`]
 if (publicFiles) {
   baseTasks[0].push('copy:public')
 }
@@ -264,3 +271,13 @@ exports.build = series(
   'del:dest',
   ...baseTasks
 )
+
+// 自定义组合任务
+for (const item of composeTasks) {
+  const { name, input } = item
+  if (Array.isArray(input) && input?.length > 0) {
+    exports[name] = input.length === 1 ? parallel(
+      ...[].concat(input)
+    ) : series(...input.map(v => parallel(...[].concat(v))))
+  }
+}
