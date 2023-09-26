@@ -1,4 +1,3 @@
-const { gulp, glob, lodash, merge } = require('@pipflow/utils')
 const { pipeline } = require('../base/utils')
 
 module.exports = function userTask(options = {}, done) {
@@ -6,15 +5,7 @@ module.exports = function userTask(options = {}, done) {
 
   // 1. 自定义处理函数
   if (typeof compiler === 'function') {
-    return compiler(
-      {
-        gulp,
-        glob,
-        lodash,
-        merge
-      },
-      done
-    )
+    return compiler(done)
   }
 
   // 2. 自定义处理流程

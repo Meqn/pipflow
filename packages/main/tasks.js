@@ -101,7 +101,8 @@ if (CC.tasks?.length > 0) {
     })
 
     // 🍱 所有自定义任务
-    task(item.name, done => {
+    // !使用async函数，防止用户自定义任务无返回值导致报错
+    task(item.name, async done => {
       return taskMap[item.type]?.(item, done)
     })
   }
