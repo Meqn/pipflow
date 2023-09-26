@@ -13,7 +13,7 @@ export type TaskType =
   | 'archive'
   | 'user'
 
-type TaskEntryType = string | string[] | { [key: string]: string | string[] }
+type TaskEntryType = string | string[] | string[][] | { [key: string]: string | string[] }
 
 //=== task compiler 配置项
 export type HtmlCompiler = 'pug' | 'ejs' | 'handlebars' | 'nunjucks' | 'artTemplate'
@@ -25,6 +25,8 @@ export type CompilerType<T> = T extends 'html'
   ? CssCompiler
   : T extends 'script'
   ? JsCompiler
+  : T extends 'user'
+  ? (done: Function) => any
   : never
 interface HtmlCompilerOptions {
   data?: { [key: string]: any }
