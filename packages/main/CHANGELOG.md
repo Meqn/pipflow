@@ -1,5 +1,17 @@
 # pipflow
 
+## 0.7.0
+
+### Minor Changes
+
+- feat: Added custom composite tasks ([ce5a1e9](https://github.com/Meqn/pipflow/commit/ce5a1e9f4e20c1a42947388b89b2fde48a35f72d))
+- fix: Fixed Compiler type of user-task ([f785458](https://github.com/Meqn/pipflow/commit/f78545896b6b227471ae1f32b97172ecf257a17a))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/core@0.9.3
+
 ## 0.6.3
 
 ### Patch Changes
