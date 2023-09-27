@@ -1,5 +1,11 @@
 # @pipflow/core
 
+## 0.9.3
+
+### Patch Changes
+
+- fix: Prevent user-task from reporting errors with no return ([6742eb1](https://github.com/Meqn/pipflow/commit/6742eb150b0b7bb64df7e04e060891b9d4f7a162))
+
 ## 0.9.2
 
 ### Patch Changes
