@@ -4,13 +4,15 @@
 
 主要任务类型包含：
 
-- `htmlTask` - HTML处理任务
-- `scriptTask` - JavaScript处理任务
-- `styleTask` - CSS处理任务
-- `staticTask` - 静态资源处理任务
-- `imageTask` - 图片资源处理任务 (待开发)
-- `createServeTask` - 创建本地服务器任务
-- `copyTask` - 复制文件任务
-- `removeTask` - 删除文件任务
-- `archiveTask` - 打包压缩任务
-- `userTask` - 用户自定义任务
+- `html` - HTML处理任务
+- `script` - JavaScript处理任务
+- `style` - CSS处理任务
+- `static` - 静态资源处理任务
+- `image` - 图片资源处理任务 (待开发)
+- `server` - 创建本地服务器任务
+- `copy` - 复制文件任务
+- `remove` - 删除文件任务
+- `archive` - 打包压缩任务
+- `user` - 用户自定义任务
+- `compose` - 组合任务
+

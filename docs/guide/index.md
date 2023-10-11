@@ -24,12 +24,36 @@ pipflow的主要功能包括:
 :::
 
 
-
 ## 搭建 `pipflow` 项目
 
+::: tip 兼容性注意
+pipflow 需要 [Node.js](https://nodejs.org/en/) 版本 14.13+，16+。然而，有些模板需要依赖更高的 Node 版本才能正常运行，当你的包管理器发出警告时，请注意升级你的 Node 版本。
+:::
 
-## `index.html` 与项目目录
+运行 `create` 命令创建新项目：
+```bash
+pipflow create my-project
+```
+
+然后按照提示操作即可！ 具体参数说明请参见 [这里](./cli.md#cli-create)
 
 
 ## 命令行界面
 
+如果在本机全局安装了 `@pipflow/cli`，进入项目根目录后，可以直接运行 `pipflow dev` 即可启动当前项目。  
+下面是通过脚手架创建的 pipflow 项目中默认的 npm scripts：
+
+```json
+{
+  "scripts": {
+    "dev": "pipflow dev", // 启动开发服务器，`pipflow dev`或`pw dev`
+    "build": "pipflow build", // 为生产环境构建产物
+    "preview": "pipflow task preview", // 本地预览生产构建产物
+    "lint": "pipflow task lint", // 代码检查
+  }
+}
+```
+
+可以指定额外的命令行选项，如 `--port` 或 `--no-open`。 运行 `pipflow --help` 获得完整的命令行选项列表。
+
+查看 [命令行界面](./cli.md) 了解更多细节。

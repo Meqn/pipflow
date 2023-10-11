@@ -1,12 +1,12 @@
-# 命令行界面
+# 命令行界面 {#cli}
 
-CLI (`@pipflow/cli`) 是一个全局安装的 npm 包，提供了终端里的 `pipflow` 命令。它可以通过 `pipflow create` 快速搭建一个新项目，或者直接通过 `pipflow serve` 构建新想法的原型。下面我们会深入介绍。
+CLI (`@pipflow/cli`) 是一个全局安装的 npm 包，提供了终端里的 `pipflow` 命令。你可以通过 `pipflow create` 快速搭建一个新项目，然后运行 `pipflow dev` 进行便捷开发。下面我们来深入介绍每个命令的使用。
 
 ::: tip 温馨提示
 你也可以在终端里使用 `pw` 命令。它是 `pipflow` 命令的缩写，由 `pipflow` 的首尾字母组合而成。
 :::
 
-## 创建项目
+## 创建项目 {#cli-create}
 
 ### `pipflow create`
 
@@ -55,7 +55,7 @@ Options:
 如果你在创建项目时，拉取模板源码一直处于 loading 状态 或者超时失败，建议从 `gitee` 拉取模板，但是本地一定要安装 git 环境。
 
 运行以下命令创建新项目：  
-`pipflow create my-project --repo gitee --clone`
+`pipflow create my-project --repo=gitee --clone`
 :::
 
 :::tip 提示
@@ -70,46 +70,74 @@ Options:
 ### 项目目录结构
 
 ```
-// 项目根目录
+.
+├── README.md
+├── package.json
+├── .browserslistrc         // 浏览器支持列表
+├── .env                    // 运行环境变量
+├── .eslintignore           // eslint忽略
+├── .eslintrc.js            // eslint配置
+├── .gitignore              // git忽略
+├── .prettierrc             // prettier配置
+├── babel.config.js         // babel配置
+├── pipflow.config.js       // pipflow配置
+├── postcss.config.js       // postcss配置
+├── public                  // 公共静态资源服务文件夹
+│   ├── favicon.ico
+│   └── robots.txt
+└── src                     // 源码文件夹
+    ├── assets              // 资源文件夹
+    │   ├── logo.png
+    │   └── logo.svg
+    ├── scripts             // js文件夹
+    │   └── index.js
+    ├── styles              // css文件夹
+    │   ├── index.scss
+    │   └── normalize.css
+    ├── views               // html文件夹
+    └── index.html          // 默认入口页面
 ```
 
-## 开发服务器
+## 开发服务器 {#cli-dev}
 
-### `pipflow serve`
+### `pipflow dev`
 
 在当前项目下启动一个开发服务器 (基于 BrowserSync) 并附带开箱即用的热重载功能。
 
 #### 使用
 
 ```bash
-pipflow serve
-# 或者
 pipflow dev
+# 或者
+pw dev
 ```
 
 #### 选项
 ```bash
-➜ pipflow serve --help
+➜ pipflow dev --help
 
-Usage: pipflow serve|dev [options]
+Usage: pipflow dev|serve [options]
 
 Start development server that with HMR in the current project
 
 Options:
-  --mode <mode>      specify env mode (default: "development")
-  --config <path>    the configuration file path
-  -p, --port <port>  specify port (default: 9527)
-  --open             open browser on server start
-  --https            use https (default: false)
-  --base <path>      base directory
-  --cors             configure CORS for the dev server
-  -h, --help         display help for command
+  --mode <mode>    specify env mode (default: "development")
+  --config <path>  the configuration file path
+  --port <port>    specify port (default: 9527)
+  --host           specify hostname
+  --index          specify index page
+  --https          enable SSL for local development (default: false)
+  --cors           enable CORS for the dev server
+  --open           open browser on startup
+  --no-open        not open browser on startup
+  --no-notify      disable the notify element in browser
+  -h, --help       display help for command
 ```
 
 除了通过命令行参数，你也可以使用 `pipflow.config.js` 里的 server 字段配置开发服务器。
 
 
-## 构建
+## 构建 {#cli-build}
 
 ### `pipflow build`
 
@@ -128,7 +156,7 @@ pipflow build
 
 Usage: pipflow build [options]
 
-Produces a production-ready bundle in the dist/ directory
+Produces a production-ready bundle in the `dist/` directory
 
 Options:
   --mode <mode>    specify env mode (default: "production")
@@ -137,9 +165,9 @@ Options:
 ```
 
 
-## 其他
+## 其他 {#cli-other}
 
-### `pipflow task`
+### `pipflow task` {#cli-task}
 单独执行某个任务
 
 #### 使用
@@ -148,6 +176,9 @@ pipflow task <task-name>
 
 # Example: 执行 lint 任务
 pipflow task lint
+
+# 查看所有任务
+pipflow task --list
 ```
 
 #### 选项
@@ -164,41 +195,45 @@ Options:
   -h, --help   display help for command
 ```
 
-### `pipflow preview`
+### `pipflow server` {#cli-server}
 
-本地预览构建产物。
+启动一个本地HTTP服务器。它是基于 BrowserSync 的。  
+你可以在任何目录下运行该命令，无需其他配置。
 
 #### 使用
 ```bash
-pipflow preview
+pipflow server
 ```
 
 #### 选项
 ```bash
 ➜ pipflow preview --help
 
-Usage: pipflow preview [options]
+Usage: pw server [options]
 
-Start a preview server in the current project
+Start a local HTTP service (base on browser-sync).
+👉 See more: https://browsersync.io/docs/command-line
 
 Options:
-  --config <path>    the configuration file path
-  -p, --port <port>  specify port (default: 8527)
-  --open             open browser on server start
-  --https            use https (default: false)
-  --base <path>      base directory
-  --cors             configure CORS for the dev server
-  -h, --help         display help for command
+  -s, --server <path>  the web root (default: ".")
+  --port <port>        specify a port to use (default: 3000)
+  --host [host]        specify a hostname to use
+  --index <filename>   specify which file should be used as the index page
+  -w, --watch          watch files for changes
+  -f, --files          file paths to watch
+  --https              enable SSL for local development (default: false)
+  --cors               add Access Control headers to every request
+  --open               open browser on server start
+  --no-open            not open browser on server start
+  --no-notify          disable the notify element in browser
+  -h, --help           display help for command
 ```
 
-### `pipflow pack`
-创建 `.zip` 压缩包
+### `pipflow-info` {#cli-info}
+
+打印当前项目的运行环境信息。
 
 #### 使用
 ```bash
-pipflow pack [...target] [dest]
+pipflow info
 ```
-
-**提示：**
-1. 最后一个参数是 输出文件。(可以省略 `.zip` 后缀)
-2. 从第一个参数起，至倒数第二个参数均为输入文件。

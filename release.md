@@ -22,5 +22,7 @@
 
 ## refs
 - [pnpm构建monorepo工程](https://github.com/astonishqft/pnpm-monorepo-demo)
+- [webpack5 的多页脚手架](https://github.com/kailong321200875/webpack-multi-page-cli)
+- [pnpm-workspaces-example & changeset](https://github.com/DavidWells/pnpm-workspaces-example/)
 
 

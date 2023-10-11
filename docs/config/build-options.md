@@ -10,8 +10,8 @@
 
 ## build.fileHash {#build-fileHash}
 
-- **类型：** `string`
-- **默认：** `boolean | '-' | '?'`
+- **类型：** `boolean | '-' | '?'`
+- **默认：** `'-'`
 
 `build` 命令构建后生成的静态资源在它们的文件名中包含了 `hash` 以便更好的控制缓存，同时也会生成对应的 `manifest.json` 文件。
 - 值为 `false` 时，关闭文件哈希。

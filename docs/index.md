@@ -7,7 +7,7 @@ titleTemplate: 基于gulp的web开发工作流,内置合并、编译、打包、
 
 hero:
   name: "Pipflow"
-  text: "开箱即用的前端开发工作流程"
+  text: "开箱即用的前端开发工作流"
   tagline: 旨在使web应用程序的开发/构建流程变得更简单!
   actions:
     - theme: brand
