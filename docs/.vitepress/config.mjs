@@ -13,6 +13,10 @@ export default defineConfig({
 
   lastUpdated: true,
 
+  sitemap: {
+    hostname: 'https://pipflow.mengqing.org'
+  },
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
 
@@ -46,9 +50,9 @@ export default defineConfig({
           items: [
             { text: '开始', link: '/guide/' },
             { text: '命令行界面', link: '/guide/cli' },
-            { text: '环境变量与模式', link: '/guide/env-and-mode' },
             { text: '静态资源处理', link: '/guide/assets' },
-            { text: '构建生产版本', link: '/guide/build' }
+            { text: '构建生产版本', link: '/guide/build' },
+            { text: '环境变量与模式', link: '/guide/env-and-mode' },
           ]
         },
         {
