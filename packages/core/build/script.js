@@ -73,9 +73,7 @@ function compileScript(options = {}, done) {
 
   // 7. babel转换 //!需配置 `babel.config.json`
   if (compiler === 'babel') {
-    processes.push(babel({
-      presets: ['@babel/preset-env'],
-    }))
+    processes.push(babel())
   }
 
   // 6. 压缩处理
