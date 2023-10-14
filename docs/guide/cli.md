@@ -55,9 +55,13 @@ Options:
 如果你在创建项目时，拉取模板源码一直处于 loading 状态 或者超时失败，建议从 `gitee` 拉取模板，但是本地一定要安装 git 环境。
 
 运行以下命令创建新项目：  
+
 `pipflow create my-project --repo=gitee --clone`
 :::
 
+> 吐槽：gitee 真不想评价，除去不可抗拒因素外，自身也是一塌糊涂，不求上进的xx!
+
+<!--
 :::tip 提示
 `pipflow` 通过 `download-git-repo` 拉取仓库模板，它分两种方式：
 1. 使用 `git clone` 克隆源码
@@ -66,6 +70,7 @@ Options:
 `pipflow` 目前仅支持从 `github` 和 `gitee` 拉取源码，但是 gitee 仓库下载 `.zip` 包时需要手动验证，故只能使用 `git clone` 方式下载。
 > 吐槽：gitee 真不想评价，除去不可抗拒因素外，自身也是一塌糊涂，不求上进的xx!
 :::
+-->
 
 ### 项目目录结构
 

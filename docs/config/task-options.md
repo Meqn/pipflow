@@ -52,17 +52,10 @@
 - **类型：** `object`
 
 转译配置项。
+
 - HTML模板引擎 配置项，请参见 [这里](../guide/task-html#configuration)
 - CSS预处理器 配置项，请参见 [这里](../guide/task-style#configuration)
-- `babel` 配置项，请参见 [这里](../guide/task-script#configuration)
 
-## module {#module}
-- **类型：** `boolean`
-- **默认：** `false`
-
-Javascript 文件是否模块化。
-
-当项目中的JS文件使用了 `require` 或 `import` 语句时，请启用模块化。
 
 ## minify {#minify}
 - **类型：** `boolean | MinifyOptions`

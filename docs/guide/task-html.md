@@ -2,18 +2,12 @@
 
 ## 处理流程 {#process-flow}
 
-* 环境变量处理
-  > 环境变量在构建时会被静态替换
-* 模板渲染
-  > 渲染HTML模板引擎，支持 `Pug`, `EJS`, `Handlebars`, `Nunjucks`, `art-template`
-* 别名替换
-  > 静态替换 `alias` 对应的字符串
-* 自定义处理流程
-  > 处理 `pipflow.config.js` 中添加的自定义 `plugins`
-* 内容压缩
-  > 基于 `html-minifier-terser` 的内容压缩
-* 资源文件指纹
-  > 将构建后通过生成的 `manifest.json` 中包含 hash 过的资源文件版本的映射，进行引入链接的替换
+- 环境变量处理 - 环境变量在构建时会被静态替换
+- 模板渲染 - 渲染HTML模板引擎，支持 `Pug`, `EJS`, `Handlebars`, `Nunjucks`, `art-template`
+- 别名替换 - 静态替换 `alias` 对应的字符串
+- 自定义处理流程 - 处理 `pipflow.config.js` 中添加的自定义 `plugins`
+- 内容压缩 - 基于 `html-minifier-terser` 的内容压缩
+- 资源文件指纹 - 将构建后通过生成的 `manifest.json` 中包含 hash 过的资源文件版本的映射，进行引入链接的替换
 
 
 ## 环境变量处理
@@ -47,7 +41,7 @@ html内容中的以 `process.env.XXX` 写入的环境变量将会被静态替换
    - **文档:** [art-template文档](https://aui.github.io/art-template/) 、 [gulp-art-tpl 插件文档](https://www.npmjs.com/package/gulp-art-tpl)
    - *个人推荐*： 功能强大，使用简单
 
-这些模板引擎在过去曾经很流行，每一款都有自己独特的特点和用法。您可以根据自己的需求和偏好选择适合的模板引擎来开发您的项目。
+这些模板引擎在过去都很流行，每一款都有自己独特的特点和用法。您可以根据自己的需求和偏好选择适合的模板引擎来开发您的项目。
 
 
 ### 渲染配置项 {#configuration}
@@ -118,4 +112,5 @@ html的压缩是基于 `html-minifier-terser` 插件, 详细配置请参见 [这
 }
 ```
 
+你可以通过 `build.htmlMinify` 配置项来指定压缩选项。 参见 [这里](../config/build-options.md#build-htmlminify)。
 

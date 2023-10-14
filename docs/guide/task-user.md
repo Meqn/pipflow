@@ -1,6 +1,6 @@
 # 自定义任务和流程
 
-
+## 扩展任务 {#extend-task}
 
 
 示例：
@@ -20,3 +20,10 @@ module.exports = defineConfig({
   ]
 })
 ```
+
+## 创建新任务 {#create-task}
+
+
+## 组合任务 {#compose-task}
+
+
