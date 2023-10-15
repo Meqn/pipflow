@@ -158,15 +158,6 @@ export interface TaskOptions<T extends TaskType, C extends CompilerType<T>> {
   compilerOptions?: CompilerOptions<T, C>
 
   /**
-   * Javascript 文件是否模块化
-   * 
-   * Whether the Javascript is module.
-   * 
-   * @default false
-   */
-  module?: T extends 'script' ? boolean : never
-
-  /**
    * 是否开始最小化混淆/压缩 或 配置项
    * 
    * Whether Minimize/compression or Configuration.
