@@ -1,4 +1,3 @@
-const babel = require('gulp-babel')
 const concat = require('gulp-concat')
 const replace = require('gulp-replace')
 const uglifyjs = require('gulp-terser')
@@ -32,7 +31,6 @@ function compileScript(options = {}, done) {
   const {
     input,
     alias,
-    compiler,
     minify: jsMinify
   } = options
 
@@ -71,12 +69,7 @@ function compileScript(options = {}, done) {
   // 6. 自定义处理流程
   putProcesses(processes, options.plugins)
 
-  // 7. babel转换 //!需配置 `babel.config.json`
-  if (compiler === 'babel') {
-    processes.push(babel())
-  }
-
-  // 6. 压缩处理
+  // 7. 压缩处理
   if (jsMinify) {
     const minifyOptions = _.isPlainObject(jsMinify) ? jsMinify : {}
     processes.push(uglifyjs(minifyOptions))
@@ -119,7 +112,7 @@ function compileScript(options = {}, done) {
 
 const compileModuleScript = require('./script.module')
 module.exports = function scriptTask(options = {}, done) {
-  if (options.module) {
+  if (options.compiler) {
     return compileModuleScript(options, done)
   } else {
     return compileScript(options, done)
