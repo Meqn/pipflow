@@ -1,5 +1,17 @@
 # @pipflow/core
 
+## 0.10.0
+
+### Minor Changes
+
+- perf: Remove autoprefixer dependence ([98a503a](https://github.com/Meqn/pipflow/commit/98a503a646d8333d2ce4ab61a84765e14c96e918))
+- perf: Optimize babel configuration & removing dependencies ([c0ed8e0](https://github.com/Meqn/pipflow/commit/c0ed8e03354937078a949781f8b82f64de0d31bc))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@0.10.1
+
 ## 0.9.3
 
 ### Patch Changes
