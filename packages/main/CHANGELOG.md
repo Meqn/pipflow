@@ -1,5 +1,15 @@
 # pipflow
 
+## 0.7.1
+
+### Patch Changes
+
+- perf: Remove the task's module option ([d67fbf8](https://github.com/Meqn/pipflow/commit/d67fbf8bf4b77ce9febacfed6300d2177681e6a7))
+
+- Updated dependencies []:
+  - @pipflow/core@0.10.0
+  - @pipflow/utils@0.10.1
+
 ## 0.7.0
 
 ### Minor Changes
