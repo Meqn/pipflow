@@ -187,11 +187,12 @@ module.exports = class Creator extends EventEmitter {
       json = await loadTemplate()
     }
     const { version: lastVersion } = await getPackageVersion(CLI_TEMPLATE_ID, 'latest')
-    const { version, tmpdir } = json
+    const { version, tmpdir, lastTime } = json
 
     // 读取本地缓存的版本
     try {
-      if (tmpdir && lastVersion === version) {
+      // 判断 1.目录存在, 2.版本一致，3.拉取时间不超过 5天
+      if (tmpdir && lastVersion === version &&  Date.now() - lastTime < 5 * 24 * 3600 * 1000) {
         await fs.access(tmpdir) // 检查文件是否存在
         return tmpdir
       }
