@@ -7,8 +7,23 @@ const {
   logger
 } = require('@pipflow/utils')
 const { task, watch, series, parallel } = gulp
+const {
+  loadEnv,
+  htmlTask,
+  scriptTask,
+  styleTask,
+  imageTask,
+  staticTask,
+  copyTask,
+  archiveTask,
+  removeTask,
+  userTask,
+  eslintTask,
+  createServeTask
+} = require('@pipflow/core')
+const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
 
-//== 参数和环境变量 ==============================================
+//== 自定义配置: 参数和环境变量 ==============================================
 // 命令行参数
 const args = minimist(process.argv.slice(3))
 
@@ -30,29 +45,19 @@ if (!process.env.NODE_ENV) {
   }
 }
 
-const {
-  loadEnv,
-  htmlTask,
-  scriptTask,
-  styleTask,
-  imageTask,
-  staticTask,
-  copyTask,
-  archiveTask,
-  removeTask,
-  userTask,
-  eslintTask,
-  createServeTask
-} = require('@pipflow/core')
-const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
-
-//== 自定义配置 ==============================================
+// 自定义配置
 const CC = getConfig(args.config || 'pipflow.config')
 const { outDir } = CC.build
 const publicFiles = globFiles(CC.publicDir, true) // public 目录文件
 
 // 重新加载环境变量文件
 loadEnv(CC.envDir)
+
+// 暴露内置环境变量
+process.env.MODE = process.env.PIPFLOW_MODE ?? 'development'
+process.env.PROD = process.env.NODE_ENV === 'production'
+process.env.DEV = process.env.NODE_ENV !== 'production'
+
 
 //== 用户任务 ==============================================
 const taskTypes = {} //所有任务类型对象, `{ type: [{name}] }`
