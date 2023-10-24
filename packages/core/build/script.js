@@ -1,4 +1,6 @@
+const path = require('path')
 const concat = require('gulp-concat')
+const gulpif = require('gulp-if')
 const replace = require('gulp-replace')
 const uglifyjs = require('gulp-terser')
 const sourcemaps = require('gulp-sourcemaps')
@@ -11,7 +13,7 @@ const {
 
 const { ENV } = require('../base/env')
 const { pipeline } = require('../base/utils')
-const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
+const { outputFiles, createSrcOptions, plumber, putProcesses, getBasePath } = require('./comm')
 
 /**
  * 处理 script文件 (非 module)
@@ -25,7 +27,7 @@ function compileScript(options = {}, done) {
   }
 
   const processes = []
-  const entries = []
+  const entries = [] //多个 gulp.src 入口
   const jsFilter = filter('*.{js,mjs}', { restore: true })
 
   const {
@@ -35,26 +37,29 @@ function compileScript(options = {}, done) {
   } = options
 
   const srcOptions = createSrcOptions(options)
-
-  // 1. 统一入口文件
+  const basePath = getBasePath(input, options.base || '.')
+  /**
+   * 统一入口文件
+   * 1. sourcemaps.init (在合并文件之前)
+   * 2. 合并文件
+   */
   if (_.isPlainObject(input)) {
     Object.keys(input).forEach(name => {
       entries.push(
-        gulp.src(input[name], srcOptions)
-          .pipe(concat(`${name}.js`))
+        gulp.src(input[name], { ...srcOptions, base: '.' })
+          .pipe(gulpif(options.sourcemap, sourcemaps.init({ loadMaps: true })))
+          .pipe(concat(path.join(basePath, `${name}.js`)))
       )
     })
   } else {
-    entries.push(gulp.src(input, srcOptions))
+    entries.push(
+      gulp.src(input, srcOptions)
+        .pipe(gulpif(options.sourcemap, sourcemaps.init({ loadMaps: true })))
+    )
   }
 
   // 2. plumber错误处理
   processes.push(plumber.handler())
-
-  // 3.1 sourcemaps.init
-  if (options.sourcemap) {
-    processes.push(sourcemaps.init({ loadMaps: true }))
-  }
 
   // 4. 环境变量处理
   processes.push(ENV.inject())

@@ -4,7 +4,7 @@ const rev = require('gulp-rev')
 const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
-const { gulp } = require('@pipflow/utils')
+const { gulp, _ } = require('@pipflow/utils')
 
 const {
   logger,
@@ -32,6 +32,47 @@ function createSrcOptions({ name, base }) {
     ret.base = base
   }
   return ret
+}
+
+/************************************************
+ * 计算相对共同目录的相对url
+ * @param {string[]} urls 文件相对路径
+ * @param {string} base 基础路径
+ * @returns 
+ */
+function getCommonPath(urls, base) {
+  const fragments = urls.map(p => p.split('/')).map(p => {
+    if (p[p.length - 1].includes('.')) {
+      return p.slice(0, p.length - 1)
+    }
+    return p
+  })
+  const comm = fragments.reduce((prev, cur) => {
+    return prev.filter((frag, idx) => cur[idx] === frag);
+  })
+
+  if (comm.length === 0 || !base || base === '.') {
+    return ''
+  }
+
+  base = base.replace(/^\.?\/+/, '').replace(/\/+$/, '')
+  const commStr = comm.join('/')
+  if (commStr.includes(base)) {
+    return commStr.split(base).pop().replace(/^\/+/, '')
+  }
+  return ''
+}
+
+// 获取公共基础路径
+function getBasePath(files, base) {
+  if (_.isPlainObject(files)) {
+    files = Object.values(files).reduce((list, current) => {
+      return list.concat(current)
+    }, [])
+  } else if (typeof files === 'string') {
+    files = [files]
+  }
+  return getCommonPath(files, base)
 }
 
 /************************************************
@@ -152,6 +193,7 @@ module.exports = {
   revDir,
   outputFiles,
   createSrcOptions,
+  getBasePath,
   plumber,
   putProcesses
 }

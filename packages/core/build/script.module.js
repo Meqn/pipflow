@@ -1,3 +1,4 @@
+const path = require('path')
 const named = require('vinyl-named')
 const gulpWebpack = require('webpack-stream')
 const webpack = require('webpack')
@@ -12,7 +13,7 @@ const {
 } = require('@pipflow/utils')
 
 const { ENV } = require('../base/env')
-const { outputFiles, createSrcOptions, plumber, putProcesses } = require('./comm')
+const { outputFiles, createSrcOptions, plumber, putProcesses, getBasePath } = require('./comm')
 const { pipeline } = require('../base/utils')
 
 /**
@@ -129,15 +130,16 @@ function getEntries(options = {}) {
     compiler,
   }
   const srcOptions = createSrcOptions(options)
-  
+  const basePath = getBasePath(input, options.base || '.')
   let entries = []
+  
   if (_.isPlainObject(input)) {
     entries = Object.keys(input).map(name => {
-      return gulp.src(input[name], srcOptions)
+      return gulp.src(input[name], { ...srcOptions, base: '.' })
         .pipe(plumber.handler())
         .pipe(gulpWebpack(getWebpackConfig(
           Object.assign({
-            filename: `${name}.js`
+            filename: path.join(basePath, `${name}.js`)
           }, webpackOptions)
         )))
     })
