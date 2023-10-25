@@ -12,7 +12,7 @@ const {
 } = require('@pipflow/utils')
 
 const { ENV } = require('../base/env')
-const { pipeline } = require('../base/utils')
+const { pipeline, onDone } = require('../base/utils')
 const { outputFiles, createSrcOptions, plumber, putProcesses, getBasePath } = require('./comm')
 
 /**
@@ -118,8 +118,8 @@ function compileScript(options = {}, done) {
 const compileModuleScript = require('./script.module')
 module.exports = function scriptTask(options = {}, done) {
   if (options.compiler) {
-    return compileModuleScript(options, done)
+    return compileModuleScript(options, onDone(done))
   } else {
-    return compileScript(options, done)
+    return compileScript(options, onDone(done))
   }
 }

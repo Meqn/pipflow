@@ -22,7 +22,19 @@ function onError(error) {
   logger.time(symbols.error, colors.red(`${plugin} ${name} : ${message}`))
 }
 
+/**
+ * 任务完成回调
+ * @param {function} done 回调函数
+ */
+function onDone(done) {
+  if (typeof done === 'function') {
+    return done
+  }
+  return () => {}
+}
+
 module.exports = {
   pipeline,
-  onError
+  onError,
+  onDone
 }

@@ -11,10 +11,10 @@ const artTemplate = require('gulp-art-tpl')
 const {
   gulp,
   _,
-  readJsonFiles
+  readJsonFilesSync
 } = require('@pipflow/utils')
 
-const { pipeline } = require('../base/utils')
+const { pipeline, onDone } = require('../base/utils')
 const { revDir, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
 const { ENV } = require('../base/env')
 
@@ -51,7 +51,7 @@ function templater(compiler, compileOptions = {}) {
   return templaterMap[compiler]?.()
 }
 
-module.exports = async function htmlTask(options = {}, done) {
+module.exports = function htmlTask(options = {}, done) {
   const {
     input,
     dest,
@@ -69,7 +69,7 @@ module.exports = async function htmlTask(options = {}, done) {
   let manifest
   if (fileHash) {
     // path.posix 统一路径, 兼容window平台
-    const json = await readJsonFiles(path.posix.join(dest, revDir, '*.json'), { merge: true })
+    const json = readJsonFilesSync(path.posix.join(dest, revDir, '*.json'), { merge: true })
     manifest = JSON.stringify(json)
   }
   
@@ -134,5 +134,5 @@ module.exports = async function htmlTask(options = {}, done) {
   return pipeline(
     gulp.src(input, srcOptions),
     processes
-  ).on('end', done)
+  ).on('end', onDone(done))
 }

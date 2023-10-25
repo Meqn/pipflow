@@ -1,6 +1,6 @@
 const { gulp, _ } = require('@pipflow/utils')
 
-const { pipeline } = require('../base/utils')
+const { pipeline, onDone } = require('../base/utils')
 const {
   createSrcOptions,
   outputFiles,
@@ -45,5 +45,5 @@ module.exports = function staticTask(options = {}, done) {
   return pipeline(
     gulp.src(options.input, srcOptions),
     processes
-  ).on('end', done)
+  ).on('end', onDone(done))
 }

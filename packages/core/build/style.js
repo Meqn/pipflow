@@ -16,7 +16,7 @@ const {
   merge
 } = require('@pipflow/utils')
 
-const { pipeline } = require('../base/utils')
+const { pipeline, onDone } = require('../base/utils')
 const {
   createSrcOptions,
   outputFiles,
@@ -122,7 +122,7 @@ module.exports = function styleTask(options = {}, done) {
   return pipeline(
     merge(...entries),
     processes
-  ).on('end', done)
+  ).on('end', onDone(done))
 }
 
 /** 任务整体流程

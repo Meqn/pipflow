@@ -1,6 +1,6 @@
 const { gulp } = require('@pipflow/utils')
 
-const { pipeline } = require('../base/utils')
+const { pipeline, onDone } = require('../base/utils')
 const { createSrcOptions, plumber, putProcesses } = require('./comm')
 
 module.exports = function copyTask(options = {}, done) {
@@ -27,5 +27,5 @@ module.exports = function copyTask(options = {}, done) {
   return pipeline(
     gulp.src(input, srcOptions),
     processes
-  ).on('end', done)
+  ).on('end', onDone(done))
 }

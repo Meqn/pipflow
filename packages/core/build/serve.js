@@ -3,7 +3,7 @@ const {
   lodash: _,
   browserSync
 } = require('@pipflow/utils')
-
+const { onDone } = require('../base/utils')
 module.exports = function createServeTask(name) {
   const bs = browserSync.create(name)
   
@@ -23,7 +23,7 @@ module.exports = function createServeTask(name) {
       }
       serveConfig.ui.port = parseInt(serveConfig.port, 10) + 1
     }
-    return bs.init(serveConfig, done)
+    return bs.init(serveConfig, onDone(done))
   }
 
   create.reload = bs.reload
