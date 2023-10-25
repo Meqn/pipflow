@@ -41,7 +41,8 @@ function createSrcOptions({ name, base }) {
  * @returns 
  */
 function getCommonPath(urls, base) {
-  const fragments = urls.map(p => p.split('/')).map(p => {
+  const fragments = urls.map(p => {
+    p = p.split('/').filter(v => v && v !== '.')
     if (p[p.length - 1].includes('.')) {
       return p.slice(0, p.length - 1)
     }
