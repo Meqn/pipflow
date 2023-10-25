@@ -111,8 +111,9 @@ if (CC.tasks?.length > 0) {
       // 组合任务放在最后导出
       composeTasks.push(item)
     } else {
-      // !使用async函数，防止用户自定义任务无返回值导致报错
-      task(item.name, async done => {
+      //! 1. 使用async函数，防止用户自定义任务无返回值导致报错
+      //! 2. 如果这里使用 async 函数，任务函数必须是一个返回promise的函数
+      task(item.name, (done) => {
         return taskMap[item.type]?.(item, done)
       })
     }
