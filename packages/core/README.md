@@ -1,11 +1,14 @@
 # @pipflow/core
 
-- [pipflow Documents](https://pipflow.mengqing.org/)
+> Wrapping Gulp's build process.
 
-> Gulp-based web development workflow. It provides a series of out-of-the-box build tasks , can cover from html, css, javascript to static resources , local servers , the entire front-end project build process , greatly simplifying and optimizing the front-end project development .
+It provides a series of out-of-the-box build tasks , can cover from html, css, javascript to static resources , local servers , the entire front-end project build process , greatly simplifying and optimizing the configuration process of Gulp .
 
-基于Gulp的web开发工作流程。它提供了一系列开箱即用的构建任务,可以涵盖从 html、css、javascript 到静态资源、本地服务器的整个前端项目构建流程,极大地简化和优化了前端的项目开发。
 
+
+基于Gulp构建流程的封装。
+
+它提供了一系列开箱即用的构建任务,可以涵盖从 html、css、javascript 到静态资源、本地服务器的整个前端项目构建流程,极大地简化和优化了Gulp的配置过程。
 
 ## Install
 
@@ -25,8 +28,8 @@ const {
 
 exports.buildHtml = done => {
   return htmlTask({
-    input: 'src/**/*.{html,art,ejs}',
-    compiler: 'pug'
+    input: 'src/**/*.{html,ejs}',
+    compiler: 'ejs'
   }, done)
 }
 
@@ -46,3 +49,8 @@ exports.buildStyle = done => {
 
 // ...
 ```
+
+## Documents 📚
+
+[Read the Docs to Learn More.](https://pipflow.mengqing.org/guide/task.html)
+
