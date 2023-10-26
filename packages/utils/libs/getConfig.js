@@ -83,8 +83,6 @@ exports.getConfig = function getConfig(file) {
   const result = _.merge({}, defaultConfig, userConfig)
   const { base, alias, tasks = [], build = {}  } = result
   const { outDir, fileHash, sourcemap } = build
-  //! [minify, sourcemap, fileHash] 必须在 `build` 命令下有效
-  const isBuild = process.env.PIPFLOW_CLI_COMMAND === 'build'
 
   result.tasks = tasks.map((item, index) => {
     if (!item.type) return false
@@ -98,12 +96,7 @@ exports.getConfig = function getConfig(file) {
     if (item.base === undefined && base) {
       item.base = base
     }
-    
-    if (!isBuild) {
-      item.minify = false
-      item.fileHash = false
-      item.sourcemap = false
-    }
+
     if (item.minify === undefined) {
       item.minify = getMinify(item.type, build)
     }
