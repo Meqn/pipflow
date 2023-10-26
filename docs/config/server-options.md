@@ -2,7 +2,7 @@
 
 `pipflow` 的本地开发服务器是基于 `Browsersync` 工具, 它为开发过程提供自动化、高效的同步与调试功能。
 
-配置详情请参见 [这里](https://browsersync.io/docs/options)。
+想要了解更多配置细节，请参考 [这里](https://browsersync.io/docs/options)。
 
 
 ## server.host

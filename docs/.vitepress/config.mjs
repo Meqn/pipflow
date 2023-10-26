@@ -52,7 +52,7 @@ export default defineConfig({
             { text: '命令行界面', link: '/guide/cli' },
             { text: '静态资源处理', link: '/guide/assets' },
             { text: '构建生产版本', link: '/guide/build' },
-            { text: '环境变量与模式', link: '/guide/env-and-mode' },
+            { text: '模式与环境变量', link: '/guide/env-and-mode' },
           ]
         },
         {

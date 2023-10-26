@@ -20,10 +20,10 @@
 
 ## build.sourcemap {#build-sourcemap}
 
-- **类型：** `string`
-- **默认：** `dist`
+- **类型：** `boolean | 'inline'`
+- **默认：** `false`
 
-`build` 命令构建后是否生成 source map 文件。如果为 `true`，将会创建一个独立的 source map 文件。
+构建后是否生成 source map 文件。如果为 `true`，将会创建一个独立的 source map 文件。如果为 `'inline'`，source map 将作为一个 data URI 附加在输出文件中。
 
 
 ## build.minify {#build-minify}
