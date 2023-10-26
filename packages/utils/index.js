@@ -21,6 +21,7 @@ module.exports = {
 
 ;[
   'defaultConfig',
+  'env',
   'fileExists',
   'generateConfig',
   'getConfig',
