@@ -1,6 +1,6 @@
 const path = require('path')
 const concat = require('gulp-concat')
-const gulpif = require('gulp-if')
+// const gulpif = require('gulp-if')
 const replace = require('gulp-replace')
 const uglifyjs = require('gulp-terser')
 const sourcemaps = require('gulp-sourcemaps')
@@ -25,56 +25,59 @@ function compileScript(options = {}, done) {
   if (!options.input) {
     throw new Error('input is required')
   }
-  
-  const processes = []
-  const entries = [] //多个 gulp.src 入口
-  const jsFilter = filter('*.{js,mjs}', { restore: true })
 
   const {
     input,
     alias,
     minify: jsMinify
   } = options
-
+  
+  const processes = []
+  const jsFilter = filter('*.{js,mjs}', { restore: true })
   const srcOptions = createSrcOptions(options)
-  const basePath = getBasePath(input, options.base || '.')
-  /**
-   * 统一入口文件
-   * 1. sourcemaps.init (在合并文件之前)
-   * 2. 合并文件
-   */
-  if (_.isPlainObject(input)) {
-    Object.keys(input).forEach(name => {
-      entries.push(
-        gulp.src(input[name], { ...srcOptions, base: '.' })
-          .pipe(gulpif(options.sourcemap, sourcemaps.init({ loadMaps: true })))
-          .pipe(concat(path.join(basePath, `${name}.js`)))
-      )
-    })
-  } else {
-    entries.push(
-      gulp.src(input, srcOptions)
-        .pipe(gulpif(options.sourcemap, sourcemaps.init({ loadMaps: true })))
-    )
-  }
+  const basePath = getBasePath(input, options.base || '.') //合并文件后的基础路径
 
-  // 2. plumber错误处理
-  processes.push(plumber.handler())
+  // 统一入口方式 (input支持 `string`, `array`, `object`)
+  const entries = (
+    _.isPlainObject(input)
+      ? Object.keys(input).map(name => ({ name, file: input[name] }))
+      : [{ name: '', file: input }]
+  ).map(({ name, file }) => {
+    const baseProceses = []
 
-  // 4. 环境变量处理
-  processes.push(injectEnv())
+    // 1. plumber错误处理
+    processes.push(plumber.handler())
 
-  // 5. replace 替换别名
-  if (_.isPlainObject(alias)) {
-    for (const key in alias) {
-      processes.push(replace(key, alias[key]))
+    // 2.1 sourcemaps.init
+    if (options.sourcemap) {
+      baseProceses.push(sourcemaps.init({ loadMaps: true }))
     }
-  }
 
-  // 6. 自定义处理流程
+    // 3. 环境变量处理
+    baseProceses.push(injectEnv())
+
+    // 4. replace 别名替换
+    if (_.isPlainObject(alias)) {
+      for (const key in alias) {
+        baseProceses.push(replace(key, alias[key]))
+      }
+    }
+
+    // 5. 合并文件
+    if (name) {
+      baseProceses.push(concat(path.join(basePath, `${name}.js`)))
+    }
+
+    return pipeline(
+      gulp.src(file, name ? { ...srcOptions, base: '.' } : srcOptions),
+      baseProceses
+    )
+  })
+
+  // 1. 自定义处理流程
   putProcesses(processes, options.plugins)
 
-  // 7. 压缩处理
+  // 2. 压缩处理
   if (jsMinify) {
     const minifyOptions = _.isPlainObject(jsMinify) ? jsMinify : {}
     processes.push(uglifyjs(minifyOptions))
@@ -102,12 +105,12 @@ function compileScript(options = {}, done) {
     processes.push(gulp.dest(dest))
   } */
 
-  // 9. 文件指纹处理 & sourcemaps & 输出文件
+  // 3. 文件指纹处理 & sourcemaps & 输出文件
   outputFiles(processes, {
     ...options,
     filter: jsFilter,
   })
-
+  
   return pipeline(
     merge(...entries),
     processes
@@ -115,10 +118,10 @@ function compileScript(options = {}, done) {
 
 }
 
-const compileModuleScript = require('./script.module')
+// const compileModuleScript = require('./script.module')
 module.exports = function scriptTask(options = {}, done) {
   if (options.compiler) {
-    return compileModuleScript(options, onDone(done))
+    return require('./script.module')(options, onDone(done))
   } else {
     return compileScript(options, onDone(done))
   }
