@@ -1,3 +1,12 @@
+# release
+
+
+## 版本发布
+
+1. `pnpm changeset`
+2. `pnpm changeset:version`
+3. `git push` 后触发 github release，自动发布
+
 
 ## 语义化版本
 严格遵循 [semver](https://semver.org/) 规范。
