@@ -148,9 +148,11 @@ function outputFiles(processes, {
 }) {
   // 1. 写入sourcemap文件
   if (hasSourcemap) {
-    processes.push(sourcemaps.write('.'))
+    processes.push(
+      hasSourcemap === 'inline' ? sourcemaps.write() : sourcemaps.write('.')
+    )
   }
-  
+
   if (fileHash) {
     const fileFilter = createFilter(filter)
     // 2. 是否生成 hash文件
