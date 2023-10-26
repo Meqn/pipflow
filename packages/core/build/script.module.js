@@ -9,10 +9,10 @@ const filter = require('gulp-filter')
 const {
   gulp,
   merge,
-  _
+  _,
+  getEnv
 } = require('@pipflow/utils')
 
-const { ENV } = require('../base/env')
 const { outputFiles, createSrcOptions, plumber, putProcesses, getBasePath } = require('./comm')
 const { pipeline } = require('../base/utils')
 
@@ -124,7 +124,7 @@ function getWebpackConfig({
 function getEntries(options = {}) {
   const { input, alias, minify, compiler } = options
   const webpackOptions = {
-    env: ENV.data,
+    env: getEnv('all'),
     minify,
     alias,
     compiler,

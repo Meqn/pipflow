@@ -9,10 +9,12 @@ const archiveTask = require('./build/archive')
 const userTask = require('./build/user')
 const createServeTask = require('./build/serve')
 const eslintTask = require('./build/eslint')
-const { loadEnv } = require('./base/env')
+
+const { loadEnv } = require('@pipflow/utils')
+// 引入时载入一次环境变量配置
+loadEnv()
 
 module.exports = {
-  loadEnv,
   scriptTask,
   styleTask,
   htmlTask,

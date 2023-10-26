@@ -13,7 +13,8 @@ const cssnano = require('cssnano')
 const {
   gulp,
   _,
-  merge
+  merge,
+  injectEnv
 } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
@@ -24,7 +25,6 @@ const {
   putProcesses,
   getBasePath
 } = require('./comm')
-const { ENV } = require('../base/env')
 
 module.exports = function styleTask(options = {}, done) {
   const {
@@ -66,7 +66,7 @@ module.exports = function styleTask(options = {}, done) {
     }
 
     // 3. 环境变量处理
-    baseProceses.push(ENV.inject({ isVar: false }))
+    baseProceses.push(injectEnv({ isVar: false }))
 
     // 4. replace 别名替换
     if (_.isPlainObject(alias)) {

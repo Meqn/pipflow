@@ -11,12 +11,12 @@ const artTemplate = require('gulp-art-tpl')
 const {
   gulp,
   _,
-  readJsonFilesSync
+  readJsonFilesSync,
+  injectEnv
 } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const { revDir, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
-const { ENV } = require('../base/env')
 
 /**
  * html 模板引擎
@@ -80,7 +80,7 @@ module.exports = function htmlTask(options = {}, done) {
   processes.push(plumber.handler())
 
   // 2. 环境变量处理
-  processes.push(ENV.inject({ isVar: false }))
+  processes.push(injectEnv({ isVar: false }))
 
   // 3. 模板处理
   if (compiler) {

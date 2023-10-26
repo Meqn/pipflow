@@ -8,10 +8,10 @@ const filter = require('gulp-filter')
 const {
   gulp,
   merge,
-  _
+  _,
+  injectEnv
 } = require('@pipflow/utils')
 
-const { ENV } = require('../base/env')
 const { pipeline, onDone } = require('../base/utils')
 const { outputFiles, createSrcOptions, plumber, putProcesses, getBasePath } = require('./comm')
 
@@ -25,7 +25,7 @@ function compileScript(options = {}, done) {
   if (!options.input) {
     throw new Error('input is required')
   }
-
+  
   const processes = []
   const entries = [] //多个 gulp.src 入口
   const jsFilter = filter('*.{js,mjs}', { restore: true })
@@ -62,7 +62,7 @@ function compileScript(options = {}, done) {
   processes.push(plumber.handler())
 
   // 4. 环境变量处理
-  processes.push(ENV.inject())
+  processes.push(injectEnv())
 
   // 5. replace 替换别名
   if (_.isPlainObject(alias)) {
