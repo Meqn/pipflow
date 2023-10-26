@@ -118,5 +118,5 @@ interface BuildOptions {
    * 
    * Whether to generate source map.
    */
-  sourcemap?: boolean
+  sourcemap?: boolean | 'inline'
 }

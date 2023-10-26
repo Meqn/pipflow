@@ -183,7 +183,7 @@ export interface TaskOptions<T extends TaskType, C extends CompilerType<T>> {
    * 
    * Whether to generate source map.
    */
-  sourcemap?: boolean
+  sourcemap?: boolean | 'inline'
 
   /**
    * 字符串别名替换
