@@ -1,5 +1,7 @@
 const path = require('path')
 const {
+  loadEnv,
+  setPublicEnv,
   gulp,
   _,
   minimist,
@@ -8,7 +10,6 @@ const {
 } = require('@pipflow/utils')
 const { task, watch, series, parallel } = gulp
 const {
-  loadEnv,
   htmlTask,
   scriptTask,
   styleTask,
@@ -51,13 +52,12 @@ const { outDir } = CC.build
 const publicFiles = globFiles(CC.publicDir, true) // public 目录文件
 
 // 重新加载环境变量文件
-loadEnv(CC.envDir)
-
-// 暴露内置环境变量
-process.env.MODE = process.env.PIPFLOW_MODE ?? 'development'
-process.env.PROD = process.env.NODE_ENV === 'production'
-process.env.DEV = process.env.NODE_ENV !== 'production'
-
+loadEnv({
+  path: CC.envDir,
+  mode: process.env.PIPFLOW_MODE
+}, true)
+//! 暴露内建特殊环境变量
+setPublicEnv()
 
 //== 用户任务 ==============================================
 const taskTypes = {} //所有任务类型对象, `{ type: [{name}] }`
