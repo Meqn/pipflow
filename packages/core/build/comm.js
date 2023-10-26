@@ -146,14 +146,15 @@ function outputFiles(processes, {
   filter,
   sourcemap: hasSourcemap
 }) {
+  // 1. 写入sourcemap文件
+  if (hasSourcemap) {
+    processes.push(sourcemaps.write('.'))
+  }
+  
   if (fileHash) {
     const fileFilter = createFilter(filter)
-
-    // 1. 写入sourcemap文件
-    hasSourcemap && processes.push(sourcemaps.write('.'))
-
-    // 2. 是否生成 rev文件
-    // 2.1 不生成 rev文件
+    // 2. 是否生成 hash文件
+    // 2.1 不生成 hash文件
     fileHash === '?' && processes.push(gulp.dest(dest))
     // 2.2 是否过滤指定文件
     if (fileFilter) {
@@ -163,7 +164,7 @@ function outputFiles(processes, {
     } else {
       processes.push(rev())
     }
-    // 2.3 生成 rev文件 和 sourcemap文件
+    // 2.3 生成 hash文件
     fileHash !== '?' && processes.push(gulp.dest(dest))
 
     // 3. 生成 manifest.json
