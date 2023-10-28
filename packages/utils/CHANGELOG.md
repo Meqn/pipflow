@@ -1,5 +1,12 @@
 # @pipflow/utils
 
+## 0.11.0
+
+### Minor Changes
+
+- feat: Add .env load and configuration ([2791d8a](https://github.com/Meqn/pipflow/commit/2791d8ab02c36b18a8cdaab4dbb267b705715d78))
+- perf: Remove restrictions on build configuration for non-build mode ([eb1c00f](https://github.com/Meqn/pipflow/commit/eb1c00f78438bccc22b1d6d5fffc724aee80b3bd))
+
 ## 0.10.1
 
 ### Patch Changes
