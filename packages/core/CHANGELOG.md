@@ -1,5 +1,26 @@
 # @pipflow/core
 
+## 0.11.0
+
+### Minor Changes 🚀
+
+- feat: Sourcemap supports inline ([08fe082](https://github.com/Meqn/pipflow/commit/08fe082aaa71931ecbd00cd104ac9853e9adac3f))
+- feat: Add gulp-concat plugins ([a049b92](https://github.com/Meqn/pipflow/commit/a049b926958f69c9038aa6ab7f1a4801048cad8b))
+- feat: Style-task input supports object structures ([95b2213](https://github.com/Meqn/pipflow/commit/95b221378f7801298048590eaad25a03df6ea5af))
+- fix: Fixed sourcemap and hash file generation issues ([9d5942b](https://github.com/Meqn/pipflow/commit/9d5942bad904ea492336f966234e725800b28a6e))
+- fix: Optimize & fix env loading and setting issues ([eb28be6](https://github.com/Meqn/pipflow/commit/eb28be6c239d8c6f6e5f82965c23f6aa511a4101))
+- fix: Fixed `getCommonPath()` errors ([af5341b](https://github.com/Meqn/pipflow/commit/af5341b190e6e67e619c1919b917be612bf383be))
+- fix: Fixed output path and base mismatch when merging files ([dade694](https://github.com/Meqn/pipflow/commit/dade694d46496253063394233f6ebd747672b4d9))
+- perf: Optimize js file merge processing ([9c23c72](https://github.com/Meqn/pipflow/commit/9c23c72de4b418c40afcab8dcdfcb04679411379))
+- perf: Optimize the task's done function ([823a3ee](https://github.com/Meqn/pipflow/commit/823a3eeb9e4f887a8e3dcaaad6cf7bab521e789f))
+- build: Remove gulp-env-loader dep ([7591efb](https://github.com/Meqn/pipflow/commit/7591efb74598f4afcc5653dcb757b2636525d955))
+- build: Add vinyl & gulp-if deps ([c28b45d](https://github.com/Meqn/pipflow/commit/c28b45d60370d3d7be42bd2a28f1bd839e198a09))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@0.11.0
+
 ## 0.10.0
 
 ### Minor Changes
