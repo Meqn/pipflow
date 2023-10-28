@@ -1,5 +1,21 @@
 # pipflow
 
+## 0.8.0
+
+### Minor Changes
+
+- feat: Added built-in environment variables ([d8658a9](https://github.com/Meqn/pipflow/commit/d8658a9ddcb0f60a0d0e38b5286e9eaf139d127e))
+- fix: Task execution sequence error (caused by async function) ([42f91f7](https://github.com/Meqn/pipflow/commit/42f91f7d35651b370971a9c3dd24a40c3afa4e93))
+- perf: Optimize env loading and setting ([edf2370](https://github.com/Meqn/pipflow/commit/edf2370825fc3eb04961a959daf1e8614a64db2b))
+- types: Add inline to the sourcemap of build configuration ([8992a36](https://github.com/Meqn/pipflow/commit/8992a361ea71fed9e389bcd6dc71b3fba45a8d6f))
+
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/core@0.11.0
+  - @pipflow/utils@0.11.0
+
 ## 0.7.1
 
 ### Patch Changes
