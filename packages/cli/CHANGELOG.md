@@ -1,5 +1,14 @@
 # @pipflow/cli
 
+## 0.10.3
+
+### Patch Changes
+
+- perf: Increase local template caching time limit ([e26bedb](https://github.com/Meqn/pipflow/commit/e26bedbb7895ce6b79184866b67142658369a069))
+
+- Updated dependencies []:
+  - @pipflow/utils@0.11.0
+
 ## 0.10.2
 
 ### Patch Changes
