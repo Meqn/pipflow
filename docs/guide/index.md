@@ -57,3 +57,6 @@ pipflow create my-project
 可以指定额外的命令行选项，如 `--port` 或 `--no-open`。 运行 `pipflow --help` 获得完整的命令行选项列表。
 
 查看 [命令行界面](./cli.md) 了解更多细节。
+
+
+## 配置

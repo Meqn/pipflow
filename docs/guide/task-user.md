@@ -38,15 +38,20 @@ module.exports = defineConfig({
 pipflow task --list
 ```
 
-2. 从列显中的任务选择一些任务组合为一个新的任务。
+
+2. 从列显的任务中选择一些任务组合为一个新的任务。
 ```js
+// pipflow.config.js
+
 const { defineConfig } = require('pipflow')
 module.exports = defineConfig({
+  // 其他配置项 ...
   tasks: [
+    // 其他任务 ...
     {
-      name: 'build:staging',
-      type: 'compose',
-      input: [
+      name: 'build:stag', //任务名
+      type: 'compose', //任务类型
+      input: [ //任务入口
         'del:dest',
         ['copy:public', 'build:image'],
         ['build:css', 'build:js'],
@@ -57,12 +62,35 @@ module.exports = defineConfig({
 })
 ```
 
+::: tip 入口说明
+在 `compose` 任务中，`input`入口和其他类型任务有些不同，其 `input` 值是一个二维数组 `string[][]`，数组的每一项是一个任务名。
+
+`input` 的值转换后的结果:
+```js
+series(parallel('任务名', ...), parallel(...), ...)
+```
+- 数组列表表示一个串联任务，其内部是通过 `series` 方法执行的。
+- 数组的子项表示一个并行任务，其内部是通过 `parallel` 方法执行的。
+:::
+
+
 3. 执行新任务，构建用于预发布环境的应用程序包。执行如下命令：
 ```bash
-pipflow task build:prod --mode=staging
+pipflow task build:stag --mode=staging
+```
+
+为了方便发布，你可以在 `package.json` 的 `scripts` 字段内添加 `build:stag` 脚本
+
+```json
+{
+  "scripts": {
+    "dev": "pipflow dev",
+    "build": "pipflow build",
+    "build:stag": "cross-env NODE_ENV=staging pipflow task build:stag --mode=staging" // [!code ++]
+  }
+}
 ```
 
 ::: tip
-如果当前主机的环境变量 `NODE` 未知或不等于 `!== production` ，那么请在执行的命令前加上 `cross-env NODE_ENV=production` （确保构建主机的环境变量 NODE_ENV 为 production）
+如果当前主机的环境变量 `NODE` 未知或不等于 `!== production` ，那么请在执行的命令前加上 `cross-env NODE_ENV=production` （确保构建主机的环境变量 `NODE_ENV` 为 `production`）
 :::
-
