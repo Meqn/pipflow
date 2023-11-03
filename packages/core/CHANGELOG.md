@@ -1,5 +1,17 @@
 # @pipflow/core
 
+## 0.12.0
+
+### Minor Changes 🚀
+
+- feat: CSS-Preprocessor adds additionalData configuration ([be84078](https://github.com/Meqn/pipflow/commit/be84078c26df95f1f1d4de48163cf61f0b0d737c))
+- perf: Optimize naming issues ([dd613f9](https://github.com/Meqn/pipflow/commit/dd613f94505a033bec8e3627756a0439b4e12308))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@0.11.1
+
 ## 0.11.0
 
 ### Minor Changes 🚀
