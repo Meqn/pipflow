@@ -1,5 +1,12 @@
 # @pipflow/cli
 
+## 0.10.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@0.11.1
+
 ## 0.10.3
 
 ### Patch Changes
