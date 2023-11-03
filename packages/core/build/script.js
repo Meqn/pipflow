@@ -43,34 +43,34 @@ function compileScript(options = {}, done) {
       ? Object.keys(input).map(name => ({ name, file: input[name] }))
       : [{ name: '', file: input }]
   ).map(({ name, file }) => {
-    const baseProceses = []
+    const baseProcesses = []
 
     // 1. plumber错误处理
     processes.push(plumber.handler())
 
     // 2.1 sourcemaps.init
     if (options.sourcemap) {
-      baseProceses.push(sourcemaps.init({ loadMaps: true }))
+      baseProcesses.push(sourcemaps.init({ loadMaps: true }))
     }
 
     // 3. 环境变量处理
-    baseProceses.push(injectEnv())
+    baseProcesses.push(injectEnv())
 
     // 4. replace 别名替换
     if (_.isPlainObject(alias)) {
       for (const key in alias) {
-        baseProceses.push(replace(key, alias[key]))
+        baseProcesses.push(replace(key, alias[key]))
       }
     }
 
     // 5. 合并文件
     if (name) {
-      baseProceses.push(concat(path.join(basePath, `${name}.js`)))
+      baseProcesses.push(concat(path.join(basePath, `${name}.js`)))
     }
 
     return pipeline(
       gulp.src(file, name ? { ...srcOptions, base: '.' } : srcOptions),
-      baseProceses
+      baseProcesses
     )
   })
 
