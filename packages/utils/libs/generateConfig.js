@@ -69,7 +69,7 @@ exports.generateConfig = function generateConfig({
         item.input = getInput('html', templater)
         if (templater) {
           item.compiler = templater
-          item.compileOptions = {
+          item.compilerOptions = {
             data: {
               title: 'pipflow',
               description: 'A web developer workflow based on Gulp.'

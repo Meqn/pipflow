@@ -44,7 +44,7 @@ const taskOptions = {
   dest: '', //输出目录, 同 `build.outDir`
   base: '', //公共基础路径, 同 `base`
   compiler: '', //编译器(转换器), 如果 `type=user`, 则类型可以是gulp任务函数
-  compileOptions: {}, //编译选项, 和对应的compiler有关, 比如 html => { data, ... }
+  compilerOptions: {}, //编译选项, 和对应的compiler有关, 比如 html => { data, ... }
   minify: process.env.NODE_ENV === 'production' ? true : false, //是否压缩, @继承 `build.minify`
   plugins: [], //自定义流程
   fileHash: process.env.NODE_ENV === 'production' ? true : false, //文件指纹, @type: [boolean, string], @value: `{ '?': [name]?[hash], '-': [name]-[hash] }`, @继承 `build.fileHash`
