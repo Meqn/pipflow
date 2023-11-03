@@ -5,6 +5,53 @@
 ## Plugins
 
 
+## Task Process
+
+1. 单个任务流程: 
+
+```js
+gulp.task('html', () => {
+  return pipeline(
+    gulp.src('./src/**/*.html', { base: 'src' }),
+    [
+      htmlMinify({}),
+      gulp.dest('dist')
+    ]
+  ).on('end', () => console.log('success!'))
+})
+```
+
+2. 合并入口任务流程:
+```js
+gulp.task('style', () => {
+  return pipeline(
+    merge(
+      ...[
+        pipeline(
+          gulp.src(['./src/styles/*.scss'], { base: 'src' }),
+          [
+            sourcemaps.init({ loadMaps: true }),
+            sass(),
+            concat('styles/index.css')
+          ]
+        ),
+        pipeline(
+          gulp.src('./src/styles/index.scss', { base: 'src' }),
+          [
+            sourcemaps.init({ loadMaps: true }),
+            sass()
+          ]
+        )
+      ]
+    ),
+    [
+      sourcemaps.write('.'),
+      gulp.dest('dist')
+    ]
+  )
+  .on('end', () => console.log('success!'))
+})
+```
 
 ## Questions
 
