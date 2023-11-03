@@ -116,10 +116,13 @@ importers:
         version: 6.0.0
       gulp-filter:
         specifier: ^7.0.0
-        version: 7.0.0(gulp@4.0.2)
+        version: 7.0.0
       gulp-hb:
         specifier: ^8.0.0
         version: 8.0.0
+      gulp-header:
+        specifier: ^2.0.9
+        version: 2.0.9
       gulp-if:
         specifier: ^3.0.0
         version: 3.0.0
@@ -131,7 +134,7 @@ importers:
         version: 5.0.0
       gulp-nunjucks:
         specifier: ^5.1.0
-        version: 5.1.0(gulp@4.0.2)
+        version: 5.1.0
       gulp-plumber:
         specifier: ^1.2.1
         version: 1.2.1
@@ -164,7 +167,7 @@ importers:
         version: 2.1.0
       gulp-zip:
         specifier: ^5.1.0
-        version: 5.1.0(gulp@4.0.2)
+        version: 5.1.0
       html-minifier-terser:
         specifier: ^7.2.0
         version: 7.2.0
@@ -5044,7 +5047,7 @@ packages:
       - supports-color
     dev: false
 
-  /gulp-filter@7.0.0(gulp@4.0.2):
+  /gulp-filter@7.0.0:
     resolution: {integrity: sha512-ZGWtJo0j1mHfP77tVuhyqem4MRA5NfNRjoVe6VAkLGeQQ/QGo2VsFwp7zfPTGDsd1rwzBmoDHhxpE6f5B3Zuaw==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -5053,7 +5056,6 @@ packages:
       gulp:
         optional: true
     dependencies:
-      gulp: 4.0.2
       multimatch: 5.0.0
       plugin-error: 1.0.1
       streamfilter: 3.0.0
@@ -5071,6 +5073,15 @@ packages:
       handlebars-wax: 6.1.0
       plugin-error: 1.0.1
       through2: 3.0.2
+    dev: false
+
+  /gulp-header@2.0.9:
+    resolution: {integrity: sha512-LMGiBx+qH8giwrOuuZXSGvswcIUh0OiioNkUpLhNyvaC6/Ga8X6cfAeme2L5PqsbXMhL8o8b/OmVqIQdxprhcQ==}
+    dependencies:
+      concat-with-sourcemaps: 1.1.0
+      lodash.template: 4.5.0
+      map-stream: 0.0.7
+      through2: 2.0.5
     dev: false
 
   /gulp-if@3.0.0:
@@ -5111,7 +5122,7 @@ packages:
       minimatch: 3.1.2
     dev: false
 
-  /gulp-nunjucks@5.1.0(gulp@4.0.2):
+  /gulp-nunjucks@5.1.0:
     resolution: {integrity: sha512-85prmLsQPIBXa7ROVcnivVHxil7SufT6H+rSezictJuRHmVjjPzJXr67Ajbl/Pf2bLkD+Gq3GWvLI9G0qbxT8w==}
     engines: {node: '>=8'}
     peerDependencies:
@@ -5121,7 +5132,6 @@ packages:
         optional: true
     dependencies:
       '@sindresorhus/is': 3.1.2
-      gulp: 4.0.2
       nunjucks: 3.2.4
       plugin-error: 1.0.1
       through2: 3.0.2
@@ -5246,7 +5256,7 @@ packages:
       vinyl-sourcemaps-apply: 0.2.1
     dev: false
 
-  /gulp-zip@5.1.0(gulp@4.0.2):
+  /gulp-zip@5.1.0:
     resolution: {integrity: sha512-XZr/y91IliK/SpR74g3TkZejGkGEmK7CSDjSghT1jXshgO+dFvpLIz9w9fpuwkew6i7k4F+G24TubNgq1ISzEw==}
     engines: {node: '>=8'}
     peerDependencies:
@@ -5256,7 +5266,6 @@ packages:
         optional: true
     dependencies:
       get-stream: 5.2.0
-      gulp: 4.0.2
       plugin-error: 1.0.1
       through2: 3.0.2
       vinyl: 2.2.1
@@ -6271,6 +6280,10 @@ packages:
     dependencies:
       p-locate: 5.0.0
 
+  /lodash._reinterpolate@3.0.0:
+    resolution: {integrity: sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==}
+    dev: false
+
   /lodash.assign@4.2.0:
     resolution: {integrity: sha512-hFuH8TY+Yji7Eja3mGiuAxBqLagejScbG8GbG0j6o9vzn0YL14My+ktnqtZgFTosKymC9/44wP6s7xyuLfnClw==}
     dev: false
@@ -6326,6 +6339,19 @@ packages:
   /lodash.startcase@4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
     dev: true
+
+  /lodash.template@4.5.0:
+    resolution: {integrity: sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A==}
+    dependencies:
+      lodash._reinterpolate: 3.0.0
+      lodash.templatesettings: 4.2.0
+    dev: false
+
+  /lodash.templatesettings@4.2.0:
+    resolution: {integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==}
+    dependencies:
+      lodash._reinterpolate: 3.0.0
+    dev: false
 
   /lodash.uniq@4.5.0:
     resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
@@ -6429,6 +6455,10 @@ packages:
     resolution: {integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==}
     engines: {node: '>=8'}
     dev: true
+
+  /map-stream@0.0.7:
+    resolution: {integrity: sha512-C0X0KQmGm3N2ftbTGBhSyuydQ+vV1LC3f3zPvT3RXHXNZrvfPZcoXp/N5DOa8vedX/rTMm2CjTtivFg2STJMRQ==}
+    dev: false
 
   /map-visit@1.0.0:
     resolution: {integrity: sha512-4y7uGv8bd2WdM9vpQsiQNo41Ln1NvhvDRuVt0k2JZQ+ezN2uaQes7lZeZ+QQUHOLQAtDaBJ+7wCbi+ab/KFs+w==}
