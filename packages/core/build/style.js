@@ -3,6 +3,7 @@ const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 const replace = require('gulp-replace')
+const header = require('gulp-header')
 const sass = require('gulp-sass')(require('sass'))
 const less = require('gulp-less')
 const stylus = require('gulp-stylus')
@@ -30,6 +31,7 @@ module.exports = function styleTask(options = {}, done) {
   const {
     input,
     compiler,
+    compilerOptions,
     minify: cssMinify,
     alias
   } = options
@@ -55,43 +57,48 @@ module.exports = function styleTask(options = {}, done) {
       ? Object.keys(input).map(name => ({ name, file: input[name] }))
       : [{ name: '', file: input }]
   ).map(({ name, file }) => {
-    const baseProceses = []
+    const baseProcesses = []
 
     // 1. plumber错误处理
-    baseProceses.push(plumber.handler())
+    baseProcesses.push(plumber.handler())
 
     // 2.1 sourcemaps.init
     if (options.sourcemap) {
-      baseProceses.push(sourcemaps.init({ loadMaps: true }))
+      baseProcesses.push(sourcemaps.init({ loadMaps: true }))
     }
 
     // 3. 环境变量处理
-    baseProceses.push(injectEnv({ isVar: false }))
+    baseProcesses.push(injectEnv({ isVar: false }))
+
+    // 5.1 插入 css.preprocessor 的 additionalData
+    if (compilerOptions?.additionalData) {
+      baseProcesses.push(header(compilerOptions.additionalData))
+    }
 
     // 4. replace 别名替换
     if (_.isPlainObject(alias)) {
       for (const key in alias) {
-        baseProceses.push(replace(key, alias[key]))
+        baseProcesses.push(replace(key, alias[key]))
       }
     }
 
-    // 5. CSS预处理器
+    // 5.2 CSS预处理器
     if (compiler === 'sass' || compiler === 'scss') {
-      baseProceses.push(sass().on('error', sass.logError))
+      baseProcesses.push(sass(compilerOptions?.preprocessorOptions || {}).on('error', sass.logError))
     } else if (compiler === 'less') {
-      baseProceses.push(less())
+      baseProcesses.push(less(compilerOptions?.preprocessorOptions || {}))
     } else if (compiler === 'stylus') {
-      baseProceses.push(stylus())
+      baseProcesses.push(stylus(compilerOptions?.preprocessorOptions || {}))
     }
 
     // 6. 合并文件
     if (name) {
-      baseProceses.push(concat(path.join(basePath, `${name}.css`)))
+      baseProcesses.push(concat(path.join(basePath, `${name}.css`)))
     }
 
     return pipeline(
       gulp.src(file, name ? { ...srcOptions, base: '.' } : srcOptions),
-      baseProceses
+      baseProcesses
     )
   })
 

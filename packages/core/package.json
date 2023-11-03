@@ -52,6 +52,7 @@
     "gulp-eslint": "^6.0.0",
     "gulp-filter": "^7.0.0",
     "gulp-hb": "^8.0.0",
+    "gulp-header": "^2.0.9",
     "gulp-if": "^3.0.0",
     "gulp-json-editor": "^2.5.6",
     "gulp-less": "^5.0.0",
