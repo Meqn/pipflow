@@ -73,15 +73,15 @@ interface StylusCompilerOptions {
         [variableName: string]: any
       }
 }
+interface CssPreprocessorOptions<T extends CssCompiler> {
+  preprocessorOptions?: T extends 'less' ? LessCompilerOptions : T extends 'stylus' ? StylusCompilerOptions : SassCompilerOptions
+  additionalData?: string
+}
 type CompilerOptions<T, C> = T extends 'html'
   ? HtmlCompilerOptions
-  : C extends 'sass'
-  ? SassCompilerOptions
-  : C extends 'less'
-  ? LessCompilerOptions
-  : C extends 'stylus'
-  ? StylusCompilerOptions
-  : never
+  : C extends CssCompiler
+    ? CssPreprocessorOptions<C>
+    : never
 
 //=== task minify 配置项
 // type MinifyTaskType = 'html' | 'style' | 'script' | 'static' | 'image'
