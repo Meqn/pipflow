@@ -1,5 +1,11 @@
 # @pipflow/utils
 
+## 0.11.1
+
+### Patch Changes
+
+- perf: Optimize compilerOptions naming issues ([d64f1d2](https://github.com/Meqn/pipflow/commit/d64f1d22e84480128eca4c1831cfb37b15b24c57))
+
 ## 0.11.0
 
 ### Minor Changes
@@ -103,7 +109,7 @@
 
 ### Patch Changes
 
-- feat: add compileOptions
+- feat: add compilerOptions
 - perf: update dev-server port
 
 ## 0.2.0
