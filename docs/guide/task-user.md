@@ -86,11 +86,11 @@ pipflow task build:stag --mode=staging
   "scripts": {
     "dev": "pipflow dev",
     "build": "pipflow build",
-    "build:stag": "cross-env NODE_ENV=staging pipflow task build:stag --mode=staging" // [!code ++]
+    "build:stag": "cross-env NODE_ENV=production pipflow task build:stag --mode=staging" // [!code ++]
   }
 }
 ```
 
 ::: tip
-如果当前主机的环境变量 `NODE` 未知或不等于 `!== production` ，那么请在执行的命令前加上 `cross-env NODE_ENV=production` （确保构建主机的环境变量 `NODE_ENV` 为 `production`）
+如果当前主机的环境变量 `NODE_ENV` 未知或不为 `production` ，那么请在执行的命令前加上 `cross-env NODE_ENV=production` （确保构建主机的环境变量 `NODE_ENV` 为 `production`）
 :::

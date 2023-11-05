@@ -44,7 +44,9 @@
 
 文件转译工具。仅对任务类型为 `html`, `style`, `script` 有效。
 - 当 `type` 为 `'html'`时, `compiler` 为 HTML模板引擎；(请参见 [这里](../guide/task-html#html-templater))
+  > 内置模板引擎: `Pug`, `EJS`, `Handlebars`, `Nunjucks`, `art-template`
 - 当 `type` 为 `'style'`时, `compiler` 为 CSS预处理器。(请参见 [这里](../guide/task-style#css-preprocessor))
+  > 支持的 CSS 预处理器: `sass`, `less`, `stylus`
 - 当 `type` 为 `'script'`时, `compiler` 为 `babel`。
 
 
@@ -55,6 +57,86 @@
 
 - HTML模板引擎 配置项，请参见 [这里](../guide/task-html#configuration)
 - CSS预处理器 配置项，请参见 [这里](../guide/task-style#configuration)
+
+### HTML模板引擎
+
+当转译器compiler 为 HTML模板引擎时，其值为传递给 HTML 模板引擎的选项。
+
+```ts
+interface CompilerOptions {
+  // 渲染时的数据
+  data: {
+    [key: string]: any
+  },
+  // 其他编译选项
+  [key: string]: any
+}
+```
+
+每一个HTML模板引擎选项都包含 `data` 属性，用于渲染时所需的数据。
+
+示例：
+```js
+{
+  compiler: 'pug',
+  compilerOptions: {
+    data: {
+      title: 'Piflow',
+      description: 'A gulp-based front-end development workflow.'
+    },
+    strict: true,
+    delimiter: '%',
+    // ...
+  }
+}
+```
+
+### CSS预处理器
+
+当转译器compiler 为 CSS预处理器时，其值为传递给 CSS 预处理器的选项。
+
+```ts
+interface CompilerOptions {
+  // 注入的额外代码
+  additionalData: String,
+  // 预处理器特有的选项
+  preprocessorOptions: {
+    [key: string]: any
+  }
+}
+```
+
+每个预处理器支持的选项可以在它们各自的文档中找到：
+- `sass/scss` : [选项]()
+- `less` : [选项]()
+- `stylus` : [选项]()
+
+
+示例：
+```js
+// pipflow.config.js
+
+module.exports = {
+  tasks: [
+    {
+      type: 'style',
+      compiler: 'sass',
+      compilerOptions: {
+        // 注入的额外代码
+        additionalData: `@import './comm/variables';\n$--primary-color: blue;`,
+        // 预处理器特有的选项
+        preprocessorOptions: {
+          // ...
+        }
+      }
+    }
+  ]
+}
+```
+
+::: tip additionalData 选项
+所有预处理器选项支持 `additionalData` 选项，可以用于为每个样式内容注入额外代码。请注意，如果注入的是实际的样式而不仅仅是变量时，那么这些样式将会在最终的打包产物中重复出现。
+:::
 
 
 ## minify {#minify}
@@ -76,6 +158,7 @@
 - **默认：** `false`
 
 文件哈希和版本控制
+> 继承 `build.fileHash` 配置，请参见 [这里](./build-options#build-filehash)
 
 
 ## sourcemap {#sourcemap}
