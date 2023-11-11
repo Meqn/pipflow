@@ -13,9 +13,8 @@
 ## type
 - **类型：** `string`
 
-任务类型。
+任务类型。 查看所有任务类型 请参见 [这里](../guide/task.md#outline)
 
-内置任务类型： `'html' | 'style' | 'script' | 'static' | 'image' | 'server' | 'remove' | 'copy' | 'archive' | 'user'` 。
 
 
 ## input {#input}
@@ -43,11 +42,11 @@
 - **类型：** `string`
 
 文件转译工具。仅对任务类型为 `html`, `style`, `script` 有效。
-- 当 `type` 为 `'html'`时, `compiler` 为 HTML模板引擎；(请参见 [这里](../guide/task-html#html-templater))
+1. 当 `type` 为 `'html'`时, `compiler` 为 HTML模板引擎；(请参见 [这里](../guide/task-html#html-templater))
   > 内置模板引擎: `Pug`, `EJS`, `Handlebars`, `Nunjucks`, `art-template`
-- 当 `type` 为 `'style'`时, `compiler` 为 CSS预处理器。(请参见 [这里](../guide/task-style#css-preprocessor))
+2. 当 `type` 为 `'style'`时, `compiler` 为 CSS预处理器。(请参见 [这里](../guide/task-style#css-preprocessor))
   > 支持的 CSS 预处理器: `sass`, `less`, `stylus`
-- 当 `type` 为 `'script'`时, `compiler` 为 `babel`。
+3. 当 `type` 为 `'script'`时, `compiler` 为 `babel`。
 
 
 ## compilerOptions {#compiler-options}
@@ -55,10 +54,10 @@
 
 转译配置项。
 
-- HTML模板引擎 配置项，请参见 [这里](../guide/task-html#configuration)
-- CSS预处理器 配置项，请参见 [这里](../guide/task-style#configuration)
+1. HTML模板引擎 配置项，请参见 [这里](../guide/task-html#configuration)
+2. CSS预处理器 配置项，请参见 [这里](../guide/task-style#configuration)
 
-### HTML模板引擎
+### 1. HTML模板引擎
 
 当转译器compiler 为 HTML模板引擎时，其值为传递给 HTML 模板引擎的选项。
 
@@ -77,21 +76,26 @@ interface CompilerOptions {
 
 示例：
 ```js
-{
-  compiler: 'pug',
-  compilerOptions: {
-    data: {
-      title: 'Piflow',
-      description: 'A gulp-based front-end development workflow.'
-    },
-    strict: true,
-    delimiter: '%',
-    // ...
-  }
+// pipflow.config.js
+module.exports = {
+  tasks: [
+    {
+      compiler: 'pug',
+      compilerOptions: {
+        data: {
+          title: 'Piflow',
+          description: 'A gulp-based front-end development workflow.'
+        },
+        strict: true,
+        delimiter: '%',
+        // ...
+      }
+    }
+  ]
 }
 ```
 
-### CSS预处理器
+### 2. CSS预处理器
 
 当转译器compiler 为 CSS预处理器时，其值为传递给 CSS 预处理器的选项。
 
@@ -115,7 +119,6 @@ interface CompilerOptions {
 示例：
 ```js
 // pipflow.config.js
-
 module.exports = {
   tasks: [
     {

@@ -2,8 +2,12 @@
 
 ## 扩展任务 {#extend-task}
 
+对于已有的任务，如果不满足你的业务需求，你可以通过这个任务的 `plugins` 配置项来扩展当前任务。
+
+比如，`html` 类型的任务默认处理流程会包含 模板引擎渲染、字符串内容替换、输出压缩、.... 等流程。如果你想在 html 类型任务中增加其他处理流程,可以通过 `plugins` 配置项来扩展任务。
 
 示例：
+在默认流程之外，动态插入一段html源码
 ```js
 const { defineConfig } = require('pipflow')
 const replace = require('gulp-replace')
@@ -14,7 +18,7 @@ module.exports = defineConfig({
       type: 'html',
       input: './src/**/*.html',
       plugins: [
-        replace('@styles/', '/static/styles/')
+        // gulp-dom 插入代码
       ]
     }
   ]
@@ -23,6 +27,96 @@ module.exports = defineConfig({
 
 ## 创建新任务 {#create-task}
 
+创建一个新任务非常简单，你只需要在配置文件`pipflow.config.js`的`tasks`中增加一条任务项即可。
+
+pipflow的任务类型主要分为两大类：
+
+- 固定流程任务：内置了基础的处理流程的任务。
+- 自定义流程任务：无内置流程，处理过程完全自主控制。
+
+### 1. 固定流程任务
+当任务类型不为 `user` 时为固定流程任务。
+
+```js
+// html 其他模板引擎任务
+```
+
+### 2. 自定义流程任务
+当任务类型为 `user` 时为自定义流程任务。创建自定义流程任务的方式有两种:
+
+- `plugins` 方式
+- `compiler` 方式
+
+这两种方式除了书写方式不同之外，没有其他区别。
+
+#### 2.1 plugins 方式
+将处理流程写在 `plugins` 配置中。
+
+```js
+// pipflow.config.js
+const gulp = require('gulp')
+const concat = require('gulp-concat')
+
+module.exports = {
+  tasks: [
+    {
+      type: 'user',
+      plugins: [
+        gulp.src('./src/**/*.css', { base: './src' }),
+        concat('bundle.css'),
+        gulp.dest('./dist')
+      ]
+    }
+  ]
+}
+```
+
+或者，你可以简化成如下形式
+
+```js
+// pipflow.config.js
+const concat = require('gulp-concat')
+
+module.exports = {
+  tasks: [
+    {
+      type: 'user',
+      input: './src/**/*.css',
+      plugins: [
+        concat('bundle.css')
+      ]
+    }
+  ]
+}
+```
+
+::: tip
+你如果配置了 `input` 属性，在gulp的处理过程中会自动增加文件的输入流和输出流。你只需要在`plugins`中配置处理流程所需要的插件即可。
+:::
+
+
+#### 2.2 compiler 方式
+将 `compiler` 作为一个任务函数。它和定义一个gulp任务是一样的。
+
+```js
+// pipflow.config.js
+const gulp = require('gulp')
+const concat = require('gulp-concat')
+
+module.exports = {
+  tasks: [
+    {
+      type: 'user',
+      compiler(done) {
+        return gulp.src('./src/**/*.css', { base: './src' })
+          .pipe(concat('bundle.css'))
+          .pipe(gulp.dest('./dist'))
+          .on('end', done)
+      }
+    }
+  ]
+}
+```
 
 ## 组合任务 {#compose-task}
 
