@@ -19,6 +19,7 @@ const {
 } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
+const { sassDefaultOptions } = require('../base/defaults')
 const {
   createSrcOptions,
   outputFiles,
@@ -44,7 +45,7 @@ module.exports = function styleTask(options = {}, done) {
   const srcOptions = createSrcOptions(options)
   const basePath = getBasePath(input, options.base || '.') //合并文件后的基础路径
   const cssFilter = filter('**/*.css', { restore: true })
-  
+
   /**
    * 统一入口方式 (input支持 `string`, `array`, `object`)
    * 流程分开处理 为了解决合并文件的问题
@@ -84,7 +85,8 @@ module.exports = function styleTask(options = {}, done) {
 
     // 5.2 CSS预处理器
     if (compiler === 'sass' || compiler === 'scss') {
-      baseProcesses.push(sass(compilerOptions?.preprocessorOptions || {}).on('error', sass.logError))
+      const _sassOptions = Object.assign({}, sassDefaultOptions, compilerOptions?.preprocessorOptions)
+      baseProcesses.push(sass(_sassOptions).on('error', sass.logError))
     } else if (compiler === 'less') {
       baseProcesses.push(less(compilerOptions?.preprocessorOptions || {}))
     } else if (compiler === 'stylus') {

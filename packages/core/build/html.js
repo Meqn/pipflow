@@ -16,6 +16,7 @@ const {
 } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
+const { htmlMinifyOptions } = require('../base/defaults')
 const { revDir, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
 
 /**
@@ -110,17 +111,7 @@ module.exports = function htmlTask(options = {}, done) {
 
   // 8. 压缩处理
   if (htmlMinify) {
-    const minifyOptions = Object.assign({
-      collapseWhitespace: true, //移除多余空白
-      removeComments: true, //移除注释
-      // removeRedundantAttributes: true, //移除默认值的属性
-      removeEmptyAttributes: true, //移除空的属性
-      // removeAttributeQuotes: true, //移除属性值周围的引号，仅在可能的情况下使用
-      collapseBooleanAttributes: true, //当属性值为布尔类型时，移除属性值，仅保留属性名称
-      minifyJS: true, //使用terser来压缩内联JavaScript代码
-      minifyCSS: true //使用clean-css压缩内联CSS代码
-    }, _.isPlainObject(htmlMinify) ? htmlMinify : {})
-
+    const minifyOptions = Object.assign({}, htmlMinifyOptions, _.isPlainObject(htmlMinify) ? htmlMinify : {})
     processes.push(htmlMinifier(minifyOptions))
   }
 
