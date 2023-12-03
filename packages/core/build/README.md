@@ -139,3 +139,39 @@ if (rootOptions.productionSourceMap && sourceMap) {
 }
 ```
 
+
+# 任务流程
+```js
+gulp.task('style', () => {
+  return pipeline(
+    merge(
+      ...[
+        pipeline(
+          gulp.src(['./src/styles/*.scss'], { base: 'src' }),
+          [
+            sourcemaps.init({ loadMaps: true }),
+            sass(),
+            concat('styles/index.css')
+          ]
+        ),
+        pipeline(
+          gulp.src('./src/styles/index.scss', { base: 'src' }),
+          [
+            sourcemaps.init({ loadMaps: true }),
+            sass()
+          ]
+        )
+      ]
+    ),
+    [
+      sourcemaps.write('.'),
+      gulp.dest('dist')
+    ]
+  )
+  .on('end', () => console.log('success!'))
+})
+```
+
+
+
+
