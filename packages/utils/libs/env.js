@@ -40,7 +40,10 @@ function resetEnv(env) {
 
 /**
  * 替换文件内的环境变量
- * @param {*} options 
+ * @param {object} options 选项
+ * @param {boolean} options.hasPublic 是否包含内建的环境变量
+ * @param {object} options.env 环境变量
+ * @param {boolean} options.isVar 将环境变量替换为对应值的字符串表示 (加单引号)。默认为 true
  * @returns 
  */
 function injectEnv(options = {}) {
