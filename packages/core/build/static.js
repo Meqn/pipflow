@@ -28,8 +28,9 @@ module.exports = function staticTask(options = {}, done) {
 
   // 3. 压缩图片
   if (imageMinify) {
-    const minifyOptions = _.isPlainObject(imageMinify) ? imageMinify : {}
     const gulpImagemin = require('gulp-imagemin')
+    const minifyOptions = _.isPlainObject(imageMinify) ? imageMinify : {}
+    
     processes.push(gulpImagemin(
       minifyOptions.plugins || undefined,
       minifyOptions.options || {}
