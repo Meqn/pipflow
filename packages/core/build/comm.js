@@ -4,9 +4,9 @@ const rev = require('gulp-rev')
 const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
-const { gulp, _ } = require('@pipflow/utils')
-
 const {
+  _,
+  gulp,
   logger,
   colors,
   symbols
