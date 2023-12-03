@@ -1,3 +1,5 @@
+const path = require('path')
+const { pathToFileURL } = require('url')
 const {
   logger,
   symbols,
@@ -33,8 +35,24 @@ function onDone(done) {
   return () => {}
 }
 
+/**
+ * 从包含指定前缀的url查找 npm 包
+ * @param {string} url path
+ * @param {string} prefix 前缀
+ * @returns 
+ */
+function findUrlFromNpm(url, prefix = '~') {
+  if (url.startsWith(prefix)) {
+    return new URL(
+      pathToFileURL(path.resolve(process.cwd(), 'node_modules', url.substring(1)))
+    )
+  }
+  return url
+}
+
 module.exports = {
   pipeline,
+  findUrlFromNpm,
   onError,
   onDone
 }
