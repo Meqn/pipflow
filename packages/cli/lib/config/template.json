@@ -7,5 +7,8 @@
   "gitee": {
     "url": "https://gitee.com/mengqing/pipflow-template.git#main",
     "download": "direct:https://gitee.com/mengqing/pipflow-template.git#main"
-  }
+  },
+  "tmpdir": "/var/folders/.pipflow",
+  "version": "1.0.0",
+  "lastTime": 1699578423347
 }
