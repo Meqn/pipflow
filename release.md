@@ -1,11 +1,23 @@
-# release
+# unit test
 
+```bash
+# 测试某个包
+pnpm test core main
+
+# 自定义 Jest-cli 选项
+pnpm test -- -p core,main --coverage
+```
+
+
+
+# release
 
 ## 版本发布
 
 1. `pnpm changeset`
 2. `pnpm changeset:version`
-3. `git push` 后触发 github release，自动发布
+3. 更改`change log`后, `git add & commit`
+4. `git push` 后触发 github release，自动发布
 
 
 ## 语义化版本

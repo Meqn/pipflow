@@ -1,7 +1,8 @@
-# script 任务
+# script 任务 {#script-task}
 
+任务类型为 `script` 。
 
-## 处理流程 {#process-flow}
+## 任务流程 {#process-flow}
 
 - 环境变量处理 - 环境变量注入
 - 别名替换 - 静态替换 `alias` 对应的字符串

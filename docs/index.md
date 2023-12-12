@@ -3,7 +3,7 @@
 layout: home
 
 title: pipflow
-titleTemplate: 基于gulp的web开发工作流,内置合并、编译、打包、压缩等功能，极大简化前端开发流程
+titleTemplate: 基于gulp工作流的前端构建工具,内置合并、编译、打包、压缩等功能，极大简化前端开发流程
 
 hero:
   name: "Pipflow"

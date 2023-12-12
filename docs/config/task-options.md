@@ -111,9 +111,9 @@ interface CompilerOptions {
 ```
 
 每个预处理器支持的选项可以在它们各自的文档中找到：
-- `sass/scss` : [选项]()
-- `less` : [选项]()
-- `stylus` : [选项]()
+- `sass/scss` : [配置说明](https://www.npmjs.com/package/gulp-sass)
+- `less` : [配置说明](https://www.npmjs.com/package/gulp-less)
+- `stylus` : [配置说明](https://www.npmjs.com/package/gulp-stylus)
 
 
 示例：
@@ -184,8 +184,9 @@ module.exports = {
 
 在 `serve` 阶段是否监视文件变动并重新编译、刷新页面。
 
+支持 `'html', 'style', 'script', 'static', 'image', 'copy', 'user'` 类型任务。
 
-
+<!-- 
 ## filename {#filename}
 - **类型：** `string`
 - **默认：** `archive`
@@ -195,3 +196,4 @@ module.exports = {
 ::: tip 温馨提示
 如果需要创建压缩包，可以使用 `pipflow pack` 命令快速生成压缩包。 请参见 [[这里](../guide/cli#pipflow-pack)]。
 :::
+ -->

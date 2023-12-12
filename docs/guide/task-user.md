@@ -1,16 +1,17 @@
 # 自定义任务和流程
 
+
 ## 扩展任务 {#extend-task}
 
 对于已有的任务，如果不满足你的业务需求，你可以通过这个任务的 `plugins` 配置项来扩展当前任务。
 
-比如，`html` 类型的任务默认处理流程会包含 模板引擎渲染、字符串内容替换、输出压缩、.... 等流程。如果你想在 html 类型任务中增加其他处理流程,可以通过 `plugins` 配置项来扩展任务。
+例如，`html` 类型的任务默认处理流程包括 模板引擎渲染、字符串内容替换、资源文件指纹、输出压缩等流程。如果你想在 `html` 类型任务构建过程中增加其他处理流程,你可以这样配置：
 
-示例：
-在默认流程之外，动态插入一段html源码
+比如在默认流程之外，动态插入一段 jquery外链源码
 ```js
+// pipflow.config.js
 const { defineConfig } = require('pipflow')
-const replace = require('gulp-replace')
+const dom  = require('gulp-dom')
 
 module.exports = defineConfig({
   tasks: [
@@ -18,7 +19,12 @@ module.exports = defineConfig({
       type: 'html',
       input: './src/**/*.html',
       plugins: [
-        // gulp-dom 插入代码
+        dom(function() {
+          return this.querySelectorAll('body')[0].insertAdjacentHTML(
+            'beforeend',
+            '<script src="https://unpkg.com/jquery/dist/jquery.js"></script>'
+          )
+        })
       ]
     }
   ]
@@ -27,29 +33,49 @@ module.exports = defineConfig({
 
 ## 创建新任务 {#create-task}
 
-创建一个新任务非常简单，你只需要在配置文件`pipflow.config.js`的`tasks`中增加一条任务项即可。
+创建一个新任务非常简单，你只需要在配置文件 `pipflow.config.js` 的 `tasks` 中增加一条任务项即可。
 
-pipflow的任务类型主要分为两大类：
+`pipflow` 的任务类型主要分为两大类：
 
-- 固定流程任务：内置了基础的处理流程的任务。
+- 固定流程任务：内置了基础处理流程的任务。
 - 自定义流程任务：无内置流程，处理过程完全自主控制。
 
-### 1. 固定流程任务
+### 1. 创建固定流程任务
 当任务类型不为 `user` 时为固定流程任务。
 
+下面我们来创建一个使用 `mustache` 模板引擎(未内置) 的 `html` 类型任务。
+
 ```js
-// html 其他模板引擎任务
+// pipflow.config.js
+const { defineConfig } = require('pipflow')
+const mustache  = require('gulp-mustache')
+
+module.exports = defineConfig({
+  tasks: [
+    {
+      type: 'html',
+      input: './src/**/*.html',
+      plugins: [
+        mustache({
+          title: 'Hello, Pipflow!',
+        })
+      ]
+    }
+  ]
+})
 ```
 
-### 2. 自定义流程任务
-当任务类型为 `user` 时为自定义流程任务。创建自定义流程任务的方式有两种:
+是不是非常简单？😀 😃 😄 😁 😆
+
+### 2. 创建自定义流程任务
+当任务类型为 `user` 时为自定义流程任务。创建自定义流程任务有两种方式:
 
 - `plugins` 方式
 - `compiler` 方式
 
 这两种方式除了书写方式不同之外，没有其他区别。
 
-#### 2.1 plugins 方式
+#### 2.1 `plugins` 方式
 将处理流程写在 `plugins` 配置中。
 
 ```js
@@ -60,6 +86,7 @@ const concat = require('gulp-concat')
 module.exports = {
   tasks: [
     {
+      name: 'build:css',
       type: 'user',
       plugins: [
         gulp.src('./src/**/*.css', { base: './src' }),
@@ -71,7 +98,7 @@ module.exports = {
 }
 ```
 
-或者，你可以简化成如下形式
+或者，你可以简化为如下形式
 
 ```js
 // pipflow.config.js
@@ -91,11 +118,11 @@ module.exports = {
 ```
 
 ::: tip
-你如果配置了 `input` 属性，在gulp的处理过程中会自动增加文件的输入流和输出流。你只需要在`plugins`中配置处理流程所需要的插件即可。
+如果配置了 `input` 属性，在gulp的处理过程中会自动增加文件的输入流和输出流。你只需要在`plugins`中配置处理流程所需要的插件即可。
 :::
 
 
-#### 2.2 compiler 方式
+#### 2.2 `compiler` 方式
 将 `compiler` 作为一个任务函数。它和定义一个gulp任务是一样的。
 
 ```js
@@ -159,7 +186,7 @@ module.exports = defineConfig({
 ::: tip 入口说明
 在 `compose` 任务中，`input`入口和其他类型任务有些不同，其 `input` 值是一个二维数组 `string[][]`，数组的每一项是一个任务名。
 
-`input` 的值转换后的结果:
+下面是 `input` 的值转换后的结果:
 ```js
 series(parallel('任务名', ...), parallel(...), ...)
 ```

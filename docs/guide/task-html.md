@@ -1,6 +1,9 @@
 # HTML 任务
 
-## 处理流程 {#process-flow}
+任务类型为 `html` 。
+
+
+## 任务流程 {#process-flow}
 
 - 环境变量处理 - 环境变量在构建时会被静态替换
 - 模板渲染 - 渲染HTML模板引擎，支持 `Pug`, `EJS`, `Handlebars`, `Nunjucks`, `art-template`

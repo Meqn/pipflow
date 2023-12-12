@@ -1,9 +1,14 @@
 import { defineConfig } from 'vitepress'
 
+import { version } from '../../packages/main/package.json'
+const ogTitle = 'pipflow'
+const ogDescription = 'A web developer workflow based on Gulp. 基于gulp工作流的前端构建工具. 开箱即用,无需配置即可启动web项目的开发.'
+const ogUrl = 'https://pipflow.mengqing.org'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "pipflow",
-  description: "A web developer workflow based on Gulp. It has built-in merging, compilation, and compression features that greatly simplify front-end development.",
+  title: ogTitle,
+  description: ogDescription,
   lang: 'zh-CN',
 
   locales: {
@@ -14,14 +19,26 @@ export default defineConfig({
   lastUpdated: true,
 
   sitemap: {
-    hostname: 'https://pipflow.mengqing.org'
+    hostname: ogUrl
   },
+
+  /* prettier-ignore */
+  head: [
+    // ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    // ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
+    ['meta', { name: 'theme-color', content: '#ea4a4a' }],
+    ['meta', { name: 'og:type', content: 'website' }],
+    ['meta', { name: 'og:locale', content: 'zh-CN' }],
+    ['meta', { name: 'og:site_name', content: ogTitle }],
+    // ['meta', { name: 'og:image', content: 'https://vitepress.dev/vitepress-og.jpg' }],
+    ['meta', { name: 'og:url', content: ogUrl }],
+  ],
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
 
     editLink: {
-      pattern: 'https://github.com/meqn/pipflow-cli/edit/main/docs/:path',
+      pattern: 'https://github.com/meqn/pipflow/edit/main/docs/:path',
       text: '为此页提供修改建议'
     },
 
@@ -39,8 +56,15 @@ export default defineConfig({
     },
 
     nav: [
-      { text: '指南', link: '/guide/' },
-      { text: '配置', link: '/config/' }
+      { text: '指南', link: '/guide/', activeMatch: '/guide/' },
+      { text: '配置', link: '/config/', activeMatch: '/config/' },
+      { text: '常见问题', link: '/help', activeMatch: '/help' },
+      {
+        text: `v${version}`,
+        items: [
+          { text: 'Changelog', link: 'https://github.com/Meqn/pipflow/releases' },
+        ]
+      }
     ],
 
     sidebar: {
@@ -63,6 +87,7 @@ export default defineConfig({
             { text: 'Javascript', link: '/guide/task-script' },
             { text: 'CSS', link: '/guide/task-style' },
             { text: '静态资源', link: '/guide/task-assets' },
+            { text: 'server服务', link: '/guide/task-server' },
             { text: '自定义任务和流程', link: '/guide/task-user' },
             { text: '其他', link: '/guide/task-more' }
           ]
@@ -73,7 +98,7 @@ export default defineConfig({
         },
         {
           text: '常见问题',
-          link: '/guide/help',
+          link: '/help',
         }
       ],
       '/config/': [
