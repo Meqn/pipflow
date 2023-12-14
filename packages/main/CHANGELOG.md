@@ -1,5 +1,14 @@
 # pipflow
 
+## 0.8.2
+
+### Patch Changes 🚚
+
+- perf: Standardize createServer-function name ([30bad60](https://github.com/Meqn/pipflow/commit/30bad607d21d4c0db623b1a7dc871d928d8d8c7d))
+- Updated dependencies []:
+  - @pipflow/core@0.13.0
+  - @pipflow/utils@0.11.2
+
 ## 0.8.1
 
 ### Patch Changes
