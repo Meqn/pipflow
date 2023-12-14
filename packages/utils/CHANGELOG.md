@@ -1,5 +1,11 @@
 # @pipflow/utils
 
+## 0.11.2
+
+### Patch Changes 🚚
+
+- perf: Add code comments ([81bf132](https://github.com/Meqn/pipflow/commit/81bf132dccd75e518346bc0fea61f9cce0a10719))
+
 ## 0.11.1
 
 ### Patch Changes
