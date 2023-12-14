@@ -1,5 +1,23 @@
 # @pipflow/core
 
+## 0.13.0
+
+### Minor Changes 🚀
+
+- feat: Add findUrlFromNpm() ([3f94c98](https://github.com/Meqn/pipflow/commit/3f94c98f2a5bf919a090e2ac8a729ca0f8a618b7))
+- feat: User-task add input configuration item. ([4648990](https://github.com/Meqn/pipflow/commit/4648990a4d763e56a2a5bdcf598a3cbdb9792f34))
+- fix: Remove duplicate require ([73d8a19](https://github.com/Meqn/pipflow/commit/73d8a195602c1be9acd485bf8dabce91f88b1075))
+- perf: Add invalid parameter judgment ([2ce1640](https://github.com/Meqn/pipflow/commit/2ce1640c6dec8a5abed51ec0dd2c4c24f3eb6c74))
+- perf: Standardize createServer-function name ([9eac55e](https://github.com/Meqn/pipflow/commit/9eac55e053fe81bc50f16dedb535d586c5268613))
+- perf: Optimize package require order ([363b588](https://github.com/Meqn/pipflow/commit/363b588593e6bb0e4053113a8c4cb2013e6eada4))
+- perf: Extract default configuration & Sass default configuration ([4ac1e7a](https://github.com/Meqn/pipflow/commit/4ac1e7a3e6cabd0f5b9b7385cd932dfbc2d7b495))
+- test: Add test-cases(comm,utils) ([a4fec38](https://github.com/Meqn/pipflow/commit/a4fec38cd51cf678d24693f17c8aacf432e6c613))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@0.11.2
+
 ## 0.12.0
 
 ### Minor Changes 🚀
