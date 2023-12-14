@@ -20,7 +20,7 @@ const {
   removeTask,
   userTask,
   eslintTask,
-  createServeTask
+  createServer
 } = require('@pipflow/core')
 const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
 
@@ -88,8 +88,7 @@ const taskMap = {
     return archiveTask(options, done)
   },
   server(options, done) {
-    const serveTask = createServeTask(options.name)
-    return serveTask(options, done)
+    return createServer(options.name)(options, done)
   },
   user(options, done) {
     return userTask(options, done)
@@ -114,6 +113,14 @@ if (CC.tasks?.length > 0) {
       //! 1. 使用async函数，防止用户自定义任务无返回值导致报错
       //! 2. 如果这里使用 async 函数，任务函数必须是一个返回promise的函数
       task(item.name, (done) => {
+        if (item.type === 'server') {
+          // server任务无 task 配置项
+          const cliServe = getCliServeArgs(args)
+          return createServer(item.name)(
+            _.merge({}, CC.server, cliServe),
+            done
+          )
+        }
         return taskMap[item.type]?.(item, done)
       })
     }
@@ -137,7 +144,7 @@ if (publicFiles) {
 /**
  * 👻 本地开发服务
  */
-const devServerTask = createServeTask('pipflowDev')
+const devServerTask = createServer('pipflowDev')
 const devServerReload = devServerTask.reload
 task('devServer', done => {
   const cliServe = getCliServeArgs(args)
@@ -154,7 +161,7 @@ task('server', done => {
     server: '.',
     open: true
   }
-  createServeTask('pipflowServer')(_.merge(_defaults, cliServe), done)
+  createServer('pipflowServer')(_.merge(_defaults, cliServe), done)
 })
 
 /**
