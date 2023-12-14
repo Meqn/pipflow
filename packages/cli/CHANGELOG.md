@@ -1,5 +1,14 @@
 # @pipflow/cli
 
+## 0.10.5
+
+### Patch Changes 🌟
+
+- perf: Optimize server-command args ([1225166](https://github.com/Meqn/pipflow/commit/12251661c4c70dd46d400451d228159f9b4b6668))
+- perf: Improve template.json configuration ([97f0487](https://github.com/Meqn/pipflow/commit/97f048790dc3cca6723c44209e99b1a5286431a0))
+- Updated dependencies []:
+  - @pipflow/utils@0.11.2
+
 ## 0.10.4
 
 ### Patch Changes
