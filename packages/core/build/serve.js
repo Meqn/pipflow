@@ -4,7 +4,7 @@ const {
   browserSync
 } = require('@pipflow/utils')
 const { onDone } = require('../base/utils')
-module.exports = function createServeTask(name) {
+module.exports = function createServer(name) {
   const bs = browserSync.create(name)
   
   /**

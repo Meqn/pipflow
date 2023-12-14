@@ -7,7 +7,7 @@ const removeTask = require('./build/remove')
 const copyTask = require('./build/copy')
 const archiveTask = require('./build/archive')
 const userTask = require('./build/user')
-const createServeTask = require('./build/serve')
+const createServer = require('./build/serve')
 const eslintTask = require('./build/eslint')
 
 const { loadEnv } = require('@pipflow/utils')
@@ -24,6 +24,6 @@ module.exports = {
   archiveTask,
   removeTask,
   userTask,
-  createServeTask,
+  createServer,
   eslintTask
 }
