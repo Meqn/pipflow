@@ -3,6 +3,7 @@ node_modules
 dist
 coverage
 temp
+.note
 TODOs.md
 
 docs/.vitepress/cache

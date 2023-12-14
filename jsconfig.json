@@ -13,6 +13,7 @@
       "dom.iterable",
       "scripthost"
     ],
+    "types": ["node", "jest"],
     "allowJs": true
   },
   "exclude": ["node_modules", "dist"]
