@@ -81,7 +81,7 @@ exports.getConfig = function getConfig(file) {
   }
   
   const result = _.merge({}, defaultConfig, userConfig)
-  const { base, alias, tasks = [], build = {}  } = result
+  const { base, tasks = [], build = {}  } = result
   const { outDir, fileHash, sourcemap } = build
 
   result.tasks = tasks.map((item, index) => {
@@ -106,10 +106,13 @@ exports.getConfig = function getConfig(file) {
     if (item.sourcemap === undefined) {
       item.sourcemap = sourcemap
     }
+    
+    item.alias = result.alias || {}
+    // 隐藏支持 `assetsInlineLimit` 配置项, 默认仅支持 `limit`
+    item.assetsInlineLimit = typeof build.assetsInlineLimit === 'number'
+      ? { limit: build.assetsInlineLimit }
+      : _.isPlainObject(build.assetsInlineLimit) ? build.assetsInlineLimit : {}
 
-    if (item.alias || alias) {
-      item.alias = _.merge({}, alias, item.alias)
-    }
     return item
   }).filter(item => item)
 

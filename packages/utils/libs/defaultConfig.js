@@ -1,40 +1,4 @@
 /**
- * 
- * html
- * 模板引擎：handlebars, EJS, artTemplate, Pug(Jade), Nunjucks
- * 
- * css
- * 预处理器: less, sass, Stylus, postCss
- *   ['*.{sass,scss,css}', '*.{less,css}', '*.{styl,css}']
- * CSS框架: TailwindCSS
- * 
- * js
- * webpack, babel, uglify
- *
- * 
- */
-
-/**
- * Task任务类型
- * 
- * 综合任务:
- * `serve`任务执行顺序: ['remove', ['public', 'static'], ['style', 'script'], 'html', ['server', 'watch']]
- * `build` 任务执行顺序: ['remove', ['public', 'static'], ['style', 'script'], 'html']
- */
-const taskTypes = [
-  'html',
-  'style',
-  'script',
-  'static', //静态资源 任务
-  'image',
-  'server', //本地服务器 任务
-  'copy',
-  'remove', //删除文件/目录 任务
-  'archive', //压缩包 任务
-  'user', //自定义 任务, (默认空任务)
-]
-
-/**
  * 每个task任务项 属性
  */
 const taskOptions = {
@@ -49,9 +13,8 @@ const taskOptions = {
   plugins: [], //自定义流程
   fileHash: process.env.NODE_ENV === 'production' ? true : false, //文件指纹, @type: [boolean, string], @value: `{ '?': [name]?[hash], '-': [name]-[hash] }`, @继承 `build.fileHash`
   sourcemap: false, //是否生成 sourcemap 文件, @继承 `build.sourcemap`
-  alias: {}, //替换别名, @继承 `alias`
+  // alias: {}, //替换别名, @继承 `alias`
   watch: false, //是否监听任务,
-  filename: 'archive.zip', //文件名，仅 `archive` 任务有效 (xxx.zip)
 }
 
 const defaults = Object.freeze({
@@ -62,6 +25,7 @@ const defaults = Object.freeze({
   envDir: '.', //用于加载 .env 文件的目录, 默认根目录
   build: {
     outDir: 'dist/', //指定输出路径（相对于 项目根目录).
+    assetsInlineLimit: 4096, //文件内联为 base64 编码
     fileHash: false, //文件指纹 ['[name]?[hash]', '[name]-[hash]']
     sourcemap: false, //构建后是否生成 source map 文件
     minify: false, //是否压缩
