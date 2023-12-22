@@ -56,8 +56,8 @@ function getCommonPath(urls, base) {
   if (comm.length === 0 || !base || base === '.') {
     return ''
   }
-
-  base = base.replace(/^\.?\/+/, '').replace(/\/+$/, '')
+  
+  base = base.replace(/^\.?\/+/, '').replace(/\/+$/, '') // 去掉 base 开始和结束的 `/`
   const commStr = comm.join('/')
   if (commStr.includes(base)) {
     return commStr.split(base).pop().replace(/^\/+/, '')
@@ -72,6 +72,7 @@ function getBasePath(files, base) {
       return list.concat(current)
     }, [])
   } else if (typeof files === 'string') {
+    if (!files) return ''
     files = [files]
   }
   return getCommonPath(files, base)
@@ -198,6 +199,7 @@ module.exports = {
   revDir,
   outputFiles,
   createSrcOptions,
+  getCommonPath,
   getBasePath,
   plumber,
   putProcesses
