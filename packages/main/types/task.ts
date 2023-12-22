@@ -190,7 +190,7 @@ export interface TaskOptions<T extends TaskType, C extends CompilerType<T>> {
    * 
    * alias replacement.
    */
-  alias?: { [key: string]: string }
+  // alias?: { [key: string]: string }
 
   /**
    * 在 serve 阶段是否监视文件变动并重新编译、刷新页面

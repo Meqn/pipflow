@@ -72,6 +72,15 @@ interface BuildOptions {
   outDir?: string
 
   /**
+   * 资源文件内联限制 (阈值或条件)
+   * 
+   * Resource file inline limit (threshold or condition).
+   * 
+   * @default 4096
+   */
+  assetsInlineLimit?: number
+
+  /**
    * 使用文件哈希作为资源文件的版本控制
    * 
    * Use file hash as version control.
