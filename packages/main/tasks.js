@@ -171,30 +171,29 @@ task('server', done => {
 task('archive', done => {
   let input = path.resolve(outDir, '**')
   let dest = outDir
-  let filename = 'archive.zip'
-  const fileReg = /(\w+\.\w+)$/
+  const fileRegex = /(\w+\.\w+)$/
 
   if (args.input) {
     //如果 input 是以 `xx.xx` 结尾，则认为是 文件，否则为 目录
     input = args.input.split(',').map(item => {
-      if (fileReg.test(item)) return item
+      if (fileRegex.test(item)) return item
       return path.resolve(item, '**')
     })
   }
 
   if (args.dest) {
-    //如果 dest 是以 `.zip` 结尾，则认为是 `输出目录 + 文件名`，否则为 `输出目录`
-    dest = args.dest
-    if (dest.endsWith('.zip')) {
-      filename = dest.split('/').pop()
-      dest = path.resolve(dest.replace(filename, '')) //当 `gulp.dest('')` 时会报错
+    const _reg = /^\.\//
+    const argsDest = args.dest.replace(_reg, '') //过滤开头的 `./`
+    if (argsDest.startsWith(outDir.replace(_reg, ''))) {
+      dest = args.dest
+    } else {
+      dest = path.join(outDir, args.dest)
     }
   }
 
   return archiveTask({
     input,
-    dest,
-    filename
+    dest
   }, done)
 })
 
