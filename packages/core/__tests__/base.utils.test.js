@@ -1,5 +1,5 @@
 const stream = require('stream')
-const { Readable, Writable } = require('stream');
+const { Readable } = require('stream');
 const logModule = require('@pipflow/utils')
 const { pipeline, findUrlFromNpm, onError, onDone } = require('../base/utils')
 
