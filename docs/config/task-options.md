@@ -171,13 +171,13 @@ module.exports = {
 是否生成 source map 文件。
 > 继承 `build.sourcemap` 配置，请参见 [这里](./build-options#build-sourcemap)
 
-
+<!-- 
 ## alias {#alias}
 - **类型：** `{ [key: string]: string }`
 
 别名替换，会合并全局 `alias` 配置。
 > 继承 全局 `alias` 配置，请参见 [这里](./shared-options#alias)
-
+ -->
 ## watch {#watch}
 - **类型：** `boolean`
 - **默认：** `false`

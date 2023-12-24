@@ -8,6 +8,14 @@
 指定输出路径（相对于`项目根目录`)。
 
 
+## build.assetsInlineLimit {#build-assetsInlineLimit}
+
+- **类型：** `number`
+- **默认：** `4096` (4 KiB)
+
+小于此阈值的资源url将内联为 base64 编码，以避免额外的 http 请求。设置为 `0` 可以完全禁用此项。
+
+
 ## build.fileHash {#build-fileHash}
 
 - **类型：** `boolean | '-' | '?'`
