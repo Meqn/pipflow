@@ -29,8 +29,15 @@ jobs:
           cache: 'pnpm'
           node-version: 18
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: CI
+        run: |
+          pnpm install --no-frozen-lockfile
+          pnpm test -- -p core,main --coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
