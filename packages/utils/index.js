@@ -1,6 +1,6 @@
 const lodash = require('lodash')
 const diyLog = require('diy-log')
-const { colors, symbols } = diyLog
+const { colors, symbols, timestamp } = diyLog
 
 module.exports = {
   lodash,
@@ -9,6 +9,7 @@ module.exports = {
   logger: diyLog,
   colors,
   symbols,
+  timestamp,
   findup: require('find-up'),
   fs: require('fs-extra'),
   gulp: require('gulp'),
@@ -29,6 +30,7 @@ module.exports = {
   'pkgDir',
   'readJsonFiles',
   'stringifyJS',
+  'findCommonPath'
 ].forEach(m => {
   Object.assign(module.exports, require(`./libs/${m}`))
 })
