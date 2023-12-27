@@ -111,7 +111,7 @@ exports.getConfig = function getConfig(file) {
     // 隐藏支持 `assetsInlineLimit` 配置项, 默认仅支持 `limit`
     item.assetsInlineLimit = typeof build.assetsInlineLimit === 'number'
       ? { limit: build.assetsInlineLimit }
-      : _.isPlainObject(build.assetsInlineLimit) ? build.assetsInlineLimit : {}
+      : _.isPlainObject(build.assetsInlineLimit) ? build.assetsInlineLimit : { limit: 0 }
 
     return item
   }).filter(item => item)
