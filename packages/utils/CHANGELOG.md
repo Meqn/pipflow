@@ -1,91 +1,100 @@
 # @pipflow/utils
 
+## 1.0.0
+
+### Major Changes 🎉
+
+- feat: Add findCommonPath function ([9689718](https://github.com/Meqn/pipflow/commit/9689718a76c203924266b5a4e77c9f55842fddb7))
+- feat: Add assetsInlineLimit & Remove useless props ([fa3e4d5](https://github.com/Meqn/pipflow/commit/fa3e4d55b0f36698525e8e2f1437596a68e63b4f)
+- fix: Handle invalid value for assetsInlineLimit ([53df0b9](https://github.com/Meqn/pipflow/commit/53df0b9029cdf984939c72c3f51bf794d678793a))
+- build: Update deps ([01cc19c](https://github.com/Meqn/pipflow/commit/01cc19c5b2defd44a152ab5fe3f0aee8d7a744e3))
+
 ## 0.11.2
 
-### Patch Changes 🚚
+### Patch Changes 🌟
 
 - perf: Add code comments ([81bf132](https://github.com/Meqn/pipflow/commit/81bf132dccd75e518346bc0fea61f9cce0a10719))
 
 ## 0.11.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - perf: Optimize compilerOptions naming issues ([d64f1d2](https://github.com/Meqn/pipflow/commit/d64f1d22e84480128eca4c1831cfb37b15b24c57))
 
 ## 0.11.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: Add .env load and configuration ([2791d8a](https://github.com/Meqn/pipflow/commit/2791d8ab02c36b18a8cdaab4dbb267b705715d78))
 - perf: Remove restrictions on build configuration for non-build mode ([eb1c00f](https://github.com/Meqn/pipflow/commit/eb1c00f78438bccc22b1d6d5fffc724aee80b3bd))
 
 ## 0.10.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - perf: Remove the task's module option ([31bf7e2](https://github.com/Meqn/pipflow/commit/31bf7e239df9af39adbc17cf4ad4a8dc9a43497f))
 
 ## 0.10.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: Add browser-sync package
 
 ## 0.9.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: Support no pipflow.config file
 - perf: Remove server-ui-port of defaultConfig
 
 ## 0.8.0
 
-### Patch Changes
+### Patch Changes 🌟
 
 - Add Image-task
 
 ## 0.7.2
 
-### Patch Changes
+### Patch Changes 🌟
 
 - perf: Optimize `process.env.NODE_ENV` write files
 
 ## 0.7.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - feat: Add makeJSOnlyValue function
 
 ## 0.7.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: Add write Js/Json file
 - perf: Optimize exports module
 
 ## 0.6.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: Add Image-Minify preset
 - perf: Simplified minify configuration
 
 ## 0.5.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - Add filename option for archiveTask
 
 ## 0.5.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: add minifyOptions
 - perf: update getConfig
 
 ## 0.4.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - feat: add fileExists function
 - perf: remove imageMinify (configuration item)
@@ -93,39 +102,39 @@
 
 ## 0.4.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - perf: 移除 server & archive 配置项
 -
 
 ## 0.3.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - fix: 修复无 cssPreprocessor 时 css 配置错误;
 - feat: add pkgDir & readJsonFiles Function;
 
 ## 0.3.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: Merge common-packages into utils;
 
 ## 0.2.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - feat: add compilerOptions
 - perf: update dev-server port
 
 ## 0.2.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: add generate-config
 
 ## 0.1.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - update
