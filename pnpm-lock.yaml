@@ -32,6 +32,9 @@ importers:
       rimraf:
         specifier: 5.0.1
         version: 5.0.1
+      simple-git:
+        specifier: ^3.21.0
+        version: 3.21.0
       vitepress:
         specifier: 1.0.0-rc.22
         version: 1.0.0-rc.22(@algolia/client-search@4.20.0)(@types/node@20.8.9)(search-insights@2.9.0)
@@ -120,6 +123,9 @@ importers:
       gulp-concat:
         specifier: ^2.6.1
         version: 2.6.1
+      gulp-dataurl:
+        specifier: ^1.2.1
+        version: 1.2.1
       gulp-ejs:
         specifier: ^5.1.0
         version: 5.1.0
@@ -128,7 +134,7 @@ importers:
         version: 6.0.0
       gulp-filter:
         specifier: ^7.0.0
-        version: 7.0.0(gulp@4.0.2)
+        version: 7.0.0
       gulp-hb:
         specifier: ^8.0.0
         version: 8.0.0
@@ -146,7 +152,7 @@ importers:
         version: 5.0.0
       gulp-nunjucks:
         specifier: ^5.1.0
-        version: 5.1.0(gulp@4.0.2)
+        version: 5.1.0
       gulp-plumber:
         specifier: ^1.2.1
         version: 1.2.1
@@ -179,7 +185,7 @@ importers:
         version: 2.1.0
       gulp-zip:
         specifier: ^5.1.0
-        version: 5.1.0(gulp@4.0.2)
+        version: 5.1.0
       html-minifier-terser:
         specifier: ^7.2.0
         version: 7.2.0
@@ -225,6 +231,9 @@ importers:
 
   packages/main:
     dependencies:
+      '@pipflow/cli':
+        specifier: workspace:^
+        version: link:../cli
       '@pipflow/core':
         specifier: workspace:*
         version: link:../core
@@ -256,8 +265,8 @@ importers:
         specifier: ^2.29.3
         version: 2.29.3
       diy-log:
-        specifier: ^2.4.1
-        version: 2.4.1
+        specifier: ^2.5.1
+        version: 2.5.1
       find-up:
         specifier: ^5.0.0
         version: 5.0.0
@@ -1850,6 +1859,18 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  /@kwsites/file-exists@1.1.1:
+    resolution: {integrity: sha512-m9/5YGR18lIwxSFDwfE3oA7bWuq9kdau6ugN4H2rJeyhFQZcG9AgSHkQtSD15a8WvTgfz9aikZMrKPHvbpqFiw==}
+    dependencies:
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@kwsites/promise-deferred@1.1.1:
+    resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
+    dev: true
 
   /@manypkg/find-root@1.1.0:
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -4421,8 +4442,8 @@ packages:
       path-type: 4.0.0
     dev: true
 
-  /diy-log@2.4.1:
-    resolution: {integrity: sha512-zbdWnxsiafCF46fg/oZ2YjzbZrRV+zX+fXPrQ3gFDxjpOQMacjrABuEI7adBHwqRClIJ5O+tx4oC8AlAZZzdeg==}
+  /diy-log@2.5.1:
+    resolution: {integrity: sha512-n3V4cQ7xy8Y0IVtcWf4va8yhUkwvLUeXjYIM9MfgahG6ysnuJ0ZEh3jLYAXBbElRM276XzeBLnVPojTN7Eo/NA==}
     engines: {node: '>=10'}
     dependencies:
       picocolors: 1.0.0
@@ -5173,6 +5194,11 @@ packages:
       escape-string-regexp: 1.0.5
     dev: false
 
+  /file-access@1.1.2:
+    resolution: {integrity: sha512-hwUE5SvbJ5uORbQ+YJ9QXCCVInZ9emwnm8y+xh5Q9vWUvn7DwxIg0yh2lUTE7MfDvfwXvOD6IOyy2BpRfPFI1Q==}
+    engines: {node: '>=12'}
+    dev: false
+
   /file-entry-cache@5.0.1:
     resolution: {integrity: sha512-bCg29ictuBaKUwwArK4ouCaqDgLZcysCFLmM/Yn/FDoqndh/9vNuQfXRDvTuXKLxfD/JtZQGKFT8MGcJBK644g==}
     engines: {node: '>=4'}
@@ -5817,6 +5843,16 @@ packages:
       vinyl: 2.2.1
     dev: false
 
+  /gulp-dataurl@1.2.1:
+    resolution: {integrity: sha512-Kwqq6dM4req7fOlhEX7V24VCKpkSLC7JCIjb/24BT/hO20jMHttyjjO85ji2AncV8CZPaAwZJWic0aeoyeXYCQ==}
+    dependencies:
+      '@types/node': 20.8.9
+      diy-log: 2.5.1
+      file-access: 1.1.2
+      mime: 3.0.0
+      through2: 4.0.2
+    dev: false
+
   /gulp-ejs@5.1.0:
     resolution: {integrity: sha512-Nygek+aV5+Fk8pneX8ztR6XqWuOp19AglVJ+qpIxPzyx/qsN8HHtroi3yiKhFDCDblIGhKcbmPonBEOB8NYbZQ==}
     engines: {node: '>= 6', npm: '>= 3'}
@@ -5848,7 +5884,7 @@ packages:
       - supports-color
     dev: false
 
-  /gulp-filter@7.0.0(gulp@4.0.2):
+  /gulp-filter@7.0.0:
     resolution: {integrity: sha512-ZGWtJo0j1mHfP77tVuhyqem4MRA5NfNRjoVe6VAkLGeQQ/QGo2VsFwp7zfPTGDsd1rwzBmoDHhxpE6f5B3Zuaw==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -5857,7 +5893,6 @@ packages:
       gulp:
         optional: true
     dependencies:
-      gulp: 4.0.2
       multimatch: 5.0.0
       plugin-error: 1.0.1
       streamfilter: 3.0.0
@@ -5924,7 +5959,7 @@ packages:
       minimatch: 3.1.2
     dev: false
 
-  /gulp-nunjucks@5.1.0(gulp@4.0.2):
+  /gulp-nunjucks@5.1.0:
     resolution: {integrity: sha512-85prmLsQPIBXa7ROVcnivVHxil7SufT6H+rSezictJuRHmVjjPzJXr67Ajbl/Pf2bLkD+Gq3GWvLI9G0qbxT8w==}
     engines: {node: '>=8'}
     peerDependencies:
@@ -5934,7 +5969,6 @@ packages:
         optional: true
     dependencies:
       '@sindresorhus/is': 3.1.2
-      gulp: 4.0.2
       nunjucks: 3.2.4
       plugin-error: 1.0.1
       through2: 3.0.2
@@ -6059,7 +6093,7 @@ packages:
       vinyl-sourcemaps-apply: 0.2.1
     dev: false
 
-  /gulp-zip@5.1.0(gulp@4.0.2):
+  /gulp-zip@5.1.0:
     resolution: {integrity: sha512-XZr/y91IliK/SpR74g3TkZejGkGEmK7CSDjSghT1jXshgO+dFvpLIz9w9fpuwkew6i7k4F+G24TubNgq1ISzEw==}
     engines: {node: '>=8'}
     peerDependencies:
@@ -6069,7 +6103,6 @@ packages:
         optional: true
     dependencies:
       get-stream: 5.2.0
-      gulp: 4.0.2
       plugin-error: 1.0.1
       through2: 3.0.2
       vinyl: 2.2.1
@@ -7924,6 +7957,12 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /mime@3.0.0:
+    resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
+    engines: {node: '>=10.0.0'}
+    hasBin: true
+    dev: false
 
   /mimic-fn@2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
@@ -10165,6 +10204,16 @@ packages:
   /signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  /simple-git@3.21.0:
+    resolution: {integrity: sha512-oTzw9248AF5bDTMk9MrxsRzEzivMlY+DWH0yWS4VYpMhNLhDWnN06pCtaUyPnqv/FpsdeNmRqmZugMABHRPdDA==}
+    dependencies:
+      '@kwsites/file-exists': 1.1.1
+      '@kwsites/promise-deferred': 1.1.1
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
