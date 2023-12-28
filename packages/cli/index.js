@@ -7,7 +7,7 @@ module.exports = () => {
   } = require('@pipflow/utils')
 
   const { info, warn } = require('./lib/utils/logger')
-  const { CLI_NAME, CLI_ID, CLI_BASE_ID, CLI_CORE_ID } = require('./lib/config/constants')
+  const { CLI_NAME, CLI_ID, CLI_BASE_ID, CLI_CORE_ID, CLI_UTILS_ID } = require('./lib/config/constants')
   const pkg = require('./package.json')
   const name = pkg.name
 
@@ -157,7 +157,7 @@ module.exports = () => {
           Binaries: ['Node', 'Yarn', 'npm', 'pnpm'],
           Browsers: ['Chrome', 'Firefox', 'Safari', 'Edge'],
           // npmPackages: '/**/{typescript,*@pipflow/cli*/*/}',
-          npmPackages: ['gulp', CLI_BASE_ID, CLI_ID, CLI_CORE_ID],
+          npmPackages: ['gulp', CLI_BASE_ID, CLI_ID, CLI_CORE_ID, CLI_UTILS_ID],
           npmGlobalPackages: [CLI_ID]
         },
         {
