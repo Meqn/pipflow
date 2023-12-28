@@ -1,0 +1,44 @@
+// gulpfile.js
+
+const gulp = require('gulp');
+
+function myTask() {
+  return gulp.src('src/*.js')
+    .pipe(/* some transformation */)
+    .pipe(gulp.dest('dist'));
+}
+
+gulp.task('myTask', myTask);
+
+module.exports = {
+  myTask
+};
+
+
+
+
+
+// gulpfile.test.js
+
+const { myTask } = require('./gulpfile');
+const gulp = require('gulp');
+
+describe('Gulp tasks', () => {
+  it('should transform and copy files from src to dist', () => {
+    // Set up the test environment
+    const srcPath = 'src/*.js';
+    const destPath = 'dist';
+
+    // Mock the Gulp stream
+    jest.spyOn(gulp, 'src').mockReturnValueOnce(gulp.src(srcPath));
+    jest.spyOn(gulp, 'dest').mockReturnValueOnce(gulp.dest(destPath));
+
+    // Call the Gulp task being tested
+    const result = myTask();
+
+    // Assert the expected behavior
+    expect(gulp.src).toHaveBeenCalledWith(srcPath);
+    expect(gulp.dest).toHaveBeenCalledWith(destPath);
+    expect(result).toBeInstanceOf(gulp.Gulp);
+  });
+});
