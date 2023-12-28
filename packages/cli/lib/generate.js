@@ -40,7 +40,7 @@ function renderTemplate(src, dest, data = {}) {
   return new Promise((resolve, reject) => {
     metalsmith(__dirname) //初始化Metalsmith对象
       .clean(false) //不清空dest目录
-      .source(path.resolve(src, 'template'))
+      .source(path.resolve(src, 'presets'))
       .destination(dest)
       .metadata({ ...data })
       .use(async function(files, metalsmith, next) {
