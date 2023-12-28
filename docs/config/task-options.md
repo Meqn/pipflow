@@ -41,12 +41,12 @@
 ## compiler {#compiler}
 - **类型：** `string`
 
-文件转译工具。仅对任务类型为 `html`, `style`, `script` 有效。
+文件内容转译工具。仅对任务类型为 `html`, `style`, `script` 有效。
 1. 当 `type` 为 `'html'`时, `compiler` 为 HTML模板引擎；(请参见 [这里](../guide/task-html#html-templater))
   > 内置模板引擎: `Pug`, `EJS`, `Handlebars`, `Nunjucks`, `art-template`
 2. 当 `type` 为 `'style'`时, `compiler` 为 CSS预处理器。(请参见 [这里](../guide/task-style#css-preprocessor))
   > 支持的 CSS 预处理器: `sass`, `less`, `stylus`
-3. 当 `type` 为 `'script'`时, `compiler` 为 `babel`。
+3. 当 `type` 为 `'script'`时, `compiler` 可设置为 `babel` (此时JS代码基于 `webpack` 构建)。
 
 
 ## compilerOptions {#compiler-options}
@@ -138,7 +138,7 @@ module.exports = {
 ```
 
 ::: tip additionalData 选项
-所有预处理器选项支持 `additionalData` 选项，可以用于为每个样式内容注入额外代码。请注意，如果注入的是实际的样式而不仅仅是变量时，那么这些样式将会在最终的打包产物中重复出现。
+所有预处理器配置项都支持 `additionalData` 选项，用于为每个样式文件内容注入额外代码。请注意，如果注入的是实际的样式而不仅仅是变量时，那么这些样式将会在最终的打包产物中重复出现。
 :::
 
 

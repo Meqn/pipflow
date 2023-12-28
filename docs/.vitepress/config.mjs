@@ -92,6 +92,10 @@ export default defineConfig({
             { text: '其他', link: '/guide/task-more' }
           ]
         },
+        /* {
+          text: '框架指南',
+          link: '/framework',
+        }, */
         {
           text: '配置和API参考',
           link: '/config/',

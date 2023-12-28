@@ -91,7 +91,7 @@ module.exports = {
 
 ## PostCSS 插件 {#postcss-plugins}
 
-PostCSS 内置了众多插件用来转换 CSS, 你只需在项目的 `postcss.config.js` 文件中配置即可。目前 `pipflow` 已内置浏览器兼容性前缀(`postcss-preset-env`)和压缩优化(`cssnano`)插件。
+PostCSS 内置了众多插件用来转换 CSS, 你只需在项目根目录的 `postcss.config.js` 文件中配置即可。目前 `pipflow` 已内置浏览器兼容性前缀(`postcss-preset-env`)和压缩优化(`cssnano`)插件。
 
 这里列出一些常用的插件和用法示例，更多插件请参见 [这里](https://github.com/postcss/postcss)
 
@@ -117,8 +117,7 @@ module.exports = {
 将CSS中的 `px` 单位转换为  `vw、vh` 等视口单位。 更多配置请参见 [这里](https://github.com/evrone/postcss-px-to-viewport)
 
 ```js
-const px2viewport = require('postcss-px-to-viewport')
-
+// postcss.config.js
 module.exports = {
   plugins: [
     require('postcss-px-to-viewport')({

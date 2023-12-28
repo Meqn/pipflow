@@ -34,9 +34,12 @@ pipflow task server --preview
 
 ```bash
 pipflow server
+
+# 参数说明
+pipflow server --help
 ```
 
-快速预览服务通过 `pipflow server` 命令启动，用于快速预览或演示单个 HTML 页面。
+快速预览服务通过 `pipflow server` 命令启动，用于快速预览或演示单个 HTML 页面。 更多信息请看 [这里](./cli.md#cli-server)。
 
 全局安装 `@pipflow/cli` 后，无需配置，可在任意目录启动服务器，同时也支持参数自定义，如端口、目录、是否监听文件变化、浏览器自动刷新等。
 
