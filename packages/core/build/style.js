@@ -3,6 +3,7 @@ const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 const replace = require('gulp-replace')
+const base64 = require('gulp-dataurl')
 const header = require('gulp-header')
 const sass = require('gulp-sass')(require('sass'))
 const less = require('gulp-less')
@@ -110,8 +111,13 @@ module.exports = function styleTask(options = {}, done) {
 
   // 1. 自定义处理流程
   putProcesses(processes, options.plugins)
+    
+  // 2. base64 处理
+  if (options.assetsInlineLimit?.limit > 0) {
+    processes.push(base64(options.assetsInlineLimit))
+  }
 
-  // 2. postcss //!需配置 `postcss.config.js` 和 `.browserslistrc`
+  // 3. postcss //!需配置 `postcss.config.js` 和 `.browserslistrc`
   const postcssPlugins = []
   postcssPlugins.push(postcssEnv())
   if (cssMinify) {

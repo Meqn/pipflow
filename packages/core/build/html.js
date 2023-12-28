@@ -8,6 +8,7 @@ const pugTemplate = require('gulp-pug')
 const hbTemplate = require('gulp-hb')
 const njkTemplate = require('gulp-nunjucks')
 const artTemplate = require('gulp-art-tpl')
+const base64 = require('gulp-dataurl')
 const {
   gulp,
   _,
@@ -100,6 +101,11 @@ module.exports = function htmlTask(options = {}, done) {
 
   // 5. 自定义处理流程
   putProcesses(processes, options.plugins)
+
+  // 6. base64 处理
+  if (options.assetsInlineLimit?.limit > 0) {
+    processes.push(base64(options.assetsInlineLimit))
+  }
   
   // 6. 文件指纹处理
   if (manifest) {
