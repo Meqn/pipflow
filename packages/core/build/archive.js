@@ -25,7 +25,7 @@ module.exports = function archiveTask(options = {}, done) {
   let filename = 'archive.zip'
   let outDir = dest
   // 获取压缩包名
-  const regex = /(\w+\.\w+)$/
+  const regex = /(.+\.\w+)$/
   if (regex.test(dest)) {
     const destArr = dest.split('/')
     if (destArr.length === 1) {
