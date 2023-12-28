@@ -1,5 +1,17 @@
 # @pipflow/cli
 
+## 1.0.0
+
+### Major Changes 🎉
+
+- perf: Change the preset template directory ([45aff6f](https://github.com/Meqn/pipflow/commit/45aff6f43c0225ab598701251e6146622441eb69))
+- perf: Update npm package infomation for info-cli ([e9d7e2f](https://github.com/Meqn/pipflow/commit/e9d7e2fc4e00488f1acf618e0a0cdaffc53dbcf4)
+
+### Patch Changes 🌟
+
+- Updated dependencies []:
+  - @pipflow/utils@1.0.0
+
 ## 0.10.5
 
 ### Patch Changes 🌟
@@ -11,14 +23,14 @@
 
 ## 0.10.4
 
-### Patch Changes
+### Patch Changes 🌟
 
 - Updated dependencies []:
   - @pipflow/utils@0.11.1
 
 ## 0.10.3
 
-### Patch Changes
+### Patch Changes 🌟
 
 - perf: Increase local template caching time limit ([e26bedb](https://github.com/Meqn/pipflow/commit/e26bedbb7895ce6b79184866b67142658369a069))
 
@@ -27,20 +39,20 @@
 
 ## 0.10.2
 
-### Patch Changes
+### Patch Changes 🌟
 
 - Updated dependencies []:
   - @pipflow/utils@0.10.1
 
 ## 0.10.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - fix: Update on changes to template project ([84cb103](https://github.com/Meqn/pipflow/commit/84cb1033096aad7a4ce63d9071ab4b7df4a886f1))
 
 ## 0.10.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: Optimize server command (not base-on gulp)
 - fix: Update repository url
@@ -49,32 +61,32 @@
 - perf: Optimize dev/task command arguments
 - perf: Remove `pack-cli` (use `task archive`)
 
-### Patch Changes
+### Patch Changes 🌟
 
 - Updated dependencies []:
   - @pipflow/utils@0.10.0
 
 ## 0.9.0
 
-### Minor Changes
+### Minor Changes 🚀
 
 - feat: Add server command & Optimize dev/pack/task
 - perf: Optimize debug mode
 
-### Patch Changes
+### Patch Changes 🌟
 
 - Updated dependencies []:
   - @pipflow/utils@0.9.0
 
 ## 0.8.2
 
-### Patch Changes
+### Patch Changes 🌟
 
 - feat: Change the display order of CLI
 
 ## 0.8.1
 
-### Patch Changes
+### Patch Changes 🌟
 
 - Migration from stand-alone(pipflow-cli) to internal(pipflow/cli)
 
