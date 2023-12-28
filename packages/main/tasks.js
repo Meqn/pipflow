@@ -171,7 +171,7 @@ task('server', done => {
 task('archive', done => {
   let input = path.resolve(outDir, '**')
   let dest = outDir
-  const fileRegex = /(\w+\.\w+)$/
+  const fileRegex = /(.+\.\w+)$/
 
   if (args.input) {
     //如果 input 是以 `xx.xx` 结尾，则认为是 文件，否则为 目录
@@ -180,15 +180,19 @@ task('archive', done => {
       return path.resolve(item, '**')
     })
   }
-
+  
   if (args.dest) {
+    /* 
+    // 打包到 dest 目录下
     const _reg = /^\.\//
     const argsDest = args.dest.replace(_reg, '') //过滤开头的 `./`
     if (argsDest.startsWith(outDir.replace(_reg, ''))) {
       dest = args.dest
     } else {
       dest = path.join(outDir, args.dest)
-    }
+    } */
+    
+    dest = args.dest
   }
 
   return archiveTask({
