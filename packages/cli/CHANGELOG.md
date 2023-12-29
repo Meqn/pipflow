@@ -1,5 +1,14 @@
 # @pipflow/cli
 
+## 1.0.1
+
+### Patch Changes 🌟
+
+- perf: Add waiting loading for require modules ([a5c6c7c](https://github.com/Meqn/pipflow/commit/a5c6c7c4cc6acfbbf6fec0fd9c70085e7e470ed0))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.0.1
+
 ## 1.0.0
 
 ### Major Changes 🎉
