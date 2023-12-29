@@ -4,6 +4,7 @@ const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 const replace = require('gulp-replace')
 const base64 = require('gulp-dataurl')
+const revRewrite = require('gulp-rev-rewrite')
 const header = require('gulp-header')
 const sass = require('gulp-sass')(require('sass'))
 const less = require('gulp-less')
@@ -16,12 +17,14 @@ const {
   gulp,
   _,
   merge,
-  injectEnv
+  injectEnv,
+  readJsonFilesSync
 } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const { sassDefaultOptions } = require('../base/defaults')
 const {
+  revDir,
   createSrcOptions,
   outputFiles,
   plumber,
@@ -46,6 +49,13 @@ module.exports = function styleTask(options = {}, done) {
   const srcOptions = createSrcOptions(options)
   const basePath = getBasePath(input, options.base || '.') //合并文件后的基础路径
   const cssFilter = filter('**/*.css', { restore: true })
+
+  let manifest
+  if (options.fileHash) {
+    // path.posix 统一路径, 兼容window平台
+    const json = readJsonFilesSync(path.posix.join(options.dest, revDir, '*.json'), { merge: true })
+    manifest = JSON.stringify(json)
+  }
 
   /**
    * 统一入口方式 (input支持 `string`, `array`, `object`)
@@ -115,6 +125,11 @@ module.exports = function styleTask(options = {}, done) {
   // 2. base64 处理
   if (options.assetsInlineLimit?.limit > 0) {
     processes.push(base64(options.assetsInlineLimit))
+  }
+
+  // 3. 文件指纹处理
+  if (manifest) {
+    processes.push(revRewrite({ manifest }))
   }
 
   // 3. postcss //!需配置 `postcss.config.js` 和 `.browserslistrc`
