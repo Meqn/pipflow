@@ -1,26 +1,4 @@
-const lodash = require('lodash')
-const diyLog = require('diy-log')
-const { colors, symbols, timestamp } = diyLog
-
-module.exports = {
-  lodash,
-  _: lodash,
-  diyLog,
-  logger: diyLog,
-  colors,
-  symbols,
-  timestamp,
-  findup: require('find-up'),
-  fs: require('fs-extra'),
-  gulp: require('gulp'),
-  glob: require('glob'),
-  browserSync: require('browser-sync'),
-  merge: require('merge2'),
-  importFresh: require('import-fresh'),
-  minimist: require('minimist')
-}
-
-;[
+[
   'defaultConfig',
   'env',
   'fileExists',
@@ -32,5 +10,24 @@ module.exports = {
   'stringifyJS',
   'findCommonPath'
 ].forEach(m => {
-  Object.assign(module.exports, require(`./libs/${m}`))
+  Object.assign(exports, require(`./libs/${m}`))
 })
+
+const lodash = require('lodash')
+const diyLog = require('diy-log')
+
+exports.lodash = lodash
+exports._ = lodash
+exports.diyLog = diyLog
+exports.logger = diyLog
+exports.colors = diyLog.colors
+exports.symbols = diyLog.symbols
+exports.timestamp = diyLog.timestamp
+exports.findup = require('find-up')
+exports.fs = require('fs-extra')
+exports.gulp = require('gulp')
+exports.glob = require('glob')
+exports.browserSync = require('browser-sync')
+exports.merge = require('merge2')
+exports.importFresh = require('import-fresh')
+exports.minimist = require('minimist')
