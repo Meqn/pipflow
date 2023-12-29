@@ -1,5 +1,16 @@
 # pipflow
 
+## 1.0.1
+
+### Patch Changes 🌟
+
+- fix: Filename matching problem for archive-task ([f9d0072](https://github.com/Meqn/pipflow/commit/f9d0072791729855a655b928b3bf2286ce84a73b))
+
+- Updated dependencies []:
+  - @pipflow/core@1.1.0
+  - @pipflow/cli@1.0.1
+  - @pipflow/utils@1.0.1
+
 ## 1.0.0
 
 ### Major Changes 🎉
