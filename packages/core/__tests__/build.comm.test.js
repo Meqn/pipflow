@@ -163,12 +163,12 @@ describe('outputFiles', () => {
     }
 
     outputFiles(processes, options)
-    expect(processes.length).toBe(7)
+    expect(processes.length).toBe(8)
 
     options.sourcemap = false
     processes = []
     outputFiles(processes, options)
-    expect(processes.length).toBe(6)
+    expect(processes.length).toBe(7)
   })
 
   test('should has filter or not', () => {
@@ -181,12 +181,12 @@ describe('outputFiles', () => {
     }
 
     outputFiles(processes, options)
-    expect(processes.length).toBe(7)
+    expect(processes.length).toBe(8)
 
     options.filter = null
     processes = []
     outputFiles(processes, options)
-    expect(processes.length).toBe(5)
+    expect(processes.length).toBe(6)
   })
 
   test('should without fileHash or fileHash is "?" or "-"', () => {
@@ -209,6 +209,6 @@ describe('outputFiles', () => {
     options.fileHash = '-'
     processes = []
     outputFiles(processes, options)
-    expect(processes.length).toBe(7)
+    expect(processes.length).toBe(8)
   })
 })
