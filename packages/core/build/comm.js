@@ -158,8 +158,8 @@ function outputFiles(processes, {
   if (fileHash) {
     const fileFilter = createFilter(filter)
     // 2. 是否生成 hash文件
-    // 2.1 不生成 hash文件
-    fileHash === '?' && processes.push(gulp.dest(dest))
+    // fileHash === '?' && processes.push(gulp.dest(dest))
+    processes.push(gulp.dest(dest)) //!复制原始文件，防止 hash 文件未被替换后导致找不到文件
     // 2.2 是否过滤指定文件
     if (fileFilter) {
       processes.push(fileFilter)
