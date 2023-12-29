@@ -1,5 +1,22 @@
 # @pipflow/core
 
+## 1.1.0
+
+### Minor Changes 🚀
+
+- feat: Replace resource hash files in style ([072679f](https://github.com/Meqn/pipflow/commit/072679fca1a91d4a56ccc2a9fd3832304c87d94c))
+- fix: Generate both source and hash files ([9951e43](https://github.com/Meqn/pipflow/commit/9951e438464fb9995dc3099833333199ad16f8d9))
+- fix: Fix getting archive filenames ([7103045](https://github.com/Meqn/pipflow/commit/7103045b1def14af9d02088c43381f4e7f8b24eb))
+- perf: Extract `readManifest()` & optimize `transformHash()` ([98f2b48](https://github.com/Meqn/pipflow/commit/98f2b481efa42719fb629d561dd9b53b6e32c005))
+- perf: Update html-task styles ([9b0c006](https://github.com/Meqn/pipflow/commit/9b0c00673f2234f68f06115c2418ad75ec6d18ed))
+- test: Add  transformHash & readManifest test cases ([b8806ad](https://github.com/Meqn/pipflow/commit/b8806ad9b0461e882b61e32d28839fb79cd38cf3))
+- test: Update test cases ([eb54f20](https://github.com/Meqn/pipflow/commit/eb54f20e308563f4f0390ecdb93b32092ba2fb5e))
+
+### Patch Changes 🌟
+
+- Updated dependencies []:
+  - @pipflow/utils@1.0.1
+
 ## 1.0.0
 
 ### Major Changes 🎉
