@@ -17,19 +17,18 @@ const {
   gulp,
   _,
   merge,
-  injectEnv,
-  readJsonFilesSync
+  injectEnv
 } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const { sassDefaultOptions } = require('../base/defaults')
 const {
-  revDir,
   createSrcOptions,
   outputFiles,
   plumber,
   putProcesses,
-  getBasePath
+  getBasePath,
+  readManifest
 } = require('./comm')
 
 module.exports = function styleTask(options = {}, done) {
@@ -49,13 +48,6 @@ module.exports = function styleTask(options = {}, done) {
   const srcOptions = createSrcOptions(options)
   const basePath = getBasePath(input, options.base || '.') //合并文件后的基础路径
   const cssFilter = filter('**/*.css', { restore: true })
-
-  let manifest
-  if (options.fileHash) {
-    // path.posix 统一路径, 兼容window平台
-    const json = readJsonFilesSync(path.posix.join(options.dest, revDir, '*.json'), { merge: true })
-    manifest = JSON.stringify(json)
-  }
 
   /**
    * 统一入口方式 (input支持 `string`, `array`, `object`)
@@ -128,6 +120,7 @@ module.exports = function styleTask(options = {}, done) {
   }
 
   // 3. 文件指纹处理
+  const manifest = readManifest(options)
   if (manifest) {
     processes.push(revRewrite({ manifest }))
   }

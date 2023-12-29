@@ -9,11 +9,14 @@ const {
   gulp,
   logger,
   colors,
-  symbols
+  symbols,
+  readJsonFilesSync
 } = require('@pipflow/utils')
 
 // gulp-rev `manifest.json` 保存目录
 const revDir = 'revManifest'
+
+const hashRegex = /(-\w{5,}\.\w+)$/
 
 /************************************************
  * 生成 gulp.src 选项
@@ -112,14 +115,12 @@ const plumber = (function() {
  * 转换文件 hash 方式
  */
 function transformHash(json) {
-  let newObj = {}
-  for (const key in json) {
-    if (json.hasOwnProperty(key)) {
-      let hash = path.basename(json[key]).split('-').pop().split('.')[0]
-      newObj[key] = key + '?' + hash
-    }
-  }
-  return newObj
+  return Object.keys(json).reduce((obj, key) => {
+    const fileName = path.basename(json[key])
+    const hash = hashRegex.test(fileName) ? fileName.split('-').pop().split('.')[0] : ''
+    obj[key] = key + '?' + hash
+    return obj
+  }, {})
 }
 
 // 创建文件过滤器
@@ -159,7 +160,7 @@ function outputFiles(processes, {
     const fileFilter = createFilter(filter)
     // 2. 是否生成 hash文件
     // fileHash === '?' && processes.push(gulp.dest(dest))
-    processes.push(gulp.dest(dest)) //!复制原始文件，防止 hash 文件未被替换后导致找不到文件
+    processes.push(gulp.dest(dest)) //!复制原始文件，防止 hash 文件未被替换后导致找不到文件 (容错)
     // 2.2 是否过滤指定文件
     if (fileFilter) {
       processes.push(fileFilter)
@@ -194,13 +195,31 @@ function outputFiles(processes, {
   }
 }
 
+/**
+ * 获取 manifest文件hash表, 并返回字符串形式内容
+ *
+ * @param {object} options - 选项
+ * @param {string} options.dest - 目标目录
+ * @param {boolean} options.fileHash - 该任务是否支持 fileHash
+ * @return {string|null} - hash文件表
+ */
+function readManifest(options) {
+  if (options.fileHash) {
+    // path.posix 统一路径, 兼容window平台
+    const json = readJsonFilesSync(path.posix.join(options.dest, revDir, '*.json'), { merge: true })
+    return JSON.stringify(json)
+  }
+  return null
+}
 
 module.exports = {
   revDir,
-  outputFiles,
   createSrcOptions,
   getCommonPath,
   getBasePath,
   plumber,
-  putProcesses
+  putProcesses,
+  transformHash,
+  outputFiles,
+  readManifest
 }

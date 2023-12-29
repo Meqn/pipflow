@@ -10,15 +10,14 @@ const njkTemplate = require('gulp-nunjucks')
 const artTemplate = require('gulp-art-tpl')
 const base64 = require('gulp-dataurl')
 const {
-  gulp,
   _,
-  readJsonFilesSync,
+  gulp,
   injectEnv
 } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const { htmlMinifyOptions } = require('../base/defaults')
-const { revDir, createSrcOptions, outputFiles, plumber, putProcesses } = require('./comm')
+const { createSrcOptions, outputFiles, plumber, putProcesses, readManifest } = require('./comm')
 
 /**
  * html 模板引擎
@@ -67,13 +66,6 @@ module.exports = function htmlTask(options = {}, done) {
     throw new Error('input is required')
   }
   
-  let manifest
-  if (options.fileHash) {
-    // path.posix 统一路径, 兼容window平台
-    const json = readJsonFilesSync(path.posix.join(dest, revDir, '*.json'), { merge: true })
-    manifest = JSON.stringify(json)
-  }
-  
   const processes = []
   const srcOptions = createSrcOptions(options)
 
@@ -107,6 +99,7 @@ module.exports = function htmlTask(options = {}, done) {
   }
   
   // 6. 文件指纹处理
+  const manifest = readManifest(options)
   if (manifest) {
     processes.push(revRewrite({ manifest }))
   }
