@@ -1,5 +1,11 @@
 # @pipflow/utils
 
+## 1.0.1
+
+### Patch Changes 🌟
+
+- perf: Optimize require module ([dff5449](https://github.com/Meqn/pipflow/commit/dff544922877358824c16ba88b26abd8fa60f7b4))
+
 ## 1.0.0
 
 ### Major Changes 🎉
