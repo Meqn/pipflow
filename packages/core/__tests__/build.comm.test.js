@@ -4,7 +4,9 @@ const {
   getBasePath,
   plumber,
   putProcesses,
-  outputFiles
+  outputFiles,
+  transformHash,
+  readManifest
 } = require('../build/comm')
 
 jest.mock('@pipflow/utils', () => ({
@@ -14,7 +16,8 @@ jest.mock('@pipflow/utils', () => ({
   },
   _: {
     isPlainObject: arg => Object.prototype.toString.call(arg) === '[object Object]'
-  }
+  },
+  readJsonFilesSync: jest.fn().mockReturnValueOnce({ '1.js': 'abc.js' })
 }))
 
 jest.mock('gulp-plumber')
@@ -58,7 +61,7 @@ describe('getBasePath', () => {
     expect(getBasePath('')).toBe('')
   })
 
-  test('should get base path for an array of files', () => {
+  it('should get base path for an array of files', () => {
     const files = ['src/text/file1.txt', 'src/text/file/2.txt', 'src/text/file/3.txt']
     expect(getBasePath(files, 'src')).toBe('text')
   })
@@ -95,7 +98,7 @@ describe('plumber', () => {
     jest.mocked(require('gulp-plumber')).mockImplementationOnce(() => {
       return { errorHandler }
     })
-    
+
     const result = plumber.handler()
     expect(result).toEqual({
       errorHandler: errorHandler
@@ -153,7 +156,7 @@ describe('outputFiles', () => {
     expect(processes).toEqual([undefined])
   })
 
-  test('should has sourcemap or not', () => {
+  it('should has sourcemap or not', () => {
     const options = {
       name: 'taskName',
       fileHash: true,
@@ -171,7 +174,7 @@ describe('outputFiles', () => {
     expect(processes.length).toBe(7)
   })
 
-  test('should has filter or not', () => {
+  it('should has filter or not', () => {
     const options = {
       name: 'taskName',
       fileHash: true,
@@ -189,7 +192,7 @@ describe('outputFiles', () => {
     expect(processes.length).toBe(6)
   })
 
-  test('should without fileHash or fileHash is "?" or "-"', () => {
+  it('should without fileHash or fileHash is "?" or "-"', () => {
     const options = {
       name: 'taskName',
       fileHash: false,
@@ -210,5 +213,65 @@ describe('outputFiles', () => {
     processes = []
     outputFiles(processes, options)
     expect(processes.length).toBe(8)
+  })
+})
+
+describe('transformHash', () => {
+  it('should transform hash correctly', () => {
+    const json = {
+      file1: '/path/to/file1-abc123.jpg',
+      file2: '/path/to/file2-def456.jpg',
+      file3: '/path/to/file3-ghi789.jpg'
+    }
+
+    const expected = {
+      file1: 'file1?abc123',
+      file2: 'file2?def456',
+      file3: 'file3?ghi789'
+    }
+
+    expect(transformHash(json)).toEqual(expected)
+  })
+
+  it('should handle empty input JSON', () => {
+    const json = {}
+    const expected = {}
+    expect(transformHash(json)).toEqual(expected)
+  })
+
+  it('should handle input with missing hash', () => {
+    const json = {
+      file1: '/path/to/file1.jpg',
+      file2: '/path/to/file2.jpg',
+      file3: '/path/to/file3.jpg'
+    }
+
+    const expected = {
+      file1: 'file1?',
+      file2: 'file2?',
+      file3: 'file3?'
+    }
+
+    expect(transformHash(json)).toEqual(expected)
+  })
+})
+
+describe('readManifest', () => {
+  it('should return null when options.fileHash is false', () => {
+    const options = {
+      dest: 'path/to/dest',
+      fileHash: false
+    }
+    const result = readManifest(options)
+    expect(result).toBeNull()
+  })
+
+  it('should return a stringified JSON when options.fileHash is true', () => {
+    const options = {
+      dest: 'path/to/dest',
+      fileHash: true
+    }
+    const result = readManifest(options)
+    expect(result).toEqual('{"1.js":"abc.js"}')
   })
 })
