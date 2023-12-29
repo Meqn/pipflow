@@ -60,8 +60,7 @@ module.exports = function htmlTask(options = {}, done) {
     compiler,
     compilerOptions,
     minify: htmlMinify,
-    alias,
-    fileHash
+    alias
   } = options
   
   if (!input) {
@@ -69,7 +68,7 @@ module.exports = function htmlTask(options = {}, done) {
   }
   
   let manifest
-  if (fileHash) {
+  if (options.fileHash) {
     // path.posix 统一路径, 兼容window平台
     const json = readJsonFilesSync(path.posix.join(dest, revDir, '*.json'), { merge: true })
     manifest = JSON.stringify(json)
