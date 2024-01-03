@@ -1,12 +1,12 @@
 const path = require('path')
 const {
+  gulp,
+  logger,
   loadEnv,
   setPublicEnv,
-  gulp,
-  _,
-  minimist,
   getConfig,
-  logger
+  deepMerge,
+  minimist
 } = require('@pipflow/utils')
 const { task, watch, series, parallel } = gulp
 const {
@@ -117,7 +117,7 @@ if (CC.tasks?.length > 0) {
           // server任务无 task 配置项
           const cliServe = getCliServeArgs(args)
           return createServer(item.name)(
-            _.merge({}, CC.server, cliServe),
+            deepMerge({}, CC.server, cliServe),
             done
           )
         }
@@ -148,7 +148,7 @@ const devServerTask = createServer('pipflowDev')
 const devServerReload = devServerTask.reload
 task('devServer', done => {
   const cliServe = getCliServeArgs(args)
-  devServerTask(_.merge({}, CC.server, cliServe), done)
+  devServerTask(deepMerge({}, CC.server, cliServe), done)
 })
 
 /**
@@ -161,7 +161,7 @@ task('server', done => {
     server: '.',
     open: true
   }
-  createServer('pipflowServer')(_.merge(_defaults, cliServe), done)
+  createServer('pipflowServer')(deepMerge(_defaults, cliServe), done)
 })
 
 /**
