@@ -3,8 +3,8 @@ const { render } = require('consolidate').handlebars
 // const handlebars = require('handlebars')
 const path = require('path')
 const {
-  _,
   fs,
+  deepMerge,
   generateConfig,
   readJsonFile,
   writeJsonFile,
@@ -117,7 +117,7 @@ exports.generateTemplate = async function(src, dest, options = {}) {
     const pkg = await readJsonFile(path.resolve(dest, 'package.json'))
 
     // 1. 处理 package.json 依赖
-    const newPkg = _.merge({}, pkg, {
+    const newPkg = deepMerge({}, pkg, {
       scripts: {
         lint: 'pipflow task lint'
       },

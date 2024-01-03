@@ -1,8 +1,8 @@
-const execa = require('execa')
-const path = require('path')
-const { pkgDir, minimist } = require('@pipflow/utils')
-
 module.exports = async function runTaskScript(command, args) {
+  const execa = require('execa')
+  const path = require('path')
+  const { pkgDir, minimist } = require('@pipflow/utils')
+
   const rootDir = await pkgDir(__dirname)
   const cwd = process.cwd()
   const option = minimist(args)
