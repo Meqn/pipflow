@@ -1,16 +1,14 @@
 module.exports = () => {
   //! 由于 require 模块比较耗时 (特别是 `@pipflow/utils`)，所以增加 loading效果
-  // 在执行命令前清除 loading
+  /* // 在执行命令前清除 loading
   const ora = require('ora')
-  const spinner = ora('Loading...').start()
+  const spinner = ora('Loading...').start() */
 
   const semver = require('semver') //npm的语义版本包
   const leven = require('leven') //简易的智能匹配引擎
   const chalk = require('chalk') //美化命令行输出
   const { Command } = require('commander') //命令行工具
-  const {
-    minimist  //参数处理
-  } = require('@pipflow/utils')
+  const minimist = require('minimist') //参数处理
 
   const { info, warn } = require('./lib/utils/logger')
   const { CLI_NAME, CLI_ID, CLI_BASE_ID, CLI_CORE_ID, CLI_UTILS_ID } = require('./lib/config/constants')
@@ -30,7 +28,7 @@ module.exports = () => {
   }
   checkNodeVersion(pkg.engines.node, name)
 
-  spinner.stop() //停止 loading
+  // spinner.stop() //停止 loading
 
   const program = new Command()
   program
