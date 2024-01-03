@@ -1,7 +1,7 @@
+const browserSync = require('browser-sync')
 const {
   defaultConfig,
-  lodash: _,
-  browserSync
+  deepMerge
 } = require('@pipflow/utils')
 const { onDone } = require('../base/utils')
 module.exports = function createServer(name) {
@@ -16,7 +16,7 @@ module.exports = function createServer(name) {
    * @return {Object} - Server对象
    */
   function create(option = {}, done, extend) {
-    const serveConfig = extend === null ? option : _.merge({}, defaultConfig.server, option)
+    const serveConfig = extend === null ? option : deepMerge({}, defaultConfig.server, option)
     if (serveConfig.port && !serveConfig.ui?.port) {
       if (!serveConfig.ui) {
         serveConfig.ui = {}

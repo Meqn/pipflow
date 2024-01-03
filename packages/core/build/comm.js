@@ -5,8 +5,8 @@ const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 const {
-  _,
   gulp,
+  isPlainObject,
   logger,
   colors,
   symbols,
@@ -70,7 +70,7 @@ function getCommonPath(urls, base) {
 
 // 获取公共基础路径
 function getBasePath(files, base) {
-  if (_.isPlainObject(files)) {
+  if (isPlainObject(files)) {
     files = Object.values(files).reduce((list, current) => {
       return list.concat(current)
     }, [])

@@ -1,4 +1,3 @@
-const path = require('path')
 const replace = require('gulp-replace')
 const rename = require('gulp-rename')
 const htmlMinifier = require('../plugins/htmlMinifier')
@@ -10,8 +9,8 @@ const njkTemplate = require('gulp-nunjucks')
 const artTemplate = require('gulp-art-tpl')
 const base64 = require('gulp-dataurl')
 const {
-  _,
   gulp,
+  isPlainObject,
   injectEnv
 } = require('@pipflow/utils')
 
@@ -84,7 +83,7 @@ module.exports = function htmlTask(options = {}, done) {
   }
   
   // 4. replace 替换别名 (在模板编译之前，避免路径不会被替换)
-  if (_.isPlainObject(alias)) {
+  if (isPlainObject(alias)) {
     for (const key in alias) {
       processes.push(replace(key, alias[key]))
     }
@@ -109,7 +108,7 @@ module.exports = function htmlTask(options = {}, done) {
 
   // 8. 压缩处理
   if (htmlMinify) {
-    const minifyOptions = Object.assign({}, htmlMinifyOptions, _.isPlainObject(htmlMinify) ? htmlMinify : {})
+    const minifyOptions = Object.assign({}, htmlMinifyOptions, isPlainObject(htmlMinify) ? htmlMinify : {})
     processes.push(htmlMinifier(minifyOptions))
   }
 

@@ -1,4 +1,5 @@
 const path = require('path')
+const merge = require('merge2')
 const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
@@ -15,8 +16,7 @@ const postcssEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
 const {
   gulp,
-  _,
-  merge,
+  isPlainObject,
   injectEnv
 } = require('@pipflow/utils')
 
@@ -57,7 +57,7 @@ module.exports = function styleTask(options = {}, done) {
    * 3. 合并文件
    */
   const entries = (
-    _.isPlainObject(input)
+    isPlainObject(input)
       ? Object.keys(input).map(name => ({ name, file: input[name] }))
       : [{ name: '', file: input }]
   ).map(({ name, file }) => {
@@ -80,7 +80,7 @@ module.exports = function styleTask(options = {}, done) {
     }
 
     // 4. replace 别名替换
-    if (_.isPlainObject(alias)) {
+    if (isPlainObject(alias)) {
       for (const key in alias) {
         baseProcesses.push(replace(key, alias[key]))
       }
@@ -129,7 +129,7 @@ module.exports = function styleTask(options = {}, done) {
   const postcssPlugins = []
   postcssPlugins.push(postcssEnv())
   if (cssMinify) {
-    const minifyOptions = _.isPlainObject(cssMinify) ? cssMinify : {}
+    const minifyOptions = isPlainObject(cssMinify) ? cssMinify : {}
     postcssPlugins.push(cssnano(minifyOptions))
   }
   processes.push(postcss({}, {

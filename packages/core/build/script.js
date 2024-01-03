@@ -5,10 +5,10 @@ const replace = require('gulp-replace')
 const uglifyjs = require('gulp-terser')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
+const merge = require('merge2')
 const {
   gulp,
-  merge,
-  _,
+  isPlainObject,
   injectEnv
 } = require('@pipflow/utils')
 
@@ -39,7 +39,7 @@ function compileScript(options = {}, done) {
 
   // 统一入口方式 (input支持 `string`, `array`, `object`)
   const entries = (
-    _.isPlainObject(input)
+    isPlainObject(input)
       ? Object.keys(input).map(name => ({ name, file: input[name] }))
       : [{ name: '', file: input }]
   ).map(({ name, file }) => {
@@ -57,7 +57,7 @@ function compileScript(options = {}, done) {
     baseProcesses.push(injectEnv())
 
     // 4. replace 别名替换
-    if (_.isPlainObject(alias)) {
+    if (isPlainObject(alias)) {
       for (const key in alias) {
         baseProcesses.push(replace(key, alias[key]))
       }
@@ -79,7 +79,7 @@ function compileScript(options = {}, done) {
 
   // 2. 压缩处理
   if (jsMinify) {
-    const minifyOptions = _.isPlainObject(jsMinify) ? jsMinify : {}
+    const minifyOptions = isPlainObject(jsMinify) ? jsMinify : {}
     processes.push(uglifyjs(minifyOptions))
   }
 

@@ -1,4 +1,4 @@
-const { gulp, _ } = require('@pipflow/utils')
+const { gulp, isPlainObject } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const {
@@ -29,7 +29,7 @@ module.exports = function staticTask(options = {}, done) {
   // 3. 压缩图片
   if (imageMinify) {
     const gulpImagemin = require('gulp-imagemin')
-    const minifyOptions = _.isPlainObject(imageMinify) ? imageMinify : {}
+    const minifyOptions = isPlainObject(imageMinify) ? imageMinify : {}
     
     processes.push(gulpImagemin(
       minifyOptions.plugins || undefined,

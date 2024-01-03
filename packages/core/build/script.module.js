@@ -6,10 +6,10 @@ const TerserPlugin = require('terser-webpack-plugin')
 // const strReplace = require('string-replace-loader')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
+const merge = require('merge2')
 const {
   gulp,
-  merge,
-  _,
+  isPlainObject,
   getEnv
 } = require('@pipflow/utils')
 
@@ -53,7 +53,7 @@ function getWebpackConfig({
     }
   } else {
     // 生产环境 自定义压缩
-    if (_.isPlainObject(minify)) {
+    if (isPlainObject(minify)) {
       uglifyOptions.terserOptions = {
         ...minify
       }
@@ -61,7 +61,7 @@ function getWebpackConfig({
   }
 
   // 2. 定义环境变量
-  if (_.isPlainObject(env)) {
+  if (isPlainObject(env)) {
     const defineEnv = Object.keys(env).reduce((obj, name) => {
       obj[`process.env.${name}`] = JSON.stringify(env[name])
       return obj
@@ -70,7 +70,7 @@ function getWebpackConfig({
   }
   
   // 3. 替换别名 string-replace-loader
-  if (_.isPlainObject(alias)) {
+  if (isPlainObject(alias)) {
     rules.push({
       test: /\.m?js$/,
       exclude: /(node_modules|bower_components)/,
@@ -133,7 +133,7 @@ function getEntries(options = {}) {
   const basePath = getBasePath(input, options.base || '.')
   let entries = []
   
-  if (_.isPlainObject(input)) {
+  if (isPlainObject(input)) {
     entries = Object.keys(input).map(name => {
       return gulp.src(input[name], { ...srcOptions, base: '.' })
         .pipe(plumber.handler())
