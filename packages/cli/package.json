@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A command-line tool based on Gulp-workflow that quickly build web development workflows.",
   "main": "index.js",
   "bin": {
@@ -65,6 +65,7 @@
     "leven": "^3.1.0",
     "lru-cache": "^10.0.0",
     "metalsmith": "^2.6.1",
+    "minimist": "^1.2.8",
     "node-fetch": "2",
     "ora": "5",
     "semver": "^7.5.2",

@@ -1,5 +1,15 @@
 # @pipflow/cli
 
+## 1.0.2
+
+### Patch Changes 🌟
+
+- perf: Optimize import modules ([cef6812](https://github.com/Meqn/pipflow/commit/cef68122ede3c2e014254b77516755c1a21abc55))
+- perf: Remove waiting loading ([56be7bd](https://github.com/Meqn/pipflow/commit/56be7bd95f11082e30ce66f8a81c18dac1aa8c47))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes 🌟
