@@ -14,9 +14,7 @@ jest.mock('@pipflow/utils', () => ({
     lastRun: jest.fn(),
     dest: jest.fn()
   },
-  _: {
-    isPlainObject: arg => Object.prototype.toString.call(arg) === '[object Object]'
-  },
+  isPlainObject: arg => Object.prototype.toString.call(arg) === '[object Object]',
   readJsonFilesSync: jest.fn().mockReturnValueOnce({ '1.js': 'abc.js' })
 }))
 
