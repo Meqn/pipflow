@@ -1,4 +1,4 @@
-const _ = require('lodash')
+const { deepMerge } = require('./utils')
 const { generateDefault } = require('./defaultConfig')
 const { makeJSOnlyValue } = require('./stringifyJS')
 
@@ -52,7 +52,7 @@ exports.generateConfig = function generateConfig({
   templater,
   imagemin
 } = {}) {
-  const result = _.merge({}, generateDefault, {
+  const result = deepMerge({}, generateDefault, {
     build: {
       fileHash: makeJSOnlyValue(`process.env.NODE_ENV === 'production'`),
       sourcemap: makeJSOnlyValue(`process.env.NODE_ENV === 'production'`),

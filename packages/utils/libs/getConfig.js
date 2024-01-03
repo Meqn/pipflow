@@ -1,7 +1,7 @@
 const path = require('path')
 const importFresh = require('import-fresh')
 // const { cosmiconfig } = require('cosmiconfig')
-const _ = require('lodash')
+const { deepMerge, isPlainObject } = require('./utils')
 const logger = require('diy-log')
 
 const { defaultConfig } = require('./defaultConfig')
@@ -80,7 +80,7 @@ exports.getConfig = function getConfig(file) {
     console.warn(`${colors.bgYellow(colors.black(' WARN '))} ${colors.yellow(`Cannot find module 'pipflow.config'`)}`)
   }
   
-  const result = _.merge({}, defaultConfig, userConfig)
+  const result = deepMerge({}, defaultConfig, userConfig)
   const { base, tasks = [], build = {}  } = result
   const { outDir, fileHash, sourcemap } = build
 
@@ -111,7 +111,7 @@ exports.getConfig = function getConfig(file) {
     // 隐藏支持 `assetsInlineLimit` 配置项, 默认仅支持 `limit`
     item.assetsInlineLimit = typeof build.assetsInlineLimit === 'number'
       ? { limit: build.assetsInlineLimit }
-      : _.isPlainObject(build.assetsInlineLimit) ? build.assetsInlineLimit : { limit: 0 }
+      : isPlainObject(build.assetsInlineLimit) ? build.assetsInlineLimit : { limit: 0 }
 
     return item
   }).filter(item => item)

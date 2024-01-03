@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const { glob, globSync } = require('glob')
-const _ = require('lodash')
+const { deepMerge } = require('./utils')
 
 /**
  * 异步读取Json文件,支持 `glob pattern`
@@ -20,7 +20,7 @@ async function readJsonFiles(pattern, options = {}) {
     contents.push(json)
   }
 
-  return options.merge ? _.merge({}, ...contents) : contents
+  return options.merge ? deepMerge({}, ...contents) : contents
 }
 
 /**
@@ -37,7 +37,7 @@ function readJsonFilesSync(pattern, options = {}) {
     contents.push(json)
   }
 
-  return options.merge ? _.merge({}, ...contents) : contents
+  return options.merge ? deepMerge({}, ...contents) : contents
 }
 
 module.exports = {
