@@ -1,5 +1,12 @@
 # @pipflow/utils
 
+## 1.0.2
+
+### Patch Changes 🌟
+
+- perf: Remove useless data ([97f5975](https://github.com/Meqn/pipflow/commit/97f5975302dfdf87459f80b595ca7936de8a6e2a))
+- perf: Optimize import modules ([1f5d143](https://github.com/Meqn/pipflow/commit/1f5d143c6e4f9c283cdd6fc4882b3b8c3c3559d0))
+
 ## 1.0.1
 
 ### Patch Changes 🌟
