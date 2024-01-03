@@ -1,5 +1,16 @@
 # pipflow
 
+## 1.0.2
+
+### Patch Changes 🌟
+
+- perf: Optimize import modules ([806825e](https://github.com/Meqn/pipflow/commit/806825eb82086b85cf29e55df4ab5b397a8b8685))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.0.2
+  - @pipflow/core@1.1.1
+  - @pipflow/cli@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes 🌟
