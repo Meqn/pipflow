@@ -53,6 +53,7 @@
   "dependencies": {
     "@pipflow/utils": "workspace:*",
     "boxen": "5",
+    "browser-sync": "^2.29.3",
     "chalk": "4",
     "commander": "^11.0.0",
     "consolidate": "^1.0.1",
