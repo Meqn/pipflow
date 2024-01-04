@@ -1,5 +1,11 @@
 # @pipflow/cli
 
+## 1.0.3
+
+### Patch Changes 🌟
+
+- build: Add browser-sync deps ([ba2c78b](https://github.com/Meqn/pipflow/commit/ba2c78bc1f3d40cefb412329dd8e26a2ed4bc3bd))
+
 ## 1.0.2
 
 ### Patch Changes 🌟
