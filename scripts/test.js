@@ -1,6 +1,7 @@
 const minimist = require('minimist')
 const rawArgs = process.argv.slice(2)
 const args = minimist(rawArgs)
+const packageNames = ['core', 'cli', 'main', 'utils']
 
 let regex
 if (args.p) {
@@ -8,6 +9,10 @@ if (args.p) {
   regex = `packages/(${packages})/.*\\.(test|spec)\\.js$`
   const i = rawArgs.indexOf('-p')
   rawArgs.splice(i, 2)
+} else if (args._.length && packageNames.includes(args._[0])) {
+  // 支持 `pnpm test core`
+  regex = `packages/(${args._[0]})/.*\\.(test|spec)\\.js$`
+  rawArgs.shift()
 }
 
 const jestArgs = [
