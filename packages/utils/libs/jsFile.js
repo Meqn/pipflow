@@ -37,8 +37,10 @@ exports.writeJsonFile = async (file, data, options = { spaces: 2 }) => {
  */
 exports.writeJsFile = async (file, data) => {
   if (typeof data === 'function') {
+    // 自定义输出内容
     data = data(stringifyJS)
   } else {
+    // 固定格式输出内容
     data = `module.exports = ${stringifyJS(data, null, 2)}`
   }
 
