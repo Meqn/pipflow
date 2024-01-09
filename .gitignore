@@ -6,6 +6,9 @@ temp
 .note
 TODOs.md
 
+# jest mocks
+**/*/__tests__/mocks/_*
+
 docs/.vitepress/cache
 docs/.vitepress/dist
 
