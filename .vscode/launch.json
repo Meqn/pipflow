@@ -11,7 +11,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${fileBasename}" //当前打开文件
+      "program": "${file}" //当前打开文件
     },
     {
       "type": "node",
