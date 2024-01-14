@@ -12,7 +12,7 @@ const { defaultConfig } = require('./defaultConfig')
  * @param {string|object} filePath 配置文件, 比如 `pipflow.config`, 可读取 `js|json`文件
  * @param {string} filePath.cwd 当前运行目录
  * @param {string} filePath.path 文件路径
- * @returns 
+ * @returns
  */
 function getUserConfig(filePath) {
   let fileContent
@@ -37,11 +37,11 @@ function getUserConfig(filePath) {
  * 获取压缩配置项
  * @param {string} type 任务类型
  * @param {object} options 配置项
- * @returns 
+ * @returns
  */
 function getMinify(type, options = {}) {
   const { minify, htmlMinify, jsMinify, cssMinify, imageMinify } = options
-  
+
   if (type === 'script') {
     return jsMinify ?? minify
   } else if (type === 'style') {
@@ -76,45 +76,57 @@ exports.getConfig = function getConfig(file) {
     }
   } catch (e) {
     // 支持无 `pipflow.config` 文件
-    const { colors } = logger
-    console.warn(`${colors.bgYellow(colors.black(' WARN '))} ${colors.yellow(`Cannot find module 'pipflow.config'`)}`)
+    logger.tag.warn('Configuration file "pipflow.config.js" not found!')
   }
-  
+
   const result = deepMerge({}, defaultConfig, userConfig)
-  const { base, tasks = [], build = {}  } = result
+  //如果配置文件存在 tasks, 则不合并默认tasks配置
+  const tasks = userConfig?.tasks || defaultConfig.tasks
+  const { base, build = {} } = result
   const { outDir, fileHash, sourcemap } = build
 
-  result.tasks = tasks.map((item, index) => {
-    if (!item.type) return false
-    
-    if (!item.name) {
-      item.name = `${item.type}:${index + 1}`
-    }
-    if (!item.dest) {
-      item.dest = outDir
-    }
-    if (item.base === undefined && base) {
-      item.base = base
-    }
+  result.tasks = tasks
+    .map((item, index) => {
+      if (!item.type) return false
 
-    if (item.minify === undefined) {
-      item.minify = getMinify(item.type, build)
-    }
-    if (item.fileHash === undefined) {
-      item.fileHash = fileHash
-    }
-    if (item.sourcemap === undefined) {
-      item.sourcemap = sourcemap
-    }
-    
-    item.alias = result.alias || {}
-    // 隐藏支持 `assetsInlineLimit` 配置项, 默认仅支持 `limit`
-    item.assetsInlineLimit = typeof build.assetsInlineLimit === 'number'
-      ? { limit: build.assetsInlineLimit }
-      : isPlainObject(build.assetsInlineLimit) ? build.assetsInlineLimit : { limit: 0 }
+      if (!item.name) {
+        item.name = `${item.type}:${index + 1}`
+      }
+      if (!item.dest) {
+        item.dest = outDir
+      }
+      if (item.base === undefined && base) {
+        item.base = base
+      }
 
-    return item
-  }).filter(item => item)
+      if (item.minify === undefined) {
+        item.minify = getMinify(item.type, build)
+      }
+      if (item.fileHash === undefined) {
+        item.fileHash = fileHash
+      }
+      if (item.sourcemap === undefined) {
+        item.sourcemap = sourcemap
+      }
+
+      item.alias = result.alias || {}
+      // 隐藏支持 `assetsInlineLimit` 配置项, 默认仅支持 `limit`
+      if (['html', 'script', 'style'].includes(item.type)) {
+        item.assetsInlineLimit =
+          typeof build.assetsInlineLimit === 'number'
+            ? { limit: build.assetsInlineLimit }
+            : isPlainObject(build.assetsInlineLimit)
+              ? { limit: defaultConfig.build.assetsInlineLimit, ...build.assetsInlineLimit }
+              : { limit: 0 }
+      }
+      return item
+    })
+    .filter(item => item)
 
   return result
+}
+
+exports.exportedForTesting = {
+  getUserConfig,
+  getMinify
 }

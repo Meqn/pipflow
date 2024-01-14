@@ -1,7 +1,7 @@
 /**
  * 每个task任务项 属性
  */
-const taskOptions = {
+/* const taskOptions = {
   name: 'html:1', //任务名, @规则 `[type]:[index]`
   type: 'html', //任务类型
   input: '', //输入文件
@@ -15,7 +15,7 @@ const taskOptions = {
   sourcemap: false, //是否生成 sourcemap 文件, @继承 `build.sourcemap`
   // alias: {}, //替换别名, @继承 `alias`
   watch: false, //是否监听任务,
-}
+} */
 
 const defaults = Object.freeze({
   // publicPath: '/', //部署应用包时的基本 URL
