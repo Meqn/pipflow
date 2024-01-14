@@ -1,5 +1,14 @@
 # @pipflow/utils
 
+## 1.0.3
+
+### Patch Changes 🌟
+
+- fix: Fixed configuration file merge issue ([34aa6ff](https://github.com/Meqn/pipflow/commit/34aa6ffdaa0821fa11cf09cda756af52bf84d192))
+- fix: Improve deepMerge-function ([ed31a05](https://github.com/Meqn/pipflow/commit/ed31a057ed9e45e9bae76c06d5ddc8ab7237f0d7))
+- perf: Optimize export modules ([97b3e57](https://github.com/Meqn/pipflow/commit/97b3e5787a67170058c2e653c78f083affdf85c3))
+- test: Add unit test cases ([2263996](https://github.com/Meqn/pipflow/commit/226399641e6519bee8de563cfa38240ac796fdcb))
+
 ## 1.0.2
 
 ### Patch Changes 🌟
