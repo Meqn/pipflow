@@ -1,5 +1,12 @@
 # @pipflow/core
 
+## 1.1.2
+
+### Patch Changes 🌟
+
+- Updated dependencies []:
+  - @pipflow/utils@1.0.3
+
 ## 1.1.1
 
 ### Patch Changes 🌟
