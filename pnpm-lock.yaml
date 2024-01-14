@@ -48,7 +48,7 @@ importers:
         specifier: '5'
         version: 5.0.0
       browser-sync:
-        specifier: '2'
+        specifier: ^2.29.3
         version: 2.29.3
       chalk:
         specifier: '4'
@@ -11729,7 +11729,7 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       string-width: 4.2.3
-      strip-ansi: 6.0.0
+      strip-ansi: 6.0.1
 
   /wrap-ansi@8.1.0:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
