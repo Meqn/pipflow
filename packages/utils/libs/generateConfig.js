@@ -59,6 +59,7 @@ exports.generateConfig = function generateConfig({
       minify: makeJSOnlyValue(`process.env.NODE_ENV === 'production'`),
     }
   })
+  // 关闭图片压缩 (预设不压缩图片, 则不会安装依赖包)
   if (imagemin === false) {
     result.build.imageMinify = imagemin
   }
@@ -96,4 +97,8 @@ exports.generateConfig = function generateConfig({
   })
 
   return result
+}
+
+exports.exportedForTesting = {
+  getInput
 }

@@ -8,7 +8,7 @@
     "libs"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "engines": {
     "node": "^14.13.1 || >=16.0.0"

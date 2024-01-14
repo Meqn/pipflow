@@ -52,7 +52,7 @@ function injectEnv(options = {}) {
   if (hasPublic) {
     options.env = Object.assign({}, options.env, getPublicEnv())
   }
-
+  
   if (envInject) {
     return envInject(options)
   }
@@ -102,5 +102,14 @@ module.exports = {
   loadEnv,
   injectEnv,
   setPublicEnv,
-  getEnv
+  getEnv,
+  exportedForTesting: {
+    resetEnv,
+    getPublicEnv,
+    mockEnvInject: (fn) => {
+      const originEnvInject = envInject
+      envInject = fn
+      return originEnvInject
+    }
+  }
 }
