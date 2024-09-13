@@ -1,5 +1,5 @@
 const execa = require('execa') // 一个child_process封装库
-const path = require('path')
+const path = require('pathe')
 const { pkgDir } = require('@pipflow/utils')
 
 module.exports = async function runTaskScript(command, args) {

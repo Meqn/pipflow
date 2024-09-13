@@ -69,6 +69,7 @@
     "minimist": "^1.2.8",
     "node-fetch": "2",
     "ora": "5",
+    "pathe": "^1.1.2",
     "semver": "^7.5.2",
     "strip-ansi": "6",
     "validate-npm-package-name": "^5.0.0"
