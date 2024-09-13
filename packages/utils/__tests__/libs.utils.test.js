@@ -98,4 +98,10 @@ describe('deepMerge', () => {
     expect(deepMerge(true, source1, source2)).toBe(true)
     expect(deepMerge(/\w/i, source1, source2)).toBeInstanceOf(RegExp)
   })
+
+  it('merge an object with an array property', () => {
+    const target = { a: [1, 2, 3] }
+    const source = { a: [5, 6] }
+    expect(deepMerge(target, source)).toEqual({ a: [5, 6, 3] })
+  })
 })
