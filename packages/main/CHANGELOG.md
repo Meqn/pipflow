@@ -1,5 +1,15 @@
 # pipflow
 
+## 1.0.5
+
+### Patch Changes 🌟
+
+- fix: 添加SIGINT信号（Ctrl+C）处理(进程正确终止) ([f0631db](https://github.com/Meqn/pipflow/commit/f0631db9b155c9ee9cd15f33fed6757cd6b95aa0))
+
+- Updated dependencies []:
+  - @pipflow/cli@1.0.5
+  - @pipflow/core@1.1.3
+
 ## 1.0.4
 
 ### Patch Changes 🌟
