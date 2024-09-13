@@ -27,5 +27,6 @@ module.exports = function createServer(name) {
   }
 
   create.reload = bs.reload
+  create.bs = bs
   return create
 }
