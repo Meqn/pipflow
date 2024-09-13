@@ -1,5 +1,13 @@
 # @pipflow/cli
 
+## 1.0.5
+
+### Patch Changes 🌟
+
+- fix: 修复不同平台下path模块路径处理问题 ([15e3ff3](https://github.com/Meqn/pipflow/commit/15e3ff342dfc97b1da81ae179d9862de88026667))
+- fix: 处理server命令进程window下正常中断 ([a68a5cd](https://github.com/Meqn/pipflow/commit/a68a5cd3b7824faa8889981238eabd83efc3cac0))
+- fix: 在调试模式下正确解析环境变量 ([2da090e](https://github.com/Meqn/pipflow/commit/2da090e13c50263ff25584576b2e2b8ed0c71dc3))
+
 ## 1.0.4
 
 ### Patch Changes 🌟
