@@ -1,5 +1,11 @@
 # @pipflow/core
 
+## 1.1.3
+
+### Patch Changes 🌟
+
+- perf: 暴露browserSync实例以改进开发工具集成 ([fba3747](https://github.com/Meqn/pipflow/commit/fba37476c83b8b3af720ad21f284a95343ca3a4e))
+
 ## 1.1.2
 
 ### Patch Changes 🌟
