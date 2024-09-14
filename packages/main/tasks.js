@@ -1,6 +1,5 @@
 const path = require('path')
 const {
-  gulp,
   logger,
   loadEnv,
   setPublicEnv,
@@ -8,7 +7,7 @@ const {
   deepMerge,
   minimist
 } = require('@pipflow/utils')
-const { task, watch, series, parallel } = gulp
+const { task, watch, series, parallel } = require('gulp')
 const {
   htmlTask,
   scriptTask,
