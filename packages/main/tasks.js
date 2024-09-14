@@ -23,7 +23,6 @@ const {
   createServer
 } = require('@pipflow/core')
 const { globFiles, getCliServeArgs, getInputList } = require('./libs/utils')
-const serverTasks = []
 
 //== 自定义配置: 参数和环境变量 ==============================================
 // 命令行参数
@@ -117,9 +116,7 @@ if (CC.tasks?.length > 0) {
         if (item.type === 'server') {
           // server任务无 task 配置项
           const cliServe = getCliServeArgs(args)
-          const _serverTask = createServer(item.name)
-          serverTasks.push(_serverTask)
-          return _serverTask(
+          return createServer(item.name)(
             deepMerge({}, CC.server, cliServe),
             done
           )
@@ -150,7 +147,6 @@ if (publicFiles) {
 const devServerTask = createServer('pipflowDev')
 const devServerReload = devServerTask.reload
 task('devServer', done => {
-  serverTasks.push(devServerTask)
   const cliServe = getCliServeArgs(args)
   devServerTask(deepMerge({}, CC.server, cliServe), done)
 })
@@ -165,9 +161,7 @@ task('server', done => {
     server: '.',
     open: true
   }
-  const _serverTask = createServer('pipflowServer')
-  serverTasks.push(_serverTask)
-  _serverTask(deepMerge(_defaults, cliServe), done)
+  createServer('pipflowServer')(deepMerge(_defaults, cliServe), done)
 })
 
 /**
@@ -303,13 +297,3 @@ for (const item of composeTasks) {
     ) : series(...input.map(v => parallel(...[].concat(v))))
   }
 }
-
-process.on('SIGINT', () => {
-  if (serverTasks.length) {
-    serverTasks.forEach(item => {
-      item.bs?.exit?.()
-      item.bs = null
-      item.reload = null
-    })
-  }
-})
