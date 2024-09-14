@@ -9,11 +9,17 @@ const {
   readManifest
 } = require('../build/comm')
 
+jest.mock('gulp', () => ({
+  src: jest.fn(),
+  dest: jest.fn(),
+  lastRun: jest.fn(),
+  series: jest.fn(),
+  parallel: jest.fn(),
+  watch: jest.fn(),
+  task: jest.fn(),
+}))
+
 jest.mock('@pipflow/utils', () => ({
-  gulp: {
-    lastRun: jest.fn(),
-    dest: jest.fn()
-  },
   isPlainObject: arg => Object.prototype.toString.call(arg) === '[object Object]',
   readJsonFilesSync: jest.fn().mockReturnValueOnce({ '1.js': 'abc.js' })
 }))
