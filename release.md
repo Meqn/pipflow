@@ -16,6 +16,7 @@ pnpm test -- -p core,main --coverage
 
 1. `pnpm changeset`
 2. `pnpm changeset:version`
+   - 然后执行 `pnpm changelog` 打印版本日志
 3. 更改`change log`后, `git add & commit`
 4. `git push` 后触发 github release，自动发布
 

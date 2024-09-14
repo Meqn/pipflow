@@ -58,7 +58,16 @@ export default defineConfig({
     nav: [
       { text: '指南', link: '/guide/', activeMatch: '/guide/' },
       { text: '配置', link: '/config/', activeMatch: '/config/' },
+      { text: '插件', link: '/plugins', activeMatch: '/plugins' },
       { text: '常见问题', link: '/help', activeMatch: '/help' },
+      { 
+        text: '相关连接',
+        items: [
+          { text: 'gulp入门', link: 'https://gulpjs.com/docs/en/getting-started/quick-start' },
+          { text: '官方API', link: 'https://gulpjs.com/docs/en/api/concepts' },
+          { text: '检索插件', link: 'https://gulpjs.com/plugins/' }
+        ]
+      },
       {
         text: `v${version}`,
         items: [
