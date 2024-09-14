@@ -1,11 +1,11 @@
 const path = require('path')
+const gulp = require('gulp')
 const gulpFilter = require('gulp-filter')
 const rev = require('gulp-rev')
 const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 const {
-  gulp,
   isPlainObject,
   logger,
   colors,

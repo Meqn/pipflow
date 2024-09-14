@@ -1,6 +1,6 @@
 module.exports = async function eslintTask(options = {}, done) {
   const eslint = require('gulp-eslint')
-  const { gulp } = require('@pipflow/utils')
+  const gulp = require('gulp')
   const { onDone } = require('../base/utils')
   const { createSrcOptions, plumber } = require('./comm')
 

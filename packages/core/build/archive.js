@@ -1,6 +1,7 @@
 module.exports = function archiveTask(options = {}, done) {
+  const gulp = require('gulp')
   const zip = require('gulp-zip')
-  const { gulp, timestamp } = require('@pipflow/utils')
+  const { timestamp } = require('@pipflow/utils')
   const { pipeline, onDone } = require('../base/utils')
   const { createSrcOptions, plumber, putProcesses } = require('./comm')
 

@@ -1,3 +1,4 @@
+const gulp = require('gulp')
 const path = require('path')
 const concat = require('gulp-concat')
 // const gulpif = require('gulp-if')
@@ -7,7 +8,6 @@ const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 const merge = require('merge2')
 const {
-  gulp,
   isPlainObject,
   injectEnv
 } = require('@pipflow/utils')

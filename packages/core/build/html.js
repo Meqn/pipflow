@@ -1,3 +1,4 @@
+const gulp = require('gulp')
 const replace = require('gulp-replace')
 const rename = require('gulp-rename')
 const htmlMinifier = require('../plugins/htmlMinifier')
@@ -9,7 +10,6 @@ const njkTemplate = require('gulp-nunjucks')
 const artTemplate = require('gulp-art-tpl')
 const base64 = require('gulp-dataurl')
 const {
-  gulp,
   isPlainObject,
   injectEnv
 } = require('@pipflow/utils')

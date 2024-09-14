@@ -1,4 +1,4 @@
-const { gulp } = require('@pipflow/utils')
+const gulp = require('gulp')
 const { pipeline, onDone } = require('../base/utils')
 const { createSrcOptions } = require('./comm')
 

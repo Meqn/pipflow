@@ -1,4 +1,5 @@
 const path = require('path')
+const gulp = require('gulp')
 const named = require('vinyl-named')
 const gulpWebpack = require('webpack-stream')
 const webpack = require('webpack')
@@ -8,7 +9,6 @@ const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 const merge = require('merge2')
 const {
-  gulp,
   isPlainObject,
   getEnv
 } = require('@pipflow/utils')

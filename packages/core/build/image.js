@@ -1,4 +1,5 @@
-const { gulp, isPlainObject } = require('@pipflow/utils')
+const gulp = require('gulp')
+const { isPlainObject } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const {

@@ -1,4 +1,5 @@
 const path = require('path')
+const gulp = require('gulp')
 const merge = require('merge2')
 const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
@@ -15,7 +16,6 @@ const postcss = require('../plugins/postcss')
 const postcssEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
 const {
-  gulp,
   isPlainObject,
   injectEnv
 } = require('@pipflow/utils')
