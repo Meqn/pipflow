@@ -1,10 +1,22 @@
 # pipflow
 
+## 1.0.6
+
+### Patch Changes 🌟
+
+- refactor: Refactor server task code to simplify logic ([412a7f7](https://github.com/Meqn/pipflow/commit/412a7f7b04159433e10b31b0ad9185fd988d1ee1))
+- fix: Fix could not print gulp task list ([c80ba38](https://github.com/Meqn/pipflow/commit/c80ba3881a89edf211ddec281f64e2b7c1b55cde))
+
+- Updated dependencies []:
+  - @pipflow/cli@1.0.6
+  - @pipflow/core@1.1.4
+  - @pipflow/utils@1.0.4
+
 ## 1.0.5
 
 ### Patch Changes 🌟
 
-- fix: 添加SIGINT信号（Ctrl+C）处理(进程正确终止) ([f0631db](https://github.com/Meqn/pipflow/commit/f0631db9b155c9ee9cd15f33fed6757cd6b95aa0))
+- fix: 添加 SIGINT 信号（Ctrl+C）处理(进程正确终止) ([f0631db](https://github.com/Meqn/pipflow/commit/f0631db9b155c9ee9cd15f33fed6757cd6b95aa0))
 
 - Updated dependencies []:
   - @pipflow/cli@1.0.5
