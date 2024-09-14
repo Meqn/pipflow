@@ -1,10 +1,19 @@
 # @pipflow/core
 
+## 1.1.4
+
+### Patch Changes 🌟
+
+- refactor: Replace gulp with direct require ([bd82fe6](https://github.com/Meqn/pipflow/commit/bd82fe612fa47a8d229f2d217f66e0cfd03888de))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.0.4
+
 ## 1.1.3
 
 ### Patch Changes 🌟
 
-- perf: 暴露browserSync实例以改进开发工具集成 ([fba3747](https://github.com/Meqn/pipflow/commit/fba37476c83b8b3af720ad21f284a95343ca3a4e))
+- perf: 暴露 browserSync 实例以改进开发工具集成 ([fba3747](https://github.com/Meqn/pipflow/commit/fba37476c83b8b3af720ad21f284a95343ca3a4e))
 
 ## 1.1.2
 
