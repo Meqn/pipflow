@@ -1,6 +1,6 @@
-const execa = require('execa') // 一个child_process封装库
 const path = require('pathe')
 const { pkgDir } = require('@pipflow/utils')
+const { execWithSign } = require('./exeCommand')
 
 module.exports = async function runTaskScript(command, args) {
   const rootDir = await pkgDir(__dirname)
@@ -21,5 +21,5 @@ module.exports = async function runTaskScript(command, args) {
   args.push(`--cwd=${path.resolve(projectRoot, '.')}`)
   
   // await execa('ls', ['-la'], { cwd: projectRoot, stdio: 'inherit' })
-  return await execa('npm', args, { cwd: rootDir, stdio: 'inherit' })
+  return await execWithSign('npm', args, { cwd: rootDir, stdio: 'inherit' })
 }
