@@ -1,11 +1,21 @@
 # @pipflow/cli
 
+## 1.0.6
+
+### Patch Changes 🌟
+
+- refactor: Replace execa with execWithSign for better SIGINT handling ([d9acb96](https://github.com/Meqn/pipflow/commit/d9acb961beb881874f6e3af233f3be8edfb593e9))
+- fix: The `CWD` path processing issue ([268d518](https://github.com/Meqn/pipflow/commit/268d518a2ce227c6407367aab5c46636aa62f376))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.0.4
+
 ## 1.0.5
 
 ### Patch Changes 🌟
 
-- fix: 修复不同平台下path模块路径处理问题 ([15e3ff3](https://github.com/Meqn/pipflow/commit/15e3ff342dfc97b1da81ae179d9862de88026667))
-- fix: 处理server命令进程window下正常中断 ([a68a5cd](https://github.com/Meqn/pipflow/commit/a68a5cd3b7824faa8889981238eabd83efc3cac0))
+- fix: 修复不同平台下 path 模块路径处理问题 ([15e3ff3](https://github.com/Meqn/pipflow/commit/15e3ff342dfc97b1da81ae179d9862de88026667))
+- fix: 处理 server 命令进程 window 下正常中断 ([a68a5cd](https://github.com/Meqn/pipflow/commit/a68a5cd3b7824faa8889981238eabd83efc3cac0))
 - fix: 在调试模式下正确解析环境变量 ([2da090e](https://github.com/Meqn/pipflow/commit/2da090e13c50263ff25584576b2e2b8ed0c71dc3))
 
 ## 1.0.4
