@@ -20,5 +20,4 @@ exports.colors = diyLog.colors
 exports.symbols = diyLog.symbols
 exports.timestamp = diyLog.timestamp
 exports.fs = require('fs-extra')
-exports.gulp = require('gulp')
 exports.minimist = require('minimist')
