@@ -1,5 +1,11 @@
 # @pipflow/utils
 
+## 1.0.4
+
+### Patch Changes 🌟
+
+- chore: Remove unused gulp dependency ([e35e772](https://github.com/Meqn/pipflow/commit/e35e77224347b9b2dab473cd588da60788b60ab2))
+
 ## 1.0.3
 
 ### Patch Changes 🌟
