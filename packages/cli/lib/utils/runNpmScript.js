@@ -18,7 +18,7 @@ module.exports = async function runTaskScript(command, args) {
   args.unshift('run', command, '--')
   // gulp命令参数
   args.push(`--gulpfile=${gulpfile}`)
-  args.push(`--cwd=${projectRoot}`)
+  args.push(`--cwd=${path.resolve(projectRoot, '.')}`)
   
   // await execa('ls', ['-la'], { cwd: projectRoot, stdio: 'inherit' })
   return await execa('npm', args, { cwd: rootDir, stdio: 'inherit' })
