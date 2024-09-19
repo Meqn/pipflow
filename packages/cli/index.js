@@ -5,7 +5,6 @@ module.exports = () => {
   const spinner = ora('Loading...').start() */
 
   const semver = require('semver') //npm的语义版本包
-  const leven = require('leven') //简易的智能匹配引擎
   const chalk = require('chalk') //美化命令行输出
   const { Command } = require('commander') //命令行工具
   const minimist = require('minimist') //参数处理
@@ -223,6 +222,7 @@ module.exports = () => {
    * @param {string} unknownCommand 未知cmd
    */
   function suggestCommands(unknownCommand) {
+    const leven = require('leven') //简易的智能匹配引擎
     const availableCommands = program.commands.map(cmd => cmd._name)
 
     let suggestion
