@@ -29,12 +29,16 @@ module.exports = function staticTask(options = {}, done) {
 
   // 3. 压缩图片
   if (imageMinify) {
-    const minifyOptions = isPlainObject(imageMinify) ? imageMinify : {}
-    const gulpImagemin = require('gulp-imagemin')
-    processes.push(gulpImagemin(
-      minifyOptions.plugins || undefined,
-      minifyOptions.options || {}
-    ))
+    try {
+      const minifyOptions = isPlainObject(imageMinify) ? imageMinify : {}
+      const gulpImagemin = require('gulp-imagemin')
+      processes.push(gulpImagemin(
+        minifyOptions.plugins || undefined,
+        minifyOptions.options || {}
+      ))
+    } catch (error) {
+      console.error(error?.message || error)
+    }
   }
 
   // 3. 文件指纹处理 & 输出文件
