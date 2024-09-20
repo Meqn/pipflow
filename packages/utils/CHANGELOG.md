@@ -1,5 +1,12 @@
 # @pipflow/utils
 
+## 1.1.0
+
+### Minor Changes 🚀
+
+- feat: Add spinner class for loading feedback ([d711e80](https://github.com/Meqn/pipflow/commit/d711e80326c96395735ae567c2043bc0e53c9a24))
+- perf: Chang the naming convention for user tasks ([b1617c0](https://github.com/Meqn/pipflow/commit/b1617c0b28eb7f0662c2af5708b05946bbcce75b))
+
 ## 1.0.4
 
 ### Patch Changes 🌟
