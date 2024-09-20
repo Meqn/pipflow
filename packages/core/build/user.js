@@ -2,6 +2,17 @@ const gulp = require('gulp')
 const { pipeline, onDone } = require('../base/utils')
 const { createSrcOptions } = require('./comm')
 
+/**
+ * 自定义流程任务
+ * 
+ * @param {Object} options - 配置项
+ * @param {string|string[]|string[][]|Object.<string, string|string[]>} [options.input] - 输入文件路径
+ * @param {string} [options.dest] - 输出目录
+ * @param {(done: Function) => Stream|void} [options.compiler] - 自定义处理函数
+ * @param {((...args: Stream[]) => Stream)[]} [options.plugins] - 自定义处理流程
+ * @param {function} done - 任务完成回调函数
+ * @returns {Stream|void}
+ */
 module.exports = function userTask(options = {}, done) {
   const { input, compiler, plugins } = options
 

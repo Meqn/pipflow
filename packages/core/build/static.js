@@ -9,6 +9,21 @@ const {
   putProcesses
 } = require('./comm')
 
+/**
+ * 静态资源 处理任务
+ * 
+ * @param {Object} options - 配置项
+ * @param {string|string[]|string[][]|Object.<string, string|string[]>} options.input - 输入文件路径
+ * @param {string} [options.dest] - 输出目录
+ * @param {string} [options.name] - 任务名
+ * @param {string} [options.base] - 输入文件路径的基准目录
+ * @param {boolean|Object.<string, any>} [options.minify=false] - 启用图片压缩或配置项
+ * @param {boolean} [options.fileHash] - 生成文件指纹
+ * @param {((...args: any[]) => Stream)[]} [options.plugins] - 自定义处理流程
+ * @param {function} done - 任务完成回调函数。
+ * @returns {Stream} 返回处理后的文件流。
+ * @throws {Error} 如果`options.input`未定义，则抛出错误。
+ */
 module.exports = function staticTask(options = {}, done) {
   if (!options.input) {
     throw new Error('input is required')

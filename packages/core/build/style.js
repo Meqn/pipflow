@@ -24,6 +24,26 @@ const {
   readManifest
 } = require('./comm')
 
+/**
+ * CSS样式 处理任务
+ * 
+ * @param {Object} options - 配置项
+ * @param {string|string[]|string[][]|Object.<string, string|string[]>} options.input - 输入文件路径
+ * @param {string} [options.dest] - 输出目录
+ * @param {string} [options.name] - 任务名
+ * @param {string} [options.base] - 输入文件路径的基准目录
+ * @param {'sass'|'scss'|'less'|'stylus'} [options.compiler] - 预处理器类型
+ * @param {Object.<string, any>} [options.compilerOptions] - 预处理器配置项
+ * @param {boolean|Object.<string, any>} [options.minify=false] - 启用CSS压缩或配置项
+ * @param {boolean|'?'|'-'} [options.fileHash] - 生成文件指纹 ('?':后缀形式, '-':连接形式)
+ * @param {boolean} [options.sourcemap=false] - 生成sourcemap
+ * @param {Object.<string, string>} [options.alias] - 别名替换
+ * @param {{limit: number}} [options.assetsInlineLimit] - 图片资源内联配置
+ * @param {((...args: any[]) => Stream)[]} [options.plugins] - 自定义处理流程
+ * @param {function} done - 任务完成回调函数
+ * @returns {Stream} 返回处理后的文件流
+ * @throws {Error} 如果`options.input`未定义，则抛出错误。
+ */
 module.exports = function styleTask(options = {}, done) {
   const {
     input,
