@@ -1,3 +1,5 @@
+console.log('🏃 Running, please wait ...')
+
 const path = require('path')
 const {
   logger,
