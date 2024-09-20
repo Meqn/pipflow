@@ -200,11 +200,4 @@ export interface TaskOptions<T extends TaskType, C extends CompilerType<T>> {
    * @default false
    */
   watch?: boolean
-  
-  /**
-   * 生成的文件名 (仅`archive`任务有效)
-   * 
-   * filename.
-   */
-  filename?: T extends 'archive' ? string : never
 }
