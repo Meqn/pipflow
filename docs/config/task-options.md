@@ -5,9 +5,14 @@
 
 ## name {#name}
 - **类型：** `string`
-- **默认：** `[type]:[index]`
+- **默认：** `task:[type]:[index]`
 
-任务名称, 默认为 `任务类型 + 任务索引`
+任务名称, 如果为设置任务名, 则默认 `task + 任务类型 + 任务索引`, 比如 `task:html:1`
+
+::: tip 温馨提示
+查看所有任务名(包含内置任务), 请执行 `pipflow task --list` 命令。
+:::
+
 
 
 ## type
