@@ -1,5 +1,19 @@
 # pipflow
 
+## 1.1.0
+
+### Minor Changes 🚀
+
+- feat: Add console feedback for task execution ([b9921ab](https://github.com/Meqn/pipflow/commit/b9921abbd0e554cc00ebeffb464770f5e55793d7))
+- perf: Remove unused `filename` property from `TaskOptions` ([9cafb8e](https://github.com/Meqn/pipflow/commit/9cafb8e5f45b265a442aef5a0cab802ba870917d))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/cli@1.1.0
+  - @pipflow/core@1.2.0
+  - @pipflow/utils@1.1.0
+
 ## 1.0.6
 
 ### Patch Changes 🌟
