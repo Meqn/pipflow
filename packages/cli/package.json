@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/cli",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "A command-line tool based on Gulp-workflow that quickly build web development workflows.",
   "main": "index.js",
   "bin": {

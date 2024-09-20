@@ -1,5 +1,16 @@
 # @pipflow/cli
 
+## 1.1.0
+
+### Minor Changes 🚀
+
+- feat: Cache variables for improved debugging ([2fabc57](https://github.com/Meqn/pipflow/commit/2fabc57cd7a474436ed2eca4e0a69d5879e5f281))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@1.1.0
+
 ## 1.0.6
 
 ### Patch Changes 🌟
