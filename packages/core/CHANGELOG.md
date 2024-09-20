@@ -1,5 +1,19 @@
 # @pipflow/core
 
+## 1.2.0
+
+### Minor Changes 🚀
+
+- feat: Add JSDOC for each task method ([78129ab](https://github.com/Meqn/pipflow/commit/78129ab318a35bbc11ebe4704bd7809fa6555405))
+- perf: Replace direct requires with gulp plugins for consistency ([e1b445e](https://github.com/Meqn/pipflow/commit/e1b445ec5c8076c60ffe50a883794ce0334aede9))
+- refactor: Add error handling for image minification ([49c2930](https://github.com/Meqn/pipflow/commit/49c2930d8c67278a7220a254e532f186c1612e70))
+- test: Replace gulp with direct require ([38b9268](https://github.com/Meqn/pipflow/commit/38b926844af47646fb91566edf6f65fcea8745d8))
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @pipflow/utils@1.1.0
+
 ## 1.1.4
 
 ### Patch Changes 🌟
