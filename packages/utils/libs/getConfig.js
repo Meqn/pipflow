@@ -90,7 +90,7 @@ exports.getConfig = function getConfig(file) {
       if (!item.type) return false
 
       if (!item.name) {
-        item.name = `${item.type}:${index + 1}`
+        item.name = `task:${item.type}:${index + 1}`
       }
       if (!item.dest) {
         item.dest = outDir
