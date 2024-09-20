@@ -2,7 +2,6 @@ const path = require('path')
 const gulp = require('gulp')
 const gulpFilter = require('gulp-filter')
 const rev = require('gulp-rev')
-const jsonEditor = require('gulp-json-editor')
 const gulpPlumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 const {
@@ -184,7 +183,7 @@ function outputFiles(processes, {
 
     // 3.1 转换`rev-manifest.json`内容
     if (fileHash === '?') {
-      processes.push(jsonEditor(function(file) {
+      processes.push(require('gulp-json-editor')(function(file) {
         return transformHash(file)
       }))
     }

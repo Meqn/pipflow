@@ -4,17 +4,10 @@ const merge = require('merge2')
 const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
-const replace = require('gulp-replace')
-const base64 = require('gulp-dataurl')
-const revRewrite = require('gulp-rev-rewrite')
-const header = require('gulp-header')
-const sass = require('gulp-sass')(require('sass'))
-const less = require('gulp-less')
-const stylus = require('gulp-stylus')
 // const postcss = require('gulp-postcss')
 const postcss = require('../plugins/postcss')
 const postcssEnv = require('postcss-preset-env')
-const cssnano = require('cssnano')
+
 const {
   isPlainObject,
   injectEnv
@@ -76,11 +69,12 @@ module.exports = function styleTask(options = {}, done) {
 
     // 5.1 插入 css.preprocessor 的 additionalData
     if (compilerOptions?.additionalData) {
-      baseProcesses.push(header(compilerOptions.additionalData))
+      baseProcesses.push(require('gulp-header')(compilerOptions.additionalData))
     }
 
     // 4. replace 别名替换
     if (isPlainObject(alias)) {
+      const replace = require('gulp-replace')
       for (const key in alias) {
         baseProcesses.push(replace(key, alias[key]))
       }
@@ -88,12 +82,13 @@ module.exports = function styleTask(options = {}, done) {
 
     // 5.2 CSS预处理器
     if (compiler === 'sass' || compiler === 'scss') {
+      const sass = require('gulp-sass')(require('sass'))
       const _sassOptions = Object.assign({}, sassDefaultOptions, compilerOptions?.preprocessorOptions)
       baseProcesses.push(sass(_sassOptions).on('error', sass.logError))
     } else if (compiler === 'less') {
-      baseProcesses.push(less(compilerOptions?.preprocessorOptions || {}))
+      baseProcesses.push(require('gulp-less')(compilerOptions?.preprocessorOptions || {}))
     } else if (compiler === 'stylus') {
-      baseProcesses.push(stylus(compilerOptions?.preprocessorOptions || {}))
+      baseProcesses.push(require('gulp-stylus')(compilerOptions?.preprocessorOptions || {}))
     }
 
     // 6. 合并文件
@@ -116,13 +111,13 @@ module.exports = function styleTask(options = {}, done) {
     
   // 2. base64 处理
   if (options.assetsInlineLimit?.limit > 0) {
-    processes.push(base64(options.assetsInlineLimit))
+    processes.push(require('gulp-dataurl')(options.assetsInlineLimit))
   }
 
   // 3. 文件指纹处理
   const manifest = readManifest(options)
   if (manifest) {
-    processes.push(revRewrite({ manifest }))
+    processes.push(require('gulp-rev-rewrite')({ manifest }))
   }
 
   // 3. postcss //!需配置 `postcss.config.js` 和 `.browserslistrc`
@@ -130,7 +125,7 @@ module.exports = function styleTask(options = {}, done) {
   postcssPlugins.push(postcssEnv())
   if (cssMinify) {
     const minifyOptions = isPlainObject(cssMinify) ? cssMinify : {}
-    postcssPlugins.push(cssnano(minifyOptions))
+    postcssPlugins.push(require('cssnano')(minifyOptions))
   }
   processes.push(postcss({}, {
     plugins: postcssPlugins

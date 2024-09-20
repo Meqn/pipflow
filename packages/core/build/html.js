@@ -1,14 +1,5 @@
 const gulp = require('gulp')
-const replace = require('gulp-replace')
 const rename = require('gulp-rename')
-const htmlMinifier = require('../plugins/htmlMinifier')
-const revRewrite = require('gulp-rev-rewrite')
-const ejsTemplate = require('gulp-ejs')
-const pugTemplate = require('gulp-pug')
-const hbTemplate = require('gulp-hb')
-const njkTemplate = require('gulp-nunjucks')
-const artTemplate = require('gulp-art-tpl')
-const base64 = require('gulp-dataurl')
 const {
   isPlainObject,
   injectEnv
@@ -29,23 +20,23 @@ function templater(compiler, compilerOptions = {}) {
   const templaterMap = {
     ejs() {
       // ejs(data, options)
-      return ejsTemplate(data, compilerOptions)
+      return require('gulp-ejs')(data, compilerOptions)
     },
     pug() {
       // pug([opts])
-      return pugTemplate(compilerOptions)
+      return require('gulp-pug')(compilerOptions)
     },
     artTemplate() {
       // template(data, options)
-      return artTemplate(data, compilerOptions)
+      return require('gulp-art-tpl')(data, compilerOptions)
     },
     handlebars() {
       // hb([options])
-      return hbTemplate(compilerOptions)
+      return require('gulp-hb')(compilerOptions)
     },
     nunjucks() {
       // nunjucks.compile(data?, options?)
-      return njkTemplate(data, compilerOptions)
+      return require('gulp-nunjucks')(data, compilerOptions)
     }
   }
   return templaterMap[compiler]?.()
@@ -84,6 +75,7 @@ module.exports = function htmlTask(options = {}, done) {
   
   // 4. replace 替换别名 (在模板编译之前，避免路径不会被替换)
   if (isPlainObject(alias)) {
+    const replace = require('gulp-replace')
     for (const key in alias) {
       processes.push(replace(key, alias[key]))
     }
@@ -94,13 +86,13 @@ module.exports = function htmlTask(options = {}, done) {
 
   // 6. base64 处理
   if (options.assetsInlineLimit?.limit > 0) {
-    processes.push(base64(options.assetsInlineLimit))
+    processes.push(require('gulp-dataurl')(options.assetsInlineLimit))
   }
   
   // 6. 文件指纹处理
   const manifest = readManifest(options)
   if (manifest) {
-    processes.push(revRewrite({ manifest }))
+    processes.push(require('gulp-rev-rewrite')({ manifest }))
   }
   
   // 7. 重命名
@@ -109,7 +101,7 @@ module.exports = function htmlTask(options = {}, done) {
   // 8. 压缩处理
   if (htmlMinify) {
     const minifyOptions = Object.assign({}, htmlMinifyOptions, isPlainObject(htmlMinify) ? htmlMinify : {})
-    processes.push(htmlMinifier(minifyOptions))
+    processes.push(require('../plugins/htmlMinifier')(minifyOptions))
   }
 
   // 9. 文件指纹处理 & sourcemaps & 输出文件
