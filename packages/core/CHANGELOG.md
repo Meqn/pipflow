@@ -1,5 +1,14 @@
 # @pipflow/core
 
+## 1.2.1
+
+### Patch Changes 🌟
+
+- refactor: Update 'gulp-eslint' to 'gulp-eslint-new' for improved linting ([f4a759b](https://github.com/Meqn/pipflow/commit/f4a759b8bb10e4016e80010690f3f003dbaf1595))
+- refactor: Remove unnecessary 'name' field from task options ([ab5f6a1](https://github.com/Meqn/pipflow/commit/ab5f6a19a60cf71f617c16989e794e1c02b4cbba))
+- refactor: Change alias replacement processing timing ([1cc5da4](https://github.com/Meqn/pipflow/commit/1cc5da4a42fef98bfa0c4366168c81980e9f2571))
+- docs: Update README ([b75f6e7](https://github.com/Meqn/pipflow/commit/b75f6e72701782efa604e41a0128b7b7f1f85f91))
+
 ## 1.2.0
 
 ### Minor Changes 🚀
