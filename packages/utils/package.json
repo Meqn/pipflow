@@ -10,9 +10,6 @@
   "scripts": {
     "test": "jest"
   },
-  "engines": {
-    "node": "^14.13.1 || >=16.0.0"
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
