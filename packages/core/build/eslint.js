@@ -9,7 +9,7 @@
  * @throws {Error} 如果`options.input`未定义，则抛出错误
  */
 module.exports = async function eslintTask(options = {}, done) {
-  const eslint = require('gulp-eslint')
+  const eslint = require('gulp-eslint-new')
   const gulp = require('gulp')
   const { onDone } = require('../base/utils')
   const { createSrcOptions, plumber } = require('./comm')
