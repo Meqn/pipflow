@@ -32,7 +32,7 @@ const {
  * @param {string} [options.dest] - 输出目录
  * @param {string} [options.name] - 任务名
  * @param {string} [options.base] - 输入文件路径的基准目录
- * @param {'sass'|'scss'|'less'|'stylus'} [options.compiler] - 预处理器类型
+ * @param {'sass'|'less'|'stylus'} [options.compiler] - 预处理器类型
  * @param {Object.<string, any>} [options.compilerOptions] - 预处理器配置项
  * @param {boolean|Object.<string, any>} [options.minify=false] - 启用CSS压缩或配置项
  * @param {boolean|'?'|'-'} [options.fileHash] - 生成文件指纹 ('?':后缀形式, '-':连接形式)
@@ -91,15 +91,6 @@ module.exports = function styleTask(options = {}, done) {
     if (compilerOptions?.additionalData) {
       baseProcesses.push(require('gulp-header')(compilerOptions.additionalData))
     }
-
-    // 4. replace 别名替换
-    if (isPlainObject(alias)) {
-      const replace = require('gulp-replace')
-      for (const key in alias) {
-        baseProcesses.push(replace(key, alias[key]))
-      }
-    }
-
     // 5.2 CSS预处理器
     if (compiler === 'sass' || compiler === 'scss') {
       const sass = require('gulp-sass')(require('sass'))
@@ -109,6 +100,14 @@ module.exports = function styleTask(options = {}, done) {
       baseProcesses.push(require('gulp-less')(compilerOptions?.preprocessorOptions || {}))
     } else if (compiler === 'stylus') {
       baseProcesses.push(require('gulp-stylus')(compilerOptions?.preprocessorOptions || {}))
+    }
+    
+    // 4. replace 别名替换
+    if (isPlainObject(alias)) {
+      const replace = require('gulp-replace')
+      for (const key in alias) {
+        baseProcesses.push(replace(key, alias[key]))
+      }
     }
 
     // 6. 合并文件

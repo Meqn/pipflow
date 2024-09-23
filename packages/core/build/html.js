@@ -92,7 +92,7 @@ module.exports = function htmlTask(options = {}, done) {
     }
   }
   
-  // 4. replace 替换别名 (在模板编译之前，避免路径不会被替换)
+  // 4. replace 替换别名 (在模板编译后，避免路径不会被替换)
   if (isPlainObject(alias)) {
     const replace = require('gulp-replace')
     for (const key in alias) {
