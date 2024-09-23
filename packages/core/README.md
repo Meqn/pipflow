@@ -21,9 +21,17 @@ npm install --save-dev @pipflow/core
 ```js
 const gulp = require('gulp')
 const {
+  htmlTask,
   scriptTask,
   styleTask,
-  htmlTask
+  imageTask,
+  staticTask,
+  copyTask,
+  archiveTask,
+  removeTask,
+  userTask,
+  eslintTask,
+  createServer
 } = require('@pipflow/core')
 
 exports.buildHtml = done => {
