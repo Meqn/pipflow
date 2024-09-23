@@ -75,7 +75,7 @@ module.exports = function htmlTask(options = {}, done) {
   }
   
   const processes = []
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, htmlTask)
 
   // 1. plumber错误处理
   processes.push(plumber.handler())

@@ -22,7 +22,7 @@ module.exports = async function eslintTask(options = {}, done) {
     throw new Error('input is required')
   }
 
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, eslintTask)
 
   return gulp.src(input, srcOptions)
     .pipe(plumber.handler())

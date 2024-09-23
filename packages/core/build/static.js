@@ -33,7 +33,7 @@ module.exports = function staticTask(options = {}, done) {
   } = options
 
   const processes = []
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, staticTask)
 
   // 1. plumber错误处理
   processes.push(plumber.handler())

@@ -28,7 +28,7 @@ module.exports = function copyTask(options = {}, done) {
   const processes = [
     plumber.handler()
   ]
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, copyTask)
   
   // 2. 自定义处理流程
   putProcesses(processes, options.plugins)

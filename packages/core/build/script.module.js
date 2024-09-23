@@ -121,7 +121,7 @@ function getWebpackConfig({
  * @param {string} options.compiler 使用babel转换
  * @returns 
  */
-function getEntries(options = {}) {
+function getEntries(options = {}, taskFn) {
   const { input, alias, minify, compiler } = options
   const webpackOptions = {
     env: getEnv('all'),
@@ -129,7 +129,7 @@ function getEntries(options = {}) {
     alias,
     compiler,
   }
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, taskFn)
   const basePath = getBasePath(input, options.base || '.')
   let entries = []
   
@@ -181,7 +181,7 @@ module.exports = function compileModule(options = {}, done) {
   })
 
   return pipeline(
-    merge(...getEntries(options)),
+    merge(...getEntries(options, compileModule)),
     processes
   ).on('end', done)
 }

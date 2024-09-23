@@ -24,7 +24,7 @@ module.exports = function userTask(options = {}, done) {
   // 2. 自定义处理流程
   if (Array.isArray(plugins) && plugins.length > 0) {
     if (input) {
-      const srcOptions = createSrcOptions(options)
+      const srcOptions = createSrcOptions(options.base, userTask)
 
       return pipeline([
         gulp.src(input, srcOptions),

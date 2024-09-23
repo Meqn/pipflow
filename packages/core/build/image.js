@@ -23,7 +23,7 @@ const {
  * @returns {Stream} 返回处理后的文件流
  * @throws {Error} 如果`options.input`未定义，则抛出错误
  */
-module.exports = function staticTask(options = {}, done) {
+module.exports = function imageTask(options = {}, done) {
   if (!options.input) {
     throw new Error('input is required')
   }
@@ -33,7 +33,7 @@ module.exports = function staticTask(options = {}, done) {
   } = options
 
   const processes = []
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, imageTask)
 
   // 1. plumber错误处理
   processes.push(plumber.handler())

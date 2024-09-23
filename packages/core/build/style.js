@@ -57,7 +57,7 @@ module.exports = function styleTask(options = {}, done) {
   }
 
   const processes = [] //统一处理流程
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, styleTask)
   const basePath = getBasePath(input, options.base || '.') //合并文件后的基础路径
   const cssFilter = filter('**/*.css', { restore: true })
 

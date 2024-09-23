@@ -34,7 +34,7 @@ function compileScript(options = {}, done) {
   
   const processes = []
   const jsFilter = filter('*.{js,mjs}', { restore: true })
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, compileScript)
   const basePath = getBasePath(input, options.base || '.') //合并文件后的基础路径
 
   // 统一入口方式 (input支持 `string`, `array`, `object`)

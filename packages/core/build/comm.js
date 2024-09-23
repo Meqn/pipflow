@@ -19,16 +19,16 @@ const hashRegex = /(-\w{5,}\.\w+)$/
 
 /************************************************
  * 生成 gulp.src 选项
- * @param {object} options 选项
- * @param {string} options.name 任务名
- * @param {string} options.base 基础路径
+ * 
+ * @param {string} base 基础路径
+ * @param {Function} taskFn 任务函数
  * @returns 
  */
-function createSrcOptions({ name, base }) {
+function createSrcOptions(base, taskFn) {
   const ret = {}
-  if (name) {
-    // 增量构建能,加快执行时间
-    ret.since = gulp.lastRun(name)
+  if (taskFn) {
+    // 增量构建,加快执行时间
+    ret.since = gulp.lastRun(taskFn)
   }
   if (base) {
     ret.base = base

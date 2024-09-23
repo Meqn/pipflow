@@ -29,7 +29,7 @@ module.exports = function archiveTask(options = {}, done) {
   const processes = [
     plumber.handler()
   ]
-  const srcOptions = createSrcOptions(options)
+  const srcOptions = createSrcOptions(options.base, archiveTask)
   
   // 2. 自定义处理流程
   putProcesses(processes, options.plugins)
