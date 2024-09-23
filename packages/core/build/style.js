@@ -30,7 +30,6 @@ const {
  * @param {Object} options - 配置项
  * @param {string|string[]|string[][]|Object.<string, string|string[]>} options.input - 输入文件路径
  * @param {string} [options.dest] - 输出目录
- * @param {string} [options.name] - 任务名
  * @param {string} [options.base] - 输入文件路径的基准目录
  * @param {'sass'|'less'|'stylus'} [options.compiler] - 预处理器类型
  * @param {Object.<string, any>} [options.compilerOptions] - 预处理器配置项
@@ -42,7 +41,7 @@ const {
  * @param {((...args: any[]) => Stream)[]} [options.plugins] - 自定义处理流程
  * @param {function} done - 任务完成回调函数
  * @returns {Stream} 返回处理后的文件流
- * @throws {Error} 如果`options.input`未定义，则抛出错误。
+ * @throws {Error} 如果`options.input`未定义，则抛出错误
  */
 module.exports = function styleTask(options = {}, done) {
   const {
