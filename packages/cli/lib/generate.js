@@ -125,9 +125,9 @@ exports.generateTemplate = async function(src, dest, options = {}) {
     })
     await writeJsonFile(path.resolve(dest, 'package.json'), newPkg)
 
-    // 2. 生成 .eslintrc.js配置
+    // 2. 生成 eslint.config.js配置
     const eslintJson = getEslintConfig(options)
-    await writeJsFile(path.resolve(dest, '.eslintrc.js'), eslintJson)
+    await writeJsFile(path.resolve(dest, 'eslint.config.js'), eslintJson)
   }
   await fs.remove(path.resolve(dest, 'eslint'))
 }
