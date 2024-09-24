@@ -84,7 +84,7 @@ module.exports = () => {
     .description('Run a specific task')
     .argument('[task-name]', 'task name')
     .option('-l, --list', 'list all tasks')
-    .option('-T, --tasks', 'list all tasks')
+    .option('--config <path>', 'the configuration file path')
     .allowUnknownOption()
     .action((name, options, cmd) => {
       if (options.list || options.tasks) {
