@@ -1,5 +1,16 @@
 # @pipflow/core
 
+## 1.2.2
+
+### Patch Changes 🌟
+
+- chore: Upgrade PostCSS-related deps ([6d72cfa](https://github.com/Meqn/pipflow/commit/6d72cfa066d81a53a303a64b51500964d1e604d6))
+- refactor: Update PostCSS plugin option handling for improved modularity ([b05d148](https://github.com/Meqn/pipflow/commit/b05d148906bac716a5226875e11d796a0890aa29))
+- perf: Update task option handling for improved modularity ([1eed1eb](https://github.com/Meqn/pipflow/commit/1eed1eb4b02e27a52b25581de6917527554bfc66))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.1.1
+
 ## 1.2.1
 
 ### Patch Changes 🌟
