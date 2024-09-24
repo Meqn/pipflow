@@ -1,5 +1,15 @@
 # @pipflow/cli
 
+## 1.1.1
+
+### Minor Changes 🚀
+
+- refactor: Rename .eslintrc.js to eslint.config.js for consistency ([e81f734](https://github.com/Meqn/pipflow/commit/e81f734c6c262f4d7a21fe858724b0ddc9d7208f))
+- perf: Add option of specify configuration file path for Task-CMD ([49845cc](https://github.com/Meqn/pipflow/commit/49845cc590fa1f1adc8962d7907d7c18b29f760d))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.1.1
+
 ## 1.1.0
 
 ### Minor Changes 🚀
