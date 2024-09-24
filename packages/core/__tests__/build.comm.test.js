@@ -28,15 +28,15 @@ jest.mock('gulp-plumber')
 
 describe('createSrcOptions', () => {
   it('should create default options', () => {
-    expect(createSrcOptions({})).toEqual({})
+    expect(createSrcOptions()).toEqual({})
   })
 
-  it('should add name', () => {
-    expect(createSrcOptions({ name: 'taskName' })).toHaveProperty('since')
+  it('should add task function', () => {
+    expect(createSrcOptions(null, () => null)).toHaveProperty('since')
   })
 
   it('should add base', () => {
-    expect(createSrcOptions({ base: 'src' })).toHaveProperty('base')
+    expect(createSrcOptions('src')).toHaveProperty('base')
   })
 })
 
