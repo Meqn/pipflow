@@ -21,17 +21,17 @@
     "types"
   ],
   "keywords": [
-    "pipflow",
-    "pipflow-cli",
-    "workflow",
-    "gulp workflow",
-    "gulp plugin",
+    "gulp",
+    "plugin",
     "gulp-webpack",
-    "gulp task",
+    "gulp-html",
+    "gulp-css",
     "gulp-sass",
     "gulp-less",
     "gulp-postcss",
-    "gulp-stylus"
+    "gulp-stylus",
+    "gulp-template",
+    "workflow"
   ],
   "homepage": "https://github.com/Meqn/pipflow",
   "repository": {
@@ -75,8 +75,8 @@
     "merge2": "^1.4.1",
     "plugin-error": "^2.0.1",
     "postcss": "^8.4.25",
-    "postcss-load-config": "^4.0.1",
-    "postcss-preset-env": "^9.0.0",
+    "postcss-load-config": "^5.0.0",
+    "postcss-preset-env": "^10.0.0",
     "rimraf": "^5.0.1",
     "sass": "^1.63.6",
     "string-replace-loader": "^3.1.0",

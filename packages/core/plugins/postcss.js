@@ -1,7 +1,7 @@
 /**
- * 源自 gulp-postcss@9.0.1
- * @description 由于原始 gulp-postcss 不支持 配置项 和 post.config配置合并，故fork并修改 (修改行: [15, 56, 143])
- * @example `.pipe(postcss({}, { plugins: [] }))`
+ * 源自 gulp-postcss@10.0.0
+ * @description 源 gulp-postcss 不支持 配置项 和 post.config合并，故fork并修改 (修改行: [56])
+ * @example `.pipe(postcss({_plugins: [require('autoprefixer')()]}))`
  */
 
 var Stream = require('stream')
@@ -12,7 +12,7 @@ var PluginError = require('plugin-error')
 var path = require('path')
 
 
-module.exports = withConfigLoader(function (loadConfig, __plugins, __options = {}) {
+module.exports = withConfigLoader(function (loadConfig) {
 
   var stream = new Stream.Transform({ objectMode: true })
 
@@ -53,7 +53,7 @@ module.exports = withConfigLoader(function (loadConfig, __plugins, __options = {
             )
           }
         }
-        return postcss([...(config.plugins || []), ...(__options.plugins || [])])
+        return postcss([].concat(configOpts._plugins || [], config.plugins || []))
           .process(file.contents, options)
       })
       .then(handleResult, handleError)
@@ -133,14 +133,14 @@ function withConfigLoader(cb) {
         } else {
           configPath = file.dirname
         }
+        // @TODO: The options property is deprecated and should be removed in 10.0.0.
+        contextOptions.options = Object.assign({}, contextOptions)
+        contextOptions.file = file
         return postcssLoadConfig(
-          {
-            file: file,
-            options: contextOptions
-          },
+          contextOptions,
           configPath
         )
-      }, plugins, options) //! 传递配置项
+      })
     }
   }
 }
