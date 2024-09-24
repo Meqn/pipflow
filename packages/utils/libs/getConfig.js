@@ -76,7 +76,8 @@ exports.getConfig = function getConfig(file) {
     }
   } catch (e) {
     // 支持无 `pipflow.config` 文件
-    logger.tag.warn('Configuration file "pipflow.config.js" not found!')
+    logger.tag.warn('Configuration file "pipflow.config.js" not found or Error!')
+    logger.tag.error(e)
   }
 
   const result = deepMerge({}, defaultConfig, userConfig)
