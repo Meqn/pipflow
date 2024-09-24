@@ -1,5 +1,11 @@
 # @pipflow/utils
 
+## 1.1.1
+
+### Patch Changes 🌟
+
+- refactor: Update error handling in getConfig to log errors ([94d2b7b](https://github.com/Meqn/pipflow/commit/94d2b7b4b94caf4a2f1783714a31a63f87f18103))
+
 ## 1.1.0
 
 ### Minor Changes 🚀
