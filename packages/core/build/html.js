@@ -92,11 +92,8 @@ module.exports = function htmlTask(options = {}, done) {
   }
   
   // 4. replace 替换别名 (在模板编译后，避免路径不会被替换)
-  if (isPlainObject(alias)) {
-    const replace = require('gulp-replace')
-    for (const key in alias) {
-      processes.push(replace(key, alias[key]))
-    }
+  if (isPlainObject(alias) || Array.isArray(alias)) {
+    processes.push(require('../plugins/renew')(alias))
   }
 
   // 5. 自定义处理流程

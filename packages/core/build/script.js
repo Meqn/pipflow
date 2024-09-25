@@ -2,7 +2,6 @@ const gulp = require('gulp')
 const path = require('path')
 const concat = require('gulp-concat')
 // const gulpif = require('gulp-if')
-const replace = require('gulp-replace')
 const uglifyjs = require('gulp-terser')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
@@ -57,10 +56,8 @@ function compileScript(options = {}, done) {
     baseProcesses.push(injectEnv())
 
     // 4. replace 别名替换
-    if (isPlainObject(alias)) {
-      for (const key in alias) {
-        baseProcesses.push(replace(key, alias[key]))
-      }
+    if (isPlainObject(alias) || Array.isArray(alias)) {
+      baseProcesses.push(require('../plugins/renew')(alias))
     }
 
     // 5. 合并文件

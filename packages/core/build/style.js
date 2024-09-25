@@ -102,11 +102,8 @@ module.exports = function styleTask(options = {}, done) {
     }
     
     // 4. replace 别名替换
-    if (isPlainObject(alias)) {
-      const replace = require('gulp-replace')
-      for (const key in alias) {
-        baseProcesses.push(replace(key, alias[key]))
-      }
+    if (isPlainObject(alias) || Array.isArray(alias)) {
+      baseProcesses.push(require('../plugins/renew')(alias))
     }
 
     // 6. 合并文件
