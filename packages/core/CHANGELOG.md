@@ -1,5 +1,12 @@
 # @pipflow/core
 
+## 1.2.3
+
+### Patch Changes 🌟
+
+- refactor: Rewrite the Batch Replacement plugin ([f866bc6](https://github.com/Meqn/pipflow/commit/f866bc684bb6eae23290eefcc31b0dd698db404b))
+- chore: Update Sass dependency version ([8a5be04](https://github.com/Meqn/pipflow/commit/8a5be0468fff06d375db5b8ddf13dc2f6277f770))
+
 ## 1.2.2
 
 ### Patch Changes 🌟
