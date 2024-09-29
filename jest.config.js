@@ -5,14 +5,8 @@
 
 /** @type {import('jest').Config} */
 module.exports = {
-  projects: [
-    '<rootDir>/packages/*',
-  ],
+  // projects: ['<rootDir>/*'],
   testEnvironment: 'node',
-  testMatch: [
-    '**/__tests__/**/*.(test|spec).js'
-  ],
-  moduleFileExtensions: [
-    'js', 'json'
-  ]
+  testMatch: ['**/__tests__/**/*.(test|spec).js'],
+  moduleFileExtensions: ['js', 'json'],
 }
