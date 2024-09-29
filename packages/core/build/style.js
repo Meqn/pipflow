@@ -8,10 +8,7 @@ const filter = require('gulp-filter')
 const postcss = require('../plugins/postcss')
 const postcssEnv = require('postcss-preset-env')
 
-const {
-  isPlainObject,
-  injectEnv
-} = require('@pipflow/utils')
+const { isPlainObject, injectEnv } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const { sassDefaultOptions } = require('../base/defaults')
@@ -21,12 +18,12 @@ const {
   plumber,
   putProcesses,
   getBasePath,
-  readManifest
+  readManifest,
 } = require('./comm')
 
 /**
  * CSS样式 处理任务
- * 
+ *
  * @param {Object} options - 配置项
  * @param {string|string[]|string[][]|Object.<string, string|string[]>} options.input - 输入文件路径
  * @param {string} [options.dest] - 输出目录
@@ -44,13 +41,7 @@ const {
  * @throws {Error} 如果`options.input`未定义，则抛出错误
  */
 module.exports = function styleTask(options = {}, done) {
-  const {
-    input,
-    compiler,
-    compilerOptions,
-    minify: cssMinify,
-    alias
-  } = options
+  const { input, compiler, compilerOptions, minify: cssMinify, alias } = options
 
   if (!input) {
     throw new Error('input is required')
@@ -70,7 +61,7 @@ module.exports = function styleTask(options = {}, done) {
    */
   const entries = (
     isPlainObject(input)
-      ? Object.keys(input).map(name => ({ name, file: input[name] }))
+      ? Object.keys(input).map((name) => ({ name, file: input[name] }))
       : [{ name: '', file: input }]
   ).map(({ name, file }) => {
     const baseProcesses = []
@@ -93,17 +84,21 @@ module.exports = function styleTask(options = {}, done) {
     // 5.2 CSS预处理器
     if (compiler === 'sass' || compiler === 'scss') {
       const sass = require('gulp-sass')(require('sass'))
-      const _sassOptions = Object.assign({}, sassDefaultOptions, compilerOptions?.preprocessorOptions)
+      const _sassOptions = Object.assign(
+        {},
+        sassDefaultOptions,
+        compilerOptions?.preprocessorOptions
+      )
       baseProcesses.push(sass(_sassOptions).on('error', sass.logError))
     } else if (compiler === 'less') {
       baseProcesses.push(require('gulp-less')(compilerOptions?.preprocessorOptions || {}))
     } else if (compiler === 'stylus') {
       baseProcesses.push(require('gulp-stylus')(compilerOptions?.preprocessorOptions || {}))
     }
-    
+
     // 4. replace 别名替换
     if (isPlainObject(alias) || Array.isArray(alias)) {
-      baseProcesses.push(require('../plugins/renew')(alias))
+      baseProcesses.push(require('gulp-renew')(alias))
     }
 
     // 6. 合并文件
@@ -111,19 +106,16 @@ module.exports = function styleTask(options = {}, done) {
       baseProcesses.push(concat(path.join(basePath, `${name}.css`)))
     }
 
-    return pipeline(
-      gulp.src(file, name ? { ...srcOptions, base: '.' } : srcOptions),
-      baseProcesses
-    )
+    return pipeline(gulp.src(file, name ? { ...srcOptions, base: '.' } : srcOptions), baseProcesses)
   })
 
   /***************************************************************
    * 统一自定义处理流程
-  */
+   */
 
   // 1. 自定义处理流程
   putProcesses(processes, options.plugins)
-    
+
   // 2. base64 处理
   if (options.assetsInlineLimit?.limit > 0) {
     processes.push(require('gulp-dataurl')(options.assetsInlineLimit))
@@ -142,20 +134,19 @@ module.exports = function styleTask(options = {}, done) {
     const minifyOptions = isPlainObject(cssMinify) ? cssMinify : {}
     postcssPlugins.push(require('cssnano')(minifyOptions))
   }
-  processes.push(postcss({
-    _plugins: postcssPlugins
-  }))
+  processes.push(
+    postcss({
+      _plugins: postcssPlugins,
+    })
+  )
 
   // 3. 文件指纹处理 & sourcemaps & 输出文件
   outputFiles(processes, {
     ...options,
-    filter: cssFilter
+    filter: cssFilter,
   })
 
-  return pipeline(
-    merge(...entries),
-    processes
-  ).on('end', onDone(done))
+  return pipeline(merge(...entries), processes).on('end', onDone(done))
 }
 
 /** 任务整体流程

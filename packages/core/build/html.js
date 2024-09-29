@@ -1,9 +1,6 @@
 const gulp = require('gulp')
 const rename = require('gulp-rename')
-const {
-  isPlainObject,
-  injectEnv
-} = require('@pipflow/utils')
+const { isPlainObject, injectEnv } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const { htmlMinifyOptions } = require('../base/defaults')
@@ -13,7 +10,7 @@ const { createSrcOptions, outputFiles, plumber, putProcesses, readManifest } = r
  * html 模板引擎
  * @param {string} compiler 模板引擎name
  * @param {object} compilerOptions 配置项
- * @returns 
+ * @returns
  */
 function templater(compiler, compilerOptions = {}) {
   const { data = {} } = compilerOptions
@@ -37,14 +34,14 @@ function templater(compiler, compilerOptions = {}) {
     nunjucks() {
       // nunjucks.compile(data?, options?)
       return require('gulp-nunjucks')(data, compilerOptions)
-    }
+    },
   }
   return templaterMap[compiler]?.()
 }
 
 /**
  * HTML 处理任务
- * 
+ *
  * @param {Object} options - 配置项
  * @param {string|string[]|string[][]|Object.<string, string|string[]>} options.input - 输入文件路径
  * @param {string} [options.dest] - 输出目录
@@ -61,19 +58,12 @@ function templater(compiler, compilerOptions = {}) {
  * @throws {Error} 如果`options.input`未定义，则抛出错误
  */
 module.exports = function htmlTask(options = {}, done) {
-  const {
-    input,
-    dest,
-    compiler,
-    compilerOptions,
-    minify: htmlMinify,
-    alias
-  } = options
-  
+  const { input, dest, compiler, compilerOptions, minify: htmlMinify, alias } = options
+
   if (!input) {
     throw new Error('input is required')
   }
-  
+
   const processes = []
   const srcOptions = createSrcOptions(options.base, htmlTask)
 
@@ -90,10 +80,10 @@ module.exports = function htmlTask(options = {}, done) {
       processes.push(rendered)
     }
   }
-  
+
   // 4. replace 替换别名 (在模板编译后，避免路径不会被替换)
   if (isPlainObject(alias) || Array.isArray(alias)) {
-    processes.push(require('../plugins/renew')(alias))
+    processes.push(require('gulp-renew')(alias))
   }
 
   // 5. 自定义处理流程
@@ -103,19 +93,23 @@ module.exports = function htmlTask(options = {}, done) {
   if (options.assetsInlineLimit?.limit > 0) {
     processes.push(require('gulp-dataurl')(options.assetsInlineLimit))
   }
-  
+
   // 6. 文件指纹处理
   const manifest = readManifest(options)
   if (manifest) {
     processes.push(require('gulp-rev-rewrite')({ manifest }))
   }
-  
+
   // 7. 重命名
   processes.push(rename({ extname: '.html' }))
 
   // 8. 压缩处理
   if (htmlMinify) {
-    const minifyOptions = Object.assign({}, htmlMinifyOptions, isPlainObject(htmlMinify) ? htmlMinify : {})
+    const minifyOptions = Object.assign(
+      {},
+      htmlMinifyOptions,
+      isPlainObject(htmlMinify) ? htmlMinify : {}
+    )
     processes.push(require('../plugins/htmlMinifier')(minifyOptions))
   }
 
@@ -126,8 +120,5 @@ module.exports = function htmlTask(options = {}, done) {
     sourcemap: false,
   })
 
-  return pipeline(
-    gulp.src(input, srcOptions),
-    processes
-  ).on('end', onDone(done))
+  return pipeline(gulp.src(input, srcOptions), processes).on('end', onDone(done))
 }

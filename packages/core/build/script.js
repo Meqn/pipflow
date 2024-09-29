@@ -6,10 +6,7 @@ const uglifyjs = require('gulp-terser')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 const merge = require('merge2')
-const {
-  isPlainObject,
-  injectEnv
-} = require('@pipflow/utils')
+const { isPlainObject, injectEnv } = require('@pipflow/utils')
 
 const { pipeline, onDone } = require('../base/utils')
 const { outputFiles, createSrcOptions, plumber, putProcesses, getBasePath } = require('./comm')
@@ -18,19 +15,15 @@ const { outputFiles, createSrcOptions, plumber, putProcesses, getBasePath } = re
  * 处理 script文件 (非 module)
  * @param {object} options 配置项
  * @param {Function} done 回调
- * @returns 
+ * @returns
  */
 function compileScript(options = {}, done) {
   if (!options.input) {
     throw new Error('input is required')
   }
 
-  const {
-    input,
-    alias,
-    minify: jsMinify
-  } = options
-  
+  const { input, alias, minify: jsMinify } = options
+
   const processes = []
   const jsFilter = filter('*.{js,mjs}', { restore: true })
   const srcOptions = createSrcOptions(options.base, compileScript)
@@ -39,7 +32,7 @@ function compileScript(options = {}, done) {
   // 统一入口方式 (input支持 `string`, `array`, `object`)
   const entries = (
     isPlainObject(input)
-      ? Object.keys(input).map(name => ({ name, file: input[name] }))
+      ? Object.keys(input).map((name) => ({ name, file: input[name] }))
       : [{ name: '', file: input }]
   ).map(({ name, file }) => {
     const baseProcesses = []
@@ -57,7 +50,7 @@ function compileScript(options = {}, done) {
 
     // 4. replace 别名替换
     if (isPlainObject(alias) || Array.isArray(alias)) {
-      baseProcesses.push(require('../plugins/renew')(alias))
+      baseProcesses.push(require('gulp-renew')(alias))
     }
 
     // 5. 合并文件
@@ -65,10 +58,7 @@ function compileScript(options = {}, done) {
       baseProcesses.push(concat(path.join(basePath, `${name}.js`)))
     }
 
-    return pipeline(
-      gulp.src(file, name ? { ...srcOptions, base: '.' } : srcOptions),
-      baseProcesses
-    )
+    return pipeline(gulp.src(file, name ? { ...srcOptions, base: '.' } : srcOptions), baseProcesses)
   })
 
   // 1. 自定义处理流程
@@ -107,17 +97,13 @@ function compileScript(options = {}, done) {
     ...options,
     filter: jsFilter,
   })
-  
-  return pipeline(
-    merge(...entries),
-    processes
-  ).on('end', done)
 
+  return pipeline(merge(...entries), processes).on('end', done)
 }
 
 /**
  * Javascript 处理任务
- * 
+ *
  * @param {Object} options - 配置项
  * @param {string|string[]|string[][]|Object.<string, string|string[]>} options.input - 输入文件路径
  * @param {string} [options.dest] - 输出目录
