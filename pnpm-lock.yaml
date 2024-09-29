@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -20,6 +20,9 @@ importers:
       '@types/node':
         specifier: ^20.8.9
         version: 20.16.10
+      diy-log:
+        specifier: ^2.5.1
+        version: 2.5.1
       gulp:
         specifier: ^4.0.2
         version: 4.0.2
@@ -174,6 +177,9 @@ importers:
       gulp-rename:
         specifier: ^2.0.0
         version: 2.0.0
+      gulp-renew:
+        specifier: workspace:^
+        version: link:../../plugins/renew
       gulp-rev:
         specifier: ^9.0.0
         version: 9.0.0
@@ -198,9 +204,6 @@ importers:
       html-minifier-terser:
         specifier: ^7.2.0
         version: 7.2.0
-      istextorbinary:
-        specifier: ^9.5.0
-        version: 9.5.0
       merge2:
         specifier: ^1.4.1
         version: 1.4.1
@@ -216,9 +219,6 @@ importers:
       postcss-preset-env:
         specifier: ^10.0.0
         version: 10.0.5(postcss@8.4.47)
-      replacestream:
-        specifier: ^4.0.3
-        version: 4.0.3
       rimraf:
         specifier: ^5.0.1
         version: 5.0.1
@@ -309,6 +309,9 @@ importers:
 
   plugins/renew:
     dependencies:
+      '@types/node':
+        specifier: '*'
+        version: 20.16.10
       istextorbinary:
         specifier: ^9.5.0
         version: 9.5.0
@@ -4564,7 +4567,6 @@ packages:
     dependencies:
       picocolors: 1.1.0
       time-stamp: 2.2.0
-    dev: false
 
   /doctypes@1.1.0:
     resolution: {integrity: sha512-LLBi6pEqS6Do3EKQ3J0NqHWV5hhb78Pi8vvESYwyOy2c31ZEZVdtitdzsQsKb7878PEERhzUk0ftqGhG6Mz+pQ==}
@@ -10642,7 +10644,6 @@ packages:
   /time-stamp@2.2.0:
     resolution: {integrity: sha512-zxke8goJQpBeEgD82CXABeMh0LSJcj7CXEd0OHOg45HgcofF7pxNwZm9+RknpxpDhwN4gFpySkApKfFYfRQnUA==}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /timed-out@4.0.1:
     resolution: {integrity: sha512-G7r3AhovYtr5YKOWQkta8RKAPb+J9IsO4uVmzjl8AZwfhs8UcUwTiD6gcJYSgOtzyjvQKrKYn41syHbUWMkafA==}

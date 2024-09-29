@@ -1,5 +1,6 @@
 const simpleGit = require('simple-git')
 const { promisify } = require('util')
+const log = require('diy-log')
 
 const git = simpleGit()
 
@@ -7,7 +8,7 @@ const git = simpleGit()
 async function getCommitsSince(commitId) {
   const log = promisify(git.log.bind(git))
   const logOptions = {
-    from: commitId
+    from: commitId,
   }
 
   try {
@@ -31,7 +32,7 @@ async function getCommitsSinceLatestTag() {
   }
 
   const logOptions = {
-    from: latestTag
+    from: latestTag,
   }
 
   try {
@@ -44,9 +45,9 @@ async function getCommitsSinceLatestTag() {
 }
 
 // 格式化 commit 记录
-function formatCommits(commits, filter = commit => commit) {
+function formatCommits(commits, filter = (commit) => commit) {
   const regex = /\(([^)]+)\)/
-  return commits.filter(filter).map(commit => {
+  return commits.filter(filter).map((commit) => {
     const { message } = commit
     const match = message.match(regex)
 
@@ -56,7 +57,7 @@ function formatCommits(commits, filter = commit => commit) {
       date: commit.date,
       message: message,
       package: match ? match[1].toLowerCase() : '',
-      text: match ? message.replace(match[0], '').trim() : ''
+      text: match ? message.replace(match[0], '').trim() : '',
     }
   })
 }
@@ -66,7 +67,7 @@ function formatCommits(commits, filter = commit => commit) {
   try {
     // const commits = await getCommitsSince('4ac1e7a')
     const commits = await getCommitsSinceLatestTag()
-    const formattedCommits = formatCommits(commits, commit => {
+    const formattedCommits = formatCommits(commits, (commit) => {
       return moduleRegex.test(commit.message)
     }).reduce((acc, commit) => {
       if (!commit.package) throw new Error('No package found in commit message: ' + commit.message)
@@ -74,12 +75,19 @@ function formatCommits(commits, filter = commit => commit) {
         acc[commit.package] = []
       }
       acc[commit.package].push(
-        `- ${commit.text} ([${commit.hash.slice(0, 7)}](https://github.com/Meqn/pipflow/commit/${commit.hash}))`
+        `- ${commit.text} ([${commit.hash.slice(0, 7)}](https://github.com/Meqn/pipflow/commit/${
+          commit.hash
+        }))`
       )
       return acc
     }, {})
-    console.log('Commit messages:', formatCommits(commits).map(commit => commit.message))
-    console.log('Commits:', formattedCommits)
+    console.log(
+      'Commit messages:',
+      formatCommits(commits).map((commit) => commit.message)
+    )
+    Object.entries(formattedCommits).forEach(([key, value]) => {
+      log.tag.warn('\n' + value.join('\n'), key)
+    })
   } catch (error) {
     console.error('error:', error.message)
   }
