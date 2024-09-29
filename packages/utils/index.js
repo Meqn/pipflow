@@ -9,8 +9,8 @@
   'pkgDir',
   'readJsonFiles',
   'stringifyJS',
-  'findCommonPath'
-].forEach(m => {
+  'findCommonPath',
+].forEach((m) => {
   Object.assign(exports, require(`./libs/${m}`))
 })
 
@@ -21,3 +21,4 @@ exports.symbols = diyLog.symbols
 exports.timestamp = diyLog.timestamp
 exports.fs = require('fs-extra')
 exports.minimist = require('minimist')
+exports.path = require('pathe')
