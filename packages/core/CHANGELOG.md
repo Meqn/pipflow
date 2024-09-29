@@ -1,5 +1,15 @@
 # @pipflow/core
 
+## 1.2.4
+
+### Patch Changes 🌟
+
+- perf: Import 'gulp-renew' package for string replacement. ([fd7e711](https://github.com/Meqn/pipflow/commit/fd7e7112fbc096950036c7bdbf8b04c0bdf8b835))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.1.2
+  - gulp-renew@1.0.1
+
 ## 1.2.3
 
 ### Patch Changes 🌟

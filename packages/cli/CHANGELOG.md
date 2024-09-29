@@ -1,5 +1,14 @@
 # @pipflow/cli
 
+## 1.1.2
+
+### Patch Changes 🌟
+
+- refactor: Imports `pathe` modules from `@pipflow/utils` ([0483d81](https://github.com/Meqn/pipflow/commit/0483d81a1d9ad9869d7ff8472ff4968034861173))
+
+- Updated dependencies []:
+  - @pipflow/utils@1.1.2
+
 ## 1.1.1
 
 ### Minor Changes 🚀

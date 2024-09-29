@@ -1,5 +1,11 @@
 # @pipflow/utils
 
+## 1.1.2
+
+### Patch Changes 🌟
+
+- fix: Add `pathe` for window & refactor findCommonPath ([223b408](https://github.com/Meqn/pipflow/commit/223b4089569a56b4b2e355013df1914896146f5e))
+
 ## 1.1.1
 
 ### Patch Changes 🌟

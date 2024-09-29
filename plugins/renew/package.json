@@ -1,6 +1,6 @@
 {
   "name": "gulp-renew",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A plugin that supports batch string replacement for gulp. Replacement rules support regular expressions and function replacements",
   "main": "index.js",
   "types": "types/index.d.ts",
