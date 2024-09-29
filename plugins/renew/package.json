@@ -1,0 +1,39 @@
+{
+  "name": "gulp-renew",
+  "version": "1.0.0",
+  "description": "A plugin that supports batch string replacement for gulp. Replacement rules support regular expressions and function replacements",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "types",
+    "index.js"
+  ],
+  "keywords": [
+    "gulp plugin",
+    "gulp-renew",
+    "gulp-replace",
+    "gulp",
+    "renew",
+    "replace",
+    "batch replace"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meqn/gulp-dataurl.git"
+  },
+  "author": "Mervin <mengqing723@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meqn/gulp-dataurl/issues"
+  },
+  "homepage": "https://github.com/meqn/gulp-dataurl#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@types/node": "*",
+    "istextorbinary": "^9.5.0",
+    "replacestream": "^4.0.3"
+  }
+}
