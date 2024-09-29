@@ -4,6 +4,9 @@
   "description": "A plugin that supports batch string replacement for gulp. Replacement rules support regular expressions and function replacements",
   "main": "index.js",
   "types": "types/index.d.ts",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "files": [
     "types",
     "index.js"
@@ -19,14 +22,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meqn/gulp-dataurl.git"
+    "url": "git+https://github.com/meqn/pipflow.git"
   },
   "author": "Mervin <mengqing723@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/meqn/gulp-dataurl/issues"
   },
-  "homepage": "https://github.com/meqn/gulp-dataurl#readme",
+  "homepage": "https://github.com/Meqn/pipflow/tree/main/plugins/renew#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

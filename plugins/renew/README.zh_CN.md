@@ -1,5 +1,9 @@
 # gulp-renew
 
+[ [English](./README.md) | [中文](./README.zh_CN.md) ]
+
+
+
 支持字符串批量替换插件。  
 替换规则支持正则表达式和函数替换。
 
@@ -46,6 +50,7 @@ renew(replacements[, options])
 ### replacements
 
 包含要进行替换的规则。每个规则是一个对象，包含 search 和 replacement 属性
+
 `type`: `Array<{ search: string | RegExp, replacement: string | Function }>`
 
 - `search`：要搜索的字符串或正则表达式。
@@ -54,12 +59,15 @@ renew(replacements[, options])
 ### options
 
 选项
+
 `Type`: `Object`
 
 #### `options.skipBinary`
 
 是否跳过二进制文件。
+
 `Type`: `boolean`
+
 `Default`: `true`
 
 如果 `skipBinary` 选项设置为 `true`，插件将不会处理二进制文件。

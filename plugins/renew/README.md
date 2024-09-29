@@ -6,6 +6,10 @@
 [![node.js](https://img.shields.io/node/v/gulp-renew?style=flat-square&logo=nodedotjs)](https://nodejs.org/en/about/releases/)
 [![license](https://img.shields.io/npm/l/gulp-renew?style=flat-square)](https://github.com/Meqn/pipflow)
 
+[ [English](./README.md) | [中文](./README.zh_CN.md) ]
+
+
+
 A plugin that supports batch string replacement for gulp.  
 Replacement rules support regular expressions and function replacements.
 
@@ -52,6 +56,7 @@ renew(replacements[, options])
 ### replacements
 
 Contains the rules for replacement. Each rule is an object containing the search and replacement properties.
+
 `type`: `Array<{ search: string | RegExp, replacement: string | Function }>`
 
 - `search`：The string or regular expression to search for.
@@ -60,12 +65,15 @@ Contains the rules for replacement. Each rule is an object containing the search
 ### options
 
 Options.
+
 `Type`: `Object`
 
 #### `options.skipBinary`
 
 Whether to skip binary files.
+
 `Type`: `boolean`
+
 `Default`: `true`
 
 Skip binary files. This option is true by default. If you want to replace content in binary files, you must explicitly set it to false.
