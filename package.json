@@ -10,7 +10,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "reinstall": "rm -rf node_modules **/*/node_modules && pnpm install",
-    "clean": "rm -rf dist packages/*/dist docs/.vitepress/cache docs/.vitepress/dist",
+    "clean": "rm -rf dist packages/*/dist plugins/*/dist docs/.vitepress/cache docs/.vitepress/dist",
     "test": "node --experimental-vm-modules scripts/test.js",
     "changelog": "node ./scripts/changelog.js",
     "changeset": "changeset",
@@ -21,7 +21,8 @@
     "docs:preview": "vitepress preview docs"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "plugins/*"
   ],
   "keywords": [],
   "author": "",
@@ -36,6 +37,7 @@
     "minimist": "^1.2.8",
     "rimraf": "5.0.1",
     "simple-git": "^3.21.0",
+    "vinyl": "^3.0.0",
     "vitepress": "1.0.0-rc.22"
   }
 }
