@@ -1,27 +1,31 @@
 const minimist = require('minimist')
 const rawArgs = process.argv.slice(2)
 const args = minimist(rawArgs)
-const packageNames = ['core', 'cli', 'main', 'utils']
+const packagesMap = {
+  core: 'packages/core',
+  cli: 'packages/cli',
+  main: 'packages/main',
+  utils: 'packages/utils',
+  renew: 'plugins/renew',
+}
 
 let regex
 if (args.p) {
-  const packages = (args.p || args.package).split(',').join('|')
-  regex = `packages/(${packages})/.*\\.(test|spec)\\.js$`
+  // `pnpm test -- -p utils,core`
+  const packages = (args.p || args.package)
+    .split(',')
+    .map((p) => packagesMap[p])
+    .join('|')
+  regex = `(${packages})/.*\\.(test|spec)\\.js$`
   const i = rawArgs.indexOf('-p')
   rawArgs.splice(i, 2)
-} else if (args._.length && packageNames.includes(args._[0])) {
-  // 支持 `pnpm test core`
-  regex = `packages/(${args._[0]})/.*\\.(test|spec)\\.js$`
-  rawArgs.shift()
+} else if (args._.length) {
+  // 支持 `pnpm test core utils`
+  const packages = args._.map((p) => packagesMap[p]).join('|')
+  regex = `(${packages})/.*\\.(test|spec)\\.js$`
+  // rawArgs.shift()
+  rawArgs.splice(0, args._.length)
 }
-
-const jestArgs = [
-  '--env', 'node',
-  '--runInBand',
-  ...rawArgs,
-  ...(regex ? [regex] : [])
-]
-
-console.log(`running jest with args: ${jestArgs.join(' ')}`)
+const jestArgs = ['--env', 'node', '--runInBand', ...rawArgs, ...(regex ? [regex] : [])]
 
 require('jest').run(jestArgs)
