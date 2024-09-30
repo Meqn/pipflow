@@ -1,7 +1,11 @@
 const simpleGit = require('simple-git')
 const { promisify } = require('util')
 const log = require('diy-log')
+const minimist = require('minimist')
+const { readPackageJson, readPackageFile, writePackageFile, updateChangelog } = require('./utils')
 
+const rawArgs = process.argv.slice(2)
+const args = minimist(rawArgs)
 const git = simpleGit()
 
 // 获取从特定 commit ID 开始的所有最新记录
@@ -62,10 +66,20 @@ function formatCommits(commits, filter = (commit) => commit) {
   })
 }
 
+// 生成日志记录
+async function generateLogs(name, logs) {
+  const pkg = await readPackageJson(name)
+  const content = await readPackageFile(name)
+  const result = updateChangelog(content, pkg.version, logs[name])
+  await writePackageFile(name, result)
+
+  return result
+}
+
 ;(async () => {
   const moduleRegex = /^[a-z]{1,10}\(\w+\).*/i
   try {
-    // const commits = await getCommitsSince('4ac1e7a')
+    // const commits = await getCommitsSince('d9acb96')
     const commits = await getCommitsSinceLatestTag()
     const formattedCommits = formatCommits(commits, (commit) => {
       return moduleRegex.test(commit.message)
@@ -81,14 +95,22 @@ function formatCommits(commits, filter = (commit) => commit) {
       )
       return acc
     }, {})
+
     console.log(
       'Commit messages:',
       formatCommits(commits).map((commit) => commit.message)
     )
+
     Object.entries(formattedCommits).forEach(([key, value]) => {
       log.tag.warn('\n' + value.join('\n'), key)
     })
-  } catch (error) {
-    console.error('error:', error.message)
+
+    if (args._.length) {
+      for (const name of args._) {
+        await generateLogs(name, formattedCommits)
+      }
+    }
+  } catch (err) {
+    console.error('error:', err.message)
   }
 })()

@@ -1,13 +1,7 @@
 const minimist = require('minimist')
 const rawArgs = process.argv.slice(2)
 const args = minimist(rawArgs)
-const packagesMap = {
-  core: 'packages/core',
-  cli: 'packages/cli',
-  main: 'packages/main',
-  utils: 'packages/utils',
-  renew: 'plugins/renew',
-}
+const { packagesMap } = require('./config')
 
 let regex
 if (args.p) {
