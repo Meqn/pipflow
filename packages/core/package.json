@@ -1,6 +1,6 @@
 {
   "name": "@pipflow/core",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Packaging of Gulp-based build tasks. It provides a series of out-of-the-box Gulp tasks.",
   "main": "index.js",
   "engines": {

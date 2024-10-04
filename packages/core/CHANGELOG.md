@@ -1,5 +1,11 @@
 # @pipflow/core
 
+## 1.2.5
+
+### Patch Changes 🌟
+
+- docs: Update README & package.json ([3632eee](https://github.com/Meqn/pipflow/commit/3632eee70e8dea480a2a5dd13c496a4cf4b08ec0))
+
 ## 1.2.4
 
 ### Patch Changes 🌟
