@@ -1,7 +1,7 @@
 {
   "name": "@pipflow/core",
   "version": "1.2.4",
-  "description": "A web developer workflow based on Gulp.",
+  "description": "Packaging of Gulp-based build tasks. It provides a series of out-of-the-box Gulp tasks.",
   "main": "index.js",
   "engines": {
     "node": ">=16.0.0"
@@ -22,14 +22,14 @@
   ],
   "keywords": [
     "gulp",
-    "plugin",
+    "gulp-task",
+    "gulp-build",
+    "gulp-workflow",
+    "gulp-plugins",
     "gulp-webpack",
     "gulp-html",
     "gulp-css",
-    "gulp-sass",
-    "gulp-less",
     "gulp-postcss",
-    "gulp-stylus",
     "gulp-template",
     "workflow"
   ],
