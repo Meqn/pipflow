@@ -19,27 +19,16 @@ const PLUGIN_NAME = 'gulp-posthtml'
 
 function rc(cb) {
   // 合并 默认配置 和 配置文件
-  return function (plugins, options) {
+  return function (plugins, options = {}) {
+    const ctx = options
     return cb(async (file) => {
-      let _results = {} //默认配置
+      let defaults = {} //默认配置
       if (Array.isArray(plugins)) {
-        _results = { plugins: plugins, options: options }
+        defaults = { plugins, options }
       } else if (typeof plugins === 'function') {
-        _results = await Promise.resolve(plugins(file))
-        if (Array.isArray(_results)) {
-          _results = { plugins: _results }
-        } else if (typeof _results === 'object' && _results !== null) {
-          const _res = {}
-          _res.plugins = _results.plugins || []
-          delete _results.plugins
-          _res.options = _results.options || _results
-          _results = _res
-        } else {
-          _results = {}
-        }
+        defaults = await Promise.resolve(plugins(file))
       }
 
-      const ctx = options || {}
       const config = {}
 
       if (ctx.config) {
@@ -50,12 +39,17 @@ function rc(cb) {
 
       config.ctx = { file: file, options: ctx }
 
-      return posthtmlrc(config.ctx, config.path).then((res) => {
-        return {
-          plugins: (_results.plugins || []).concat(res.plugins),
-          options: Object.assign(_results.options, res.options),
-        }
-      })
+      return posthtmlrc(config.ctx, config.path)
+        .then((result) => {
+          return {
+            plugins: (defaults.plugins || []).concat(result.plugins || []),
+            options: Object.assign({}, defaults.options, result.options),
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+          return defaults
+        })
     })
   }
 }

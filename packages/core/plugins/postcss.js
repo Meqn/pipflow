@@ -1,7 +1,8 @@
 /**
+ * @Date 2024/10/11
  * 源自 gulp-postcss@10.0.0
- * @description 源 gulp-postcss 不支持 配置项 和 post.config合并，故fork并修改 (修改行: [56])
- * @example `.pipe(postcss({_plugins: [require('autoprefixer')()]}))`
+ * `gulp-postcss` 不支持 配置项 和 post.config合并，故fork并修改
+ * 1. 重写 `withConfigLoader` 函数
  */
 
 var Stream = require('stream')
@@ -11,13 +12,10 @@ var fancyLog = require('fancy-log')
 var PluginError = require('plugin-error')
 var path = require('path')
 
-
 module.exports = withConfigLoader(function (loadConfig) {
-
   var stream = new Stream.Transform({ objectMode: true })
 
   stream._transform = function (file, encoding, cb) {
-
     if (file.isNull()) {
       return cb(null, file)
     }
@@ -27,15 +25,13 @@ module.exports = withConfigLoader(function (loadConfig) {
     }
 
     // Protect `from` and `map` if using gulp-sourcemaps
-    var isProtected = file.sourceMap
-      ? { from: true, map: true }
-      : {}
+    var isProtected = file.sourceMap ? { from: true, map: true } : {}
 
     var options = {
       from: file.path,
       to: file.path,
       // Generate a separate source map for gulp-sourcemaps
-      map: file.sourceMap ? { annotation: false } : false
+      map: file.sourceMap ? { annotation: false } : false,
     }
 
     loadConfig(file)
@@ -48,17 +44,18 @@ module.exports = withConfigLoader(function (loadConfig) {
           } else {
             fancyLog.info(
               'gulp-postcss:',
-              file.relative + '\nCannot override ' + opt +
-              ' option, because it is required by gulp-sourcemaps'
+              file.relative +
+                '\nCannot override ' +
+                opt +
+                ' option, because it is required by gulp-sourcemaps'
             )
           }
         }
-        return postcss([].concat(configOpts._plugins || [], config.plugins || []))
-          .process(file.contents, options)
+        return postcss(config.plugins || []).process(file.contents, options)
       })
       .then(handleResult, handleError)
 
-    function handleResult (result) {
+    function handleResult(result) {
       var map
       var warnings = result.warnings().join('\n')
 
@@ -83,7 +80,7 @@ module.exports = withConfigLoader(function (loadConfig) {
       })
     }
 
-    function handleError (error) {
+    function handleError(error) {
       var errorOptions = { fileName: file.path, showStack: true }
       if (error.name === 'CssSyntaxError') {
         errorOptions.error = error
@@ -99,48 +96,48 @@ module.exports = withConfigLoader(function (loadConfig) {
         cb(new PluginError('gulp-postcss', error, errorOptions))
       })
     }
-
   }
 
   return stream
 })
 
-
 function withConfigLoader(cb) {
-  return function (plugins, options) {
-    if (Array.isArray(plugins)) {
-      return cb(function () {
-        return Promise.resolve({
-          plugins: plugins,
-          options: options
-        })
-      })
-    } else if (typeof plugins === 'function') {
-      return cb(function (file) {
-        return Promise.resolve(plugins(file))
-      })
-    } else {
-      var postcssLoadConfig = require('postcss-load-config')
-      var contextOptions = plugins || {}
-      return cb(function(file) {
-        var configPath
-        if (contextOptions.config) {
-          if (path.isAbsolute(contextOptions.config)) {
-            configPath = contextOptions.config
-          } else {
-            configPath = path.join(file.base, contextOptions.config)
-          }
+  return function (plugins, options = {}) {
+    var postcssLoadConfig = require('postcss-load-config')
+    var contextOptions = options
+    return cb(async (file) => {
+      var defaults = {} //默认配置
+      if (Array.isArray(plugins)) {
+        defaults = { plugins, options }
+      } else if (typeof plugins === 'function') {
+        defaults = await Promise.resolve(plugins(file))
+      }
+
+      var configPath
+      if (contextOptions.config) {
+        if (path.isAbsolute(contextOptions.config)) {
+          configPath = contextOptions.config
         } else {
-          configPath = file.dirname
+          configPath = path.join(file.base, contextOptions.config)
         }
-        // @TODO: The options property is deprecated and should be removed in 10.0.0.
-        contextOptions.options = Object.assign({}, contextOptions)
-        contextOptions.file = file
-        return postcssLoadConfig(
-          contextOptions,
-          configPath
-        )
-      })
-    }
+      } else {
+        configPath = file.dirname
+      }
+      // @TODO: The options property is deprecated and should be removed in 10.0.0.
+      contextOptions.options = Object.assign({}, contextOptions)
+      contextOptions.file = file
+      return postcssLoadConfig(contextOptions, configPath)
+        .then((result) => {
+          return {
+            file: result.file || file,
+            plugins: [].concat(result.plugins || [], defaults.plugins || []),
+            options: Object.assign({}, defaults.options, result.options),
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+          return defaults
+        })
+    })
   }
 }

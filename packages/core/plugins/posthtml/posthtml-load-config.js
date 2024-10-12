@@ -93,7 +93,7 @@ module.exports = function posthtmlrc(ctx, path, options) {
     .search(path)
     .then((result) => {
       if (!result) {
-        console.error('PostHTML Config could not be loaded. Please check your PostHTML Config.')
+        throw new Error('Failed to load PostHTML Config.')
       }
       return result?.config || {}
     })
@@ -112,8 +112,5 @@ module.exports = function posthtmlrc(ctx, path, options) {
         plugins: loadPlugins(config),
         options: loadOptions(config),
       }
-    })
-    .catch((err) => {
-      console.error(err)
     })
 }

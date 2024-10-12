@@ -134,11 +134,7 @@ module.exports = function styleTask(options = {}, done) {
     const minifyOptions = isPlainObject(cssMinify) ? cssMinify : {}
     postcssPlugins.push(require('cssnano')(minifyOptions))
   }
-  processes.push(
-    postcss({
-      _plugins: postcssPlugins,
-    })
-  )
+  processes.push(postcss(postcssPlugins))
 
   // 3. 文件指纹处理 & sourcemaps & 输出文件
   outputFiles(processes, {
