@@ -8,7 +8,7 @@ const {
   generateConfig,
   readJsonFile,
   writeJsonFile,
-  writeJsFile
+  writeJsFile,
 } = require('@pipflow/utils')
 
 const { CLI_CONFIG_FILE } = require('./config/constants')
@@ -16,7 +16,7 @@ const { CLI_CONFIG_FILE } = require('./config/constants')
 /**
  * 生成 pipflow.config 配置
  * @param {object} preset 用户预设
- * @returns 
+ * @returns
  */
 async function createConfig(file, preset = {}) {
   const data = generateConfig(preset)
@@ -33,7 +33,7 @@ async function createConfig(file, preset = {}) {
  * @param {string} src 源地址
  * @param {string} dest 目标地址
  * @param {object} data 预设数据
- * @returns 
+ * @returns
  */
 function renderTemplate(src, dest, data = {}) {
   const renderTypes = ['js', 'json', 'md', 'html']
@@ -43,16 +43,17 @@ function renderTemplate(src, dest, data = {}) {
       .source(path.resolve(src, 'presets'))
       .destination(dest)
       .metadata({ ...data })
-      .use(async function(files, metalsmith, next) {
-        const data = metalsmith.metadata()  //获取metalsmith的所有变量
+      .use(async function (files, metalsmith, next) {
+        const data = metalsmith.metadata() //获取metalsmith的所有变量
         for (const file of Object.keys(files)) {
           // 过滤掉不需要编译的文件
           if (!renderTypes.includes(file.split('.').pop())) continue
 
-          let contents = files[file].contents.toString()  //读取文件内容
-          if (contents.includes('{{')) {  //内容包含 `{{` 才需要编译
+          let contents = files[file].contents.toString() //读取文件内容
+          if (contents.includes('{{')) {
+            //内容包含 `{{` 才需要编译
             contents = await render(contents, data) //用数据渲染模板
-            files[file].contents = Buffer.from(contents)  //更新文件内容
+            files[file].contents = Buffer.from(contents) //更新文件内容
           }
         }
         next()
@@ -67,16 +68,13 @@ function renderTemplate(src, dest, data = {}) {
   })
 }
 
-exports.generateTemplate = async function(src, dest, options = {}) {
+exports.generateTemplate = async function (src, dest, options = {}) {
   // 拷贝并渲染基础模板
   await renderTemplate(src, dest, options)
-    
+
   // 生成 pipflow.config 配置文件
-  await createConfig(
-    path.resolve(dest, CLI_CONFIG_FILE),
-    options
-  )
-  
+  await createConfig(path.resolve(dest, CLI_CONFIG_FILE), options)
+
   const { cssPreprocessor, templater, babel, hasGit, linter, eslintConfig } = options
   // 删除 .gitignore
   if (!hasGit) {
@@ -88,29 +86,18 @@ exports.generateTemplate = async function(src, dest, options = {}) {
   }
   // 拷贝 style 样式文件
   const cssDir = ['less', 'sass', 'stylus'].includes(cssPreprocessor) ? cssPreprocessor : 'default'
-  await fs.copy(
-    path.resolve(dest, 'styles', cssDir),
-    path.resolve(dest, 'src/styles')
-  )
+  await fs.copy(path.resolve(dest, 'styles', cssDir), path.resolve(dest, 'src/styles'))
   await fs.remove(path.resolve(dest, 'styles'))
   // 拷贝基础 html 模板文件
-  const htmlDir = ['artTemplate', 'ejs', 'pug', 'handlebars', 'nunjucks'].includes(templater) ? templater : 'default'
-  await fs.copy(
-    path.resolve(dest, 'views', htmlDir),
-    path.resolve(dest, 'src')
-  )
+  // const htmlDir = ['artTemplate', 'ejs', 'pug', 'handlebars', 'nunjucks'].includes(templater) ? templater : 'default'
+  const htmlDir = 'default'
+  await fs.copy(path.resolve(dest, 'views', htmlDir), path.resolve(dest, 'src'))
   await fs.remove(path.resolve(dest, 'views'))
   // 处理 linter 和 eslint 配置
   if (linter) {
-    await fs.copy(
-      path.resolve(dest, 'eslint', eslintConfig),
-      path.resolve(dest)
-    )
+    await fs.copy(path.resolve(dest, 'eslint', eslintConfig), path.resolve(dest))
     if (eslintConfig !== 'base') {
-      await fs.copy(
-        path.resolve(dest, 'eslint/base'),
-        path.resolve(dest)
-      )
+      await fs.copy(path.resolve(dest, 'eslint/base'), path.resolve(dest))
     }
 
     const { getConfig: getEslintConfig, getDeps: getEslintDeps } = require('./utils/eslint')
@@ -119,9 +106,9 @@ exports.generateTemplate = async function(src, dest, options = {}) {
     // 1. 处理 package.json 依赖
     const newPkg = deepMerge({}, pkg, {
       scripts: {
-        lint: 'pipflow task lint'
+        lint: 'pipflow task lint',
       },
-      devDependencies: getEslintDeps(options)
+      devDependencies: getEslintDeps(options),
     })
     await writeJsonFile(path.resolve(dest, 'package.json'), newPkg)
 

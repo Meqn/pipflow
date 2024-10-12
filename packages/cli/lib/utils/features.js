@@ -3,11 +3,17 @@ module.exports = [
     name: 'Babel',
     value: 'babel',
     short: 'Babel',
-    description:
-      'Transpile modern JavaScript to older versions (for compatibility)',
-    link: 'https://babeljs.io/'
+    description: 'Transpile modern JavaScript to older versions (for compatibility)',
+    link: 'https://babeljs.io/',
   },
   {
+    name: 'HTML templater',
+    value: 'templater',
+    short: 'templater',
+    description: 'Enhance HTML development experience (By Art-template)',
+    link: 'https://github.com/aui/art-template',
+  },
+  /* {
     name: 'HTML templater', // HTML(JS) templating engine
     value: 'templater',
     short: 'HTML templater',
@@ -18,30 +24,30 @@ module.exports = [
       choices: [
         {
           name: 'art-template',
-          value: 'artTemplate'
+          value: 'artTemplate',
         },
         {
           name: 'EJS',
-          value: 'ejs'
+          value: 'ejs',
         },
         {
           name: 'Pug',
-          value: 'pug'
+          value: 'pug',
         },
         {
           name: 'Handlebars',
-          value: 'handlebars'
+          value: 'handlebars',
         },
         {
           name: 'Nunjucks',
-          value: 'nunjucks'
-        }
-      ]
+          value: 'nunjucks',
+        },
+      ],
     },
     onPromptComplete(answer, options) {
       options['templater'] = answer['templater']
-    }
-  },
+    },
+  }, */
   {
     name: 'CSS Pre-processors',
     value: 'cssPreprocessor',
@@ -54,27 +60,27 @@ module.exports = [
       choices: [
         {
           name: 'Sass/SCSS (with dart-sass)',
-          value: 'sass'
+          value: 'sass',
         },
         {
           name: 'Less',
-          value: 'less'
+          value: 'less',
         },
         {
           name: 'Stylus',
-          value: 'stylus'
-        }
-      ]
+          value: 'stylus',
+        },
+      ],
     },
     onPromptComplete(answer, options) {
       options['cssPreprocessor'] = answer['cssPreprocessor']
-    }
+    },
   },
   {
     name: 'Compress Image & SVG',
     value: 'imagemin',
     short: 'Compress Image',
-    description: 'Minify PNG, JPEG, GIF and SVG images'
+    description: 'Minify PNG, JPEG, GIF and SVG images',
   },
   {
     name: 'Linter / Formatter',
@@ -90,27 +96,27 @@ module.exports = [
         {
           name: 'ESLint with error prevention only',
           value: 'base',
-          short: 'Basic'
+          short: 'Basic',
         },
         {
           name: 'ESLint + Airbnb config',
           value: 'airbnb',
-          short: 'Airbnb'
+          short: 'Airbnb',
         },
         {
           name: 'ESLint + Standard config',
           value: 'standard',
-          short: 'Standard'
+          short: 'Standard',
         },
         {
           name: 'ESLint + Prettier',
           value: 'prettier',
-          short: 'Prettier'
-        }
-      ]
+          short: 'Prettier',
+        },
+      ],
     },
     onPromptComplete(answer, options) {
       options['eslintConfig'] = answer['eslintConfig']
-    }
-  }
+    },
+  },
 ]
