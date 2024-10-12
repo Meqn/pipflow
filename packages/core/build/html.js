@@ -73,21 +73,26 @@ module.exports = function htmlTask(options = {}, done) {
   // 2. 环境变量处理
   processes.push(injectEnv({ isVar: false }))
 
-  // 3. 模板处理
+  //! 3. 别名替换 (可能需要多次处理，避免载入的文件内容不被替换)
+  if (isPlainObject(alias) || Array.isArray(alias)) {
+    processes.push(require('gulp-renew')(alias))
+  }
+
+  // 4. 仅内置 `art-template` 模板引擎
   if (compiler) {
-    const rendered = templater(compiler, compilerOptions)
+    const rendered = templater('artTemplate', compilerOptions)
     if (rendered) {
       processes.push(rendered)
     }
   }
 
-  // 4. replace 替换别名 (在模板编译后，避免路径不会被替换)
+  // 5. 自定义处理流程
+  putProcesses(processes, options.plugins)
+
+  //! 3. 别名替换
   if (isPlainObject(alias) || Array.isArray(alias)) {
     processes.push(require('gulp-renew')(alias))
   }
-
-  // 5. 自定义处理流程
-  putProcesses(processes, options.plugins)
 
   // 6. base64 处理
   if (options.assetsInlineLimit?.limit > 0) {
