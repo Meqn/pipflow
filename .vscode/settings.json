@@ -3,6 +3,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
+  "cSpell.ignoreWords": ["pipflow", "templater"],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.inlineSuggest.showToolbar": "onHover",
@@ -16,21 +17,6 @@
     "**/bower_components": true,
     "**/*.code-search": true,
     "**/*.log": true
-  },
-  "[properties]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "[svg]": {
-    "editor.defaultFormatter": "jock.svg"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "svg.preview.background": "transparent",
   "[shellscript]": {
