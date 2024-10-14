@@ -1,8 +1,15 @@
+const path = require('path')
 const { Transform } = require('stream')
 const postcss = require('postcss')
 
 const PLUGIN_NAME = 'gulp-html-css'
 
+/**
+ * Create a CSS compiler function
+ * @param {Object} compiler - CSS compiler object
+ * @param {Object} options - Compiler options
+ * @returns {Function} - CSS compiler function
+ */
 function cssCompiler(compiler, options) {
   const compilerMap = {
     sass: async (input, file) => {
@@ -11,21 +18,35 @@ function cssCompiler(compiler, options) {
       }
       const opts = {
         file: file.path,
+        importers: [
+          {
+            findFileUrl(url) {
+              if (!path.isAbsolute(url)) {
+                url = path.resolve(path.dirname(file.path), url)
+              }
+              return new URL(`file://${url}`)
+            },
+          },
+        ],
+        // loadPaths: [path.dirname(file.path)],
         ...options,
       }
       const result = await compiler.compileStringAsync(input, opts)
       return result.css
     },
-    less: async (input, file) => {
+    less: (input, file) => {
       if (typeof compiler.render !== 'function') {
         throw new Error('Invalid Less compiler')
       }
       const opts = {
         filename: file.path,
+        // paths: [path.dirname(file.path)],
+        javascriptEnabled: true,
         ...options,
       }
-      const result = await compiler.render(input, opts)
-      return result.css
+      return new Promise((resolve, reject) =>
+        compiler.render(input, opts, (err, res) => (err ? reject(err) : resolve(res.css)))
+      )
     },
     stylus: (input, file) => {
       if (typeof compiler.render !== 'function') {
@@ -33,17 +54,15 @@ function cssCompiler(compiler, options) {
       }
       const opts = {
         filename: file.path,
+        // paths: [path.dirname(file.path)],
         ...options,
       }
       if (file.data) {
         opts.define = file.data
       }
-      return new Promise((resolve, reject) => {
-        compiler.render(input, opts, (err, css) => {
-          if (err) reject(err)
-          else resolve(css)
-        })
-      })
+      return new Promise((resolve, reject) =>
+        compiler.render(input, opts, (err, css) => (err ? reject(err) : resolve(css)))
+      )
     },
   }
 
@@ -75,6 +94,51 @@ async function asyncReplace(str, regex, asyncFn) {
 }
 
 /**
+ * Create a PostCSS config loader
+ * @param {Object} config - PostCSS configuration
+ * @param {Array} config.plugins - PostCSS plugins
+ * @param {Object} config.options - PostCSS options
+ * @param {boolean} merge - Merge with existing PostCSS config
+ * @returns {Function} - PostCSS loader function
+ */
+function createPostCSSLoader(config, merge) {
+  return async (file) => {
+    try {
+      if (!config.plugins?.length || merge) {
+        const postcssrc = require('postcss-load-config')
+        const ctx = config.options || {}
+        let configPath
+        if (ctx.config) {
+          configPath = path.isAbsolute(ctx.config) ? ctx.config : path.join(file.base, ctx.config)
+        } else {
+          configPath = file.dirname
+        }
+        ctx.options = Object.assign({}, ctx)
+        ctx.file = file
+
+        const result = await postcssrc(ctx, configPath)
+        config = {
+          file: result.file || file,
+          plugins: [].concat(result.plugins || [], config.plugins || []),
+          options: Object.assign({}, config.options, result.options),
+        }
+      }
+    } catch (err) {
+      console.error(err)
+    }
+
+    return {
+      ...config,
+      options: {
+        from: file.path,
+        to: file.path,
+        ...config.options,
+      },
+    }
+  }
+}
+
+/**
  * Process HTML file, compile and transform CSS in <style> tags and inline styles using PostCSS.
  * If <style lang=""> attribute exists, compile the content using appropriate preprocessor before PostCSS.
  *
@@ -83,9 +147,10 @@ async function asyncReplace(str, regex, asyncFn) {
  * @param {Object} options.postcss - PostCSS options
  * @param {Object} options.compiler - CSS preprocessor compiler
  * @param {Object} options.compilerOptions - Preprocessor options
+ * @param {boolean} ext - Extended configuration, .e.g: merge: Merge with existing PostCSS config
  * @returns {Transform} - Transform stream object
  */
-function gulpHtmlCss(plugins = [], options = {}) {
+function gulpHtmlCss(plugins = [], options = {}, ext) {
   let renderer = null
   let postcssOptions = options
   if (options.compiler) {
@@ -93,7 +158,10 @@ function gulpHtmlCss(plugins = [], options = {}) {
     postcssOptions = options.postcss || {}
   }
 
-  const processor = postcss(plugins)
+  const loadConfig = createPostCSSLoader(
+    { plugins, options: postcssOptions },
+    typeof ext === 'boolean' ? ext : ext?.merge
+  )
 
   const styleTagRegex = /<style\b([^>]*)>([\s\S]*?)<\/style>/gi
   const langAttrRegex = /\blang=(['"])(.*?)\1/i
@@ -114,19 +182,22 @@ function gulpHtmlCss(plugins = [], options = {}) {
         if (file.isBuffer()) {
           let content = file.contents.toString()
 
+          const postcssConfig = await loadConfig(file)
+          const postcssProcessor = postcss(postcssConfig.plugins)
+
           // Process <style> tags
           content = await asyncReplace(content, styleTagRegex, async (match, attrs, css) => {
             const langMatch = attrs.match(langAttrRegex)
             if (langMatch && renderer) {
               css = await renderer(langMatch[2].toLowerCase(), css, file)
             }
-            const result = await processor.process(css, { ...postcssOptions, from: file.path })
+            const result = await postcssProcessor.process(css, postcssConfig.options)
             return `<style${attrs}>${result.css}</style>`
           })
 
           // Process inline styles
           content = await asyncReplace(content, inlineStyleRegex, async (match, quote, css) => {
-            const result = await processor.process(css, { ...postcssOptions, from: file.path })
+            const result = await postcssProcessor.process(css, postcssConfig.options)
             return `style=${quote}${result.css}${quote}`
           })
 
