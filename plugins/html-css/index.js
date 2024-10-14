@@ -151,6 +151,12 @@ function createPostCSSLoader(config, merge) {
  * @returns {Transform} - Transform stream object
  */
 function gulpHtmlCss(plugins = [], options = {}, ext) {
+  if (plugins && !Array.isArray(plugins)) {
+    options = plugins
+    plugins = options.plugins || []
+  }
+  if (typeof options === 'boolean') ext = options
+
   let renderer = null
   let postcssOptions = options
   if (options.compiler) {
