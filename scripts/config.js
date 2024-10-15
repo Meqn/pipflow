@@ -7,6 +7,7 @@ const packagesMap = {
   main: 'packages/main',
   utils: 'packages/utils',
   renew: 'plugins/renew',
+  htmlCss: 'plugins/html-css',
 }
 
 /**
