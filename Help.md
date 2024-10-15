@@ -26,6 +26,8 @@ pnpm changeset:version
 pnpm changelog core cli
 # 查看日志记录
 pnpm changelog
+pnpm changelog --commit=commitId # 从commitId记录开始
+pnpm changelog core cli --push # 生成 CHANGELOG 后直接 push (忽略 step4,5)
 
 
 # 4. 提交 commit

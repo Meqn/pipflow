@@ -70,7 +70,7 @@ function formatCommits(commits, filter = (commit) => commit) {
 async function generateLogs(name, logs) {
   const pkg = await readPackageJson(name)
   const content = await readPackageFile(name)
-  const result = updateChangelog(content, pkg.version, logs[name])
+  const result = updateChangelog(content, pkg.version, logs[name.toLowerCase()])
   await writePackageFile(name, result)
 
   return result
@@ -80,7 +80,9 @@ async function generateLogs(name, logs) {
   const moduleRegex = /^[a-z]{1,10}\(\w+\).*/i
   try {
     // const commits = await getCommitsSince('d9acb96')
-    const commits = await getCommitsSinceLatestTag()
+    const commitId = args.commit || args.C
+    const getCommitLogs = () => (commitId ? getCommitsSince(commitId) : getCommitsSinceLatestTag())
+    const commits = await getCommitLogs()
     const formattedCommits = formatCommits(commits, (commit) => {
       return moduleRegex.test(commit.message)
     }).reduce((acc, commit) => {
@@ -88,7 +90,7 @@ async function generateLogs(name, logs) {
       if (!acc[commit.package]) {
         acc[commit.package] = []
       }
-      acc[commit.package].push(
+      acc[commit.package.toLowerCase()].push(
         `- ${commit.text} ([${commit.hash.slice(0, 7)}](https://github.com/Meqn/pipflow/commit/${
           commit.hash
         }))`
@@ -109,8 +111,14 @@ async function generateLogs(name, logs) {
       for (const name of args._) {
         await generateLogs(name, formattedCommits)
       }
+
+      if (args.push) {
+        await git.add(['*/*/package.json', '*/*/CHANGELOG.md'])
+        await git.commit('Version Packages')
+        await git.push('origin', 'main')
+      }
     }
   } catch (err) {
-    console.error('error:', err.message)
+    console.error(err)
   }
 })()
