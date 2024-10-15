@@ -1,11 +1,11 @@
 {
-  "name": "gulp-renew",
-  "version": "1.0.1",
-  "description": "A plugin that supports batch string replacement for gulp. Replacement rules support regular expressions and function replacements",
+  "name": "gulp-html-css",
+  "version": "1.0.0",
+  "description": "A Gulp plugin for processing CSS within HTML. It compiles and transforms CSS in style tags and inline styles using PostCSS.",
   "main": "index.js",
   "types": "types/index.d.ts",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "files": [
     "types",
@@ -13,12 +13,13 @@
   ],
   "keywords": [
     "gulp plugin",
-    "gulp-renew",
-    "gulp-replace",
-    "gulp",
-    "renew",
-    "replace",
-    "batch replace"
+    "gulp-html-css",
+    "gulp-css",
+    "gulp-html",
+    "gulp-postcss",
+    "gulp-sass",
+    "gulp-less",
+    "gulp-stylus"
   ],
   "repository": {
     "type": "git",
@@ -36,7 +37,10 @@
   },
   "dependencies": {
     "@types/node": "*",
-    "istextorbinary": "^9.5.0",
-    "replacestream": "^4.0.3"
+    "postcss": "^8.4.47",
+    "postcss-load-config": "^5.1.0"
+  },
+  "devDependencies": {
+    "sass": "1.77.2"
   }
 }

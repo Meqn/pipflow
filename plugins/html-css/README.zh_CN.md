@@ -8,10 +8,17 @@
 
 [ [English](./README.md) | [中文](./README.zh_CN.md) ]
 
-A Gulp plugin for processing CSS within HTML.
+一个用于处理 `HTML` 文件中 `CSS` 的 Gulp 插件。
 
-It compiles and transforms CSS in `<style>` tags and inline styles using `PostCSS`.  
-If a `<style lang="">` attribute exists, it compiles the content using the appropriate preprocessor before applying `PostCSS`.
+它可以编译和转换 `<style>` 标签中的 CSS 以及内联样式，使用 `PostCSS` 进行处理。如果存在 `<style lang="">` 属性，它会使用相应的预处理器进行编译内容。
+
+## Features
+
+- 处理 `<style>` 标签内的 CSS
+- 处理 HTML 元素中的内联样式
+- 支持 `<style lang="">` 属性中指定 CSS 预处理器（Sass、Less、Stylus）
+- 使用 `PostCSS` 统一转换 CSS
+- 支持合并 `postcss.config.js` 配置文件
 
 ## Installation
 
@@ -31,10 +38,10 @@ gulp.task('process-html', () => {
     .pipe(
       htmlCss(
         [
-          /* PostCSS plugins */
+          /* PostCSS 插件 */
         ],
         {
-          /* options */
+          /* 选项 */
         }
       )
     )
@@ -50,25 +57,25 @@ htmlCss(plugins[(options, ext)])
 
 ### plugins
 
-Type: `Array` | `Object`
+类型：`Array` | `Object`
 
-PostCSS plugins to be used for processing CSS.
+用于处理 CSS 的 PostCSS 插件。
 
 ### options
 
-Type: `Object`
+类型：`Object`
 
-Configuration options for the plugin.
+插件的配置选项。
 
-- `postcss`: `Object` - PostCSS options
-- `compiler`: `Object` - CSS preprocessor compiler (e.g., Sass, Less, Stylus)
-- `compilerOptions`: `Object` - Options for the preprocessor
+- `postcss`：`Object` - PostCSS 选项
+- `compiler`：`Object` - CSS 预处理器编译器（如 Sass、Less、Stylus）
+- `compilerOptions`：`Object` - 预处理器的选项
 
 ### ext
 
-Type: `Object` | `boolean`
+类型：`Object` | `boolean`
 
-Extended configuration. If set to `true` or `{ merge: true }`, it will merge with the existing PostCSS config.
+扩展配置。如果设置为 `true` 或 `{ merge: true }`，将与现有的 PostCSS 配置合并。
 
 ## Example
 
@@ -86,10 +93,10 @@ gulp.task('process-html', () => {
       htmlCss([autoprefixer(), cssnano()], {
         compiler: sass,
         compilerOptions: {
-          // Sass options
+          // Sass 选项
         },
         postcss: {
-          // PostCSS options
+          // PostCSS 选项
         },
       })
     )
@@ -97,7 +104,7 @@ gulp.task('process-html', () => {
 })
 ```
 
-This example processes HTML files, compiling Sass within `<style lang="sass">` tags, then applies Autoprefixer and minifies the CSS using cssnano.
+这个示例处理 HTML 文件，编译 `<style lang="sass">` 标签中的 Sass，然后应用 Autoprefixer 并使用 cssnano 压缩 CSS。
 
 ## License
 
