@@ -24,19 +24,22 @@ async function getCommitsSince(commitId) {
   }
 }
 
-// 获取从最近的标签开始的所有最新记录
-async function getCommitsSinceLatestTag() {
+// 从指定标签获取所有最新记录
+async function getCommitsSinceTag(tagId) {
   const tags = promisify(git.tags.bind(git))
   const log = promisify(git.log.bind(git))
-  const latestTag = (await tags()).latest
 
-  if (!latestTag) {
+  if (!tagId) {
+    tagId = (await tags()).latest
+  }
+
+  if (!tagId) {
     console.error('No tags found.')
     return []
   }
 
   const logOptions = {
-    from: latestTag,
+    from: tagId,
   }
 
   try {
@@ -81,7 +84,8 @@ async function generateLogs(name, logs) {
   try {
     // const commits = await getCommitsSince('d9acb96')
     const commitId = args.commit || args.C
-    const getCommitLogs = () => (commitId ? getCommitsSince(commitId) : getCommitsSinceLatestTag())
+    const getCommitLogs = () =>
+      commitId ? getCommitsSince(commitId) : getCommitsSinceTag(args.tag)
     const commits = await getCommitLogs()
     const formattedCommits = formatCommits(commits, (commit) => {
       return moduleRegex.test(commit.message)
