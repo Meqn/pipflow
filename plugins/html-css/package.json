@@ -1,6 +1,6 @@
 {
   "name": "gulp-html-css",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Gulp plugin for processing CSS within HTML. It compiles and transforms CSS in style tags and inline styles using PostCSS.",
   "main": "index.js",
   "types": "types/index.d.ts",
