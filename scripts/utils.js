@@ -33,12 +33,7 @@ function writePackageFile(name, data, filename) {
     fs.writeFile(
       path.resolve(__dirname, '../', packagesMap[name], filename || 'CHANGELOG.md'),
       data,
-      (err) => {
-        if (err) {
-          reject(err)
-        }
-        resolve()
-      }
+      (err) => (err ? reject(err) : resolve())
     )
   })
 }
@@ -77,12 +72,8 @@ function updateChangelog(content, version, logs) {
   logStr = sortLogsByType(logs).join('\n')
 
   return content
-    .replace(regex, (match, p1) => {
-      // console.log('replace : ', match, p1)
-      return match.replace('Changes', 'Changes ' + semverSymbol[p1])
-      // return match + ' ' + semverSymbol[p1]
-    })
-    .replace(defaultChangeLog, logStr)
+    .replace(regex, (match, p1) => match.replace('Changes', 'Changes ' + semverSymbol[p1]))
+    .replace(`- ${defaultChangeLog}`, logStr)
 }
 
 /**

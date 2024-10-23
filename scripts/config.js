@@ -28,7 +28,7 @@ const messagesType = ['feat', 'fix', 'perf', 'refactor', 'docs']
 /**
  * changeset 默认变更日志 (待替换)
  */
-const defaultChangeLog = `- update.`
+const defaultChangeLog = `update.`
 
 module.exports = {
   packagesMap,
