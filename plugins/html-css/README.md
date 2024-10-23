@@ -13,6 +13,14 @@ A Gulp plugin for processing CSS within HTML.
 It compiles and transforms CSS in `<style>` tags and inline styles using `PostCSS`.  
 If a `<style lang="">` attribute exists, it compiles the content using the appropriate preprocessor before applying `PostCSS`.
 
+## Features
+
+- Handle CSS within `<style/>` tag
+- Handle inline styles
+- Support for CSS preprocessor in the `<style lang=""/>`（Sass、Less、Stylus）
+- Using `PostCSS` to transform CSS
+- Supports merge `postcss.config.js`
+
 ## Installation
 
 ```bash
@@ -45,7 +53,7 @@ gulp.task('process-html', () => {
 ## API
 
 ```js
-htmlCss(plugins[(options, ext)])
+htmlCss(plugins, options, ext)
 ```
 
 ### plugins

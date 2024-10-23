@@ -52,7 +52,7 @@ gulp.task('process-html', () => {
 ## API
 
 ```js
-htmlCss(plugins[(options, ext)])
+htmlCss(plugins, options, ext)
 ```
 
 ### plugins
